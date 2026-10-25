@@ -66,7 +66,7 @@ def main():
         info=lookup.get(ticker) or lookup.get(ticker.replace('-','.'))
         old=entries.get(ticker,{})
         if not info:
-            entries[ticker]={**old,'ticker':ticker,'status':'unavailable','reason':'No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)'}
+            entries[ticker]={**old,'ticker':ticker,'status':('snapshot' if old.get('history') else 'unsupported'),'reason':'No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider.'}
             continue
         cik=str(info['cik_str']).zfill(10)
         try:
@@ -80,7 +80,7 @@ def main():
                 if key not in unique or (v['filed'],v.get('accn',''))>(unique[key]['filed'],unique[key].get('accn','')):unique[key]=v
             series=sorted(unique.values(),key=lambda v:v['end'])[-16:]
             history=[{'date':v['end'],'filed':v['filed'],'shares':v['val'],'form':v['form'],'accession':v.get('accn',''), 'url':f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{v.get('accn','').replace('-','')}/" if v.get('accn') else ''} for v in series]
-            entries[ticker]={'ticker':ticker,'name':info.get('title',ticker),'cik':cik,'status':'ok' if history else 'no_data','history':history}
+            entries[ticker]={'ticker':ticker,'name':info.get('title',ticker),'cik':cik,'status':'ok' if history else 'no_data','history':history or old.get('history',[]),'yoy_pct':old.get('yoy_pct')}
         except Exception as exc:
             print(ticker,repr(exc))
             try:
@@ -89,7 +89,7 @@ def main():
                 print(ticker,'external snapshot:',backup[-1]['shares'])
             except Exception as backup_exc:
                 print(ticker,'snapshot failed:',repr(backup_exc))
-                entries[ticker]={**old,'ticker':ticker,'name':info.get('title',ticker),'status':'error','reason':str(exc)[:90]+'; backup: '+str(backup_exc)[:90]}
+                entries[ticker]={**old,'ticker':ticker,'name':info.get('title',ticker),'status':('stale' if old.get('history') else 'error'),'reason':str(exc)[:90]+'; backup: '+str(backup_exc)[:90]}
         time.sleep(3.2)
     out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps({'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'companies':entries},indent=2)+'\n')
