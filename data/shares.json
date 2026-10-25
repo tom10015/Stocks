@@ -1,56 +1,253 @@
 {
-  "updated_at": "2026-10-25T04:17:45.853692+00:00",
+  "updated_at": "2026-10-25T04:20:46.113076+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
-      "status": "error",
+      "name": "Iren Ltd",
+      "cik": "0001878848",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 394060000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/iren/statistics/"
+          "date": "2025-10-31",
+          "filed": "2025-11-06",
+          "shares": 283465490,
+          "form": "10-Q",
+          "accession": "0001878848-25-000081",
+          "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000081/"
+        },
+        {
+          "date": "2026-01-30",
+          "filed": "2026-02-05",
+          "shares": 332280383,
+          "form": "10-Q",
+          "accession": "0001878848-26-000015",
+          "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000015/"
+        },
+        {
+          "date": "2026-04-30",
+          "filed": "2026-05-08",
+          "shares": 357378674,
+          "form": "10-Q",
+          "accession": "0001878848-26-000026",
+          "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000026/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Iren Ltd",
-      "yoy_pct": 41.6
+      ]
     },
     "KGC": {
       "ticker": "KGC",
-      "status": "error",
+      "name": "Kinross Gold Corp",
+      "cik": "0000701818",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 1190000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/kgc/statistics/"
+          "date": "2017-12-31",
+          "filed": "2018-03-29",
+          "shares": 1247003940,
+          "form": "40-F",
+          "accession": "0001104659-18-021288",
+          "url": "https://www.sec.gov/Archives/edgar/data/701818/000110465918021288/"
+        },
+        {
+          "date": "2018-12-31",
+          "filed": "2019-03-29",
+          "shares": 1250228821,
+          "form": "40-F",
+          "accession": "0001104659-19-018715",
+          "url": "https://www.sec.gov/Archives/edgar/data/701818/000110465919018715/"
+        },
+        {
+          "date": "2019-12-31",
+          "filed": "2020-03-30",
+          "shares": 1253765724,
+          "form": "40-F",
+          "accession": "0001104659-20-039814",
+          "url": "https://www.sec.gov/Archives/edgar/data/701818/000110465920039814/"
+        },
+        {
+          "date": "2020-12-31",
+          "filed": "2021-03-30",
+          "shares": 1258320461,
+          "form": "40-F",
+          "accession": "0001104659-21-043926",
+          "url": "https://www.sec.gov/Archives/edgar/data/701818/000110465921043926/"
+        },
+        {
+          "date": "2021-12-31",
+          "filed": "2022-03-31",
+          "shares": 1244332772,
+          "form": "40-F",
+          "accession": "0001104659-22-041156",
+          "url": "https://www.sec.gov/Archives/edgar/data/701818/000110465922041156/"
+        },
+        {
+          "date": "2022-12-31",
+          "filed": "2023-03-31",
+          "shares": 1221891341,
+          "form": "40-F",
+          "accession": "0001104659-23-040149",
+          "url": "https://www.sec.gov/Archives/edgar/data/701818/000110465923040149/"
+        },
+        {
+          "date": "2023-12-31",
+          "filed": "2024-03-27",
+          "shares": 1227837974,
+          "form": "40-F",
+          "accession": "0001104659-24-039723",
+          "url": "https://www.sec.gov/Archives/edgar/data/701818/000110465924039723/"
+        },
+        {
+          "date": "2024-12-31",
+          "filed": "2025-03-27",
+          "shares": 1229125606,
+          "form": "40-F",
+          "accession": "0001104659-25-028819",
+          "url": "https://www.sec.gov/Archives/edgar/data/701818/000110465925028819/"
+        },
+        {
+          "date": "2025-12-31",
+          "filed": "2026-03-26",
+          "shares": 1199843037,
+          "form": "40-F",
+          "accession": "0001104659-26-035268",
+          "url": "https://www.sec.gov/Archives/edgar/data/701818/000110465926035268/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Kinross Gold Corp",
-      "yoy_pct": -2.14
+      ]
     },
     "NVDA": {
       "ticker": "NVDA",
-      "status": "error",
+      "name": "Nvidia Corp",
+      "cik": "0001045810",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 24150000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
-          "url": "https://stockanalysis.com/stocks/nvda/statistics/"
+          "date": "2022-11-11",
+          "filed": "2022-11-18",
+          "shares": 2460000000,
+          "form": "10-Q",
+          "accession": "0001045810-22-000166",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581022000166/"
+        },
+        {
+          "date": "2023-02-17",
+          "filed": "2023-02-24",
+          "shares": 2470000000,
+          "form": "10-K",
+          "accession": "0001045810-23-000017",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000017/"
+        },
+        {
+          "date": "2023-05-19",
+          "filed": "2023-05-26",
+          "shares": 2470000000,
+          "form": "10-Q",
+          "accession": "0001045810-23-000093",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000093/"
+        },
+        {
+          "date": "2023-08-18",
+          "filed": "2023-08-28",
+          "shares": 2470000000,
+          "form": "10-Q",
+          "accession": "0001045810-23-000175",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000175/"
+        },
+        {
+          "date": "2023-11-17",
+          "filed": "2023-11-21",
+          "shares": 2470000000,
+          "form": "10-Q",
+          "accession": "0001045810-23-000227",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000227/"
+        },
+        {
+          "date": "2024-02-16",
+          "filed": "2024-02-21",
+          "shares": 2500000000,
+          "form": "10-K",
+          "accession": "0001045810-24-000029",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/"
+        },
+        {
+          "date": "2024-05-24",
+          "filed": "2024-05-29",
+          "shares": 2460000000,
+          "form": "10-Q",
+          "accession": "0001045810-24-000124",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/"
+        },
+        {
+          "date": "2024-08-23",
+          "filed": "2024-08-28",
+          "shares": 24530000000,
+          "form": "10-Q",
+          "accession": "0001045810-24-000264",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000264/"
+        },
+        {
+          "date": "2024-11-15",
+          "filed": "2024-11-20",
+          "shares": 24490000000,
+          "form": "10-Q",
+          "accession": "0001045810-24-000316",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/"
+        },
+        {
+          "date": "2025-02-21",
+          "filed": "2025-02-26",
+          "shares": 24400000000,
+          "form": "10-K",
+          "accession": "0001045810-25-000023",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/"
+        },
+        {
+          "date": "2025-05-23",
+          "filed": "2025-05-28",
+          "shares": 24400000000,
+          "form": "10-Q",
+          "accession": "0001045810-25-000116",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/"
+        },
+        {
+          "date": "2025-08-22",
+          "filed": "2025-08-27",
+          "shares": 24300000000,
+          "form": "10-Q",
+          "accession": "0001045810-25-000209",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/"
+        },
+        {
+          "date": "2025-11-14",
+          "filed": "2025-11-19",
+          "shares": 24300000000,
+          "form": "10-Q",
+          "accession": "0001045810-25-000230",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/"
+        },
+        {
+          "date": "2026-02-20",
+          "filed": "2026-02-25",
+          "shares": 24300000000,
+          "form": "10-K",
+          "accession": "0001045810-26-000021",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/"
+        },
+        {
+          "date": "2026-05-15",
+          "filed": "2026-05-20",
+          "shares": 24200000000,
+          "form": "10-Q",
+          "accession": "0001045810-26-000052",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/"
+        },
+        {
+          "date": "2026-08-21",
+          "filed": "2026-08-26",
+          "shares": 24100000000,
+          "form": "10-Q",
+          "accession": "0001045810-26-000075",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Nvidia Corp",
-      "yoy_pct": -1.04
+      ]
     },
     "ORCU": {
       "ticker": "ORCU",
@@ -60,58 +257,627 @@
     },
     "QUBT": {
       "ticker": "QUBT",
-      "status": "error",
+      "name": "Quantum Computing Inc.",
+      "cik": "0001758009",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 226350000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/qubt/statistics/"
+          "date": "2022-11-11",
+          "filed": "2022-11-14",
+          "shares": 53301805,
+          "form": "10-Q",
+          "accession": "0001213900-22-072142",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390022072142/"
+        },
+        {
+          "date": "2023-03-28",
+          "filed": "2023-07-10",
+          "shares": 60496062,
+          "form": "10-K/A",
+          "accession": "0001213900-23-055614",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390023055614/"
+        },
+        {
+          "date": "2023-05-09",
+          "filed": "2023-05-12",
+          "shares": 61512111,
+          "form": "10-Q",
+          "accession": "0001213900-23-038633",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390023038633/"
+        },
+        {
+          "date": "2023-08-10",
+          "filed": "2023-08-14",
+          "shares": 74296370,
+          "form": "10-Q",
+          "accession": "0001213900-23-067059",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390023067059/"
+        },
+        {
+          "date": "2023-11-10",
+          "filed": "2023-11-13",
+          "shares": 75097249,
+          "form": "10-Q",
+          "accession": "0001213900-23-086246",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390023086246/"
+        },
+        {
+          "date": "2024-03-28",
+          "filed": "2024-04-01",
+          "shares": 91357640,
+          "form": "10-K",
+          "accession": "0001213900-24-028799",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390024028799/"
+        },
+        {
+          "date": "2024-09-09",
+          "filed": "2024-09-11",
+          "shares": 94210626,
+          "form": "10-K/A",
+          "accession": "0001213900-24-077754",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390024077754/"
+        },
+        {
+          "date": "2024-10-01",
+          "filed": "2024-10-02",
+          "shares": 91345140,
+          "form": "10-Q",
+          "accession": "0001213900-24-084727",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390024084727/"
+        },
+        {
+          "date": "2024-11-04",
+          "filed": "2024-11-06",
+          "shares": 99086476,
+          "form": "10-Q",
+          "accession": "0001213900-24-094983",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390024094983/"
+        },
+        {
+          "date": "2025-03-18",
+          "filed": "2025-03-20",
+          "shares": 137244545,
+          "form": "10-K",
+          "accession": "0001213900-25-025561",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390025025561/"
+        },
+        {
+          "date": "2025-05-15",
+          "filed": "2025-05-15",
+          "shares": 140903536,
+          "form": "10-Q",
+          "accession": "0001213900-25-044341",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390025044341/"
+        },
+        {
+          "date": "2025-08-13",
+          "filed": "2025-08-14",
+          "shares": 159883187,
+          "form": "10-Q",
+          "accession": "0001213900-25-076846",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390025076846/"
+        },
+        {
+          "date": "2025-11-13",
+          "filed": "2025-11-14",
+          "shares": 224123304,
+          "form": "10-Q",
+          "accession": "0001213900-25-110814",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390025110814/"
+        },
+        {
+          "date": "2026-02-27",
+          "filed": "2026-03-02",
+          "shares": 224538254,
+          "form": "10-K",
+          "accession": "0001213900-26-022417",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390026022417/"
+        },
+        {
+          "date": "2026-05-08",
+          "filed": "2026-05-11",
+          "shares": 225534987,
+          "form": "10-Q",
+          "accession": "0001213900-26-054473",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000121390026054473/"
+        },
+        {
+          "date": "2026-08-07",
+          "filed": "2026-08-10",
+          "shares": 226346861,
+          "form": "10-Q",
+          "accession": "0001628280-26-055218",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000162828026055218/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Quantum Computing Inc.",
-      "yoy_pct": 73.72
+      ]
     },
     "BTC": {
       "ticker": "BTC",
-      "status": "error",
-      "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
-      "name": "Grayscale Bitcoin Mini Trust Etf"
+      "name": "Grayscale Bitcoin Mini Trust Etf",
+      "cik": "0002015034",
+      "status": "ok",
+      "history": [
+        {
+          "date": "2024-08-26",
+          "filed": "2024-08-30",
+          "shares": 368630100,
+          "form": "10-Q",
+          "accession": "0000950170-24-102091",
+          "url": "https://www.sec.gov/Archives/edgar/data/2015034/000095017024102091/"
+        },
+        {
+          "date": "2024-10-28",
+          "filed": "2024-11-01",
+          "shares": 381490100,
+          "form": "10-Q",
+          "accession": "0000950170-24-120123",
+          "url": "https://www.sec.gov/Archives/edgar/data/2015034/000095017024120123/"
+        },
+        {
+          "date": "2025-02-24",
+          "filed": "2025-02-28",
+          "shares": 93759963,
+          "form": "10-K",
+          "accession": "0000950170-25-029405",
+          "url": "https://www.sec.gov/Archives/edgar/data/2015034/000095017025029405/"
+        },
+        {
+          "date": "2025-04-28",
+          "filed": "2025-05-02",
+          "shares": 95459963,
+          "form": "10-Q",
+          "accession": "0000950170-25-062727",
+          "url": "https://www.sec.gov/Archives/edgar/data/2015034/000095017025062727/"
+        },
+        {
+          "date": "2025-07-28",
+          "filed": "2025-08-01",
+          "shares": 103769963,
+          "form": "10-Q",
+          "accession": "0000950170-25-101399",
+          "url": "https://www.sec.gov/Archives/edgar/data/2015034/000095017025101399/"
+        },
+        {
+          "date": "2025-10-31",
+          "filed": "2025-11-05",
+          "shares": 108969963,
+          "form": "10-Q",
+          "accession": "0001193125-25-266856",
+          "url": "https://www.sec.gov/Archives/edgar/data/2015034/000119312525266856/"
+        },
+        {
+          "date": "2026-02-20",
+          "filed": "2026-02-25",
+          "shares": 113779963,
+          "form": "10-K",
+          "accession": "0001193125-26-071952",
+          "url": "https://www.sec.gov/Archives/edgar/data/2015034/000119312526071952/"
+        },
+        {
+          "date": "2026-04-30",
+          "filed": "2026-05-05",
+          "shares": 119829963,
+          "form": "10-Q",
+          "accession": "0001193125-26-206324",
+          "url": "https://www.sec.gov/Archives/edgar/data/2015034/000119312526206324/"
+        },
+        {
+          "date": "2026-07-30",
+          "filed": "2026-08-04",
+          "shares": 133199963,
+          "form": "10-Q",
+          "accession": "0002015034-26-000008",
+          "url": "https://www.sec.gov/Archives/edgar/data/2015034/000201503426000008/"
+        }
+      ]
     },
     "INTC": {
       "ticker": "INTC",
-      "status": "error",
+      "name": "Intel Corp",
+      "cik": "0000050863",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 5250000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
-          "url": "https://stockanalysis.com/stocks/intc/statistics/"
+          "date": "2022-10-01",
+          "filed": "2022-10-28",
+          "shares": 4127000000,
+          "form": "10-Q",
+          "accession": "0000050863-22-000038",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086322000038/"
+        },
+        {
+          "date": "2023-01-20",
+          "filed": "2023-01-27",
+          "shares": 4137000000,
+          "form": "10-K",
+          "accession": "0000050863-23-000006",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086323000006/"
+        },
+        {
+          "date": "2023-04-21",
+          "filed": "2023-04-28",
+          "shares": 4171000000,
+          "form": "10-Q",
+          "accession": "0000050863-23-000028",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086323000028/"
+        },
+        {
+          "date": "2023-07-21",
+          "filed": "2023-07-28",
+          "shares": 4188000000,
+          "form": "10-Q",
+          "accession": "0000050863-23-000069",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086323000069/"
+        },
+        {
+          "date": "2023-10-20",
+          "filed": "2023-10-27",
+          "shares": 4216000000,
+          "form": "10-Q",
+          "accession": "0000050863-23-000103",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086323000103/"
+        },
+        {
+          "date": "2024-01-19",
+          "filed": "2024-01-26",
+          "shares": 4228000000,
+          "form": "10-K",
+          "accession": "0000050863-24-000010",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000010/"
+        },
+        {
+          "date": "2024-04-19",
+          "filed": "2024-04-26",
+          "shares": 4257000000,
+          "form": "10-Q",
+          "accession": "0000050863-24-000076",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000076/"
+        },
+        {
+          "date": "2024-07-26",
+          "filed": "2024-08-02",
+          "shares": 4276000000,
+          "form": "10-Q",
+          "accession": "0000050863-24-000124",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000124/"
+        },
+        {
+          "date": "2024-10-25",
+          "filed": "2024-11-01",
+          "shares": 4313000000,
+          "form": "10-Q",
+          "accession": "0000050863-24-000149",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000149/"
+        },
+        {
+          "date": "2025-01-24",
+          "filed": "2025-01-31",
+          "shares": 4330000000,
+          "form": "10-K",
+          "accession": "0000050863-25-000009",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/"
+        },
+        {
+          "date": "2025-04-18",
+          "filed": "2025-04-25",
+          "shares": 4362000000,
+          "form": "10-Q",
+          "accession": "0000050863-25-000074",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000074/"
+        },
+        {
+          "date": "2025-07-18",
+          "filed": "2025-07-24",
+          "shares": 4377000000,
+          "form": "10-Q",
+          "accession": "0000050863-25-000109",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000109/"
+        },
+        {
+          "date": "2025-10-17",
+          "filed": "2025-11-06",
+          "shares": 4770000000,
+          "form": "10-Q",
+          "accession": "0000050863-25-000179",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000179/"
+        },
+        {
+          "date": "2026-01-16",
+          "filed": "2026-01-23",
+          "shares": 4995000000,
+          "form": "10-K",
+          "accession": "0000050863-26-000011",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/"
+        },
+        {
+          "date": "2026-04-17",
+          "filed": "2026-04-24",
+          "shares": 5026000000,
+          "form": "10-Q",
+          "accession": "0000050863-26-000079",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000079/"
+        },
+        {
+          "date": "2026-07-17",
+          "filed": "2026-07-24",
+          "shares": 5044000000,
+          "form": "10-Q",
+          "accession": "0000050863-26-000157",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000157/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Intel Corp",
-      "yoy_pct": 13.28
+      ]
     },
     "IAU": {
       "ticker": "IAU",
-      "status": "error",
-      "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
-      "name": "Ishares Gold Trust"
+      "name": "Ishares Gold Trust",
+      "cik": "0001278680",
+      "status": "ok",
+      "history": [
+        {
+          "date": "2022-10-31",
+          "filed": "2022-11-01",
+          "shares": 776100000,
+          "form": "10-Q",
+          "accession": "0001437749-22-025346",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774922025346/"
+        },
+        {
+          "date": "2023-01-31",
+          "filed": "2023-02-23",
+          "shares": 765600000,
+          "form": "10-K",
+          "accession": "0001437749-23-004329",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774923004329/"
+        },
+        {
+          "date": "2023-04-28",
+          "filed": "2023-05-05",
+          "shares": 768450000,
+          "form": "10-Q",
+          "accession": "0001437749-23-012783",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774923012783/"
+        },
+        {
+          "date": "2023-07-31",
+          "filed": "2023-08-04",
+          "shares": 753850000,
+          "form": "10-Q",
+          "accession": "0001437749-23-022117",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774923022117/"
+        },
+        {
+          "date": "2023-10-31",
+          "filed": "2023-11-03",
+          "shares": 683150000,
+          "form": "10-Q",
+          "accession": "0001437749-23-030196",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774923030196/"
+        },
+        {
+          "date": "2024-01-31",
+          "filed": "2024-02-20",
+          "shares": 671350000,
+          "form": "10-K",
+          "accession": "0001437749-24-004670",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774924004670/"
+        },
+        {
+          "date": "2024-04-30",
+          "filed": "2024-05-08",
+          "shares": 651850000,
+          "form": "10-Q",
+          "accession": "0001437749-24-015387",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774924015387/"
+        },
+        {
+          "date": "2024-07-31",
+          "filed": "2024-08-08",
+          "shares": 649350000,
+          "form": "10-Q",
+          "accession": "0001437749-24-025405",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774924025405/"
+        },
+        {
+          "date": "2024-10-31",
+          "filed": "2024-11-07",
+          "shares": 648350000,
+          "form": "10-Q",
+          "accession": "0001437749-24-033816",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774924033816/"
+        },
+        {
+          "date": "2025-01-31",
+          "filed": "2025-02-19",
+          "shares": 667500000,
+          "form": "10-K",
+          "accession": "0001437749-25-004257",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774925004257/"
+        },
+        {
+          "date": "2025-04-30",
+          "filed": "2025-05-07",
+          "shares": 745250000,
+          "form": "10-Q",
+          "accession": "0001437749-25-015165",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774925015165/"
+        },
+        {
+          "date": "2025-07-31",
+          "filed": "2025-08-05",
+          "shares": 767400000,
+          "form": "10-Q",
+          "accession": "0001437749-25-024887",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774925024887/"
+        },
+        {
+          "date": "2025-10-31",
+          "filed": "2025-11-06",
+          "shares": 824100000,
+          "form": "10-Q",
+          "accession": "0001437749-25-033433",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774925033433/"
+        },
+        {
+          "date": "2026-01-30",
+          "filed": "2026-02-27",
+          "shares": 850200000,
+          "form": "10-K",
+          "accession": "0001437749-26-006055",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774926006055/"
+        },
+        {
+          "date": "2026-04-30",
+          "filed": "2026-05-07",
+          "shares": 825900000,
+          "form": "10-Q",
+          "accession": "0001437749-26-015532",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774926015532/"
+        },
+        {
+          "date": "2026-07-31",
+          "filed": "2026-08-06",
+          "shares": 788600000,
+          "form": "10-Q",
+          "accession": "0001437749-26-026002",
+          "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774926026002/"
+        }
+      ]
     },
     "GLD": {
       "ticker": "GLD",
-      "status": "error",
-      "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
-      "name": "Spdr Gold Trust"
+      "name": "Spdr Gold Trust",
+      "cik": "0001222333",
+      "status": "ok",
+      "history": [
+        {
+          "date": "2022-11-22",
+          "filed": "2022-11-23",
+          "shares": 313200000,
+          "form": "10-K",
+          "accession": "0001193125-22-291881",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000119312522291881/"
+        },
+        {
+          "date": "2023-02-08",
+          "filed": "2023-02-09",
+          "shares": 318300000,
+          "form": "10-Q",
+          "accession": "0001437749-23-002856",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774923002856/"
+        },
+        {
+          "date": "2023-05-08",
+          "filed": "2023-05-09",
+          "shares": 324300000,
+          "form": "10-Q",
+          "accession": "0001437749-23-013346",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774923013346/"
+        },
+        {
+          "date": "2023-08-04",
+          "filed": "2023-08-07",
+          "shares": 313700000,
+          "form": "10-Q",
+          "accession": "0001437749-23-022288",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774923022288/"
+        },
+        {
+          "date": "2023-11-21",
+          "filed": "2023-11-22",
+          "shares": 306300000,
+          "form": "10-K",
+          "accession": "0001437749-23-032876",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774923032876/"
+        },
+        {
+          "date": "2024-02-07",
+          "filed": "2024-02-08",
+          "shares": 292200000,
+          "form": "10-Q",
+          "accession": "0001437749-24-003442",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774924003442/"
+        },
+        {
+          "date": "2024-05-07",
+          "filed": "2024-05-08",
+          "shares": 288400000,
+          "form": "10-Q",
+          "accession": "0001437749-24-015320",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774924015320/"
+        },
+        {
+          "date": "2024-08-05",
+          "filed": "2024-08-06",
+          "shares": 293700000,
+          "form": "10-Q",
+          "accession": "0001437749-24-024842",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774924024842/"
+        },
+        {
+          "date": "2024-11-22",
+          "filed": "2024-12-19",
+          "shares": 305600000,
+          "form": "10-K/A",
+          "accession": "0001437749-24-037938",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774924037938/"
+        },
+        {
+          "date": "2025-02-04",
+          "filed": "2025-02-05",
+          "shares": 300600000,
+          "form": "10-Q",
+          "accession": "0001437749-25-002865",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774925002865/"
+        },
+        {
+          "date": "2025-05-06",
+          "filed": "2025-05-07",
+          "shares": 327000000,
+          "form": "10-Q",
+          "accession": "0001437749-25-015077",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774925015077/"
+        },
+        {
+          "date": "2025-08-05",
+          "filed": "2025-08-06",
+          "shares": 333600000,
+          "form": "10-Q",
+          "accession": "0001437749-25-024998",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774925024998/"
+        },
+        {
+          "date": "2025-11-24",
+          "filed": "2025-11-25",
+          "shares": 363700000,
+          "form": "10-K",
+          "accession": "0001437749-25-036305",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774925036305/"
+        },
+        {
+          "date": "2026-02-03",
+          "filed": "2026-02-04",
+          "shares": 378800000,
+          "form": "10-Q",
+          "accession": "0001437749-26-002987",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774926002987/"
+        },
+        {
+          "date": "2026-05-04",
+          "filed": "2026-05-05",
+          "shares": 362500000,
+          "form": "10-Q",
+          "accession": "0001437749-26-014926",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774926014926/"
+        },
+        {
+          "date": "2026-08-03",
+          "filed": "2026-08-04",
+          "shares": 352400000,
+          "form": "10-Q",
+          "accession": "0001437749-26-025680",
+          "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774926025680/"
+        }
+      ]
     },
     "GDX": {
       "ticker": "GDX",
@@ -160,7 +926,7 @@
           "url": "https://stockanalysis.com/stocks/asst/statistics/"
         }
       ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Asset Entities Inc.",
       "yoy_pct": 3905.98
     },
@@ -172,54 +938,411 @@
     },
     "T": {
       "ticker": "T",
-      "status": "error",
+      "name": "At&T Inc.",
+      "cik": "0000732717",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 6740000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/t/statistics/"
+          "date": "2023-02-08",
+          "filed": "2023-02-13",
+          "shares": 7129870323,
+          "form": "10-K",
+          "accession": "0000732717-23-000011",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271723000011/"
+        },
+        {
+          "date": "2023-04-25",
+          "filed": "2023-05-01",
+          "shares": 7149000000,
+          "form": "10-Q",
+          "accession": "0000732717-23-000022",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271723000022/"
+        },
+        {
+          "date": "2023-07-24",
+          "filed": "2023-07-27",
+          "shares": 7149000000,
+          "form": "10-Q",
+          "accession": "0000732717-23-000047",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271723000047/"
+        },
+        {
+          "date": "2023-10-25",
+          "filed": "2023-10-31",
+          "shares": 7150020118,
+          "form": "10-Q",
+          "accession": "0000732717-23-000057",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271723000057/"
+        },
+        {
+          "date": "2024-02-07",
+          "filed": "2024-02-23",
+          "shares": 7152792253,
+          "form": "10-K",
+          "accession": "0000732717-24-000009",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271724000009/"
+        },
+        {
+          "date": "2024-04-25",
+          "filed": "2024-05-02",
+          "shares": 7170165104,
+          "form": "10-Q",
+          "accession": "0000732717-24-000022",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271724000022/"
+        },
+        {
+          "date": "2024-07-18",
+          "filed": "2024-07-25",
+          "shares": 7170243877,
+          "form": "10-Q",
+          "accession": "0000732717-24-000053",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271724000053/"
+        },
+        {
+          "date": "2024-10-24",
+          "filed": "2024-10-29",
+          "shares": 7175289157,
+          "form": "10-Q",
+          "accession": "0000732717-24-000059",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271724000059/"
+        },
+        {
+          "date": "2025-01-31",
+          "filed": "2025-02-12",
+          "shares": 7178183000,
+          "form": "10-K",
+          "accession": "0000732717-25-000013",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271725000013/"
+        },
+        {
+          "date": "2025-04-24",
+          "filed": "2025-04-29",
+          "shares": 7195602178,
+          "form": "10-Q",
+          "accession": "0000732717-25-000023",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271725000023/"
+        },
+        {
+          "date": "2025-07-21",
+          "filed": "2025-07-24",
+          "shares": 7150385480,
+          "form": "10-Q",
+          "accession": "0000732717-25-000080",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271725000080/"
+        },
+        {
+          "date": "2025-10-21",
+          "filed": "2025-10-31",
+          "shares": 7089449495,
+          "form": "10-Q",
+          "accession": "0000732717-25-000171",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271725000171/"
+        },
+        {
+          "date": "2026-01-28",
+          "filed": "2026-02-09",
+          "shares": 7000577201,
+          "form": "10-K",
+          "accession": "0000732717-26-000120",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271726000120/"
+        },
+        {
+          "date": "2026-04-22",
+          "filed": "2026-04-27",
+          "shares": 6948338835,
+          "form": "10-Q",
+          "accession": "0000732717-26-000206",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271726000206/"
+        },
+        {
+          "date": "2026-07-16",
+          "filed": "2026-07-22",
+          "shares": 6852385650,
+          "form": "10-Q",
+          "accession": "0000732717-26-000297",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271726000297/"
+        },
+        {
+          "date": "2026-10-15",
+          "filed": "2026-10-21",
+          "shares": 6736473433,
+          "form": "10-Q",
+          "accession": "0000732717-26-000372",
+          "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271726000372/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "At&T Inc.",
-      "yoy_pct": -3.14
+      ]
     },
     "LTC": {
       "ticker": "LTC",
-      "status": "error",
+      "name": "Ltc Properties Inc",
+      "cik": "0000887905",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 53910000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/ltc/statistics/"
+          "date": "2022-10-20",
+          "filed": "2022-10-27",
+          "shares": 40504791,
+          "form": "10-Q",
+          "accession": "0001558370-22-015515",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837022015515/"
+        },
+        {
+          "date": "2023-02-09",
+          "filed": "2023-02-16",
+          "shares": 41372589,
+          "form": "10-K",
+          "accession": "0001558370-23-001423",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837023001423/"
+        },
+        {
+          "date": "2023-04-20",
+          "filed": "2023-04-27",
+          "shares": 41396216,
+          "form": "10-Q",
+          "accession": "0001558370-23-007076",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837023007076/"
+        },
+        {
+          "date": "2023-07-20",
+          "filed": "2023-07-27",
+          "shares": 41408693,
+          "form": "10-Q",
+          "accession": "0001558370-23-012418",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837023012418/"
+        },
+        {
+          "date": "2023-10-19",
+          "filed": "2023-10-26",
+          "shares": 41411693,
+          "form": "10-Q",
+          "accession": "0001558370-23-016867",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837023016867/"
+        },
+        {
+          "date": "2024-02-08",
+          "filed": "2024-02-15",
+          "shares": 43112693,
+          "form": "10-K",
+          "accession": "0001558370-24-001256",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837024001256/"
+        },
+        {
+          "date": "2024-04-22",
+          "filed": "2024-04-29",
+          "shares": 43475389,
+          "form": "10-Q",
+          "accession": "0001558370-24-006117",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837024006117/"
+        },
+        {
+          "date": "2024-07-22",
+          "filed": "2024-07-29",
+          "shares": 43491284,
+          "form": "10-Q",
+          "accession": "0001558370-24-010291",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837024010291/"
+        },
+        {
+          "date": "2024-10-22",
+          "filed": "2024-10-28",
+          "shares": 45260754,
+          "form": "10-Q",
+          "accession": "0001558370-24-013751",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837024013751/"
+        },
+        {
+          "date": "2025-02-18",
+          "filed": "2025-02-24",
+          "shares": 45450613,
+          "form": "10-K",
+          "accession": "0001558370-25-001395",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837025001395/"
+        },
+        {
+          "date": "2025-04-28",
+          "filed": "2025-05-05",
+          "shares": 45930567,
+          "form": "10-Q",
+          "accession": "0001558370-25-006304",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837025006304/"
+        },
+        {
+          "date": "2025-07-28",
+          "filed": "2025-08-04",
+          "shares": 46065292,
+          "form": "10-Q",
+          "accession": "0001558370-25-010115",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000155837025010115/"
+        },
+        {
+          "date": "2025-10-28",
+          "filed": "2025-11-04",
+          "shares": 47614192,
+          "form": "10-Q",
+          "accession": "0001104659-25-106323",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000110465925106323/"
+        },
+        {
+          "date": "2026-02-18",
+          "filed": "2026-02-24",
+          "shares": 48509762,
+          "form": "10-K",
+          "accession": "0001104659-26-019178",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000110465926019178/"
+        },
+        {
+          "date": "2026-04-29",
+          "filed": "2026-05-06",
+          "shares": 51181456,
+          "form": "10-Q",
+          "accession": "0001104659-26-056329",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000110465926056329/"
+        },
+        {
+          "date": "2026-07-29",
+          "filed": "2026-08-05",
+          "shares": 53905563,
+          "form": "10-Q",
+          "accession": "0001104659-26-091183",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000110465926091183/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Ltc Properties Inc",
-      "yoy_pct": 7.5
+      ]
     },
     "SOFI": {
       "ticker": "SOFI",
-      "status": "error",
+      "name": "Sofi Technologies, Inc.",
+      "cik": "0001818874",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 1290000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
-          "url": "https://stockanalysis.com/stocks/sofi/statistics/"
+          "date": "2022-10-31",
+          "filed": "2022-11-09",
+          "shares": 927938294,
+          "form": "10-Q",
+          "accession": "0001818874-22-000241",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887422000241/"
+        },
+        {
+          "date": "2023-02-15",
+          "filed": "2023-03-01",
+          "shares": 934551932,
+          "form": "10-K",
+          "accession": "0001818874-23-000018",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887423000018/"
+        },
+        {
+          "date": "2023-04-28",
+          "filed": "2023-05-10",
+          "shares": 940895594,
+          "form": "10-Q",
+          "accession": "0001818874-23-000095",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887423000095/"
+        },
+        {
+          "date": "2023-07-31",
+          "filed": "2023-08-08",
+          "shares": 950114369,
+          "form": "10-Q",
+          "accession": "0001818874-23-000144",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887423000144/"
+        },
+        {
+          "date": "2023-10-31",
+          "filed": "2023-11-08",
+          "shares": 958742717,
+          "form": "10-Q",
+          "accession": "0001818874-23-000173",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887423000173/"
+        },
+        {
+          "date": "2024-02-15",
+          "filed": "2024-02-27",
+          "shares": 976736877,
+          "form": "10-K",
+          "accession": "0001818874-24-000026",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887424000026/"
+        },
+        {
+          "date": "2024-04-30",
+          "filed": "2024-05-07",
+          "shares": 1057223164,
+          "form": "10-Q",
+          "accession": "0001818874-24-000121",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887424000121/"
+        },
+        {
+          "date": "2024-07-31",
+          "filed": "2024-08-06",
+          "shares": 1065944831,
+          "form": "10-Q",
+          "accession": "0001818874-24-000175",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887424000175/"
+        },
+        {
+          "date": "2024-10-31",
+          "filed": "2024-11-07",
+          "shares": 1085146875,
+          "form": "10-Q",
+          "accession": "0001818874-24-000233",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887424000233/"
+        },
+        {
+          "date": "2025-01-31",
+          "filed": "2025-02-24",
+          "shares": 1096540215,
+          "form": "10-K",
+          "accession": "0001818874-25-000016",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887425000016/"
+        },
+        {
+          "date": "2025-04-30",
+          "filed": "2025-05-06",
+          "shares": 1105363096,
+          "form": "10-Q",
+          "accession": "0001818874-25-000072",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887425000072/"
+        },
+        {
+          "date": "2025-07-31",
+          "filed": "2025-08-07",
+          "shares": 1197450100,
+          "form": "10-Q",
+          "accession": "0001818874-25-000180",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887425000180/"
+        },
+        {
+          "date": "2025-10-31",
+          "filed": "2025-11-06",
+          "shares": 1205903044,
+          "form": "10-Q",
+          "accession": "0001818874-25-000210",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887425000210/"
+        },
+        {
+          "date": "2026-01-30",
+          "filed": "2026-02-17",
+          "shares": 1275263850,
+          "form": "10-K",
+          "accession": "0001818874-26-000013",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887426000013/"
+        },
+        {
+          "date": "2026-04-30",
+          "filed": "2026-05-07",
+          "shares": 1282741200,
+          "form": "10-Q",
+          "accession": "0001818874-26-000037",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887426000037/"
+        },
+        {
+          "date": "2026-07-31",
+          "filed": "2026-08-06",
+          "shares": 1291570324,
+          "form": "10-Q",
+          "accession": "0001818874-26-000054",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887426000054/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Sofi Technologies, Inc.",
-      "yoy_pct": 14.49
+      ]
     },
     "XOVR": {
       "ticker": "XOVR",
@@ -229,37 +1352,275 @@
     },
     "ORCL": {
       "ticker": "ORCL",
-      "status": "error",
+      "name": "Oracle Corp",
+      "cik": "0001341439",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 3030000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/orcl/statistics/"
+          "date": "2022-12-07",
+          "filed": "2022-12-13",
+          "shares": 2696253000,
+          "form": "10-Q",
+          "accession": "0001564590-22-039278",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000156459022039278/"
+        },
+        {
+          "date": "2023-03-06",
+          "filed": "2023-03-10",
+          "shares": 2699802000,
+          "form": "10-Q",
+          "accession": "0001564590-23-003413",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000156459023003413/"
+        },
+        {
+          "date": "2023-06-12",
+          "filed": "2023-06-20",
+          "shares": 2714259000,
+          "form": "10-K",
+          "accession": "0000950170-23-028914",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017023028914/"
+        },
+        {
+          "date": "2023-09-07",
+          "filed": "2023-09-12",
+          "shares": 2739821000,
+          "form": "10-Q",
+          "accession": "0000950170-23-047713",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017023047713/"
+        },
+        {
+          "date": "2023-12-07",
+          "filed": "2023-12-12",
+          "shares": 2748922000,
+          "form": "10-Q",
+          "accession": "0000950170-23-069682",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017023069682/"
+        },
+        {
+          "date": "2024-03-07",
+          "filed": "2024-03-12",
+          "shares": 2748514000,
+          "form": "10-Q",
+          "accession": "0000950170-24-029904",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024029904/"
+        },
+        {
+          "date": "2024-06-13",
+          "filed": "2024-06-20",
+          "shares": 2755860000,
+          "form": "10-K",
+          "accession": "0000950170-24-075605",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024075605/"
+        },
+        {
+          "date": "2024-09-06",
+          "filed": "2024-09-10",
+          "shares": 2770968000,
+          "form": "10-Q",
+          "accession": "0000950170-24-104905",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024104905/"
+        },
+        {
+          "date": "2024-12-06",
+          "filed": "2024-12-10",
+          "shares": 2796956000,
+          "form": "10-Q",
+          "accession": "0000950170-24-134973",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024134973/"
+        },
+        {
+          "date": "2025-03-07",
+          "filed": "2025-03-11",
+          "shares": 2804234000,
+          "form": "10-Q",
+          "accession": "0000950170-25-037143",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025037143/"
+        },
+        {
+          "date": "2025-06-13",
+          "filed": "2025-06-18",
+          "shares": 2808833000,
+          "form": "10-K",
+          "accession": "0000950170-25-087926",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025087926/"
+        },
+        {
+          "date": "2025-09-05",
+          "filed": "2025-09-10",
+          "shares": 2841714000,
+          "form": "10-Q",
+          "accession": "0001193125-25-200095",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525200095/"
+        },
+        {
+          "date": "2025-12-05",
+          "filed": "2025-12-11",
+          "shares": 2873130000,
+          "form": "10-Q",
+          "accession": "0001193125-25-315925",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525315925/"
+        },
+        {
+          "date": "2026-03-05",
+          "filed": "2026-03-11",
+          "shares": 2876046000,
+          "form": "10-Q",
+          "accession": "0001193125-26-101045",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526101045/"
+        },
+        {
+          "date": "2026-06-12",
+          "filed": "2026-06-22",
+          "shares": 2880471000,
+          "form": "10-K",
+          "accession": "0001193125-26-277521",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526277521/"
+        },
+        {
+          "date": "2026-09-07",
+          "filed": "2026-09-11",
+          "shares": 3023736000,
+          "form": "10-Q",
+          "accession": "0001193125-26-389274",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526389274/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Oracle Corp",
-      "yoy_pct": 1.95
+      ]
     },
     "ADC": {
       "ticker": "ADC",
-      "status": "error",
+      "name": "Agree Realty Corp",
+      "cik": "0000917251",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 130270000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/adc/statistics/"
+          "date": "2023-02-13",
+          "filed": "2023-02-14",
+          "shares": 90173424,
+          "form": "10-K",
+          "accession": "0001558370-23-001274",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837023001274/"
+        },
+        {
+          "date": "2023-05-03",
+          "filed": "2023-05-04",
+          "shares": 93198440,
+          "form": "10-Q",
+          "accession": "0001558370-23-008149",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837023008149/"
+        },
+        {
+          "date": "2023-07-31",
+          "filed": "2023-08-01",
+          "shares": 96268891,
+          "form": "10-Q",
+          "accession": "0001558370-23-012736",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837023012736/"
+        },
+        {
+          "date": "2023-10-23",
+          "filed": "2023-10-24",
+          "shares": 100519717,
+          "form": "10-Q",
+          "accession": "0001558370-23-016665",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837023016665/"
+        },
+        {
+          "date": "2024-02-12",
+          "filed": "2024-02-13",
+          "shares": 100519355,
+          "form": "10-K",
+          "accession": "0001558370-24-001056",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837024001056/"
+        },
+        {
+          "date": "2024-04-22",
+          "filed": "2024-04-23",
+          "shares": 100625948,
+          "form": "10-Q",
+          "accession": "0001558370-24-005482",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837024005482/"
+        },
+        {
+          "date": "2024-07-22",
+          "filed": "2024-07-23",
+          "shares": 100624549,
+          "form": "10-Q",
+          "accession": "0001558370-24-009974",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837024009974/"
+        },
+        {
+          "date": "2024-10-21",
+          "filed": "2024-10-22",
+          "shares": 103522677,
+          "form": "10-Q",
+          "accession": "0001558370-24-013452",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837024013452/"
+        },
+        {
+          "date": "2025-02-10",
+          "filed": "2025-02-11",
+          "shares": 107248705,
+          "form": "10-K",
+          "accession": "0001558370-25-000803",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837025000803/"
+        },
+        {
+          "date": "2025-04-21",
+          "filed": "2025-04-22",
+          "shares": 110018548,
+          "form": "10-Q",
+          "accession": "0001558370-25-005142",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837025005142/"
+        },
+        {
+          "date": "2025-07-30",
+          "filed": "2025-07-31",
+          "shares": 110666073,
+          "form": "10-Q",
+          "accession": "0001558370-25-009887",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000155837025009887/"
+        },
+        {
+          "date": "2025-10-20",
+          "filed": "2025-10-21",
+          "shares": 114934390,
+          "form": "10-Q",
+          "accession": "0001104659-25-101233",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000110465925101233/"
+        },
+        {
+          "date": "2026-02-09",
+          "filed": "2026-02-10",
+          "shares": 120028299,
+          "form": "10-K",
+          "accession": "0000917251-26-000013",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000091725126000013/"
+        },
+        {
+          "date": "2026-04-20",
+          "filed": "2026-04-21",
+          "shares": 120102901,
+          "form": "10-Q",
+          "accession": "0000917251-26-000047",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000091725126000047/"
+        },
+        {
+          "date": "2026-07-29",
+          "filed": "2026-07-30",
+          "shares": 124379310,
+          "form": "10-Q",
+          "accession": "0000917251-26-000063",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000091725126000063/"
+        },
+        {
+          "date": "2026-10-19",
+          "filed": "2026-10-20",
+          "shares": 130101031,
+          "form": "10-Q",
+          "accession": "0000917251-26-000076",
+          "url": "https://www.sec.gov/Archives/edgar/data/917251/000091725126000076/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Agree Realty Corp",
-      "yoy_pct": 10.66
+      ]
     },
     "AVGG": {
       "ticker": "AVGG",
@@ -280,57 +1641,207 @@
           "url": "https://stockanalysis.com/stocks/finv/statistics/"
         }
       ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Finvolution Group",
       "yoy_pct": -0.19
     },
     "SOUN": {
       "ticker": "SOUN",
-      "status": "error",
+      "name": "Soundhound Ai, Inc.",
+      "cik": "0001840856",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 444110000,
-          "form": "Snapshot",
-          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
-          "url": "https://stockanalysis.com/stocks/soun/statistics/"
+          "date": "2021-07-20",
+          "filed": "2021-07-27",
+          "shares": 17461000,
+          "form": "10-Q",
+          "accession": "0001213900-21-038740",
+          "url": "https://www.sec.gov/Archives/edgar/data/1840856/000121390021038740/"
+        },
+        {
+          "date": "2021-08-27",
+          "filed": "2021-08-27",
+          "shares": 17461000,
+          "form": "10-Q",
+          "accession": "0001213900-21-045421",
+          "url": "https://www.sec.gov/Archives/edgar/data/1840856/000121390021045421/"
+        },
+        {
+          "date": "2021-11-15",
+          "filed": "2021-11-15",
+          "shares": 17461000,
+          "form": "10-Q",
+          "accession": "0001213900-21-059488",
+          "url": "https://www.sec.gov/Archives/edgar/data/1840856/000121390021059488/"
+        },
+        {
+          "date": "2022-01-10",
+          "filed": "2022-01-10",
+          "shares": 17461000,
+          "form": "10-Q/A",
+          "accession": "0001213900-22-001224",
+          "url": "https://www.sec.gov/Archives/edgar/data/1840856/000121390022001224/"
+        },
+        {
+          "date": "2022-03-09",
+          "filed": "2022-03-09",
+          "shares": 17461000,
+          "form": "10-K",
+          "accession": "0001213900-22-011342",
+          "url": "https://www.sec.gov/Archives/edgar/data/1840856/000121390022011342/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Soundhound Ai, Inc.",
-      "yoy_pct": 9.82
+      ]
     },
     "CRF": {
       "ticker": "CRF",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
+      "reason": "SEC reader returned an error page; backup: HTTP Error 404: Not Found",
       "name": "Cornerstone Total Return Fund Inc"
     },
     "CLM": {
       "ticker": "CLM",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
+      "reason": "SEC reader returned an error page; backup: HTTP Error 404: Not Found",
       "name": "Cornerstone Strategic Investment Fund, Inc."
     },
     "ENB": {
       "ticker": "ENB",
-      "status": "error",
+      "name": "Enbridge Inc",
+      "cik": "0000895728",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 2180000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/enb/statistics/"
+          "date": "2022-10-28",
+          "filed": "2022-11-04",
+          "shares": 2024819303,
+          "form": "10-Q",
+          "accession": "0000895728-22-000033",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000089572822000033/"
+        },
+        {
+          "date": "2023-02-03",
+          "filed": "2023-03-06",
+          "shares": 2024907965,
+          "form": "10-K/A",
+          "accession": "0001193125-23-060793",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000119312523060793/"
+        },
+        {
+          "date": "2023-04-28",
+          "filed": "2023-05-05",
+          "shares": 2024676423,
+          "form": "10-Q",
+          "accession": "0000895728-23-000016",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000089572823000016/"
+        },
+        {
+          "date": "2023-07-28",
+          "filed": "2023-08-04",
+          "shares": 2022660553,
+          "form": "10-Q",
+          "accession": "0000895728-23-000026",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000089572823000026/"
+        },
+        {
+          "date": "2023-10-27",
+          "filed": "2023-11-03",
+          "shares": 2125574412,
+          "form": "10-Q",
+          "accession": "0000895728-23-000033",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000089572823000033/"
+        },
+        {
+          "date": "2024-02-02",
+          "filed": "2024-03-13",
+          "shares": 2125586356,
+          "form": "10-K/A",
+          "accession": "0001193125-24-066168",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000119312524066168/"
+        },
+        {
+          "date": "2024-05-03",
+          "filed": "2024-05-10",
+          "shares": 2126090754,
+          "form": "10-Q",
+          "accession": "0000895728-24-000013",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000089572824000013/"
+        },
+        {
+          "date": "2024-07-26",
+          "filed": "2024-08-02",
+          "shares": 2177417976,
+          "form": "10-Q",
+          "accession": "0000895728-24-000020",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000089572824000020/"
+        },
+        {
+          "date": "2024-10-25",
+          "filed": "2024-11-01",
+          "shares": 2177956195,
+          "form": "10-Q",
+          "accession": "0000895728-24-000028",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000089572824000028/"
+        },
+        {
+          "date": "2025-02-07",
+          "filed": "2025-03-11",
+          "shares": 2179049670,
+          "form": "10-K/A",
+          "accession": "0001193125-25-052058",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000119312525052058/"
+        },
+        {
+          "date": "2025-05-02",
+          "filed": "2025-05-09",
+          "shares": 2180284527,
+          "form": "10-Q",
+          "accession": "0000895728-25-000012",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000089572825000012/"
+        },
+        {
+          "date": "2025-07-25",
+          "filed": "2025-08-01",
+          "shares": 2180514839,
+          "form": "10-Q",
+          "accession": "0000950170-25-101102",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000095017025101102/"
+        },
+        {
+          "date": "2025-10-31",
+          "filed": "2025-11-07",
+          "shares": 2181275613,
+          "form": "10-Q",
+          "accession": "0001193125-25-270991",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000119312525270991/"
+        },
+        {
+          "date": "2026-02-06",
+          "filed": "2026-03-10",
+          "shares": 2181830165,
+          "form": "10-K/A",
+          "accession": "0001193125-26-100426",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000119312526100426/"
+        },
+        {
+          "date": "2026-05-01",
+          "filed": "2026-05-08",
+          "shares": 2183696415,
+          "form": "10-Q",
+          "accession": "0001193125-26-213266",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000119312526213266/"
+        },
+        {
+          "date": "2026-07-24",
+          "filed": "2026-07-31",
+          "shares": 2184085509,
+          "form": "10-Q",
+          "accession": "0001193125-26-326752",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000119312526326752/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Enbridge Inc",
-      "yoy_pct": 0.14
+      ]
     },
     "HYDB": {
       "ticker": "HYDB",
@@ -342,7 +1853,7 @@
       "ticker": "UTF",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
+      "reason": "SEC reader returned an error page; backup: HTTP Error 404: Not Found",
       "name": "Cohen & Steers Infrastructure Fund Inc"
     },
     "CAN": {
@@ -358,7 +1869,7 @@
           "url": "https://stockanalysis.com/stocks/can/statistics/"
         }
       ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Canaan Inc.",
       "yoy_pct": 96.61
     },
@@ -370,54 +1881,411 @@
     },
     "PEP": {
       "ticker": "PEP",
-      "status": "error",
+      "name": "Pepsico Inc",
+      "cik": "0000077476",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 1360000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/pep/statistics/"
+          "date": "2023-02-02",
+          "filed": "2023-02-09",
+          "shares": 1377251316,
+          "form": "10-K",
+          "accession": "0000077476-23-000007",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747623000007/"
+        },
+        {
+          "date": "2023-04-18",
+          "filed": "2023-04-25",
+          "shares": 1377693115,
+          "form": "10-Q",
+          "accession": "0000077476-23-000023",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747623000023/"
+        },
+        {
+          "date": "2023-07-06",
+          "filed": "2023-07-13",
+          "shares": 1376580611,
+          "form": "10-Q",
+          "accession": "0000077476-23-000046",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747623000046/"
+        },
+        {
+          "date": "2023-10-03",
+          "filed": "2023-10-10",
+          "shares": 1374863961,
+          "form": "10-Q",
+          "accession": "0000077476-23-000058",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747623000058/"
+        },
+        {
+          "date": "2024-02-02",
+          "filed": "2024-02-09",
+          "shares": 1374429271,
+          "form": "10-K",
+          "accession": "0000077476-24-000008",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747624000008/"
+        },
+        {
+          "date": "2024-04-16",
+          "filed": "2024-04-23",
+          "shares": 1374785980,
+          "form": "10-Q",
+          "accession": "0000077476-24-000017",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747624000017/"
+        },
+        {
+          "date": "2024-07-05",
+          "filed": "2024-07-11",
+          "shares": 1373572400,
+          "form": "10-Q",
+          "accession": "0000077476-24-000042",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747624000042/"
+        },
+        {
+          "date": "2024-10-01",
+          "filed": "2024-10-08",
+          "shares": 1371989025,
+          "form": "10-Q",
+          "accession": "0000077476-24-000052",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747624000052/"
+        },
+        {
+          "date": "2025-01-28",
+          "filed": "2025-02-04",
+          "shares": 1371499838,
+          "form": "10-K",
+          "accession": "0000077476-25-000007",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747625000007/"
+        },
+        {
+          "date": "2025-04-17",
+          "filed": "2025-04-24",
+          "shares": 1371079540,
+          "form": "10-Q",
+          "accession": "0000077476-25-000019",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747625000019/"
+        },
+        {
+          "date": "2025-07-10",
+          "filed": "2025-07-17",
+          "shares": 1369077204,
+          "form": "10-Q",
+          "accession": "0000077476-25-000044",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747625000044/"
+        },
+        {
+          "date": "2025-10-02",
+          "filed": "2025-10-09",
+          "shares": 1367340122,
+          "form": "10-Q",
+          "accession": "0000077476-25-000053",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747625000053/"
+        },
+        {
+          "date": "2026-01-23",
+          "filed": "2026-02-03",
+          "shares": 1366649053,
+          "form": "10-K",
+          "accession": "0000077476-26-000007",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747626000007/"
+        },
+        {
+          "date": "2026-04-09",
+          "filed": "2026-04-16",
+          "shares": 1366768315,
+          "form": "10-Q",
+          "accession": "0000077476-26-000017",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747626000017/"
+        },
+        {
+          "date": "2026-07-02",
+          "filed": "2026-07-09",
+          "shares": 1364891558,
+          "form": "10-Q",
+          "accession": "0000077476-26-000035",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747626000035/"
+        },
+        {
+          "date": "2026-10-01",
+          "filed": "2026-10-08",
+          "shares": 1362741092,
+          "form": "10-Q",
+          "accession": "0000077476-26-000048",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747626000048/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Pepsico Inc",
-      "yoy_pct": -0.26
+      ]
     },
     "TSLX": {
       "ticker": "TSLX",
-      "status": "error",
+      "name": "Sixth Street Specialty Lending, Inc.",
+      "cik": "0001508655",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 95340000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/tslx/statistics/"
+          "date": "2022-11-01",
+          "filed": "2022-11-01",
+          "shares": 80983301,
+          "form": "10-Q",
+          "accession": "0000950170-22-020830",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017022020830/"
+        },
+        {
+          "date": "2023-02-16",
+          "filed": "2023-02-16",
+          "shares": 81389287,
+          "form": "10-K",
+          "accession": "0000950170-23-003042",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017023003042/"
+        },
+        {
+          "date": "2023-05-08",
+          "filed": "2023-05-08",
+          "shares": 81751865,
+          "form": "10-Q",
+          "accession": "0000950170-23-018777",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017023018777/"
+        },
+        {
+          "date": "2023-08-03",
+          "filed": "2023-08-03",
+          "shares": 87241231,
+          "form": "10-Q",
+          "accession": "0000950170-23-038066",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017023038066/"
+        },
+        {
+          "date": "2023-11-02",
+          "filed": "2023-11-02",
+          "shares": 87546498,
+          "form": "10-Q",
+          "accession": "0000950170-23-058321",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017023058321/"
+        },
+        {
+          "date": "2024-02-15",
+          "filed": "2024-02-15",
+          "shares": 87829499,
+          "form": "10-K",
+          "accession": "0000950170-24-015845",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017024015845/"
+        },
+        {
+          "date": "2024-05-01",
+          "filed": "2024-05-01",
+          "shares": 92721556,
+          "form": "10-Q",
+          "accession": "0000950170-24-051235",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017024051235/"
+        },
+        {
+          "date": "2024-07-31",
+          "filed": "2024-07-31",
+          "shares": 93017205,
+          "form": "10-Q",
+          "accession": "0000950170-24-088524",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017024088524/"
+        },
+        {
+          "date": "2024-11-05",
+          "filed": "2024-11-05",
+          "shares": 93317621,
+          "form": "10-Q",
+          "accession": "0000950170-24-121434",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017024121434/"
+        },
+        {
+          "date": "2025-02-13",
+          "filed": "2025-02-13",
+          "shares": 93661436,
+          "form": "10-K",
+          "accession": "0000950170-25-019845",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017025019845/"
+        },
+        {
+          "date": "2025-04-30",
+          "filed": "2025-04-30",
+          "shares": 93964358,
+          "form": "10-Q",
+          "accession": "0000950170-25-061008",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017025061008/"
+        },
+        {
+          "date": "2025-07-30",
+          "filed": "2025-07-30",
+          "shares": 94240348,
+          "form": "10-Q",
+          "accession": "0000950170-25-100204",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000095017025100204/"
+        },
+        {
+          "date": "2025-11-04",
+          "filed": "2025-11-04",
+          "shares": 94493925,
+          "form": "10-Q",
+          "accession": "0001193125-25-264618",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000119312525264618/"
+        },
+        {
+          "date": "2026-02-12",
+          "filed": "2026-02-12",
+          "shares": 94705150,
+          "form": "10-K",
+          "accession": "0001193125-26-048664",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000119312526048664/"
+        },
+        {
+          "date": "2026-05-05",
+          "filed": "2026-05-05",
+          "shares": 95019600,
+          "form": "10-Q",
+          "accession": "0001193125-26-206313",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000119312526206313/"
+        },
+        {
+          "date": "2026-08-04",
+          "filed": "2026-08-04",
+          "shares": 95343139,
+          "form": "10-Q",
+          "accession": "0001193125-26-332725",
+          "url": "https://www.sec.gov/Archives/edgar/data/1508655/000119312526332725/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Sixth Street Specialty Lending, Inc.",
-      "yoy_pct": 1.2
+      ]
     },
     "OBDC": {
       "ticker": "OBDC",
-      "status": "error",
+      "name": "Blue Owl Capital Corp",
+      "cik": "0001655888",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 493140000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/obdc/statistics/"
+          "date": "2022-11-02",
+          "filed": "2022-11-02",
+          "shares": 393823013,
+          "form": "10-Q",
+          "accession": "0001655888-22-000024",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588822000024/"
+        },
+        {
+          "date": "2023-02-22",
+          "filed": "2023-02-22",
+          "shares": 390954494,
+          "form": "10-K",
+          "accession": "0001655888-23-000012",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588823000012/"
+        },
+        {
+          "date": "2023-05-10",
+          "filed": "2023-05-10",
+          "shares": 389798180,
+          "form": "10-Q",
+          "accession": "0001655888-23-000019",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588823000019/"
+        },
+        {
+          "date": "2023-08-09",
+          "filed": "2023-08-09",
+          "shares": 389732868,
+          "form": "10-Q",
+          "accession": "0001655888-23-000024",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588823000024/"
+        },
+        {
+          "date": "2023-11-08",
+          "filed": "2023-11-09",
+          "shares": 389732868,
+          "form": "10-Q/A",
+          "accession": "0001655888-23-000031",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588823000031/"
+        },
+        {
+          "date": "2024-02-21",
+          "filed": "2024-02-21",
+          "shares": 389732868,
+          "form": "10-K",
+          "accession": "0001655888-24-000008",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588824000008/"
+        },
+        {
+          "date": "2024-05-08",
+          "filed": "2024-05-08",
+          "shares": 389732868,
+          "form": "10-Q",
+          "accession": "0001655888-24-000014",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588824000014/"
+        },
+        {
+          "date": "2024-08-07",
+          "filed": "2024-08-07",
+          "shares": 390217304,
+          "form": "10-Q",
+          "accession": "0001655888-24-000019",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588824000019/"
+        },
+        {
+          "date": "2024-11-06",
+          "filed": "2024-11-06",
+          "shares": 390217304,
+          "form": "10-Q",
+          "accession": "0001655888-24-000023",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588824000023/"
+        },
+        {
+          "date": "2025-02-19",
+          "filed": "2025-02-19",
+          "shares": 510847634,
+          "form": "10-K",
+          "accession": "0001655888-25-000007",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588825000007/"
+        },
+        {
+          "date": "2025-05-07",
+          "filed": "2025-05-07",
+          "shares": 511048237,
+          "form": "10-Q",
+          "accession": "0001655888-25-000012",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588825000012/"
+        },
+        {
+          "date": "2025-08-06",
+          "filed": "2025-08-06",
+          "shares": 511048237,
+          "form": "10-Q",
+          "accession": "0001655888-25-000020",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588825000020/"
+        },
+        {
+          "date": "2025-11-05",
+          "filed": "2025-11-05",
+          "shares": 511048237,
+          "form": "10-Q",
+          "accession": "0001655888-25-000024",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588825000024/"
+        },
+        {
+          "date": "2026-02-11",
+          "filed": "2026-02-18",
+          "shares": 499448499,
+          "form": "10-K",
+          "accession": "0001655888-26-000010",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588826000010/"
+        },
+        {
+          "date": "2026-05-01",
+          "filed": "2026-05-06",
+          "shares": 496305424,
+          "form": "10-Q",
+          "accession": "0001655888-26-000033",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588826000033/"
+        },
+        {
+          "date": "2026-07-31",
+          "filed": "2026-08-05",
+          "shares": 493142569,
+          "form": "10-Q",
+          "accession": "0001655888-26-000056",
+          "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588826000056/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Blue Owl Capital Corp",
-      "yoy_pct": 12.67
+      ]
     },
     "SCHD": {
       "ticker": "SCHD",
@@ -463,54 +2331,347 @@
     },
     "F": {
       "ticker": "F",
-      "status": "error",
+      "name": "Ford Motor Co",
+      "cik": "0000037996",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 3990000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/f/statistics/"
+          "date": "2009-07-28",
+          "filed": "2009-08-05",
+          "shares": 3221289753,
+          "form": "10-Q",
+          "accession": "0001140361-09-017928",
+          "url": "https://www.sec.gov/Archives/edgar/data/37996/000114036109017928/"
+        },
+        {
+          "date": "2009-10-29",
+          "filed": "2009-11-06",
+          "shares": 3236248800,
+          "form": "10-Q",
+          "accession": "0001140361-09-025042",
+          "url": "https://www.sec.gov/Archives/edgar/data/37996/000114036109025042/"
+        },
+        {
+          "date": "2010-02-12",
+          "filed": "2010-02-25",
+          "shares": 3297413605,
+          "form": "10-K",
+          "accession": "0001157523-10-001218",
+          "url": "https://www.sec.gov/Archives/edgar/data/37996/000115752310001218/"
+        },
+        {
+          "date": "2010-04-29",
+          "filed": "2010-05-07",
+          "shares": 3335728639,
+          "form": "10-Q",
+          "accession": "0001157523-10-002965",
+          "url": "https://www.sec.gov/Archives/edgar/data/37996/000115752310002965/"
+        },
+        {
+          "date": "2010-07-30",
+          "filed": "2010-08-06",
+          "shares": 3368467152,
+          "form": "10-Q",
+          "accession": "0001157523-10-004856",
+          "url": "https://www.sec.gov/Archives/edgar/data/37996/000115752310004856/"
+        },
+        {
+          "date": "2010-10-29",
+          "filed": "2010-11-08",
+          "shares": 3401803026,
+          "form": "10-Q",
+          "accession": "0001157523-10-006707",
+          "url": "https://www.sec.gov/Archives/edgar/data/37996/000115752310006707/"
+        },
+        {
+          "date": "2011-02-14",
+          "filed": "2011-02-28",
+          "shares": 3711858859,
+          "form": "10-K",
+          "accession": "0001157523-11-001210",
+          "url": "https://www.sec.gov/Archives/edgar/data/37996/000115752311001210/"
+        },
+        {
+          "date": "2011-04-28",
+          "filed": "2011-05-10",
+          "shares": 3727332952,
+          "form": "10-Q",
+          "accession": "0001157523-11-002989",
+          "url": "https://www.sec.gov/Archives/edgar/data/37996/000115752311002989/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Ford Motor Co",
-      "yoy_pct": -0.81
+      ]
     },
     "ET": {
       "ticker": "ET",
-      "status": "error",
+      "name": "Energy Transfer Lp",
+      "cik": "0001276187",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 3440000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/et/statistics/"
+          "date": "2022-10-28",
+          "filed": "2022-11-03",
+          "shares": 3088475132,
+          "form": "10-Q",
+          "accession": "0001276187-22-000072",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618722000072/"
+        },
+        {
+          "date": "2023-02-10",
+          "filed": "2023-02-17",
+          "shares": 3094593760,
+          "form": "10-K",
+          "accession": "0001276187-23-000014",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618723000014/"
+        },
+        {
+          "date": "2023-04-28",
+          "filed": "2023-05-04",
+          "shares": 3096774774,
+          "form": "10-Q",
+          "accession": "0001276187-23-000035",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618723000035/"
+        },
+        {
+          "date": "2023-07-28",
+          "filed": "2023-08-03",
+          "shares": 3143207052,
+          "form": "10-Q",
+          "accession": "0001276187-23-000059",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618723000059/"
+        },
+        {
+          "date": "2023-10-27",
+          "filed": "2023-11-02",
+          "shares": 3145065881,
+          "form": "10-Q",
+          "accession": "0001276187-23-000093",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618723000093/"
+        },
+        {
+          "date": "2024-02-09",
+          "filed": "2024-02-16",
+          "shares": 3367757556,
+          "form": "10-K",
+          "accession": "0001276187-24-000024",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618724000024/"
+        },
+        {
+          "date": "2024-05-03",
+          "filed": "2024-05-09",
+          "shares": 3370023318,
+          "form": "10-Q",
+          "accession": "0001276187-24-000040",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618724000040/"
+        },
+        {
+          "date": "2024-08-02",
+          "filed": "2024-08-08",
+          "shares": 3422233857,
+          "form": "10-Q",
+          "accession": "0001276187-24-000083",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618724000083/"
+        },
+        {
+          "date": "2024-11-01",
+          "filed": "2024-11-07",
+          "shares": 3423916517,
+          "form": "10-Q",
+          "accession": "0001276187-24-000108",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618724000108/"
+        },
+        {
+          "date": "2025-02-07",
+          "filed": "2025-03-13",
+          "shares": 3431214964,
+          "form": "10-K/A",
+          "accession": "0001276187-25-000037",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618725000037/"
+        },
+        {
+          "date": "2025-05-02",
+          "filed": "2025-05-08",
+          "shares": 3431778119,
+          "form": "10-Q",
+          "accession": "0001276187-25-000056",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618725000056/"
+        },
+        {
+          "date": "2025-08-01",
+          "filed": "2025-08-07",
+          "shares": 3432681531,
+          "form": "10-Q",
+          "accession": "0001276187-25-000086",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618725000086/"
+        },
+        {
+          "date": "2025-10-31",
+          "filed": "2025-11-06",
+          "shares": 3433386854,
+          "form": "10-Q",
+          "accession": "0001276187-25-000119",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618725000119/"
+        },
+        {
+          "date": "2026-02-13",
+          "filed": "2026-02-19",
+          "shares": 3440314575,
+          "form": "10-K",
+          "accession": "0001276187-26-000013",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618726000013/"
+        },
+        {
+          "date": "2026-05-01",
+          "filed": "2026-05-07",
+          "shares": 3441159277,
+          "form": "10-Q",
+          "accession": "0001276187-26-000026",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618726000026/"
+        },
+        {
+          "date": "2026-07-31",
+          "filed": "2026-08-06",
+          "shares": 3443299601,
+          "form": "10-Q",
+          "accession": "0001276187-26-000038",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618726000038/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Energy Transfer Lp",
-      "yoy_pct": 0.08
+      ]
     },
     "MO": {
       "ticker": "MO",
-      "status": "error",
+      "name": "Altria Group, Inc.",
+      "cik": "0000764180",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 1670000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/mo/statistics/"
+          "date": "2022-10-18",
+          "filed": "2022-10-27",
+          "shares": 1792172618,
+          "form": "10-Q",
+          "accession": "0000764180-22-000102",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418022000102/"
+        },
+        {
+          "date": "2023-02-15",
+          "filed": "2023-06-01",
+          "shares": 1785563827,
+          "form": "10-K/A",
+          "accession": "0000764180-23-000093",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418023000093/"
+        },
+        {
+          "date": "2023-04-18",
+          "filed": "2023-04-27",
+          "shares": 1785039536,
+          "form": "10-Q",
+          "accession": "0000764180-23-000060",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418023000060/"
+        },
+        {
+          "date": "2023-07-24",
+          "filed": "2023-08-01",
+          "shares": 1774609985,
+          "form": "10-Q",
+          "accession": "0000764180-23-000113",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418023000113/"
+        },
+        {
+          "date": "2023-10-17",
+          "filed": "2023-10-26",
+          "shares": 1768646674,
+          "form": "10-Q",
+          "accession": "0000764180-23-000126",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418023000126/"
+        },
+        {
+          "date": "2024-02-15",
+          "filed": "2024-06-05",
+          "shares": 1763461775,
+          "form": "10-K/A",
+          "accession": "0000764180-24-000079",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418024000079/"
+        },
+        {
+          "date": "2024-04-16",
+          "filed": "2024-04-25",
+          "shares": 1717626424,
+          "form": "10-Q",
+          "accession": "0000764180-24-000057",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418024000057/"
+        },
+        {
+          "date": "2024-07-24",
+          "filed": "2024-07-31",
+          "shares": 1706224328,
+          "form": "10-Q",
+          "accession": "0000764180-24-000093",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418024000093/"
+        },
+        {
+          "date": "2024-10-22",
+          "filed": "2024-10-31",
+          "shares": 1694812982,
+          "form": "10-Q",
+          "accession": "0000764180-24-000102",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418024000102/"
+        },
+        {
+          "date": "2025-02-14",
+          "filed": "2025-06-04",
+          "shares": 1690661641,
+          "form": "10-K/A",
+          "accession": "0000764180-25-000092",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418025000092/"
+        },
+        {
+          "date": "2025-04-21",
+          "filed": "2025-04-29",
+          "shares": 1684451818,
+          "form": "10-Q",
+          "accession": "0000764180-25-000049",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418025000049/"
+        },
+        {
+          "date": "2025-07-23",
+          "filed": "2025-07-30",
+          "shares": 1679890953,
+          "form": "10-Q",
+          "accession": "0000764180-25-000111",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418025000111/"
+        },
+        {
+          "date": "2025-10-22",
+          "filed": "2025-10-30",
+          "shares": 1678671552,
+          "form": "10-Q",
+          "accession": "0000764180-25-000130",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418025000130/"
+        },
+        {
+          "date": "2026-02-13",
+          "filed": "2026-05-27",
+          "shares": 1671898087,
+          "form": "10-K/A",
+          "accession": "0000764180-26-000077",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418026000077/"
+        },
+        {
+          "date": "2026-04-22",
+          "filed": "2026-04-30",
+          "shares": 1669891235,
+          "form": "10-Q",
+          "accession": "0000764180-26-000058",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418026000058/"
+        },
+        {
+          "date": "2026-07-22",
+          "filed": "2026-07-30",
+          "shares": 1669743926,
+          "form": "10-Q",
+          "accession": "0000764180-26-000094",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418026000094/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Altria Group, Inc.",
-      "yoy_pct": -1
+      ]
     },
     "BND": {
       "ticker": "BND",
@@ -526,105 +2687,747 @@
     },
     "BRK-B": {
       "ticker": "BRK-B",
-      "status": "error",
+      "name": "Berkshire Hathaway Inc",
+      "cik": "0001067983",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 2140000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/brk.b/statistics/"
+          "date": "2009-10-29",
+          "filed": "2009-11-06",
+          "shares": 1056884,
+          "form": "10-Q",
+          "accession": "0001157523-09-007839",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000115752309007839/"
+        },
+        {
+          "date": "2010-02-18",
+          "filed": "2010-03-01",
+          "shares": 1103764,
+          "form": "10-K",
+          "accession": "0001193125-10-043450",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312510043450/"
+        },
+        {
+          "date": "2010-04-30",
+          "filed": "2010-05-07",
+          "shares": 0,
+          "form": "10-Q",
+          "accession": "0001157523-10-002982",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000115752310002982/"
+        },
+        {
+          "date": "2010-07-30",
+          "filed": "2010-08-06",
+          "shares": 976414,
+          "form": "10-Q",
+          "accession": "0001157523-10-004882",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000115752310004882/"
+        },
+        {
+          "date": "2010-10-29",
+          "filed": "2010-11-05",
+          "shares": 956153,
+          "form": "10-Q",
+          "accession": "0001157523-10-006675",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000115752310006675/"
+        },
+        {
+          "date": "2011-02-17",
+          "filed": "2011-02-28",
+          "shares": 943242,
+          "form": "10-K",
+          "accession": "0001193125-11-048914",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312511048914/"
+        },
+        {
+          "date": "2011-04-29",
+          "filed": "2011-05-06",
+          "shares": 941481,
+          "form": "10-Q",
+          "accession": "0001157523-11-002891",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000115752311002891/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Berkshire Hathaway Inc",
-      "yoy_pct": 0
+      ]
     },
     "DIS": {
       "ticker": "DIS",
-      "status": "error",
+      "name": "Walt Disney Co",
+      "cik": "0001744489",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 1730000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/dis/statistics/"
+          "date": "2023-02-01",
+          "filed": "2023-02-08",
+          "shares": 1826807227,
+          "form": "10-Q",
+          "accession": "0001744489-23-000049",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448923000049/"
+        },
+        {
+          "date": "2023-05-03",
+          "filed": "2023-05-10",
+          "shares": 1827304988,
+          "form": "10-Q",
+          "accession": "0001744489-23-000099",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448923000099/"
+        },
+        {
+          "date": "2023-08-02",
+          "filed": "2023-08-09",
+          "shares": 1829778789,
+          "form": "10-Q",
+          "accession": "0001744489-23-000171",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448923000171/"
+        },
+        {
+          "date": "2023-11-15",
+          "filed": "2023-11-21",
+          "shares": 1830315921,
+          "form": "10-K",
+          "accession": "0001744489-23-000216",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448923000216/"
+        },
+        {
+          "date": "2024-01-17",
+          "filed": "2024-01-24",
+          "shares": 1834285760,
+          "form": "10-K/A",
+          "accession": "0001744489-24-000064",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448924000064/"
+        },
+        {
+          "date": "2024-01-31",
+          "filed": "2024-02-07",
+          "shares": 1834302235,
+          "form": "10-Q",
+          "accession": "0001744489-24-000081",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448924000081/"
+        },
+        {
+          "date": "2024-05-01",
+          "filed": "2024-05-07",
+          "shares": 1823043026,
+          "form": "10-Q",
+          "accession": "0001744489-24-000152",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448924000152/"
+        },
+        {
+          "date": "2024-07-31",
+          "filed": "2024-08-07",
+          "shares": 1813587380,
+          "form": "10-Q",
+          "accession": "0001744489-24-000232",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448924000232/"
+        },
+        {
+          "date": "2024-11-06",
+          "filed": "2024-11-14",
+          "shares": 1810939306,
+          "form": "10-K",
+          "accession": "0001744489-24-000276",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448924000276/"
+        },
+        {
+          "date": "2025-01-29",
+          "filed": "2025-02-05",
+          "shares": 1807788865,
+          "form": "10-Q",
+          "accession": "0001744489-25-000067",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448925000067/"
+        },
+        {
+          "date": "2025-04-30",
+          "filed": "2025-05-07",
+          "shares": 1797746311,
+          "form": "10-Q",
+          "accession": "0001744489-25-000098",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448925000098/"
+        },
+        {
+          "date": "2025-07-30",
+          "filed": "2025-08-06",
+          "shares": 1797933833,
+          "form": "10-Q",
+          "accession": "0001744489-25-000136",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448925000136/"
+        },
+        {
+          "date": "2025-11-05",
+          "filed": "2025-11-13",
+          "shares": 1785288846,
+          "form": "10-K",
+          "accession": "0001744489-25-000155",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448925000155/"
+        },
+        {
+          "date": "2026-01-28",
+          "filed": "2026-02-02",
+          "shares": 1771519851,
+          "form": "10-Q",
+          "accession": "0001744489-26-000019",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448926000019/"
+        },
+        {
+          "date": "2026-04-29",
+          "filed": "2026-05-06",
+          "shares": 1736511424,
+          "form": "10-Q",
+          "accession": "0001744489-26-000037",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448926000037/"
+        },
+        {
+          "date": "2026-07-29",
+          "filed": "2026-08-05",
+          "shares": 1726686902,
+          "form": "10-Q",
+          "accession": "0001744489-26-000057",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448926000057/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Walt Disney Co",
-      "yoy_pct": -1.93
+      ]
     },
     "GE": {
       "ticker": "GE",
-      "status": "error",
+      "name": "General Electric Co",
+      "cik": "0000040545",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 1030000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/ge/statistics/"
+          "date": "2023-01-31",
+          "filed": "2023-02-10",
+          "shares": 1089286553,
+          "form": "10-K",
+          "accession": "0000040545-23-000023",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054523000023/"
+        },
+        {
+          "date": "2023-03-31",
+          "filed": "2023-04-25",
+          "shares": 1088960029,
+          "form": "10-Q",
+          "accession": "0000040545-23-000136",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054523000136/"
+        },
+        {
+          "date": "2023-06-30",
+          "filed": "2023-07-25",
+          "shares": 1088378193,
+          "form": "10-Q",
+          "accession": "0000040545-23-000198",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054523000198/"
+        },
+        {
+          "date": "2023-09-30",
+          "filed": "2023-10-24",
+          "shares": 1088386043,
+          "form": "10-Q",
+          "accession": "0000040545-23-000238",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054523000238/"
+        },
+        {
+          "date": "2024-01-15",
+          "filed": "2024-02-02",
+          "shares": 1088334304,
+          "form": "10-K",
+          "accession": "0000040545-24-000027",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054524000027/"
+        },
+        {
+          "date": "2024-03-31",
+          "filed": "2024-04-23",
+          "shares": 1094606676,
+          "form": "10-Q",
+          "accession": "0000040545-24-000113",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054524000113/"
+        },
+        {
+          "date": "2024-06-30",
+          "filed": "2024-07-23",
+          "shares": 1084311016,
+          "form": "10-Q",
+          "accession": "0000040545-24-000176",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054524000176/"
+        },
+        {
+          "date": "2024-09-30",
+          "filed": "2024-10-22",
+          "shares": 1082294004,
+          "form": "10-Q",
+          "accession": "0000040545-24-000200",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054524000200/"
+        },
+        {
+          "date": "2025-01-15",
+          "filed": "2025-02-03",
+          "shares": 1073290505,
+          "form": "10-K",
+          "accession": "0000040545-25-000015",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054525000015/"
+        },
+        {
+          "date": "2025-03-31",
+          "filed": "2025-04-22",
+          "shares": 1066386643,
+          "form": "10-Q",
+          "accession": "0000040545-25-000062",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054525000062/"
+        },
+        {
+          "date": "2025-06-30",
+          "filed": "2025-07-21",
+          "shares": 1060439387,
+          "form": "10-Q",
+          "accession": "0000040545-25-000111",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054525000111/"
+        },
+        {
+          "date": "2025-09-30",
+          "filed": "2025-10-21",
+          "shares": 1054813911,
+          "form": "10-Q",
+          "accession": "0000040545-25-000132",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054525000132/"
+        },
+        {
+          "date": "2026-01-15",
+          "filed": "2026-01-29",
+          "shares": 1048813612,
+          "form": "10-K",
+          "accession": "0000040545-26-000008",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054526000008/"
+        },
+        {
+          "date": "2026-03-31",
+          "filed": "2026-04-21",
+          "shares": 1043337235,
+          "form": "10-Q",
+          "accession": "0000040545-26-000027",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054526000027/"
+        },
+        {
+          "date": "2026-06-30",
+          "filed": "2026-07-16",
+          "shares": 1037562513,
+          "form": "10-Q",
+          "accession": "0000040545-26-000049",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054526000049/"
+        },
+        {
+          "date": "2026-09-30",
+          "filed": "2026-10-20",
+          "shares": 1033351921,
+          "form": "10-Q",
+          "accession": "0000040545-26-000064",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054526000064/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "General Electric Co",
-      "yoy_pct": -2.21
+      ]
     },
     "HD": {
       "ticker": "HD",
-      "status": "error",
+      "name": "Home Depot, Inc.",
+      "cik": "0000354950",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 997690000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/hd/statistics/"
+          "date": "2022-11-15",
+          "filed": "2022-11-22",
+          "shares": 1019186022,
+          "form": "10-Q",
+          "accession": "0000354950-22-000239",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495022000239/"
+        },
+        {
+          "date": "2023-03-01",
+          "filed": "2023-03-15",
+          "shares": 1014955506,
+          "form": "10-K",
+          "accession": "0000354950-23-000059",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495023000059/"
+        },
+        {
+          "date": "2023-05-16",
+          "filed": "2023-05-23",
+          "shares": 1005376130,
+          "form": "10-Q",
+          "accession": "0000354950-23-000144",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495023000144/"
+        },
+        {
+          "date": "2023-08-15",
+          "filed": "2023-08-22",
+          "shares": 1000065982,
+          "form": "10-Q",
+          "accession": "0000354950-23-000185",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495023000185/"
+        },
+        {
+          "date": "2023-11-14",
+          "filed": "2023-11-21",
+          "shares": 995261844,
+          "form": "10-Q",
+          "accession": "0000354950-23-000240",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495023000240/"
+        },
+        {
+          "date": "2024-02-28",
+          "filed": "2024-03-13",
+          "shares": 991015773,
+          "form": "10-K",
+          "accession": "0000354950-24-000062",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495024000062/"
+        },
+        {
+          "date": "2024-05-14",
+          "filed": "2024-05-21",
+          "shares": 991614186,
+          "form": "10-Q",
+          "accession": "0000354950-24-000152",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495024000152/"
+        },
+        {
+          "date": "2024-08-13",
+          "filed": "2024-08-20",
+          "shares": 993293377,
+          "form": "10-Q",
+          "accession": "0000354950-24-000201",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495024000201/"
+        },
+        {
+          "date": "2024-11-12",
+          "filed": "2024-11-19",
+          "shares": 993362612,
+          "form": "10-Q",
+          "accession": "0000354950-24-000240",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495024000240/"
+        },
+        {
+          "date": "2025-03-05",
+          "filed": "2025-03-21",
+          "shares": 994032168,
+          "form": "10-K",
+          "accession": "0000354950-25-000085",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495025000085/"
+        },
+        {
+          "date": "2025-05-20",
+          "filed": "2025-05-28",
+          "shares": 994927985,
+          "form": "10-Q",
+          "accession": "0000354950-25-000165",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495025000165/"
+        },
+        {
+          "date": "2025-08-19",
+          "filed": "2025-08-26",
+          "shares": 995386647,
+          "form": "10-Q",
+          "accession": "0000354950-25-000217",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495025000217/"
+        },
+        {
+          "date": "2025-11-18",
+          "filed": "2025-11-25",
+          "shares": 995511485,
+          "form": "10-Q",
+          "accession": "0001628280-25-053868",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828025053868/"
+        },
+        {
+          "date": "2026-03-04",
+          "filed": "2026-03-18",
+          "shares": 996011466,
+          "form": "10-K",
+          "accession": "0001628280-26-019436",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/"
+        },
+        {
+          "date": "2026-05-19",
+          "filed": "2026-05-27",
+          "shares": 997116682,
+          "form": "10-Q",
+          "accession": "0001628280-26-038247",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026038247/"
+        },
+        {
+          "date": "2026-08-18",
+          "filed": "2026-08-25",
+          "shares": 997689626,
+          "form": "10-Q",
+          "accession": "0001628280-26-058715",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026058715/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Home Depot, Inc.",
-      "yoy_pct": 0.2
+      ]
     },
     "NKE": {
       "ticker": "NKE",
-      "status": "error",
+      "name": "Nike, Inc.",
+      "cik": "0000320187",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 1490000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/nke/statistics/"
+          "date": "2010-03-31",
+          "filed": "2010-04-07",
+          "shares": 395710294,
+          "form": "10-Q",
+          "accession": "0001193125-10-078534",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000119312510078534/"
+        },
+        {
+          "date": "2011-11-30",
+          "filed": "2012-01-05",
+          "shares": 458913682,
+          "form": "10-Q",
+          "accession": "0001193125-12-003655",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000119312512003655/"
+        },
+        {
+          "date": "2012-02-29",
+          "filed": "2012-04-06",
+          "shares": 458368009,
+          "form": "10-Q",
+          "accession": "0001193125-12-153669",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000119312512153669/"
+        },
+        {
+          "date": "2012-07-19",
+          "filed": "2012-07-24",
+          "shares": 455870220,
+          "form": "10-K",
+          "accession": "0001193125-12-312306",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000119312512312306/"
+        },
+        {
+          "date": "2012-08-31",
+          "filed": "2012-10-09",
+          "shares": 450552418,
+          "form": "10-Q",
+          "accession": "0001193125-12-418554",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000119312512418554/"
+        },
+        {
+          "date": "2012-11-30",
+          "filed": "2013-01-09",
+          "shares": 895711770,
+          "form": "10-Q",
+          "accession": "0001193125-13-008172",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000119312513008172/"
+        },
+        {
+          "date": "2013-02-28",
+          "filed": "2013-04-04",
+          "shares": 893614573,
+          "form": "10-Q",
+          "accession": "0001193125-13-142156",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000119312513142156/"
+        },
+        {
+          "date": "2013-07-19",
+          "filed": "2013-07-23",
+          "shares": 890352466,
+          "form": "10-K",
+          "accession": "0000320187-13-000092",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018713000092/"
+        },
+        {
+          "date": "2013-10-02",
+          "filed": "2013-10-07",
+          "shares": 889555117,
+          "form": "10-Q",
+          "accession": "0000320187-13-000183",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018713000183/"
+        },
+        {
+          "date": "2014-01-02",
+          "filed": "2014-01-07",
+          "shares": 885484422,
+          "form": "10-Q",
+          "accession": "0000320187-14-000003",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018714000003/"
+        },
+        {
+          "date": "2014-04-01",
+          "filed": "2014-04-07",
+          "shares": 878138823,
+          "form": "10-Q",
+          "accession": "0000320187-14-000030",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018714000030/"
+        },
+        {
+          "date": "2014-07-18",
+          "filed": "2014-07-25",
+          "shares": 868297496,
+          "form": "10-K",
+          "accession": "0000320187-14-000097",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018714000097/"
+        },
+        {
+          "date": "2014-10-02",
+          "filed": "2014-10-07",
+          "shares": 861508468,
+          "form": "10-Q",
+          "accession": "0000320187-14-000158",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018714000158/"
+        },
+        {
+          "date": "2015-01-02",
+          "filed": "2015-01-07",
+          "shares": 863938522,
+          "form": "10-Q",
+          "accession": "0000320187-15-000003",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018715000003/"
+        },
+        {
+          "date": "2015-04-02",
+          "filed": "2015-04-07",
+          "shares": 859747555,
+          "form": "10-Q",
+          "accession": "0000320187-15-000044",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018715000044/"
+        },
+        {
+          "date": "2015-07-17",
+          "filed": "2015-07-23",
+          "shares": 855351589,
+          "form": "10-K",
+          "accession": "0000320187-15-000113",
+          "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018715000113/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Nike, Inc.",
-      "yoy_pct": 0.03
+      ]
     },
     "SBUX": {
       "ticker": "SBUX",
-      "status": "error",
+      "name": "Starbucks Corp",
+      "cik": "0000829224",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
+          "date": "2022-11-11",
+          "filed": "2022-11-18",
+          "shares": 1147800000,
+          "form": "10-K",
+          "accession": "0000829224-22-000058",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922422000058/"
+        },
+        {
+          "date": "2023-01-27",
+          "filed": "2023-02-02",
+          "shares": 1149300000,
+          "form": "10-Q",
+          "accession": "0000829224-23-000017",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922423000017/"
+        },
+        {
+          "date": "2023-04-26",
+          "filed": "2023-05-02",
+          "shares": 1146400000,
+          "form": "10-Q",
+          "accession": "0000829224-23-000037",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922423000037/"
+        },
+        {
+          "date": "2023-07-26",
+          "filed": "2023-08-01",
+          "shares": 1145400000,
+          "form": "10-Q",
+          "accession": "0000829224-23-000044",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922423000044/"
+        },
+        {
+          "date": "2023-11-10",
+          "filed": "2023-11-17",
+          "shares": 1136700000,
+          "form": "10-K",
+          "accession": "0000829224-23-000058",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922423000058/"
+        },
+        {
+          "date": "2024-01-24",
+          "filed": "2024-02-16",
+          "shares": 1132200000,
+          "form": "10-Q/A",
+          "accession": "0001193125-24-037988",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000119312524037988/"
+        },
+        {
+          "date": "2024-04-24",
+          "filed": "2024-04-30",
+          "shares": 1132700000,
+          "form": "10-Q",
+          "accession": "0000829224-24-000024",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922424000024/"
+        },
+        {
+          "date": "2024-07-24",
+          "filed": "2024-07-30",
+          "shares": 1133200000,
+          "form": "10-Q",
+          "accession": "0000829224-24-000042",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922424000042/"
+        },
+        {
+          "date": "2024-11-13",
+          "filed": "2024-11-20",
+          "shares": 1133800000,
+          "form": "10-K",
+          "accession": "0000829224-24-000057",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922424000057/"
+        },
+        {
+          "date": "2025-01-22",
+          "filed": "2025-01-28",
+          "shares": 1135900000,
+          "form": "10-Q",
+          "accession": "0000829224-25-000014",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922425000014/"
+        },
+        {
+          "date": "2025-04-23",
+          "filed": "2025-04-29",
+          "shares": 1136400000,
+          "form": "10-Q",
+          "accession": "0000829224-25-000034",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922425000034/"
+        },
+        {
+          "date": "2025-07-23",
+          "filed": "2025-07-29",
+          "shares": 1136700000,
+          "form": "10-Q",
+          "accession": "0000829224-25-000058",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922425000058/"
+        },
+        {
+          "date": "2025-11-07",
+          "filed": "2025-11-14",
+          "shares": 1137100000,
+          "form": "10-K",
+          "accession": "0000829224-25-000114",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922425000114/"
+        },
+        {
+          "date": "2026-01-22",
+          "filed": "2026-01-28",
+          "shares": 1139300000,
+          "form": "10-Q",
+          "accession": "0000829224-26-000011",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922426000011/"
+        },
+        {
+          "date": "2026-04-22",
+          "filed": "2026-04-28",
+          "shares": 1139700000,
+          "form": "10-Q",
+          "accession": "0000829224-26-000080",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922426000080/"
+        },
+        {
+          "date": "2026-07-23",
+          "filed": "2026-07-29",
           "shares": 1140000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/sbux/statistics/"
+          "form": "10-Q",
+          "accession": "0000829224-26-000130",
+          "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922426000130/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Starbucks Corp",
-      "yoy_pct": 0.32
+      ]
     },
     "CLSK": {
       "ticker": "CLSK",
@@ -639,7 +3442,7 @@
           "url": "https://stockanalysis.com/stocks/clsk/statistics/"
         }
       ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "reason": "HTTP Error 429: Too Many Requests; backup: External source has no readable shares outstanding",
       "name": "Cleanspark, Inc.",
       "yoy_pct": -7.82
     },
@@ -656,7 +3459,7 @@
           "url": "https://stockanalysis.com/stocks/ecc/statistics/"
         }
       ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "reason": "HTTP Error 429: Too Many Requests; backup: External source has no readable shares outstanding",
       "name": "Eagle Point Credit Co Inc.",
       "yoy_pct": 8.97
     },
@@ -674,20 +3477,139 @@
     },
     "O": {
       "ticker": "O",
-      "status": "error",
+      "name": "Realty Income Corp",
+      "cik": "0000726728",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 945900000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/o/statistics/"
+          "date": "2022-10-28",
+          "filed": "2022-11-03",
+          "shares": 627153861,
+          "form": "10-Q",
+          "accession": "0000726728-22-000121",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672822000121/"
+        },
+        {
+          "date": "2023-02-15",
+          "filed": "2023-02-22",
+          "shares": 660520906,
+          "form": "10-K",
+          "accession": "0000726728-23-000044",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672823000044/"
+        },
+        {
+          "date": "2023-04-28",
+          "filed": "2023-05-04",
+          "shares": 673222491,
+          "form": "10-Q",
+          "accession": "0000726728-23-000068",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672823000068/"
+        },
+        {
+          "date": "2023-07-31",
+          "filed": "2023-08-03",
+          "shares": 708787568,
+          "form": "10-Q",
+          "accession": "0000726728-23-000107",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672823000107/"
+        },
+        {
+          "date": "2023-11-03",
+          "filed": "2023-11-07",
+          "shares": 723923644,
+          "form": "10-Q",
+          "accession": "0000726728-23-000115",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672823000115/"
+        },
+        {
+          "date": "2024-02-15",
+          "filed": "2024-02-21",
+          "shares": 861123757,
+          "form": "10-K",
+          "accession": "0000726728-24-000047",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672824000047/"
+        },
+        {
+          "date": "2024-05-03",
+          "filed": "2024-05-07",
+          "shares": 870774436,
+          "form": "10-Q",
+          "accession": "0000726728-24-000077",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672824000077/"
+        },
+        {
+          "date": "2024-08-02",
+          "filed": "2024-08-06",
+          "shares": 870867608,
+          "form": "10-Q",
+          "accession": "0000726728-24-000118",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672824000118/"
+        },
+        {
+          "date": "2024-10-31",
+          "filed": "2024-11-05",
+          "shares": 875211050,
+          "form": "10-Q",
+          "accession": "0000726728-24-000130",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672824000130/"
+        },
+        {
+          "date": "2025-02-20",
+          "filed": "2025-02-25",
+          "shares": 891516161,
+          "form": "10-K",
+          "accession": "0000726728-25-000055",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672825000055/"
+        },
+        {
+          "date": "2025-05-02",
+          "filed": "2025-05-06",
+          "shares": 903079947,
+          "form": "10-Q",
+          "accession": "0000726728-25-000096",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672825000096/"
+        },
+        {
+          "date": "2025-08-01",
+          "filed": "2025-08-07",
+          "shares": 914306087,
+          "form": "10-Q",
+          "accession": "0000726728-25-000131",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672825000131/"
+        },
+        {
+          "date": "2025-10-30",
+          "filed": "2025-11-04",
+          "shares": 919905765,
+          "form": "10-Q",
+          "accession": "0000726728-25-000148",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672825000148/"
+        },
+        {
+          "date": "2026-02-20",
+          "filed": "2026-02-25",
+          "shares": 932440218,
+          "form": "10-K",
+          "accession": "0000726728-26-000011",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672826000011/"
+        },
+        {
+          "date": "2026-04-30",
+          "filed": "2026-05-07",
+          "shares": 932492530,
+          "form": "10-Q",
+          "accession": "0000726728-26-000030",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672826000030/"
+        },
+        {
+          "date": "2026-07-30",
+          "filed": "2026-08-06",
+          "shares": 946218033,
+          "form": "10-Q",
+          "accession": "0000726728-26-000048",
+          "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672826000048/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Realty Income Corp",
-      "yoy_pct": 4.53
+      ]
     },
     "MAIN": {
       "ticker": "MAIN",
@@ -702,7 +3624,7 @@
           "url": "https://stockanalysis.com/stocks/main/statistics/"
         }
       ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "reason": "HTTP Error 429: Too Many Requests; backup: External source has no readable shares outstanding",
       "name": "Main Street Capital Corp",
       "yoy_pct": 2.7
     },
@@ -719,26 +3641,145 @@
           "url": "https://stockanalysis.com/stocks/aapl/statistics/"
         }
       ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "reason": "HTTP Error 429: Too Many Requests; backup: External source has no readable shares outstanding",
       "name": "Apple Inc.",
       "yoy_pct": -2.13
     },
     "BA": {
       "ticker": "BA",
-      "status": "error",
+      "name": "Boeing Co",
+      "cik": "0000012927",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 790370000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/ba/statistics/"
+          "date": "2022-10-19",
+          "filed": "2022-10-26",
+          "shares": 595983192,
+          "form": "10-Q",
+          "accession": "0000012927-22-000073",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292722000073/"
+        },
+        {
+          "date": "2023-01-20",
+          "filed": "2023-01-27",
+          "shares": 598239585,
+          "form": "10-K",
+          "accession": "0000012927-23-000007",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292723000007/"
+        },
+        {
+          "date": "2023-04-19",
+          "filed": "2023-04-26",
+          "shares": 601593507,
+          "form": "10-Q",
+          "accession": "0000012927-23-000029",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292723000029/"
+        },
+        {
+          "date": "2023-07-19",
+          "filed": "2023-07-26",
+          "shares": 603203554,
+          "form": "10-Q",
+          "accession": "0000012927-23-000048",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292723000048/"
+        },
+        {
+          "date": "2023-10-18",
+          "filed": "2023-10-25",
+          "shares": 604976797,
+          "form": "10-Q",
+          "accession": "0000012927-23-000062",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292723000062/"
+        },
+        {
+          "date": "2024-01-24",
+          "filed": "2024-01-31",
+          "shares": 610135205,
+          "form": "10-K",
+          "accession": "0000012927-24-000010",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292724000010/"
+        },
+        {
+          "date": "2024-04-17",
+          "filed": "2024-04-24",
+          "shares": 613884224,
+          "form": "10-Q",
+          "accession": "0000012927-24-000025",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292724000025/"
+        },
+        {
+          "date": "2024-07-24",
+          "filed": "2024-07-31",
+          "shares": 616167165,
+          "form": "10-Q",
+          "accession": "0000012927-24-000055",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292724000055/"
+        },
+        {
+          "date": "2024-10-16",
+          "filed": "2024-10-23",
+          "shares": 618200911,
+          "form": "10-Q",
+          "accession": "0000012927-24-000082",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292724000082/"
+        },
+        {
+          "date": "2025-01-27",
+          "filed": "2025-02-03",
+          "shares": 750074411,
+          "form": "10-K",
+          "accession": "0000012927-25-000015",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292725000015/"
+        },
+        {
+          "date": "2025-04-16",
+          "filed": "2025-04-23",
+          "shares": 754005474,
+          "form": "10-Q",
+          "accession": "0000012927-25-000031",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292725000031/"
+        },
+        {
+          "date": "2025-07-22",
+          "filed": "2025-07-29",
+          "shares": 756157695,
+          "form": "10-Q",
+          "accession": "0000012927-25-000062",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000001292725000062/"
+        },
+        {
+          "date": "2025-10-22",
+          "filed": "2025-10-29",
+          "shares": 760095468,
+          "form": "10-Q",
+          "accession": "0001628280-25-047023",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000162828025047023/"
+        },
+        {
+          "date": "2026-01-23",
+          "filed": "2026-01-30",
+          "shares": 785347096,
+          "form": "10-K",
+          "accession": "0001628280-26-004357",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000162828026004357/"
+        },
+        {
+          "date": "2026-04-15",
+          "filed": "2026-04-22",
+          "shares": 788302331,
+          "form": "10-Q",
+          "accession": "0001628280-26-026458",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000162828026026458/"
+        },
+        {
+          "date": "2026-07-21",
+          "filed": "2026-07-28",
+          "shares": 790370020,
+          "form": "10-Q",
+          "accession": "0001628280-26-050038",
+          "url": "https://www.sec.gov/Archives/edgar/data/12927/000162828026050038/"
         }
-      ],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
-      "name": "Boeing Co",
-      "yoy_pct": 8.7
+      ]
     }
   }
 }
