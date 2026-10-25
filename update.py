@@ -19,8 +19,14 @@ def main():
         mapping=fetch('https://www.sec.gov/files/company_tickers.json')
         lookup={v['ticker'].upper():v for v in mapping.values()}
     except Exception as exc:
-        print('Ticker mapping unavailable:',exc)
-        lookup={}
+        print('SEC ticker listing blocked; using daily-maintained GitHub ticker mapping:',exc)
+        try:
+            mapping=fetch('https://raw.githubusercontent.com/jadchaar/sec-cik-mapper/main/mappings/stocks/ticker_to_cik.json')
+            names=fetch('https://raw.githubusercontent.com/jadchaar/sec-cik-mapper/main/mappings/stocks/ticker_to_company_name.json')
+            lookup={k.upper():{'ticker':k,'cik_str':int(v),'title':names.get(k,k)} for k,v in mapping.items()}
+        except Exception as fallback_exc:
+            raise RuntimeError('Cannot load SEC ticker mapping from either endpoint. Refusing to erase valid records.') from fallback_exc
+    print('Ticker identifiers loaded:',len(lookup))
     for ticker in tickers:
         info=lookup.get(ticker) or lookup.get(ticker.replace('-','.'))
         old=entries.get(ticker,{})
