@@ -1,305 +1,365 @@
 {
-  "updated_at": null,
+  "updated_at": "2026-10-25T04:11:19.068226+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "KGC": {
       "ticker": "KGC",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "NVDA": {
       "ticker": "NVDA",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "ORCU": {
       "ticker": "ORCU",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "QUBT": {
       "ticker": "QUBT",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "BTC": {
       "ticker": "BTC",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "INTC": {
       "ticker": "INTC",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "IAU": {
       "ticker": "IAU",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "GLD": {
       "ticker": "GLD",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "CRWV": {
       "ticker": "CRWV",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "QQQA": {
       "ticker": "QQQA",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "STRC": {
       "ticker": "STRC",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "ASST": {
       "ticker": "ASST",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "CRSH": {
       "ticker": "CRSH",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "T": {
       "ticker": "T",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "LTC": {
       "ticker": "LTC",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "SOFI": {
       "ticker": "SOFI",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "XOVR": {
       "ticker": "XOVR",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "ORCL": {
       "ticker": "ORCL",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "ADC": {
       "ticker": "ADC",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "AVGG": {
       "ticker": "AVGG",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "FINV": {
       "ticker": "FINV",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "SOUN": {
       "ticker": "SOUN",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "CRF": {
       "ticker": "CRF",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "CLM": {
       "ticker": "CLM",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "ENB": {
       "ticker": "ENB",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "HYDB": {
       "ticker": "HYDB",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "UTF": {
       "ticker": "UTF",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "CAN": {
       "ticker": "CAN",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "TSLW": {
       "ticker": "TSLW",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "PEP": {
       "ticker": "PEP",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "TSLX": {
       "ticker": "TSLX",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "OBDC": {
       "ticker": "OBDC",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "SCHD": {
       "ticker": "SCHD",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "COIW": {
       "ticker": "COIW",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "NVDY": {
       "ticker": "NVDY",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "YMAX": {
       "ticker": "YMAX",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "ULTY": {
       "ticker": "ULTY",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "CONY": {
       "ticker": "CONY",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "AIYY": {
       "ticker": "AIYY",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "F": {
       "ticker": "F",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "ET": {
       "ticker": "ET",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "MO": {
       "ticker": "MO",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "BND": {
       "ticker": "BND",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "QQQI": {
       "ticker": "QQQI",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "BRK-B": {
       "ticker": "BRK-B",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "DIS": {
       "ticker": "DIS",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "GE": {
       "ticker": "GE",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "HD": {
       "ticker": "HD",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "NKE": {
       "ticker": "NKE",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "SBUX": {
       "ticker": "SBUX",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "CLSK": {
       "ticker": "CLSK",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "ECC": {
       "ticker": "ECC",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "MSTY": {
       "ticker": "MSTY",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "TSLY": {
       "ticker": "TSLY",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "O": {
       "ticker": "O",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "MAIN": {
       "ticker": "MAIN",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "AAPL": {
       "ticker": "AAPL",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     },
     "BA": {
       "ticker": "BA",
-      "status": "pending",
-      "history": []
+      "status": "unavailable",
+      "history": [],
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
     }
   }
 }
