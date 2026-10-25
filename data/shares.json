@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-25T04:15:18.237Z",
+  "updated_at": "2026-10-25T04:16:57.954272+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -14,13 +14,13 @@
           "url": "https://stockanalysis.com/stocks/iren/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Iren Ltd",
       "yoy_pct": 41.6
     },
     "KGC": {
       "ticker": "KGC",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -31,13 +31,13 @@
           "url": "https://stockanalysis.com/stocks/kgc/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Kinross Gold Corp",
       "yoy_pct": -2.14
     },
     "NVDA": {
       "ticker": "NVDA",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -48,7 +48,7 @@
           "url": "https://stockanalysis.com/stocks/nvda/statistics/"
         }
       ],
-      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Nvidia Corp",
       "yoy_pct": -1.04
     },
@@ -60,7 +60,7 @@
     },
     "QUBT": {
       "ticker": "QUBT",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -71,7 +71,7 @@
           "url": "https://stockanalysis.com/stocks/qubt/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Quantum Computing Inc.",
       "yoy_pct": 73.72
     },
@@ -84,7 +84,7 @@
     },
     "INTC": {
       "ticker": "INTC",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -95,7 +95,7 @@
           "url": "https://stockanalysis.com/stocks/intc/statistics/"
         }
       ],
-      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Intel Corp",
       "yoy_pct": 13.28
     },
@@ -121,7 +121,7 @@
     },
     "CRWV": {
       "ticker": "CRWV",
-      "status": "snapshot",
+      "status": "unavailable",
       "history": [
         {
           "date": "2026-10-25",
@@ -132,7 +132,7 @@
           "url": "https://stockanalysis.com/stocks/crwv/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)",
       "yoy_pct": 75.59
     },
     "QQQA": {
@@ -149,7 +149,7 @@
     },
     "ASST": {
       "ticker": "ASST",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -160,7 +160,7 @@
           "url": "https://stockanalysis.com/stocks/asst/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Asset Entities Inc.",
       "yoy_pct": 3905.98
     },
@@ -172,7 +172,7 @@
     },
     "T": {
       "ticker": "T",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -183,13 +183,13 @@
           "url": "https://stockanalysis.com/stocks/t/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "At&T Inc.",
       "yoy_pct": -3.14
     },
     "LTC": {
       "ticker": "LTC",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -200,13 +200,13 @@
           "url": "https://stockanalysis.com/stocks/ltc/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Ltc Properties Inc",
       "yoy_pct": 7.5
     },
     "SOFI": {
       "ticker": "SOFI",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -217,7 +217,7 @@
           "url": "https://stockanalysis.com/stocks/sofi/statistics/"
         }
       ],
-      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Sofi Technologies, Inc.",
       "yoy_pct": 14.49
     },
@@ -229,7 +229,7 @@
     },
     "ORCL": {
       "ticker": "ORCL",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -240,13 +240,13 @@
           "url": "https://stockanalysis.com/stocks/orcl/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Oracle Corp",
       "yoy_pct": 1.95
     },
     "ADC": {
       "ticker": "ADC",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -257,7 +257,7 @@
           "url": "https://stockanalysis.com/stocks/adc/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Agree Realty Corp",
       "yoy_pct": 10.66
     },
@@ -269,7 +269,7 @@
     },
     "FINV": {
       "ticker": "FINV",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -280,13 +280,13 @@
           "url": "https://stockanalysis.com/stocks/finv/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Finvolution Group",
       "yoy_pct": -0.19
     },
     "SOUN": {
       "ticker": "SOUN",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -297,7 +297,7 @@
           "url": "https://stockanalysis.com/stocks/soun/statistics/"
         }
       ],
-      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Soundhound Ai, Inc.",
       "yoy_pct": 9.82
     },
@@ -317,7 +317,7 @@
     },
     "ENB": {
       "ticker": "ENB",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -328,7 +328,7 @@
           "url": "https://stockanalysis.com/stocks/enb/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Enbridge Inc",
       "yoy_pct": 0.14
     },
@@ -347,7 +347,7 @@
     },
     "CAN": {
       "ticker": "CAN",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -358,7 +358,7 @@
           "url": "https://stockanalysis.com/stocks/can/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Canaan Inc.",
       "yoy_pct": 96.61
     },
@@ -370,7 +370,7 @@
     },
     "PEP": {
       "ticker": "PEP",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -381,13 +381,13 @@
           "url": "https://stockanalysis.com/stocks/pep/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Pepsico Inc",
       "yoy_pct": -0.26
     },
     "TSLX": {
       "ticker": "TSLX",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -398,13 +398,13 @@
           "url": "https://stockanalysis.com/stocks/tslx/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Sixth Street Specialty Lending, Inc.",
       "yoy_pct": 1.2
     },
     "OBDC": {
       "ticker": "OBDC",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -415,7 +415,7 @@
           "url": "https://stockanalysis.com/stocks/obdc/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Blue Owl Capital Corp",
       "yoy_pct": 12.67
     },
@@ -463,7 +463,7 @@
     },
     "F": {
       "ticker": "F",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -474,13 +474,13 @@
           "url": "https://stockanalysis.com/stocks/f/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Ford Motor Co",
       "yoy_pct": -0.81
     },
     "ET": {
       "ticker": "ET",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -491,13 +491,13 @@
           "url": "https://stockanalysis.com/stocks/et/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Energy Transfer Lp",
       "yoy_pct": 0.08
     },
     "MO": {
       "ticker": "MO",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -508,7 +508,7 @@
           "url": "https://stockanalysis.com/stocks/mo/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Altria Group, Inc.",
       "yoy_pct": -1
     },
@@ -526,7 +526,7 @@
     },
     "BRK-B": {
       "ticker": "BRK-B",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -537,13 +537,13 @@
           "url": "https://stockanalysis.com/stocks/brk.b/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Berkshire Hathaway Inc",
       "yoy_pct": 0
     },
     "DIS": {
       "ticker": "DIS",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -554,13 +554,13 @@
           "url": "https://stockanalysis.com/stocks/dis/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Walt Disney Co",
       "yoy_pct": -1.93
     },
     "GE": {
       "ticker": "GE",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -571,13 +571,13 @@
           "url": "https://stockanalysis.com/stocks/ge/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "General Electric Co",
       "yoy_pct": -2.21
     },
     "HD": {
       "ticker": "HD",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -588,13 +588,13 @@
           "url": "https://stockanalysis.com/stocks/hd/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Home Depot, Inc.",
       "yoy_pct": 0.2
     },
     "NKE": {
       "ticker": "NKE",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -605,13 +605,13 @@
           "url": "https://stockanalysis.com/stocks/nke/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Nike, Inc.",
       "yoy_pct": 0.03
     },
     "SBUX": {
       "ticker": "SBUX",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -622,13 +622,13 @@
           "url": "https://stockanalysis.com/stocks/sbux/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Starbucks Corp",
       "yoy_pct": 0.32
     },
     "CLSK": {
       "ticker": "CLSK",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -639,13 +639,13 @@
           "url": "https://stockanalysis.com/stocks/clsk/statistics/"
         }
       ],
-      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Cleanspark, Inc.",
       "yoy_pct": -7.82
     },
     "ECC": {
       "ticker": "ECC",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -656,7 +656,7 @@
           "url": "https://stockanalysis.com/stocks/ecc/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Eagle Point Credit Co Inc.",
       "yoy_pct": 8.97
     },
@@ -674,7 +674,7 @@
     },
     "O": {
       "ticker": "O",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -685,13 +685,13 @@
           "url": "https://stockanalysis.com/stocks/o/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Realty Income Corp",
       "yoy_pct": 4.53
     },
     "MAIN": {
       "ticker": "MAIN",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -702,13 +702,13 @@
           "url": "https://stockanalysis.com/stocks/main/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Main Street Capital Corp",
       "yoy_pct": 2.7
     },
     "AAPL": {
       "ticker": "AAPL",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -719,13 +719,13 @@
           "url": "https://stockanalysis.com/stocks/aapl/statistics/"
         }
       ],
-      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Apple Inc.",
       "yoy_pct": -2.13
     },
     "BA": {
       "ticker": "BA",
-      "status": "snapshot",
+      "status": "error",
       "history": [
         {
           "date": "2026-10-25",
@@ -736,7 +736,7 @@
           "url": "https://stockanalysis.com/stocks/ba/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Boeing Co",
       "yoy_pct": 8.7
     }
