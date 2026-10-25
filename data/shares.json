@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T04:20:46.113076+00:00",
+  "updated_at": "2026-10-25T04:26:13.974339+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -31,7 +31,8 @@
           "accession": "0001878848-26-000026",
           "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000026/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "KGC": {
       "ticker": "KGC",
@@ -111,7 +112,8 @@
           "accession": "0001104659-26-035268",
           "url": "https://www.sec.gov/Archives/edgar/data/701818/000110465926035268/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "NVDA": {
       "ticker": "NVDA",
@@ -247,13 +249,14 @@
           "accession": "0001045810-26-000075",
           "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "ORCU": {
       "ticker": "ORCU",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "QUBT": {
       "ticker": "QUBT",
@@ -389,7 +392,8 @@
           "accession": "0001628280-26-055218",
           "url": "https://www.sec.gov/Archives/edgar/data/1758009/000162828026055218/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "BTC": {
       "ticker": "BTC",
@@ -469,7 +473,8 @@
           "accession": "0002015034-26-000008",
           "url": "https://www.sec.gov/Archives/edgar/data/2015034/000201503426000008/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "INTC": {
       "ticker": "INTC",
@@ -605,7 +610,8 @@
           "accession": "0000050863-26-000157",
           "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000157/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "IAU": {
       "ticker": "IAU",
@@ -741,7 +747,8 @@
           "accession": "0001437749-26-026002",
           "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774926026002/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "GLD": {
       "ticker": "GLD",
@@ -877,17 +884,18 @@
           "accession": "0001437749-26-025680",
           "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774926025680/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "CRWV": {
       "ticker": "CRWV",
-      "status": "unavailable",
+      "status": "snapshot",
       "history": [
         {
           "date": "2026-10-25",
@@ -898,24 +906,24 @@
           "url": "https://stockanalysis.com/stocks/crwv/statistics/"
         }
       ],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)",
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider.",
       "yoy_pct": 75.59
     },
     "QQQA": {
       "ticker": "QQQA",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "STRC": {
       "ticker": "STRC",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "ASST": {
       "ticker": "ASST",
-      "status": "error",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-25",
@@ -932,9 +940,9 @@
     },
     "CRSH": {
       "ticker": "CRSH",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "T": {
       "ticker": "T",
@@ -1070,7 +1078,8 @@
           "accession": "0000732717-26-000372",
           "url": "https://www.sec.gov/Archives/edgar/data/732717/000073271726000372/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "LTC": {
       "ticker": "LTC",
@@ -1206,7 +1215,8 @@
           "accession": "0001104659-26-091183",
           "url": "https://www.sec.gov/Archives/edgar/data/887905/000110465926091183/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "SOFI": {
       "ticker": "SOFI",
@@ -1342,13 +1352,14 @@
           "accession": "0001818874-26-000054",
           "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887426000054/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "XOVR": {
       "ticker": "XOVR",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "ORCL": {
       "ticker": "ORCL",
@@ -1484,7 +1495,8 @@
           "accession": "0001193125-26-389274",
           "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526389274/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "ADC": {
       "ticker": "ADC",
@@ -1620,17 +1632,18 @@
           "accession": "0000917251-26-000076",
           "url": "https://www.sec.gov/Archives/edgar/data/917251/000091725126000076/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "AVGG": {
       "ticker": "AVGG",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "FINV": {
       "ticker": "FINV",
-      "status": "error",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-25",
@@ -1691,7 +1704,8 @@
           "accession": "0001213900-22-011342",
           "url": "https://www.sec.gov/Archives/edgar/data/1840856/000121390022011342/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "CRF": {
       "ticker": "CRF",
@@ -1841,13 +1855,14 @@
           "accession": "0001193125-26-326752",
           "url": "https://www.sec.gov/Archives/edgar/data/895728/000119312526326752/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "HYDB": {
       "ticker": "HYDB",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "UTF": {
       "ticker": "UTF",
@@ -1858,7 +1873,7 @@
     },
     "CAN": {
       "ticker": "CAN",
-      "status": "error",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-25",
@@ -1875,9 +1890,9 @@
     },
     "TSLW": {
       "ticker": "TSLW",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "PEP": {
       "ticker": "PEP",
@@ -2013,7 +2028,8 @@
           "accession": "0000077476-26-000048",
           "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747626000048/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "TSLX": {
       "ticker": "TSLX",
@@ -2149,7 +2165,8 @@
           "accession": "0001193125-26-332725",
           "url": "https://www.sec.gov/Archives/edgar/data/1508655/000119312526332725/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "OBDC": {
       "ticker": "OBDC",
@@ -2285,49 +2302,50 @@
           "accession": "0001655888-26-000056",
           "url": "https://www.sec.gov/Archives/edgar/data/1655888/000165588826000056/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "SCHD": {
       "ticker": "SCHD",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "COIW": {
       "ticker": "COIW",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "NVDY": {
       "ticker": "NVDY",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "YMAX": {
       "ticker": "YMAX",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "ULTY": {
       "ticker": "ULTY",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "CONY": {
       "ticker": "CONY",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "AIYY": {
       "ticker": "AIYY",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "F": {
       "ticker": "F",
@@ -2399,7 +2417,8 @@
           "accession": "0001157523-11-002989",
           "url": "https://www.sec.gov/Archives/edgar/data/37996/000115752311002989/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "ET": {
       "ticker": "ET",
@@ -2535,7 +2554,8 @@
           "accession": "0001276187-26-000038",
           "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618726000038/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "MO": {
       "ticker": "MO",
@@ -2671,19 +2691,20 @@
           "accession": "0000764180-26-000094",
           "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418026000094/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "BND": {
       "ticker": "BND",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "QQQI": {
       "ticker": "QQQI",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "BRK-B": {
       "ticker": "BRK-B",
@@ -2747,7 +2768,8 @@
           "accession": "0001157523-11-002891",
           "url": "https://www.sec.gov/Archives/edgar/data/1067983/000115752311002891/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "DIS": {
       "ticker": "DIS",
@@ -2883,13 +2905,14 @@
           "accession": "0001744489-26-000057",
           "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448926000057/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "GE": {
       "ticker": "GE",
       "name": "General Electric Co",
       "cik": "0000040545",
-      "status": "ok",
+      "status": "stale",
       "history": [
         {
           "date": "2023-01-31",
@@ -3019,7 +3042,8 @@
           "accession": "0000040545-26-000064",
           "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054526000064/"
         }
-      ]
+      ],
+      "reason": "HTTP Error 503: Service Unavailable; backup: External source has no readable shares outstanding"
     },
     "HD": {
       "ticker": "HD",
@@ -3155,7 +3179,8 @@
           "accession": "0001628280-26-058715",
           "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026058715/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "NKE": {
       "ticker": "NKE",
@@ -3291,7 +3316,8 @@
           "accession": "0000320187-15-000113",
           "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018715000113/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "SBUX": {
       "ticker": "SBUX",
@@ -3427,28 +3453,149 @@
           "accession": "0000829224-26-000130",
           "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922426000130/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "CLSK": {
       "ticker": "CLSK",
-      "status": "error",
+      "name": "Cleanspark, Inc.",
+      "cik": "0000827876",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 256820000,
-          "form": "Snapshot",
-          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
-          "url": "https://stockanalysis.com/stocks/clsk/statistics/"
+          "date": "2022-12-14",
+          "filed": "2022-12-15",
+          "shares": 71711381,
+          "form": "10-K",
+          "accession": "0000950170-22-026564",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017022026564/"
+        },
+        {
+          "date": "2023-02-09",
+          "filed": "2023-02-09",
+          "shares": 77992916,
+          "form": "10-Q",
+          "accession": "0000950170-23-002371",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017023002371/"
+        },
+        {
+          "date": "2023-05-10",
+          "filed": "2023-05-10",
+          "shares": 112687174,
+          "form": "10-Q",
+          "accession": "0000950170-23-020599",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017023020599/"
+        },
+        {
+          "date": "2023-08-09",
+          "filed": "2023-08-09",
+          "shares": 152643328,
+          "form": "10-Q",
+          "accession": "0000950170-23-040675",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017023040675/"
+        },
+        {
+          "date": "2023-12-01",
+          "filed": "2023-12-01",
+          "shares": 184749641,
+          "form": "10-K",
+          "accession": "0000950170-23-067339",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017023067339/"
+        },
+        {
+          "date": "2024-02-08",
+          "filed": "2024-02-08",
+          "shares": 198064754,
+          "form": "10-Q",
+          "accession": "0000950170-24-012812",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017024012812/"
+        },
+        {
+          "date": "2024-05-08",
+          "filed": "2024-05-09",
+          "shares": 227870260,
+          "form": "10-Q",
+          "accession": "0000950170-24-056330",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017024056330/"
+        },
+        {
+          "date": "2024-08-09",
+          "filed": "2024-08-09",
+          "shares": 248119133,
+          "form": "10-Q",
+          "accession": "0000950170-24-094891",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017024094891/"
+        },
+        {
+          "date": "2024-12-03",
+          "filed": "2024-12-03",
+          "shares": 292561667,
+          "form": "10-K",
+          "accession": "0000950170-24-132565",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017024132565/"
+        },
+        {
+          "date": "2025-02-04",
+          "filed": "2025-02-06",
+          "shares": 280807606,
+          "form": "10-Q",
+          "accession": "0000950170-25-015470",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017025015470/"
+        },
+        {
+          "date": "2025-05-06",
+          "filed": "2025-05-08",
+          "shares": 280943856,
+          "form": "10-Q",
+          "accession": "0000950170-25-067219",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017025067219/"
+        },
+        {
+          "date": "2025-08-01",
+          "filed": "2025-08-07",
+          "shares": 281083382,
+          "form": "10-Q",
+          "accession": "0000827876-25-000005",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000082787625000005/"
+        },
+        {
+          "date": "2025-11-19",
+          "filed": "2025-11-25",
+          "shares": 255583445,
+          "form": "10-K",
+          "accession": "0001193125-25-297510",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000119312525297510/"
+        },
+        {
+          "date": "2026-01-29",
+          "filed": "2026-02-05",
+          "shares": 255752913,
+          "form": "10-Q",
+          "accession": "0001193125-26-039538",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526039538/"
+        },
+        {
+          "date": "2026-05-07",
+          "filed": "2026-05-11",
+          "shares": 256608606,
+          "form": "10-Q",
+          "accession": "0001193125-26-217036",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526217036/"
+        },
+        {
+          "date": "2026-08-04",
+          "filed": "2026-08-06",
+          "shares": 256817073,
+          "form": "10-Q",
+          "accession": "0001193125-26-338382",
+          "url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526338382/"
         }
       ],
-      "reason": "HTTP Error 429: Too Many Requests; backup: External source has no readable shares outstanding",
-      "name": "Cleanspark, Inc.",
       "yoy_pct": -7.82
     },
     "ECC": {
       "ticker": "ECC",
-      "status": "error",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-25",
@@ -3459,21 +3606,21 @@
           "url": "https://stockanalysis.com/stocks/ecc/statistics/"
         }
       ],
-      "reason": "HTTP Error 429: Too Many Requests; backup: External source has no readable shares outstanding",
+      "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Eagle Point Credit Co Inc.",
       "yoy_pct": 8.97
     },
     "MSTY": {
       "ticker": "MSTY",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "TSLY": {
       "ticker": "TSLY",
-      "status": "unavailable",
+      "status": "unsupported",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
     },
     "O": {
       "ticker": "O",
@@ -3609,40 +3756,281 @@
           "accession": "0000726728-26-000048",
           "url": "https://www.sec.gov/Archives/edgar/data/726728/000072672826000048/"
         }
-      ]
+      ],
+      "yoy_pct": null
     },
     "MAIN": {
       "ticker": "MAIN",
-      "status": "error",
+      "name": "Main Street Capital Corp",
+      "cik": "0001396440",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 93510000,
-          "form": "Snapshot",
-          "source": "Stock Analysis / S&P Global Market Intelligence (rounded)",
-          "url": "https://stockanalysis.com/stocks/main/statistics/"
+          "date": "2022-11-03",
+          "filed": "2022-11-04",
+          "shares": 77253793,
+          "form": "10-Q",
+          "accession": "0001396440-22-000034",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644022000034/"
+        },
+        {
+          "date": "2023-02-23",
+          "filed": "2023-02-24",
+          "shares": 79549888,
+          "form": "10-K",
+          "accession": "0001396440-23-000035",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644023000035/"
+        },
+        {
+          "date": "2023-05-04",
+          "filed": "2023-05-05",
+          "shares": 80466696,
+          "form": "10-Q",
+          "accession": "0001396440-23-000067",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644023000067/"
+        },
+        {
+          "date": "2023-08-03",
+          "filed": "2023-08-04",
+          "shares": 82428020,
+          "form": "10-Q",
+          "accession": "0001396440-23-000102",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644023000102/"
+        },
+        {
+          "date": "2023-11-01",
+          "filed": "2023-11-03",
+          "shares": 83745165,
+          "form": "10-Q",
+          "accession": "0001396440-23-000140",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644023000140/"
+        },
+        {
+          "date": "2024-02-21",
+          "filed": "2024-02-23",
+          "shares": 84980145,
+          "form": "10-K",
+          "accession": "0001396440-24-000055",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644024000055/"
+        },
+        {
+          "date": "2024-05-06",
+          "filed": "2024-05-10",
+          "shares": 85715621,
+          "form": "10-Q",
+          "accession": "0001396440-24-000082",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644024000082/"
+        },
+        {
+          "date": "2024-08-08",
+          "filed": "2024-08-09",
+          "shares": 87073879,
+          "form": "10-Q",
+          "accession": "0001396440-24-000154",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644024000154/"
+        },
+        {
+          "date": "2024-11-07",
+          "filed": "2024-11-08",
+          "shares": 88178190,
+          "form": "10-Q",
+          "accession": "0001396440-24-000236",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644024000236/"
+        },
+        {
+          "date": "2025-02-27",
+          "filed": "2025-02-28",
+          "shares": 88556229,
+          "form": "10-K",
+          "accession": "0001396440-25-000018",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644025000018/"
+        },
+        {
+          "date": "2025-05-08",
+          "filed": "2025-05-09",
+          "shares": 89029361,
+          "form": "10-Q",
+          "accession": "0001396440-25-000068",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644025000068/"
+        },
+        {
+          "date": "2025-08-07",
+          "filed": "2025-08-08",
+          "shares": 89430382,
+          "form": "10-Q",
+          "accession": "0001396440-25-000102",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644025000102/"
+        },
+        {
+          "date": "2025-11-06",
+          "filed": "2025-11-07",
+          "shares": 89587543,
+          "form": "10-Q",
+          "accession": "0001396440-25-000184",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644025000184/"
+        },
+        {
+          "date": "2026-02-26",
+          "filed": "2026-02-27",
+          "shares": 90104831,
+          "form": "10-K",
+          "accession": "0001396440-26-000016",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644026000016/"
+        },
+        {
+          "date": "2026-05-07",
+          "filed": "2026-05-08",
+          "shares": 92989838,
+          "form": "10-Q",
+          "accession": "0001396440-26-000073",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644026000073/"
+        },
+        {
+          "date": "2026-08-06",
+          "filed": "2026-08-07",
+          "shares": 93508461,
+          "form": "10-Q",
+          "accession": "0001396440-26-000094",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644026000094/"
         }
       ],
-      "reason": "HTTP Error 429: Too Many Requests; backup: External source has no readable shares outstanding",
-      "name": "Main Street Capital Corp",
       "yoy_pct": 2.7
     },
     "AAPL": {
       "ticker": "AAPL",
-      "status": "error",
+      "name": "Apple Inc.",
+      "cik": "0000320193",
+      "status": "ok",
       "history": [
         {
-          "date": "2026-10-25",
-          "filed": null,
-          "shares": 14590000000,
-          "form": "Snapshot",
-          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
-          "url": "https://stockanalysis.com/stocks/aapl/statistics/"
+          "date": "2022-10-14",
+          "filed": "2022-10-28",
+          "shares": 15908118000,
+          "form": "10-K",
+          "accession": "0000320193-22-000108",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019322000108/"
+        },
+        {
+          "date": "2023-01-20",
+          "filed": "2023-02-03",
+          "shares": 15821946000,
+          "form": "10-Q",
+          "accession": "0000320193-23-000006",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000006/"
+        },
+        {
+          "date": "2023-04-21",
+          "filed": "2023-05-05",
+          "shares": 15728702000,
+          "form": "10-Q",
+          "accession": "0000320193-23-000064",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000064/"
+        },
+        {
+          "date": "2023-07-21",
+          "filed": "2023-08-04",
+          "shares": 15634232000,
+          "form": "10-Q",
+          "accession": "0000320193-23-000077",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000077/"
+        },
+        {
+          "date": "2023-10-20",
+          "filed": "2023-11-03",
+          "shares": 15552752000,
+          "form": "10-K",
+          "accession": "0000320193-23-000106",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/"
+        },
+        {
+          "date": "2024-01-19",
+          "filed": "2024-02-02",
+          "shares": 15441881000,
+          "form": "10-Q",
+          "accession": "0000320193-24-000006",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000006/"
+        },
+        {
+          "date": "2024-04-19",
+          "filed": "2024-05-03",
+          "shares": 15334082000,
+          "form": "10-Q",
+          "accession": "0000320193-24-000069",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000069/"
+        },
+        {
+          "date": "2024-07-19",
+          "filed": "2024-08-02",
+          "shares": 15204137000,
+          "form": "10-Q",
+          "accession": "0000320193-24-000081",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000081/"
+        },
+        {
+          "date": "2024-10-18",
+          "filed": "2024-11-01",
+          "shares": 15115823000,
+          "form": "10-K",
+          "accession": "0000320193-24-000123",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/"
+        },
+        {
+          "date": "2025-01-17",
+          "filed": "2025-01-31",
+          "shares": 15022073000,
+          "form": "10-Q",
+          "accession": "0000320193-25-000008",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000008/"
+        },
+        {
+          "date": "2025-04-18",
+          "filed": "2025-05-02",
+          "shares": 14935826000,
+          "form": "10-Q",
+          "accession": "0000320193-25-000057",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000057/"
+        },
+        {
+          "date": "2025-07-18",
+          "filed": "2025-08-01",
+          "shares": 14840390000,
+          "form": "10-Q",
+          "accession": "0000320193-25-000073",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000073/"
+        },
+        {
+          "date": "2025-10-17",
+          "filed": "2025-10-31",
+          "shares": 14776353000,
+          "form": "10-K",
+          "accession": "0000320193-25-000079",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/"
+        },
+        {
+          "date": "2026-01-16",
+          "filed": "2026-01-30",
+          "shares": 14681140000,
+          "form": "10-Q",
+          "accession": "0000320193-26-000006",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/"
+        },
+        {
+          "date": "2026-04-17",
+          "filed": "2026-05-01",
+          "shares": 14687356000,
+          "form": "10-Q",
+          "accession": "0000320193-26-000013",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000013/"
+        },
+        {
+          "date": "2026-07-17",
+          "filed": "2026-07-31",
+          "shares": 14594180000,
+          "form": "10-Q",
+          "accession": "0000320193-26-000020",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/"
         }
       ],
-      "reason": "HTTP Error 429: Too Many Requests; backup: External source has no readable shares outstanding",
-      "name": "Apple Inc.",
       "yoy_pct": -2.13
     },
     "BA": {
@@ -3779,7 +4167,8 @@
           "accession": "0001628280-26-050038",
           "url": "https://www.sec.gov/Archives/edgar/data/12927/000162828026050038/"
         }
-      ]
+      ],
+      "yoy_pct": null
     }
   }
 }
