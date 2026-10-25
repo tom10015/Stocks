@@ -1,25 +1,25 @@
 {
-  "updated_at": "2026-10-25T04:12:25.381513+00:00",
+  "updated_at": "2026-10-25T04:13:38.070898+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Iren Ltd"
     },
     "KGC": {
       "ticker": "KGC",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Kinross Gold Corp"
     },
     "NVDA": {
       "ticker": "NVDA",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Nvidia Corp"
     },
     "ORCU": {
@@ -32,35 +32,35 @@
       "ticker": "QUBT",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Quantum Computing Inc."
     },
     "BTC": {
       "ticker": "BTC",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
       "name": "Grayscale Bitcoin Mini Trust Etf"
     },
     "INTC": {
       "ticker": "INTC",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Intel Corp"
     },
     "IAU": {
       "ticker": "IAU",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
       "name": "Ishares Gold Trust"
     },
     "GLD": {
       "ticker": "GLD",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
       "name": "Spdr Gold Trust"
     },
     "GDX": {
@@ -91,7 +91,7 @@
       "ticker": "ASST",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Asset Entities Inc."
     },
     "CRSH": {
@@ -104,21 +104,21 @@
       "ticker": "T",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "At&T Inc."
     },
     "LTC": {
       "ticker": "LTC",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Ltc Properties Inc"
     },
     "SOFI": {
       "ticker": "SOFI",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Sofi Technologies, Inc."
     },
     "XOVR": {
@@ -131,14 +131,14 @@
       "ticker": "ORCL",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Oracle Corp"
     },
     "ADC": {
       "ticker": "ADC",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Agree Realty Corp"
     },
     "AVGG": {
@@ -151,35 +151,35 @@
       "ticker": "FINV",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Finvolution Group"
     },
     "SOUN": {
       "ticker": "SOUN",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Soundhound Ai, Inc."
     },
     "CRF": {
       "ticker": "CRF",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
       "name": "Cornerstone Total Return Fund Inc"
     },
     "CLM": {
       "ticker": "CLM",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
       "name": "Cornerstone Strategic Investment Fund, Inc."
     },
     "ENB": {
       "ticker": "ENB",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Enbridge Inc"
     },
     "HYDB": {
@@ -192,14 +192,14 @@
       "ticker": "UTF",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: HTTP Error 404: Not Found",
       "name": "Cohen & Steers Infrastructure Fund Inc"
     },
     "CAN": {
       "ticker": "CAN",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Canaan Inc."
     },
     "TSLW": {
@@ -212,21 +212,21 @@
       "ticker": "PEP",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Pepsico Inc"
     },
     "TSLX": {
       "ticker": "TSLX",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Sixth Street Specialty Lending, Inc."
     },
     "OBDC": {
       "ticker": "OBDC",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Blue Owl Capital Corp"
     },
     "SCHD": {
@@ -275,21 +275,21 @@
       "ticker": "F",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Ford Motor Co"
     },
     "ET": {
       "ticker": "ET",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Energy Transfer Lp"
     },
     "MO": {
       "ticker": "MO",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Altria Group, Inc."
     },
     "BND": {
@@ -308,56 +308,56 @@
       "ticker": "BRK-B",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Berkshire Hathaway Inc"
     },
     "DIS": {
       "ticker": "DIS",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Walt Disney Co"
     },
     "GE": {
       "ticker": "GE",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "General Electric Co"
     },
     "HD": {
       "ticker": "HD",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Home Depot, Inc."
     },
     "NKE": {
       "ticker": "NKE",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Nike, Inc."
     },
     "SBUX": {
       "ticker": "SBUX",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Starbucks Corp"
     },
     "CLSK": {
       "ticker": "CLSK",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Cleanspark, Inc."
     },
     "ECC": {
       "ticker": "ECC",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Eagle Point Credit Co Inc."
     },
     "MSTY": {
@@ -376,28 +376,28 @@
       "ticker": "O",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Realty Income Corp"
     },
     "MAIN": {
       "ticker": "MAIN",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Main Street Capital Corp"
     },
     "AAPL": {
       "ticker": "AAPL",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Apple Inc."
     },
     "BA": {
       "ticker": "BA",
       "status": "error",
       "history": [],
-      "reason": "HTTP Error 403: Forbidden",
+      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
       "name": "Boeing Co"
     }
   }
