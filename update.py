@@ -1,4 +1,4 @@
-import json, os, time, urllib.request, datetime
+import json, os, time, urllib.request, datetime, re, html
 from pathlib import Path
 BASE=Path(__file__).resolve().parent
 HEAD={'User-Agent':os.getenv('SEC_USER_AGENT','ShareWatch Research contact@example.com'),'Accept-Encoding':'gzip, deflate','Accept':'application/json'}
@@ -9,6 +9,24 @@ def fetch(url):
         if r.headers.get('Content-Encoding')=='gzip':
             import gzip;body=gzip.decompress(body)
         return json.loads(body)
+
+def backup_snapshot(ticker, old):
+    """Approximate share count from public statistics page when EDGAR blocks automated requests."""
+    url=f'https://stockanalysis.com/stocks/{ticker.lower().replace("-", ".")}/statistics/'
+    request=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; ShareWatch/1.0)','Accept':'text/html'})
+    with urllib.request.urlopen(request,timeout=25) as response:
+        body=response.read().decode('utf-8','replace')
+    plain=html.unescape(re.sub(r'<[^>]*>', ' ', re.sub(r'<(script|style)\\b[^>]*>.*?</\\1>', ' ', body, flags=re.I|re.S)))
+    plain=re.sub(r'\\s+', ' ', plain)
+    match=re.search(r'Shares Outstanding\\s+([\\d,.]+)\\s*([KMBT]?)\\b',plain,re.I)
+    if not match: raise ValueError('External source has no readable shares outstanding')
+    val=float(match.group(1).replace(',',''))*{'':1,'K':1e3,'M':1e6,'B':1e9,'T':1e12}[match.group(2).upper()]
+    if val<1: raise ValueError('Invalid snapshot share count')
+    today=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+    history=list(old.get('history') or [])
+    if not history or history[-1]['shares']!=round(val):
+        history.append({'date':today,'filed':None,'shares':round(val),'form':'Snapshot','url':url,'source':'Stock Analysis (rounded)'})
+    return history[-16:]
 
 def main():
     tickers=json.loads((BASE/'tickers.json').read_text())
@@ -48,7 +66,13 @@ def main():
             entries[ticker]={'ticker':ticker,'name':info.get('title',ticker),'cik':cik,'status':'ok' if history else 'no_data','history':history}
         except Exception as exc:
             print(ticker,repr(exc))
-            entries[ticker]={**old,'ticker':ticker,'name':info.get('title',ticker),'status':'error','reason':str(exc)[:180]}
+            try:
+                backup=backup_snapshot(ticker,old)
+                entries[ticker]={**old,'ticker':ticker,'name':info.get('title',ticker),'cik':cik,'status':'snapshot','history':backup,'reason':'SEC API blocked; using rounded third-party snapshot instead of filing data'}
+                print(ticker,'external snapshot:',backup[-1]['shares'])
+            except Exception as backup_exc:
+                print(ticker,'snapshot failed:',repr(backup_exc))
+                entries[ticker]={**old,'ticker':ticker,'name':info.get('title',ticker),'status':'error','reason':str(exc)[:90]+'; backup: '+str(backup_exc)[:90]}
         time.sleep(.22)
     out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps({'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'companies':entries},indent=2)+'\n')
