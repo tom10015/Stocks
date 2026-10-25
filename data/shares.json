@@ -1,23 +1,26 @@
 {
-  "updated_at": "2026-10-25T04:11:19.068226+00:00",
+  "updated_at": "2026-10-25T04:12:25.381513+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Iren Ltd"
     },
     "KGC": {
       "ticker": "KGC",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Kinross Gold Corp"
     },
     "NVDA": {
       "ticker": "NVDA",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Nvidia Corp"
     },
     "ORCU": {
       "ticker": "ORCU",
@@ -27,33 +30,38 @@
     },
     "QUBT": {
       "ticker": "QUBT",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Quantum Computing Inc."
     },
     "BTC": {
       "ticker": "BTC",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Grayscale Bitcoin Mini Trust Etf"
     },
     "INTC": {
       "ticker": "INTC",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Intel Corp"
     },
     "IAU": {
       "ticker": "IAU",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Ishares Gold Trust"
     },
     "GLD": {
       "ticker": "GLD",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Spdr Gold Trust"
     },
     "GDX": {
       "ticker": "GDX",
@@ -81,9 +89,10 @@
     },
     "ASST": {
       "ticker": "ASST",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Asset Entities Inc."
     },
     "CRSH": {
       "ticker": "CRSH",
@@ -93,21 +102,24 @@
     },
     "T": {
       "ticker": "T",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "At&T Inc."
     },
     "LTC": {
       "ticker": "LTC",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Ltc Properties Inc"
     },
     "SOFI": {
       "ticker": "SOFI",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Sofi Technologies, Inc."
     },
     "XOVR": {
       "ticker": "XOVR",
@@ -117,15 +129,17 @@
     },
     "ORCL": {
       "ticker": "ORCL",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Oracle Corp"
     },
     "ADC": {
       "ticker": "ADC",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Agree Realty Corp"
     },
     "AVGG": {
       "ticker": "AVGG",
@@ -135,33 +149,38 @@
     },
     "FINV": {
       "ticker": "FINV",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Finvolution Group"
     },
     "SOUN": {
       "ticker": "SOUN",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Soundhound Ai, Inc."
     },
     "CRF": {
       "ticker": "CRF",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Cornerstone Total Return Fund Inc"
     },
     "CLM": {
       "ticker": "CLM",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Cornerstone Strategic Investment Fund, Inc."
     },
     "ENB": {
       "ticker": "ENB",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Enbridge Inc"
     },
     "HYDB": {
       "ticker": "HYDB",
@@ -171,15 +190,17 @@
     },
     "UTF": {
       "ticker": "UTF",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Cohen & Steers Infrastructure Fund Inc"
     },
     "CAN": {
       "ticker": "CAN",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Canaan Inc."
     },
     "TSLW": {
       "ticker": "TSLW",
@@ -189,21 +210,24 @@
     },
     "PEP": {
       "ticker": "PEP",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Pepsico Inc"
     },
     "TSLX": {
       "ticker": "TSLX",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Sixth Street Specialty Lending, Inc."
     },
     "OBDC": {
       "ticker": "OBDC",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Blue Owl Capital Corp"
     },
     "SCHD": {
       "ticker": "SCHD",
@@ -249,21 +273,24 @@
     },
     "F": {
       "ticker": "F",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Ford Motor Co"
     },
     "ET": {
       "ticker": "ET",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Energy Transfer Lp"
     },
     "MO": {
       "ticker": "MO",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Altria Group, Inc."
     },
     "BND": {
       "ticker": "BND",
@@ -279,51 +306,59 @@
     },
     "BRK-B": {
       "ticker": "BRK-B",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Berkshire Hathaway Inc"
     },
     "DIS": {
       "ticker": "DIS",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Walt Disney Co"
     },
     "GE": {
       "ticker": "GE",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "General Electric Co"
     },
     "HD": {
       "ticker": "HD",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Home Depot, Inc."
     },
     "NKE": {
       "ticker": "NKE",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Nike, Inc."
     },
     "SBUX": {
       "ticker": "SBUX",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Starbucks Corp"
     },
     "CLSK": {
       "ticker": "CLSK",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Cleanspark, Inc."
     },
     "ECC": {
       "ticker": "ECC",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Eagle Point Credit Co Inc."
     },
     "MSTY": {
       "ticker": "MSTY",
@@ -339,27 +374,31 @@
     },
     "O": {
       "ticker": "O",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Realty Income Corp"
     },
     "MAIN": {
       "ticker": "MAIN",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Main Street Capital Corp"
     },
     "AAPL": {
       "ticker": "AAPL",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Apple Inc."
     },
     "BA": {
       "ticker": "BA",
-      "status": "unavailable",
+      "status": "error",
       "history": [],
-      "reason": "No SEC ticker mapping (may be an ETF, fund, index, crypto, or alternate symbol)"
+      "reason": "HTTP Error 403: Forbidden",
+      "name": "Boeing Co"
     }
   }
 }
