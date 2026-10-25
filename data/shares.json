@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T04:13:38.070898+00:00",
+  "updated_at": "2026-10-25T04:14:20.643Z",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -17,9 +17,18 @@
     },
     "NVDA": {
       "ticker": "NVDA",
-      "status": "error",
-      "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "status": "snapshot",
+      "history": [
+        {
+          "date": "2026-10-25",
+          "filed": null,
+          "shares": 24150000000,
+          "form": "Snapshot",
+          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
+          "url": "https://stockanalysis.com/stocks/nvda/statistics/"
+        }
+      ],
+      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
       "name": "Nvidia Corp"
     },
     "ORCU": {
@@ -44,9 +53,18 @@
     },
     "INTC": {
       "ticker": "INTC",
-      "status": "error",
-      "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "status": "snapshot",
+      "history": [
+        {
+          "date": "2026-10-25",
+          "filed": null,
+          "shares": 5250000000,
+          "form": "Snapshot",
+          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
+          "url": "https://stockanalysis.com/stocks/intc/statistics/"
+        }
+      ],
+      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
       "name": "Intel Corp"
     },
     "IAU": {
@@ -116,9 +134,18 @@
     },
     "SOFI": {
       "ticker": "SOFI",
-      "status": "error",
-      "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "status": "snapshot",
+      "history": [
+        {
+          "date": "2026-10-25",
+          "filed": null,
+          "shares": 1290000000,
+          "form": "Snapshot",
+          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
+          "url": "https://stockanalysis.com/stocks/sofi/statistics/"
+        }
+      ],
+      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
       "name": "Sofi Technologies, Inc."
     },
     "XOVR": {
@@ -156,9 +183,18 @@
     },
     "SOUN": {
       "ticker": "SOUN",
-      "status": "error",
-      "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "status": "snapshot",
+      "history": [
+        {
+          "date": "2026-10-25",
+          "filed": null,
+          "shares": 444110000,
+          "form": "Snapshot",
+          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
+          "url": "https://stockanalysis.com/stocks/soun/statistics/"
+        }
+      ],
+      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
       "name": "Soundhound Ai, Inc."
     },
     "CRF": {
@@ -348,9 +384,18 @@
     },
     "CLSK": {
       "ticker": "CLSK",
-      "status": "error",
-      "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "status": "snapshot",
+      "history": [
+        {
+          "date": "2026-10-25",
+          "filed": null,
+          "shares": 256820000,
+          "form": "Snapshot",
+          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
+          "url": "https://stockanalysis.com/stocks/clsk/statistics/"
+        }
+      ],
+      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
       "name": "Cleanspark, Inc."
     },
     "ECC": {
@@ -388,9 +433,18 @@
     },
     "AAPL": {
       "ticker": "AAPL",
-      "status": "error",
-      "history": [],
-      "reason": "HTTP Error 403: Forbidden; backup: External source has no readable shares outstanding",
+      "status": "snapshot",
+      "history": [
+        {
+          "date": "2026-10-25",
+          "filed": null,
+          "shares": 14590000000,
+          "form": "Snapshot",
+          "source": "Stock Analysis (S&P Global Market Intelligence; rounded)",
+          "url": "https://stockanalysis.com/stocks/aapl/statistics/"
+        }
+      ],
+      "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
       "name": "Apple Inc."
     },
     "BA": {
