@@ -1,0 +1,305 @@
+{
+  "updated_at": null,
+  "companies": {
+    "IREN": {
+      "ticker": "IREN",
+      "status": "pending",
+      "history": []
+    },
+    "KGC": {
+      "ticker": "KGC",
+      "status": "pending",
+      "history": []
+    },
+    "NVDA": {
+      "ticker": "NVDA",
+      "status": "pending",
+      "history": []
+    },
+    "ORCU": {
+      "ticker": "ORCU",
+      "status": "pending",
+      "history": []
+    },
+    "QUBT": {
+      "ticker": "QUBT",
+      "status": "pending",
+      "history": []
+    },
+    "BTC": {
+      "ticker": "BTC",
+      "status": "pending",
+      "history": []
+    },
+    "INTC": {
+      "ticker": "INTC",
+      "status": "pending",
+      "history": []
+    },
+    "IAU": {
+      "ticker": "IAU",
+      "status": "pending",
+      "history": []
+    },
+    "GLD": {
+      "ticker": "GLD",
+      "status": "pending",
+      "history": []
+    },
+    "GDX": {
+      "ticker": "GDX",
+      "status": "pending",
+      "history": []
+    },
+    "CRWV": {
+      "ticker": "CRWV",
+      "status": "pending",
+      "history": []
+    },
+    "QQQA": {
+      "ticker": "QQQA",
+      "status": "pending",
+      "history": []
+    },
+    "STRC": {
+      "ticker": "STRC",
+      "status": "pending",
+      "history": []
+    },
+    "ASST": {
+      "ticker": "ASST",
+      "status": "pending",
+      "history": []
+    },
+    "CRSH": {
+      "ticker": "CRSH",
+      "status": "pending",
+      "history": []
+    },
+    "T": {
+      "ticker": "T",
+      "status": "pending",
+      "history": []
+    },
+    "LTC": {
+      "ticker": "LTC",
+      "status": "pending",
+      "history": []
+    },
+    "SOFI": {
+      "ticker": "SOFI",
+      "status": "pending",
+      "history": []
+    },
+    "XOVR": {
+      "ticker": "XOVR",
+      "status": "pending",
+      "history": []
+    },
+    "ORCL": {
+      "ticker": "ORCL",
+      "status": "pending",
+      "history": []
+    },
+    "ADC": {
+      "ticker": "ADC",
+      "status": "pending",
+      "history": []
+    },
+    "AVGG": {
+      "ticker": "AVGG",
+      "status": "pending",
+      "history": []
+    },
+    "FINV": {
+      "ticker": "FINV",
+      "status": "pending",
+      "history": []
+    },
+    "SOUN": {
+      "ticker": "SOUN",
+      "status": "pending",
+      "history": []
+    },
+    "CRF": {
+      "ticker": "CRF",
+      "status": "pending",
+      "history": []
+    },
+    "CLM": {
+      "ticker": "CLM",
+      "status": "pending",
+      "history": []
+    },
+    "ENB": {
+      "ticker": "ENB",
+      "status": "pending",
+      "history": []
+    },
+    "HYDB": {
+      "ticker": "HYDB",
+      "status": "pending",
+      "history": []
+    },
+    "UTF": {
+      "ticker": "UTF",
+      "status": "pending",
+      "history": []
+    },
+    "CAN": {
+      "ticker": "CAN",
+      "status": "pending",
+      "history": []
+    },
+    "TSLW": {
+      "ticker": "TSLW",
+      "status": "pending",
+      "history": []
+    },
+    "PEP": {
+      "ticker": "PEP",
+      "status": "pending",
+      "history": []
+    },
+    "TSLX": {
+      "ticker": "TSLX",
+      "status": "pending",
+      "history": []
+    },
+    "OBDC": {
+      "ticker": "OBDC",
+      "status": "pending",
+      "history": []
+    },
+    "SCHD": {
+      "ticker": "SCHD",
+      "status": "pending",
+      "history": []
+    },
+    "COIW": {
+      "ticker": "COIW",
+      "status": "pending",
+      "history": []
+    },
+    "NVDY": {
+      "ticker": "NVDY",
+      "status": "pending",
+      "history": []
+    },
+    "YMAX": {
+      "ticker": "YMAX",
+      "status": "pending",
+      "history": []
+    },
+    "ULTY": {
+      "ticker": "ULTY",
+      "status": "pending",
+      "history": []
+    },
+    "CONY": {
+      "ticker": "CONY",
+      "status": "pending",
+      "history": []
+    },
+    "AIYY": {
+      "ticker": "AIYY",
+      "status": "pending",
+      "history": []
+    },
+    "F": {
+      "ticker": "F",
+      "status": "pending",
+      "history": []
+    },
+    "ET": {
+      "ticker": "ET",
+      "status": "pending",
+      "history": []
+    },
+    "MO": {
+      "ticker": "MO",
+      "status": "pending",
+      "history": []
+    },
+    "BND": {
+      "ticker": "BND",
+      "status": "pending",
+      "history": []
+    },
+    "QQQI": {
+      "ticker": "QQQI",
+      "status": "pending",
+      "history": []
+    },
+    "BRK-B": {
+      "ticker": "BRK-B",
+      "status": "pending",
+      "history": []
+    },
+    "DIS": {
+      "ticker": "DIS",
+      "status": "pending",
+      "history": []
+    },
+    "GE": {
+      "ticker": "GE",
+      "status": "pending",
+      "history": []
+    },
+    "HD": {
+      "ticker": "HD",
+      "status": "pending",
+      "history": []
+    },
+    "NKE": {
+      "ticker": "NKE",
+      "status": "pending",
+      "history": []
+    },
+    "SBUX": {
+      "ticker": "SBUX",
+      "status": "pending",
+      "history": []
+    },
+    "CLSK": {
+      "ticker": "CLSK",
+      "status": "pending",
+      "history": []
+    },
+    "ECC": {
+      "ticker": "ECC",
+      "status": "pending",
+      "history": []
+    },
+    "MSTY": {
+      "ticker": "MSTY",
+      "status": "pending",
+      "history": []
+    },
+    "TSLY": {
+      "ticker": "TSLY",
+      "status": "pending",
+      "history": []
+    },
+    "O": {
+      "ticker": "O",
+      "status": "pending",
+      "history": []
+    },
+    "MAIN": {
+      "ticker": "MAIN",
+      "status": "pending",
+      "history": []
+    },
+    "AAPL": {
+      "ticker": "AAPL",
+      "status": "pending",
+      "history": []
+    },
+    "BA": {
+      "ticker": "BA",
+      "status": "pending",
+      "history": []
+    }
+  }
+}
