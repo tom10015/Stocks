@@ -15,7 +15,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Iren Ltd"
+      "name": "Iren Ltd",
+      "yoy_pct": 41.6
     },
     "KGC": {
       "ticker": "KGC",
@@ -31,7 +32,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Kinross Gold Corp"
+      "name": "Kinross Gold Corp",
+      "yoy_pct": -2.14
     },
     "NVDA": {
       "ticker": "NVDA",
@@ -47,7 +49,8 @@
         }
       ],
       "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
-      "name": "Nvidia Corp"
+      "name": "Nvidia Corp",
+      "yoy_pct": -1.04
     },
     "ORCU": {
       "ticker": "ORCU",
@@ -69,7 +72,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Quantum Computing Inc."
+      "name": "Quantum Computing Inc.",
+      "yoy_pct": 73.72
     },
     "BTC": {
       "ticker": "BTC",
@@ -92,7 +96,8 @@
         }
       ],
       "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
-      "name": "Intel Corp"
+      "name": "Intel Corp",
+      "yoy_pct": 13.28
     },
     "IAU": {
       "ticker": "IAU",
@@ -127,7 +132,8 @@
           "url": "https://stockanalysis.com/stocks/crwv/statistics/"
         }
       ],
-      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked."
+      "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
+      "yoy_pct": 75.59
     },
     "QQQA": {
       "ticker": "QQQA",
@@ -155,7 +161,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Asset Entities Inc."
+      "name": "Asset Entities Inc.",
+      "yoy_pct": 3905.98
     },
     "CRSH": {
       "ticker": "CRSH",
@@ -177,7 +184,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "At&T Inc."
+      "name": "At&T Inc.",
+      "yoy_pct": -3.14
     },
     "LTC": {
       "ticker": "LTC",
@@ -193,7 +201,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Ltc Properties Inc"
+      "name": "Ltc Properties Inc",
+      "yoy_pct": 7.5
     },
     "SOFI": {
       "ticker": "SOFI",
@@ -209,7 +218,8 @@
         }
       ],
       "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
-      "name": "Sofi Technologies, Inc."
+      "name": "Sofi Technologies, Inc.",
+      "yoy_pct": 14.49
     },
     "XOVR": {
       "ticker": "XOVR",
@@ -231,7 +241,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Oracle Corp"
+      "name": "Oracle Corp",
+      "yoy_pct": 1.95
     },
     "ADC": {
       "ticker": "ADC",
@@ -247,7 +258,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Agree Realty Corp"
+      "name": "Agree Realty Corp",
+      "yoy_pct": 10.66
     },
     "AVGG": {
       "ticker": "AVGG",
@@ -269,7 +281,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Finvolution Group"
+      "name": "Finvolution Group",
+      "yoy_pct": -0.19
     },
     "SOUN": {
       "ticker": "SOUN",
@@ -285,7 +298,8 @@
         }
       ],
       "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
-      "name": "Soundhound Ai, Inc."
+      "name": "Soundhound Ai, Inc.",
+      "yoy_pct": 9.82
     },
     "CRF": {
       "ticker": "CRF",
@@ -315,7 +329,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Enbridge Inc"
+      "name": "Enbridge Inc",
+      "yoy_pct": 0.14
     },
     "HYDB": {
       "ticker": "HYDB",
@@ -344,7 +359,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Canaan Inc."
+      "name": "Canaan Inc.",
+      "yoy_pct": 96.61
     },
     "TSLW": {
       "ticker": "TSLW",
@@ -366,7 +382,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Pepsico Inc"
+      "name": "Pepsico Inc",
+      "yoy_pct": -0.26
     },
     "TSLX": {
       "ticker": "TSLX",
@@ -382,7 +399,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Sixth Street Specialty Lending, Inc."
+      "name": "Sixth Street Specialty Lending, Inc.",
+      "yoy_pct": 1.2
     },
     "OBDC": {
       "ticker": "OBDC",
@@ -398,7 +416,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Blue Owl Capital Corp"
+      "name": "Blue Owl Capital Corp",
+      "yoy_pct": 12.67
     },
     "SCHD": {
       "ticker": "SCHD",
@@ -456,7 +475,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Ford Motor Co"
+      "name": "Ford Motor Co",
+      "yoy_pct": -0.81
     },
     "ET": {
       "ticker": "ET",
@@ -472,7 +492,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Energy Transfer Lp"
+      "name": "Energy Transfer Lp",
+      "yoy_pct": 0.08
     },
     "MO": {
       "ticker": "MO",
@@ -488,7 +509,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Altria Group, Inc."
+      "name": "Altria Group, Inc.",
+      "yoy_pct": -1
     },
     "BND": {
       "ticker": "BND",
@@ -516,7 +538,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Berkshire Hathaway Inc"
+      "name": "Berkshire Hathaway Inc",
+      "yoy_pct": 0
     },
     "DIS": {
       "ticker": "DIS",
@@ -532,7 +555,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Walt Disney Co"
+      "name": "Walt Disney Co",
+      "yoy_pct": -1.93
     },
     "GE": {
       "ticker": "GE",
@@ -548,7 +572,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "General Electric Co"
+      "name": "General Electric Co",
+      "yoy_pct": -2.21
     },
     "HD": {
       "ticker": "HD",
@@ -564,7 +589,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Home Depot, Inc."
+      "name": "Home Depot, Inc.",
+      "yoy_pct": 0.2
     },
     "NKE": {
       "ticker": "NKE",
@@ -580,7 +606,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Nike, Inc."
+      "name": "Nike, Inc.",
+      "yoy_pct": 0.03
     },
     "SBUX": {
       "ticker": "SBUX",
@@ -596,7 +623,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Starbucks Corp"
+      "name": "Starbucks Corp",
+      "yoy_pct": 0.32
     },
     "CLSK": {
       "ticker": "CLSK",
@@ -612,7 +640,8 @@
         }
       ],
       "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
-      "name": "Cleanspark, Inc."
+      "name": "Cleanspark, Inc.",
+      "yoy_pct": -7.82
     },
     "ECC": {
       "ticker": "ECC",
@@ -628,7 +657,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Eagle Point Credit Co Inc."
+      "name": "Eagle Point Credit Co Inc.",
+      "yoy_pct": 8.97
     },
     "MSTY": {
       "ticker": "MSTY",
@@ -656,7 +686,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Realty Income Corp"
+      "name": "Realty Income Corp",
+      "yoy_pct": 4.53
     },
     "MAIN": {
       "ticker": "MAIN",
@@ -672,7 +703,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Main Street Capital Corp"
+      "name": "Main Street Capital Corp",
+      "yoy_pct": 2.7
     },
     "AAPL": {
       "ticker": "AAPL",
@@ -688,7 +720,8 @@
         }
       ],
       "reason": "Rounded, independently sourced share count; SEC automatic collection blocked (403).",
-      "name": "Apple Inc."
+      "name": "Apple Inc.",
+      "yoy_pct": -2.13
     },
     "BA": {
       "ticker": "BA",
@@ -704,7 +737,8 @@
         }
       ],
       "reason": "Rounded third-party snapshot, NOT an SEC-confirmed filing date; automated SEC requests were blocked.",
-      "name": "Boeing Co"
+      "name": "Boeing Co",
+      "yoy_pct": 8.7
     }
   }
 }
