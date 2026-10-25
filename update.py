@@ -90,7 +90,7 @@ def main():
             except Exception as backup_exc:
                 print(ticker,'snapshot failed:',repr(backup_exc))
                 entries[ticker]={**old,'ticker':ticker,'name':info.get('title',ticker),'status':'error','reason':str(exc)[:90]+'; backup: '+str(backup_exc)[:90]}
-        time.sleep(.65)
+        time.sleep(3.2)
     out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps({'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'companies':entries},indent=2)+'\n')
 if __name__=='__main__':main()
