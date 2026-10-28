@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T13:30:07.839559+00:00",
+  "updated_at": "2026-10-28T13:32:20.631077+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1596,7 +1596,7 @@
       "ticker": "IAU",
       "name": "Ishares Gold Trust",
       "cik": "0001278680",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "date": "2022-10-31",
@@ -1725,17 +1725,27 @@
           "form": "10-Q",
           "accession": "0001437749-26-026002",
           "url": "https://www.sec.gov/Archives/edgar/data/1278680/000143774926026002/"
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-28",
+          "shares": 790700000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
+          "date_is_check_only": true
         }
       ],
       "yoy_pct": null,
       "type": "fund",
-      "reason": "No explicitly published shares outstanding found"
+      "reason": "",
+      "source_updated_at": "2026-10-28"
     },
     "GLD": {
       "ticker": "GLD",
       "name": "Spdr Gold Trust",
       "cik": "0001222333",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "date": "2022-11-22",
@@ -1864,15 +1874,25 @@
           "form": "10-Q",
           "accession": "0001437749-26-025680",
           "url": "https://www.sec.gov/Archives/edgar/data/1222333/000143774926025680/"
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-28",
+          "shares": 365300000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
+          "date_is_check_only": true
         }
       ],
       "yoy_pct": null,
       "type": "fund",
-      "reason": "No explicitly published shares outstanding found"
+      "reason": "",
+      "source_updated_at": "2026-10-28"
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 307902500,
@@ -1880,10 +1900,20 @@
           "form": "Fund report",
           "source": "Secondary source citing issuer",
           "url": "https://companiesmarketcap.com/vaneck-gold-miners-etf/shares-outstanding/"
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-28",
+          "shares": 307802500,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/",
+          "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "CRWV": {
       "ticker": "CRWV",
@@ -1950,7 +1980,7 @@
     },
     "CRSH": {
       "ticker": "CRSH",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "date": "2026-09-04",
@@ -1958,10 +1988,20 @@
           "form": "Fund snapshot",
           "source": "Third-party snapshot",
           "url": "https://stockanalysis.com/etf/crsh/"
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-28",
+          "shares": 704975,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/crsh/",
+          "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "T": {
       "ticker": "T",
@@ -3226,7 +3266,7 @@
           "url": "https://stockanalysis.com/etf/xovr/"
         }
       ],
-      "reason": "The read operation timed out",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund"
     },
     "ORCL": {
@@ -5675,7 +5715,7 @@
     },
     "NVDY": {
       "ticker": "NVDY",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "date": "2026-10-21",
@@ -5685,12 +5725,13 @@
           "url": "https://yieldmaxetfs.com/our-etfs/nvdy/"
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "YMAX": {
       "ticker": "YMAX",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 48225000,
@@ -5698,14 +5739,24 @@
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ymax/"
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-28",
+          "shares": 48850000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ymax/",
+          "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "ULTY": {
       "ticker": "ULTY",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "date": "2026-10-20",
@@ -5713,14 +5764,24 @@
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ulty/"
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-28",
+          "shares": 27352464,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
+          "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "CONY": {
       "ticker": "CONY",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 19857457,
@@ -5728,14 +5789,24 @@
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/cony/"
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-28",
+          "shares": 19882457,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/cony/",
+          "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "AIYY": {
       "ticker": "AIYY",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 6212473,
@@ -5743,10 +5814,20 @@
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/aiyy/"
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-28",
+          "shares": 6512473,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/aiyy/",
+          "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "F": {
       "ticker": "F",
@@ -6928,7 +7009,7 @@
     },
     "QQQI": {
       "ticker": "QQQI",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 275500000,
@@ -6936,10 +7017,20 @@
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://neosfunds.com/qqqi/"
+        },
+        {
+          "date": "2026-10-27",
+          "checked_at": "2026-10-28",
+          "shares": 286100000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://neosfunds.com/qqqi/",
+          "date_is_check_only": false
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "BRK-B": {
       "ticker": "BRK-B",
@@ -9631,7 +9722,7 @@
     },
     "MSTY": {
       "ticker": "MSTY",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "date": "2026-10-22",
@@ -9641,12 +9732,13 @@
           "url": "https://yieldmaxetfs.com/our-etfs/msty/"
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "TSLY": {
       "ticker": "TSLY",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "date": "2026-10-20",
@@ -9654,10 +9746,20 @@
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/tsly/"
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-28",
+          "shares": 29529965,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/tsly/",
+          "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "O": {
       "ticker": "O",
