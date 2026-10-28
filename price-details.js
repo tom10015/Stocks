@@ -14,9 +14,10 @@ function plotPrice(ticker,entry){
  const target=document.getElementById("priceChart"),table=document.getElementById("priceTable"),note=document.getElementById("priceNote");
  const full=(entry.history||[]).filter(p=>Array.isArray(p)&&p.length===2&&/^\d{4}-\d{2}-\d{2}$/.test(p[0])&&Number(p[1])>0).sort((a,b)=>a[0].localeCompare(b[0]));
  if(!full.length){target.innerHTML='<p class="muted">Price history unavailable for this symbol.</p>';table.innerHTML='';note.textContent=entry.error||"No supported price source yet.";return;}
- const latest=full.at(-1),window=chartWindow();
+ const window=chartWindow();
  const points=full.filter(p=>p[0]>=window.start&&p[0]<=window.end);
  if(!points.length){target.innerHTML='<p class="muted" style="padding:45px 5px">No closing prices in this selected period.</p>';table.innerHTML='';document.getElementById("priceCount").textContent="No prices in selected period";document.getElementById("priceLast").textContent="";note.textContent="Try 5 years, 10 years, or All available.";return;}
+ const latest=points.at(-1),earliest=points[0];
  const W=760,H=265,L=74,R=23,T=17,B=49,values=points.map(p=>Number(p[1]));
  const lo0=Math.min(...values),hi0=Math.max(...values),pad=Math.max((hi0-lo0)*.12,hi0*.015,0.01),lo=Math.max(0,lo0-pad),hi=hi0+pad;
  const minT=window.minTime,maxT=window.maxTime;
@@ -27,12 +28,15 @@ function plotPrice(ticker,entry){
  const color=values.at(-1)>=values[0]?"#58dab2":"#ff8b97";
  const peak=points.reduce((a,b)=>Number(b[1])>Number(a[1])?b:a);
  target.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Historical closing share prices for '+esc(ticker)+'">'+lines+'<path d="'+path+'" stroke="'+color+'" fill="none" stroke-width="2.5" stroke-linejoin="round"/><circle cx="'+px(points.length-1)+'" cy="'+py(values.at(-1))+'" r="5.5" fill="'+color+'"/><text x="'+L+'" y="'+(H-7)+'" fill="#9cb0c6" font-size="12">'+esc(window.start)+'</text><text x="'+(W-R)+'" y="'+(H-7)+'" text-anchor="end" fill="#9cb0c6" font-size="12">'+esc(window.end)+'</text></svg>';
- document.getElementById("priceLast").textContent=priceMoney(latest[1])+" closing price · "+latest[0];
+ const diff=Number(latest[1])-Number(earliest[1]);
+ const pct=Number(earliest[1])>0?100*diff/Number(earliest[1]):0;
+ document.getElementById("priceLast").textContent=priceMoney(earliest[1])+" → "+priceMoney(latest[1])+"  ("+(pct>=0?"+":"")+pct.toFixed(2)+"%)";
+
  const link=entry.source?.url,provider=entry.source?.provider||"External price source";
  note.innerHTML='End-of-day historical closes, not live quotes. Source: '+(link?'<a href="'+esc(link.trim())+'" target="_blank" rel="noopener noreferrer">'+esc(provider)+'</a>':esc(provider))+'. Last source check: '+esc((entry.checked_at||"").slice(0,10))+'. '+(entry.status==="stale"?"Most recent refresh failed; showing previously saved history.":"");
- const rows=points.slice(-90).reverse();
+ const rows=points.slice().reverse();
  table.innerHTML='<table><thead><tr><th>Trading date</th><th>Close / share</th><th>Change</th></tr></thead><tbody>'+rows.map((p,i)=>{let index=points.length-1-i,prev=points[index-1],diff=prev?(Number(p[1])-Number(prev[1])):null,pct=prev&&Number(prev[1])?100*diff/Number(prev[1]):null;return '<tr><td>'+esc(p[0])+'</td><td>'+priceMoney(p[1])+'</td><td class="'+(diff>0?'down':diff<0?'up':'')+'">'+(pct===null?'—':(diff>=0?'+':'')+priceMoney(diff)+' ('+(pct>=0?'+':'')+pct.toFixed(2)+'%)')+'</td></tr>';}).join("")+'</tbody></table>';
- document.getElementById("priceCount").textContent="Showing "+rows.length+" recent trading dates from "+points.length+" saved price observations · highest "+priceMoney(peak[1]);
+ document.getElementById("priceCount").textContent=points.length+" closing-price observations ("+earliest[0]+" to "+latest[0]+") · highest "+priceMoney(peak[1]);
 }
 async function loadPricePanel(ticker){
  currentPriceTicker=ticker;
