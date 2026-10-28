@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T17:09:53.331287+00:00",
+  "updated_at": "2026-10-28T21:37:53.107485+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -4414,7 +4414,8 @@
       ],
       "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Finvolution Group",
-      "yoy_pct": -0.19
+      "yoy_pct": -0.19,
+      "cik": "0001691445"
     },
     "SOUN": {
       "ticker": "SOUN",
@@ -9921,7 +9922,8 @@
       ],
       "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Eagle Point Credit Co Inc.",
-      "yoy_pct": 8.97
+      "yoy_pct": 8.97,
+      "cik": "0001604174"
     },
     "MSTY": {
       "ticker": "MSTY",
