@@ -156,7 +156,8 @@ def main():
    if ticker in CEF_CIK:
     known={v.get("date") for v in company.get("history",[])}
     offset=previous_status.get("results",{}).get(ticker,{}).get("next_offset",0)
-    found,next_offset=fund_backfill(ticker,CEF_CIK[ticker],known,args.max_filing_per_fund,offset)\n    added=merge(company,found)
+    found,next_offset=fund_backfill(ticker,CEF_CIK[ticker],known,args.max_filing_per_fund,offset)
+    added=merge(company,found)
     result="added "+str(added)+" SEC N-CSR observations" if added else "no matching, explicitly dated disclosure found"
    elif company.get("cik") and company.get("type") not in ("fund","preferred"):
     found=company_backfill(company,company["cik"]);added=merge(company,found)
