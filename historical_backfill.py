@@ -21,7 +21,7 @@ DATA=ROOT/"data"/"shares.json"
 STATE=ROOT/"data"/"backfill_status.json"
 UA=os.getenv("SEC_USER_AGENT","ShareWatch tom10015@users.noreply.github.com")
 # SEC registrant CIKs, not ETF security CUSIPs.
-CEF_CIK={"CRF":33934,"CLM":814083,"UTF":1275617}
+CEF_CIK={"CRF":33934,"CLM":814083,"UTF":1275617,"ECC":1604174}
 DATE=re.compile(r"^\d{4}-\d{2}-\d{2}$")
 FORMS={"N-CSR","N-CSRS","N-CSR/A","N-CSRS/A"}
 # Require the text to describe shares outstanding, not underlying holdings.
