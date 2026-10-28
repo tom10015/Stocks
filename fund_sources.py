@@ -65,8 +65,11 @@ def get_count(text):
 
 def find_as_of(text):
     # Prefer issuer's trailing current snapshot date; if not verified, report check date only.
-    matches=list(DATE_PATTERN.finditer(text))
-    for m in matches[:8]:
+    i=text.lower().find("shares outstanding")
+    # Only dates immediately adjacent to the shares-outstanding field qualify as its as-of date.
+    if i<0: return None
+    matches=list(DATE_PATTERN.finditer(text[max(0,i-85):i+300]))
+    for m in matches:
         try:
             raw=m.group(1)
             date=datetime.datetime.strptime(raw,"%m/%d/%Y" if "/" in raw else "%Y-%m-%d").date()
