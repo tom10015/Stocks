@@ -103,4 +103,4 @@ def update_fund(ticker,old):
     if history and history[-1]["shares"]==count:
         return {**old,"ticker":ticker,"status":"fund","history":history,"type":"fund","source_updated_at":today,"reason":""}
     history.append({"date":stated or today,"checked_at":today,"shares":count,"form":"Fund report" if stated else "Fund snapshot","source":source,"url":url,"date_is_check_only":not bool(stated)})
-    return {**old,"ticker":ticker,"status":"fund","history":history[-30:],"type":"fund","source_updated_at":today,"reason":""}
+    return {**old,"ticker":ticker,"status":"fund","history":history,"type":"fund","source_updated_at":today,"reason":""}
