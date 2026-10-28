@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T16:46:30.902921+00:00",
+  "updated_at": "2026-10-28T17:09:53.331287+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1963,7 +1963,7 @@
     },
     "ASST": {
       "ticker": "ASST",
-      "status": "ok",
+      "status": "stale",
       "history": [
         {
           "date": "2022-12-31",
@@ -4384,10 +4384,20 @@
           "form": "Fund snapshot",
           "source": "Third-party snapshot (rounded)",
           "url": "https://stockanalysis.com/etf/avgg/"
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-28",
+          "shares": 2405000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
+          "date_is_check_only": false
         }
       ],
-      "reason": "Official issuer history added; ongoing checks use corrected US issuer source",
-      "type": "fund"
+      "reason": "",
+      "type": "fund",
+      "source_updated_at": "2026-10-28"
     },
     "FINV": {
       "ticker": "FINV",
@@ -4922,7 +4932,7 @@
     },
     "CAN": {
       "ticker": "CAN",
-      "status": "ok",
+      "status": "stale",
       "history": [
         {
           "date": "2018-12-31",
