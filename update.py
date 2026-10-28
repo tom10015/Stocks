@@ -1,5 +1,6 @@
 import json, os, time, urllib.request, urllib.error, datetime, re, html
 from pathlib import Path
+from fund_sources import FUND_TICKERS, update_fund
 BASE=Path(__file__).resolve().parent
 HEAD={'User-Agent':os.getenv('SEC_USER_AGENT','ShareWatch Research contact@example.com'),'Accept-Encoding':'gzip, deflate','Accept':'application/json'}
 def fetch(url):
@@ -63,6 +64,16 @@ def main():
             raise RuntimeError('Cannot load SEC ticker mapping from either endpoint. Refusing to erase valid records.') from fallback_exc
     print('Ticker identifiers loaded:',len(lookup))
     for ticker in tickers:
+        if ticker in FUND_TICKERS:
+            old=entries.get(ticker,{})
+            try:
+                entries[ticker]=update_fund(ticker,old)
+                print(ticker,"fund shares:",entries[ticker]["history"][-1]["shares"])
+            except Exception as exc:
+                print(ticker,"issuer data unavailable:",repr(exc))
+                entries[ticker]={**old,"ticker":ticker,"type":"fund","status":"stale" if old.get("history") else "unavailable","reason":str(exc)[:140]}
+            time.sleep(0.5)
+            continue
         info=lookup.get(ticker) or lookup.get(ticker.replace('-','.'))
         old=entries.get(ticker,{})
         if not info:
@@ -90,7 +101,7 @@ def main():
             except Exception as backup_exc:
                 print(ticker,'snapshot failed:',repr(backup_exc))
                 entries[ticker]={**old,'ticker':ticker,'name':info.get('title',ticker),'status':('stale' if old.get('history') else 'error'),'reason':str(exc)[:90]+'; backup: '+str(backup_exc)[:90]}
-        time.sleep(3.2)
+        time.sleep(1.7)
     out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps({'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'companies':entries},indent=2)+'\n')
 if __name__=='__main__':main()
