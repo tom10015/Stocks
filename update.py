@@ -2,6 +2,23 @@ import json, os, time, urllib.request, urllib.error, datetime, re, html
 from pathlib import Path
 from fund_sources import FUND_TICKERS, update_fund
 BASE=Path(__file__).resolve().parent
+SUPABASE_URL='https://fmtfskcgnlxusipaxdog.supabase.co'
+SUPABASE_PUBLISHABLE_KEY='sb_publishable__pT9Xdhi40Fu4XLd7YVuAw_bkdpHpUD'
+def load_watchlist():
+    """Read active admin-selected symbols; never require a privileged Supabase key."""
+    url=SUPABASE_URL+'/rest/v1/stocks_watchlist?select=ticker,security_type,issuer_url&active=eq.true&limit=1000'
+    req=urllib.request.Request(url,headers={'apikey':SUPABASE_PUBLISHABLE_KEY,'Accept':'application/json'})
+    try:
+        with urllib.request.urlopen(req,timeout=25) as response:
+            rows=json.load(response)
+        if not isinstance(rows,list):raise ValueError('Invalid watchlist format')
+        records={r['ticker']:{'security_type':r.get('security_type','auto'),'issuer_url':r.get('issuer_url')} for r in rows if r.get('ticker')}
+        print('Loaded',len(records),'active symbols from Supabase')
+        return records
+    except Exception as exc:
+        print('WARNING: Supabase unavailable, using original GitHub list:',repr(exc))
+        return {ticker:{'security_type':'auto','issuer_url':None} for ticker in json.loads((BASE/'tickers.json').read_text())}
+
 HEAD={'User-Agent':os.getenv('SEC_USER_AGENT','ShareWatch Research contact@example.com'),'Accept-Encoding':'gzip, deflate','Accept':'application/json'}
 def fetch(url):
     req=urllib.request.Request(url,headers=HEAD)
@@ -47,7 +64,7 @@ def backup_snapshot(ticker, old):
     return history[-16:]
 
 def main():
-    tickers=json.loads((BASE/'tickers.json').read_text())
+    ticker_settings=load_watchlist()\n    tickers=list(ticker_settings)
     out=BASE/'data'/'shares.json'
     previous=json.loads(out.read_text()) if out.exists() else {}
     entries=previous.get('companies',{})
@@ -64,10 +81,10 @@ def main():
             raise RuntimeError('Cannot load SEC ticker mapping from either endpoint. Refusing to erase valid records.') from fallback_exc
     print('Ticker identifiers loaded:',len(lookup))
     for ticker in tickers:
-        if ticker in FUND_TICKERS:
+        settings=ticker_settings[ticker]\n        if ticker in FUND_TICKERS or settings['security_type']=='fund':
             old=entries.get(ticker,{})
             try:
-                entries[ticker]=update_fund(ticker,old)
+                entries[ticker]=update_fund(ticker,old,settings.get('issuer_url'))
                 print(ticker,"fund shares:",entries[ticker]["history"][-1]["shares"])
             except Exception as exc:
                 print(ticker,"issuer data unavailable:",repr(exc))
