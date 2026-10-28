@@ -1,0 +1,76 @@
+{
+  "CRF": [
+    {
+      "date": "2020-12-31",
+      "shares": 40943597,
+      "form": "Fund report",
+      "source": "Cornerstone annual/semiannual report",
+      "url": "https://cornerstonetotalreturnfund.com/assets/pdfs/investor-reports/CRF_Annual_2021.pdf",
+      "note": "Prior-year ending balance from 2021 annual report"
+    },
+    {
+      "date": "2021-12-31",
+      "shares": 63297395,
+      "form": "Fund report",
+      "source": "Cornerstone annual/semiannual report",
+      "url": "https://cornerstonetotalreturnfund.com/assets/pdfs/investor-reports/CRF_Annual_2021.pdf",
+      "note": "2021 annual report"
+    },
+    {
+      "date": "2022-12-31",
+      "shares": 102314499,
+      "form": "Fund report",
+      "source": "Cornerstone annual/semiannual report",
+      "url": "https://cornerstonetotalreturnfund.com/assets/pdfs/investor-reports/CRF_Annual_2022.pdf",
+      "note": "2022 annual report"
+    },
+    {
+      "date": "2023-12-31",
+      "shares": 109823100,
+      "form": "Fund report",
+      "source": "Cornerstone annual/semiannual report",
+      "url": "https://cornerstonetotalreturnfund.com/assets/pdfs/investor-reports/CRF_Annual_2023.pdf",
+      "note": "2023 annual report"
+    },
+    {
+      "date": "2024-06-30",
+      "shares": 113004522,
+      "form": "Fund report",
+      "source": "Cornerstone annual/semiannual report",
+      "url": "https://cornerstonetotalreturnfund.com/assets/pdfs/investor-reports/CRF_Semi_Annual_2024.pdf",
+      "note": "2024 semiannual report"
+    },
+    {
+      "date": "2024-12-31",
+      "shares": 116364943,
+      "form": "Fund report",
+      "source": "Cornerstone annual/semiannual report",
+      "url": "https://www.sec.gov/Archives/edgar/data/33934/000139834425004653/fp0091906-3_ncsrixbrl.htm",
+      "note": "2024 SEC N-CSR annual report"
+    },
+    {
+      "date": "2025-06-30",
+      "shares": 153924404,
+      "form": "Fund report",
+      "source": "Cornerstone annual/semiannual report",
+      "url": "https://www.sec.gov/Archives/edgar/data/33934/000139834425016667/fp0094486-3_ncsrs.htm",
+      "note": "2025 SEC N-CSR semiannual report"
+    },
+    {
+      "date": "2025-12-31",
+      "shares": 160934109,
+      "form": "Fund report",
+      "source": "Cornerstone annual/semiannual report",
+      "url": "https://cornerstonetotalreturnfund.com/assets/pdfs/investor-reports/CRF_Annual_2025.pdf",
+      "note": "2025 annual report"
+    },
+    {
+      "date": "2026-06-30",
+      "shares": 168890411,
+      "form": "Fund report",
+      "source": "Cornerstone annual/semiannual report",
+      "url": "https://cornerstonetotalreturnfund.com/assets/pdfs/investor-reports/CRF_Semi_Annual_2026.pdf",
+      "note": "2026 semiannual report"
+    }
+  ]
+}
