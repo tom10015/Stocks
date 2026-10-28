@@ -43,7 +43,7 @@ function render(){
  const q=$('search').value.trim().toUpperCase();
  const matching=rows.filter(x=>x.ticker.includes(q)||(x.name||'').toUpperCase().includes(q));
  $('count').textContent=rows.filter(x=>x.active).length+' active / '+rows.length+' total';
- $('rows').innerHTML=matching.map(x=>'<tr><td><strong>'+esc(x.ticker)+'</strong></td><td>'+esc(x.name||'—')+'</td><td>'+esc(x.security_type)+'</td><td>'+esc((x.added_at||'').slice(0,10))+'</td><td>'+(x.active?'Tracking':'Hidden')+'</td><td><button class="'+(x.active?'danger':'secondary')+'" data-ticker="'+esc(x.ticker)+'" data-action="'+(x.active?'disable':'enable')+'">'+(x.active?'Remove':'Restore')+'</button></td></tr>').join('')||'<tr><td colspan="6">No matching tickers</td></tr>';
+ $('rows').innerHTML=matching.map(x=>'<tr><td><strong>'+esc(x.ticker)+'</strong></td><td>'+esc(x.name||'—')+'</td><td>'+esc(x.security_type)+'</td><td>'+esc((x.added_at||'').slice(0,10))+'</td><td>'+(x.active?'Tracking':'Hidden')+'</td><td><button class="'+(x.active?'danger':'secondary')+'" data-ticker="'+esc(x.ticker)+'" data-action="'+(x.active?'disable':'enable')+'">'+(x.active?'Remove':'Restore')+'</button> <button class="danger" title="Permanently delete this ticker from the watchlist" aria-label="Delete '+esc(x.ticker)+' permanently" data-ticker="'+esc(x.ticker)+'" data-action="delete">🗑</button></td></tr>').join('')||'<tr><td colspan="6">No matching tickers</td></tr>';
 }
 $('loginForm').addEventListener('submit',async e=>{
  e.preventDefault();const button=e.target.querySelector('button');button.disabled=true;
@@ -76,10 +76,23 @@ $('addForm').addEventListener('submit',async e=>{
 });
 $('rows').addEventListener('click',async e=>{
  const button=e.target.closest('button[data-ticker]');if(!button)return;
- const ticker=button.dataset.ticker,active=button.dataset.action==='enable';button.disabled=true;
- try{await api('/rest/v1/stocks_watchlist?ticker=eq.'+encodeURIComponent(ticker),{method:'PATCH',token:await freshToken(),body:{active}});
- await loadList();alertMsg(ticker+(active?' restored':' removed from the active watchlist')+'. Historical observations are preserved.');}
- catch(error){alertMsg(error.message,true);button.disabled=false;}
+ const ticker=button.dataset.ticker;
+ const action=button.dataset.action;
+ if(action==='delete' && !window.confirm('Permanently delete '+ticker+' from your ShareWatch watchlist? This removes the database entry. Existing historical share-count records are kept for possible future recovery.'))return;
+ button.disabled=true;
+ try{
+  if(action==='delete'){
+   const deleted=await api('/rest/v1/stocks_watchlist?ticker=eq.'+encodeURIComponent(ticker),{method:'DELETE',token:await freshToken()});
+   if(!Array.isArray(deleted)||!deleted.some(row=>row.ticker===ticker))throw Error('Deletion was not confirmed by the database');
+   await loadList();
+   alertMsg(ticker+' permanently deleted from the watchlist. Saved share-count history was not erased.');
+  }else{
+   const active=action==='enable';
+   await api('/rest/v1/stocks_watchlist?ticker=eq.'+encodeURIComponent(ticker),{method:'PATCH',token:await freshToken(),body:{active}});
+   await loadList();
+   alertMsg(ticker+(active?' restored':' hidden from the active watchlist')+'. Historical observations are preserved.');
+  }
+ }catch(error){alertMsg(error.message,true);button.disabled=false;}
 });
 $('search').addEventListener('input',render);
 $('logout').addEventListener('click',async()=>{
