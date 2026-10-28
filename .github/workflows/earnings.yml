@@ -16,7 +16,7 @@ concurrency:
 jobs:
   earnings:
     runs-on: ubuntu-latest
-    timeout-minutes: 27
+    timeout-minutes: 55
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -27,7 +27,7 @@ jobs:
       - name: Retrieve historical reported EPS
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'ShareWatch tom10015@users.noreply.github.com' }}
-        run: python -u earnings_update.py --limit 20
+        run: python -u earnings_update.py --limit 100
       - name: Save earnings history
         run: |
           cp data/earnings.json /tmp/sharewatch-earnings.json
