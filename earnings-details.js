@@ -25,6 +25,7 @@ plotPrice=function(ticker,entry){
 function renderEarningsDots(ticker,entry,earnings,info){
  const svg=document.querySelector('#priceChart svg');
  if(!svg){info.textContent='No price chart available to place EPS markers.';return;}
+ svg.querySelectorAll('.earnings-marker-layer').forEach(layer=>layer.remove());
  if(!earnings?.events?.length){
   info.textContent=earnings?.error||'No comparable quarterly EPS reported for this security. ETFs generally do not report corporate EPS.';
   return;
