@@ -143,7 +143,8 @@ def main():
  args=parser.parse_args()
  if not DATA.exists():raise SystemExit("Missing share file")
  payload=json.loads(DATA.read_text());companies=payload.get("companies",{})
- previous_status=json.loads(STATE.read_text()) if STATE.exists() else {}\n status={"checked_at":dt.datetime.now(dt.timezone.utc).isoformat(),"results":{}}
+ previous_status=json.loads(STATE.read_text()) if STATE.exists() else {}
+ status={"checked_at":dt.datetime.now(dt.timezone.utc).isoformat(),"results":{}}
  # Iterate across all companies that need more than one data point first.
  items=sorted(companies.items(),key=lambda kv:(len(kv[1].get("history",[])),kv[0]))
  total=0
@@ -154,14 +155,16 @@ def main():
   try:
    if ticker in CEF_CIK:
     known={v.get("date") for v in company.get("history",[])}
-    offset=previous_status.get("results",{}).get(ticker,{}).get("next_offset",0)\n    found,next_offset=fund_backfill(ticker,CEF_CIK[ticker],known,args.max_filing_per_fund,offset)\n    added=merge(company,found)
+    offset=previous_status.get("results",{}).get(ticker,{}).get("next_offset",0)
+    found,next_offset=fund_backfill(ticker,CEF_CIK[ticker],known,args.max_filing_per_fund,offset)\n    added=merge(company,found)
     result="added "+str(added)+" SEC N-CSR observations" if added else "no matching, explicitly dated disclosure found"
    elif company.get("cik") and company.get("type") not in ("fund","preferred"):
     found=company_backfill(company,company["cik"]);added=merge(company,found)
     result="added "+str(added)+" company XBRL observations" if added else "no new XBRL observations"
    else:
     result="no supported historical provider; retain actual future observations"
-   status["results"][ticker]={"status":result,"history_points":len(company.get("history",[]))}\n   if ticker in CEF_CIK:status["results"][ticker]["next_offset"]=next_offset
+   status["results"][ticker]={"status":result,"history_points":len(company.get("history",[]))}
+   if ticker in CEF_CIK:status["results"][ticker]["next_offset"]=next_offset
    print(ticker,result,flush=True)
   except Exception as ex:
    status["results"][ticker]={"status":"source unavailable","reason":str(ex)[:160]}
