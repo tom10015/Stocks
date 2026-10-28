@@ -83,7 +83,7 @@ def compress(points):
             week=dt.date.fromisoformat(day).isocalendar()
             weekly[(week.year,week.week)]=(day,close)
     for day,close in weekly.values():selected[day]=close
-    return [[day,close] for day,close in sorted(selected.items())
+    return [[day,close] for day,close in sorted(selected.items())]
 
 def main():
     watch=load_watchlist()
