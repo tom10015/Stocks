@@ -2,12 +2,34 @@
    Colors are YoY EPS change, not analyst consensus or call sentiment. */
 let earningsPromise=null;
 let earningsCache=null;
+async function fetchEarningsFile(url){
+ const response=await fetch(url,{cache:'no-store'});
+ if(!response.ok)throw Error('HTTP '+response.status+' from '+url.split('?')[0]);
+ const body=await response.json();
+ if(!body||typeof body.companies!=='object')throw Error('Invalid EPS data file');
+ return body;
+}
 function earningsData(){
  if(earningsCache)return Promise.resolve(earningsCache);
- if(!earningsPromise)earningsPromise=fetch('./data/earnings.json?ts='+Date.now())
- .then(async r=>{if(!r.ok)throw Error('Earnings history not collected yet');return r.json();})
- .then(d=>{earningsCache=d;return d})
- .catch(ex=>{earningsPromise=null;throw ex});
+ if(!earningsPromise){
+  // GitHub Pages may lag behind a successful GitHub Actions commit; the
+  // public raw repository provides a read-only fallback until deployment.
+  const sources=[
+   './data/earnings.json?v='+Date.now(),
+   'https://raw.githubusercontent.com/tom10015/Stocks/main/data/earnings.json?v='+Date.now()
+  ];
+  earningsPromise=(async()=>{
+   let error;
+   for(const url of sources){
+    try{
+     const body=await fetchEarningsFile(url);
+     earningsCache=body;
+     return body;
+    }catch(ex){error=ex;console.warn('Earnings feed unavailable:',ex.message);}
+   }
+   throw new Error('The published EPS data is temporarily unavailable ('+(error?.message||'network issue')+').');
+  })().catch(ex=>{earningsPromise=null;throw ex;});
+ }
  return earningsPromise;
 }
 const earlierPlotPrice=plotPrice;
