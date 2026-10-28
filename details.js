@@ -28,6 +28,7 @@ function openStock(ticker){
  document.getElementById('detailNote').textContent=h.length===1?'One observed count is saved. The chart will gain real points when future counts are published; no historical points have been invented.':'All dated observations currently saved in the repository are shown. Fund share changes can reflect creations and redemptions, not company dilution.';
  document.getElementById('detailHistory').innerHTML=h.length?'<table><thead><tr><th>Date</th><th>Shares outstanding</th><th>Change</th><th>Original source</th></tr></thead><tbody>'+h.map((p,i)=>{const prev=h[i-1],diff=prev?Number(p.shares)-Number(prev.shares):null,pct=prev&&prev.shares?100*diff/prev.shares:null;return '<tr><td>'+esc(p.date)+(p.date_is_check_only?' (checked)':'')+'</td><td>'+Number(p.shares).toLocaleString()+'</td><td class="'+(diff>0?'up':diff<0?'down':'')+'">'+(diff===null?'Baseline':(diff>=0?'+':'')+diff.toLocaleString()+' ('+(pct>=0?'+':'')+pct.toFixed(2)+'%)')+'</td><td>'+(p.url?'<a href="'+esc(p.url)+'" target="_blank" rel="noopener noreferrer">'+esc(p.form||'Source')+'</a>':esc(p.form||'—'))+'</td></tr>'}).reverse().join('')+'</tbody></table>':'<p>No verified observations yet.</p>';
  backdrop.classList.add('open');document.getElementById('detailClose').focus();
+ if(typeof loadPricePanel==='function')loadPricePanel(ticker);
  location.hash='stock='+encodeURIComponent(ticker);
 }
 function closeStock(){backdrop.classList.remove('open');if(location.hash.startsWith('#stock='))history.replaceState(null,'',location.pathname+location.search);}
