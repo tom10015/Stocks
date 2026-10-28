@@ -23,7 +23,7 @@ DEST=ROOT/"data"/"prices.json"
 HEAD={"User-Agent":"Mozilla/5.0 (compatible; ShareWatch/1.0; public data research)","Accept":"application/json,text/csv,*/*"}
 NOW=dt.datetime.now(dt.timezone.utc)
 
-def read(url,timeout=23):
+def read(url,timeout=8):
     req=urllib.request.Request(url,headers=HEAD)
     with urllib.request.urlopen(req,timeout=timeout) as r:
         return r.read(5000000).decode("utf-8","replace")
@@ -51,7 +51,7 @@ def yahoo_prices(ticker):
                 date=dt.datetime.fromtimestamp(ts,dt.timezone.utc).date().isoformat()
                 points[date]=round(float(close),5)
             if not points:raise ValueError("No valid closing prices")
-            return points,{"provider":"Yahoo Finance","symbol":symbol,"url":"https://finance.yahoo.com/quote/"+urllib.parse.quote(symbol,safe="-")+" /history"}
+            return points,{"provider":"Yahoo Finance","symbol":symbol,"url":"https://finance.yahoo.com/quote/"+urllib.parse.quote(symbol,safe="-")+"/history"}
         except Exception as ex:err=ex
     raise RuntimeError("Yahoo price history not available: "+str(err)[:110])
 
