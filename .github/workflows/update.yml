@@ -1,10 +1,11 @@
-name: Update SEC share counts
+name: Update stock and ETF shares
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - update.py
+      - fund_sources.py
       - tickers.json
       - .github/workflows/update.yml
   schedule:
