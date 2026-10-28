@@ -64,7 +64,8 @@ def backup_snapshot(ticker, old):
     return history[-16:]
 
 def main():
-    ticker_settings=load_watchlist()\n    tickers=list(ticker_settings)
+    ticker_settings=load_watchlist()
+    tickers=list(ticker_settings)
     out=BASE/'data'/'shares.json'
     previous=json.loads(out.read_text()) if out.exists() else {}
     entries=previous.get('companies',{})
