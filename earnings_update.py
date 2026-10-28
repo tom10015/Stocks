@@ -14,6 +14,7 @@ import time
 from pathlib import Path
 from update import fetch, load_watchlist
 from fund_sources import FUND_TICKERS
+from historical_backfill import CEF_CIK
 
 BASE=Path(__file__).resolve().parent
 TARGET=BASE/"data"/"earnings.json"
@@ -73,16 +74,17 @@ def eps_series(cik):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument("--limit",type=int,default=20)
+    parser.add_argument("--limit",type=int,default=100)
     args=parser.parse_args()
     active=load_watchlist()
     old=json.loads(TARGET.read_text()) if TARGET.exists() else {"companies":{}}
     companies=old.setdefault("companies",{})
     share_data=json.loads(SHARES.read_text()) if SHARES.exists() else {"companies":{}}
     stocks=share_data.get("companies",{})
-    queue=[t for t in active if active[t].get("security_type")!="fund" and t not in FUND_TICKERS and stocks.get(t,{}).get("type") not in ("fund","preferred")]
-    queue.sort(key=lambda t:(t in companies,companies.get(t,{}).get("checked_at",""),t))
+    queue=[t for t in active if active[t].get("security_type")!="fund" and t not in FUND_TICKERS and stocks.get(t,{}).get("type") not in ("fund","preferred") and t not in CEF_CIK]
+    queue.sort(key=lambda t:(not bool(companies.get(t,{}).get("events")),companies.get(t,{}).get("checked_at",""),t))
     selected=queue[:args.limit]
+    print("Eligible company stocks:",len(queue),"selected:",len(selected),"first:",selected[:8],flush=True)
     missing=[t for t in selected if not stocks.get(t,{}).get("cik")]
     mapping=ticker_map() if missing else {}
     for ticker in selected:
@@ -97,7 +99,7 @@ def main():
             if events:
                 companies[ticker]={"status":"ok","checked_at":TODAY.isoformat(),"events":events,"cik":str(cik).zfill(10)}
             else:
-                companies[ticker]={**previous,"status":"unavailable","checked_at":TODAY.isoformat(),"error":"No comparable quarterly EPS XBRL entries"}
+                companies[ticker]={**previous,"status":"stale" if previous.get("events") else "unavailable","checked_at":TODAY.isoformat(),"error":"No comparable quarterly EPS XBRL entries"}
             print(ticker, len(events), "earnings EPS records",flush=True)
         except Exception as ex:
             companies[ticker]={**previous,"status":"stale" if previous.get("events") else "unavailable","checked_at":TODAY.isoformat(),"error":str(ex)[:150]}
