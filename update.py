@@ -89,9 +89,14 @@ def main():
             for v in observations:
                 key=v['end']
                 if key not in unique or (v['filed'],v.get('accn',''))>(unique[key]['filed'],unique[key].get('accn','')):unique[key]=v
-            series=sorted(unique.values(),key=lambda v:v['end'])[-16:]
+            series=sorted(unique.values(),key=lambda v:v['end'])
             history=[{'date':v['end'],'filed':v['filed'],'shares':v['val'],'form':v['form'],'accession':v.get('accn',''), 'url':f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{v.get('accn','').replace('-','')}/" if v.get('accn') else ''} for v in series]
-            entries[ticker]={'ticker':ticker,'name':info.get('title',ticker),'cik':cik,'status':'ok' if history else 'no_data','history':history or old.get('history',[]),'yoy_pct':old.get('yoy_pct')}
+            # Preserve dated observations from earlier runs, even when the source omits them later.
+            preserved={p['date']:p for p in old.get('history',[]) if p.get('date') and p.get('shares')}
+            for point in history:
+                preserved[point['date']]=point
+            full_history=sorted(preserved.values(),key=lambda p:p['date'])
+            entries[ticker]={'ticker':ticker,'name':info.get('title',ticker),'cik':cik,'status':'ok' if history else 'no_data','history':full_history,'yoy_pct':old.get('yoy_pct')}
         except Exception as exc:
             print(ticker,repr(exc))
             try:
