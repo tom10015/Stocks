@@ -82,7 +82,8 @@ def main():
             raise RuntimeError('Cannot load SEC ticker mapping from either endpoint. Refusing to erase valid records.') from fallback_exc
     print('Ticker identifiers loaded:',len(lookup))
     for ticker in tickers:
-        settings=ticker_settings[ticker]\n        if ticker in FUND_TICKERS or settings['security_type']=='fund':
+        settings=ticker_settings[ticker]
+        if ticker in FUND_TICKERS or settings['security_type']=='fund':
             old=entries.get(ticker,{})
             try:
                 entries[ticker]=update_fund(ticker,old,settings.get('issuer_url'))
