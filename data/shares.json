@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T15:04:41.548738+00:00",
+  "updated_at": "2026-10-28T15:13:01.064095+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -4418,7 +4418,7 @@
     },
     "CRF": {
       "ticker": "CRF",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2020-12-31",
@@ -4491,9 +4491,16 @@
           "source": "Cornerstone annual/semiannual report",
           "url": "https://cornerstonetotalreturnfund.com/assets/pdfs/investor-reports/CRF_Semi_Annual_2026.pdf",
           "note": "2026 semiannual report"
+        },
+        {
+          "date": "2026-10-13",
+          "shares": 168890411,
+          "form": "Fund report",
+          "source": "CEFConnect fund capital structure",
+          "url": "https://www.cefconnect.com/fund/CRF"
         }
       ],
-      "reason": "Historical shares verified from Cornerstone published reports; future updates may be delayed by source access restrictions",
+      "reason": "Website returned a bot challenge",
       "name": "Cornerstone Total Return Fund Inc",
       "type": "fund",
       "source_updated_at": "2026-10-28"
@@ -11627,6 +11634,567 @@
           "form": "10-Q",
           "accession": "0001628280-26-067508",
           "url": "https://www.sec.gov/Archives/edgar/data/12927/000162828026067508/"
+        }
+      ],
+      "yoy_pct": null
+    },
+    "AMZN": {
+      "ticker": "AMZN",
+      "name": "Amazon Com Inc",
+      "cik": "0001018724",
+      "status": "ok",
+      "history": [
+        {
+          "date": "2009-07-17",
+          "filed": "2009-07-24",
+          "shares": 431807370,
+          "form": "10-Q",
+          "accession": "0001193125-09-154174",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312509154174/"
+        },
+        {
+          "date": "2009-10-19",
+          "filed": "2009-10-23",
+          "shares": 432982766,
+          "form": "10-Q",
+          "accession": "0001193125-09-212134",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312509212134/"
+        },
+        {
+          "date": "2010-01-22",
+          "filed": "2010-01-29",
+          "shares": 444546442,
+          "form": "10-K",
+          "accession": "0001193125-10-016098",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312510016098/"
+        },
+        {
+          "date": "2010-04-16",
+          "filed": "2010-04-23",
+          "shares": 445671637,
+          "form": "10-Q",
+          "accession": "0001193125-10-090367",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312510090367/"
+        },
+        {
+          "date": "2010-07-15",
+          "filed": "2010-07-23",
+          "shares": 447825009,
+          "form": "10-Q",
+          "accession": "0001193125-10-164083",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312510164083/"
+        },
+        {
+          "date": "2010-10-14",
+          "filed": "2010-10-22",
+          "shares": 448836757,
+          "form": "10-Q",
+          "accession": "0001193125-10-233883",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312510233883/"
+        },
+        {
+          "date": "2011-01-19",
+          "filed": "2011-01-28",
+          "shares": 451003759,
+          "form": "10-K",
+          "accession": "0001193125-11-016253",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312511016253/"
+        },
+        {
+          "date": "2011-04-19",
+          "filed": "2011-04-27",
+          "shares": 452043073,
+          "form": "10-Q",
+          "accession": "0001193125-11-110197",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312511110197/"
+        },
+        {
+          "date": "2011-07-15",
+          "filed": "2011-07-27",
+          "shares": 453935325,
+          "form": "10-Q",
+          "accession": "0001193125-11-197823",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312511197823/"
+        },
+        {
+          "date": "2011-10-14",
+          "filed": "2011-10-26",
+          "shares": 454754345,
+          "form": "10-Q",
+          "accession": "0001193125-11-280739",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312511280739/"
+        },
+        {
+          "date": "2012-01-19",
+          "filed": "2012-02-01",
+          "shares": 455068465,
+          "form": "10-K",
+          "accession": "0001193125-12-032846",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312512032846/"
+        },
+        {
+          "date": "2012-04-13",
+          "filed": "2012-04-27",
+          "shares": 450525501,
+          "form": "10-Q",
+          "accession": "0001193125-12-187203",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312512187203/"
+        },
+        {
+          "date": "2012-07-13",
+          "filed": "2012-07-27",
+          "shares": 452065256,
+          "form": "10-Q",
+          "accession": "0001193125-12-317409",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312512317409/"
+        },
+        {
+          "date": "2012-10-12",
+          "filed": "2012-10-26",
+          "shares": 452958533,
+          "form": "10-Q",
+          "accession": "0001193125-12-436012",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312512436012/"
+        },
+        {
+          "date": "2013-01-18",
+          "filed": "2013-01-30",
+          "shares": 454551069,
+          "form": "10-K",
+          "accession": "0001193125-13-028520",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312513028520/"
+        },
+        {
+          "date": "2013-04-12",
+          "filed": "2013-04-26",
+          "shares": 455242694,
+          "form": "10-Q",
+          "accession": "0001193125-13-174667",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312513174667/"
+        },
+        {
+          "date": "2013-07-12",
+          "filed": "2013-07-26",
+          "shares": 456883519,
+          "form": "10-Q",
+          "accession": "0001193125-13-303204",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000119312513303204/"
+        },
+        {
+          "date": "2013-10-11",
+          "filed": "2013-10-25",
+          "shares": 457733620,
+          "form": "10-Q",
+          "accession": "0001445305-13-002495",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000144530513002495/"
+        },
+        {
+          "date": "2014-01-17",
+          "filed": "2014-01-31",
+          "shares": 459264535,
+          "form": "10-K",
+          "accession": "0001018724-14-000006",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872414000006/"
+        },
+        {
+          "date": "2014-04-16",
+          "filed": "2014-04-25",
+          "shares": 460167404,
+          "form": "10-Q",
+          "accession": "0001018724-14-000014",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872414000014/"
+        },
+        {
+          "date": "2014-07-16",
+          "filed": "2014-07-25",
+          "shares": 462036113,
+          "form": "10-Q",
+          "accession": "0001018724-14-000025",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872414000025/"
+        },
+        {
+          "date": "2014-10-15",
+          "filed": "2014-10-24",
+          "shares": 463006452,
+          "form": "10-Q",
+          "accession": "0001018724-14-000055",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872414000055/"
+        },
+        {
+          "date": "2015-01-16",
+          "filed": "2015-01-30",
+          "shares": 464383939,
+          "form": "10-K",
+          "accession": "0001018724-15-000006",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872415000006/"
+        },
+        {
+          "date": "2015-04-15",
+          "filed": "2015-04-24",
+          "shares": 465680957,
+          "form": "10-Q",
+          "accession": "0001018724-15-000038",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872415000038/"
+        },
+        {
+          "date": "2015-07-15",
+          "filed": "2015-07-24",
+          "shares": 467710218,
+          "form": "10-Q",
+          "accession": "0001018724-15-000087",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872415000087/"
+        },
+        {
+          "date": "2015-10-14",
+          "filed": "2015-10-23",
+          "shares": 468762005,
+          "form": "10-Q",
+          "accession": "0001018724-15-000126",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872415000126/"
+        },
+        {
+          "date": "2016-01-20",
+          "filed": "2016-01-29",
+          "shares": 470842035,
+          "form": "10-K",
+          "accession": "0001018724-16-000172",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872416000172/"
+        },
+        {
+          "date": "2016-04-20",
+          "filed": "2016-04-29",
+          "shares": 471827960,
+          "form": "10-Q",
+          "accession": "0001018724-16-000227",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872416000227/"
+        },
+        {
+          "date": "2016-07-20",
+          "filed": "2016-07-29",
+          "shares": 474073542,
+          "form": "10-Q",
+          "accession": "0001018724-16-000286",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872416000286/"
+        },
+        {
+          "date": "2016-10-19",
+          "filed": "2016-10-28",
+          "shares": 475166527,
+          "form": "10-Q",
+          "accession": "0001018724-16-000324",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872416000324/"
+        },
+        {
+          "date": "2017-01-25",
+          "filed": "2017-02-10",
+          "shares": 477170618,
+          "form": "10-K",
+          "accession": "0001018724-17-000011",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872417000011/"
+        },
+        {
+          "date": "2017-04-18",
+          "filed": "2017-04-28",
+          "shares": 477975499,
+          "form": "10-Q",
+          "accession": "0001018724-17-000051",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872417000051/"
+        },
+        {
+          "date": "2017-07-18",
+          "filed": "2017-07-28",
+          "shares": 480379517,
+          "form": "10-Q",
+          "accession": "0001018724-17-000100",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872417000100/"
+        },
+        {
+          "date": "2017-10-18",
+          "filed": "2017-10-27",
+          "shares": 481872175,
+          "form": "10-Q",
+          "accession": "0001018724-17-000135",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872417000135/"
+        },
+        {
+          "date": "2018-01-24",
+          "filed": "2018-02-02",
+          "shares": 484107183,
+          "form": "10-K",
+          "accession": "0001018724-18-000005",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872418000005/"
+        },
+        {
+          "date": "2018-04-18",
+          "filed": "2018-04-27",
+          "shares": 485226904,
+          "form": "10-Q",
+          "accession": "0001018724-18-000072",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872418000072/"
+        },
+        {
+          "date": "2018-07-18",
+          "filed": "2018-07-27",
+          "shares": 487741189,
+          "form": "10-Q",
+          "accession": "0001018724-18-000108",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872418000108/"
+        },
+        {
+          "date": "2018-10-17",
+          "filed": "2018-10-26",
+          "shares": 488968628,
+          "form": "10-Q",
+          "accession": "0001018724-18-000159",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872418000159/"
+        },
+        {
+          "date": "2019-01-23",
+          "filed": "2019-02-01",
+          "shares": 491202890,
+          "form": "10-K",
+          "accession": "0001018724-19-000004",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872419000004/"
+        },
+        {
+          "date": "2019-04-17",
+          "filed": "2019-04-26",
+          "shares": 492331776,
+          "form": "10-Q",
+          "accession": "0001018724-19-000043",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872419000043/"
+        },
+        {
+          "date": "2019-07-17",
+          "filed": "2019-07-26",
+          "shares": 494656015,
+          "form": "10-Q",
+          "accession": "0001018724-19-000071",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872419000071/"
+        },
+        {
+          "date": "2019-10-16",
+          "filed": "2019-10-25",
+          "shares": 495797220,
+          "form": "10-Q",
+          "accession": "0001018724-19-000089",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872419000089/"
+        },
+        {
+          "date": "2020-01-22",
+          "filed": "2020-01-31",
+          "shares": 497810444,
+          "form": "10-K",
+          "accession": "0001018724-20-000004",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872420000004/"
+        },
+        {
+          "date": "2020-04-22",
+          "filed": "2020-05-01",
+          "shares": 498776032,
+          "form": "10-Q",
+          "accession": "0001018724-20-000010",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872420000010/"
+        },
+        {
+          "date": "2020-07-22",
+          "filed": "2020-07-31",
+          "shares": 500889651,
+          "form": "10-Q",
+          "accession": "0001018724-20-000021",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872420000021/"
+        },
+        {
+          "date": "2020-10-21",
+          "filed": "2020-10-30",
+          "shares": 501751183,
+          "form": "10-Q",
+          "accession": "0001018724-20-000030",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872420000030/"
+        },
+        {
+          "date": "2021-01-20",
+          "filed": "2021-02-03",
+          "shares": 503564743,
+          "form": "10-K",
+          "accession": "0001018724-21-000004",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872421000004/"
+        },
+        {
+          "date": "2021-04-21",
+          "filed": "2021-04-30",
+          "shares": 504323736,
+          "form": "10-Q",
+          "accession": "0001018724-21-000010",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872421000010/"
+        },
+        {
+          "date": "2021-07-21",
+          "filed": "2021-07-30",
+          "shares": 506440520,
+          "form": "10-Q",
+          "accession": "0001018724-21-000020",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872421000020/"
+        },
+        {
+          "date": "2021-10-20",
+          "filed": "2021-10-29",
+          "shares": 507147620,
+          "form": "10-Q",
+          "accession": "0001018724-21-000028",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872421000028/"
+        },
+        {
+          "date": "2022-01-26",
+          "filed": "2022-02-04",
+          "shares": 508844410,
+          "form": "10-K",
+          "accession": "0001018724-22-000005",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872422000005/"
+        },
+        {
+          "date": "2022-04-20",
+          "filed": "2022-04-29",
+          "shares": 508720481,
+          "form": "10-Q",
+          "accession": "0001018724-22-000013",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872422000013/"
+        },
+        {
+          "date": "2022-07-20",
+          "filed": "2022-07-29",
+          "shares": 10187554818,
+          "form": "10-Q",
+          "accession": "0001018724-22-000019",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872422000019/"
+        },
+        {
+          "date": "2022-10-19",
+          "filed": "2022-10-28",
+          "shares": 10201654176,
+          "form": "10-Q",
+          "accession": "0001018724-22-000023",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872422000023/"
+        },
+        {
+          "date": "2023-01-25",
+          "filed": "2023-02-03",
+          "shares": 10247259757,
+          "form": "10-K",
+          "accession": "0001018724-23-000004",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872423000004/"
+        },
+        {
+          "date": "2023-04-19",
+          "filed": "2023-04-28",
+          "shares": 10260353688,
+          "form": "10-Q",
+          "accession": "0001018724-23-000008",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872423000008/"
+        },
+        {
+          "date": "2023-07-21",
+          "filed": "2023-08-04",
+          "shares": 10317750796,
+          "form": "10-Q",
+          "accession": "0001018724-23-000012",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872423000012/"
+        },
+        {
+          "date": "2023-10-18",
+          "filed": "2023-10-27",
+          "shares": 10334030586,
+          "form": "10-Q",
+          "accession": "0001018724-23-000018",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872423000018/"
+        },
+        {
+          "date": "2024-01-24",
+          "filed": "2024-02-02",
+          "shares": 10387381291,
+          "form": "10-K",
+          "accession": "0001018724-24-000008",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872424000008/"
+        },
+        {
+          "date": "2024-04-24",
+          "filed": "2024-05-01",
+          "shares": 10406627415,
+          "form": "10-Q",
+          "accession": "0001018724-24-000083",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872424000083/"
+        },
+        {
+          "date": "2024-07-24",
+          "filed": "2024-08-02",
+          "shares": 10495566881,
+          "form": "10-Q",
+          "accession": "0001018724-24-000130",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872424000130/"
+        },
+        {
+          "date": "2024-10-18",
+          "filed": "2024-11-01",
+          "shares": 10515011008,
+          "form": "10-Q",
+          "accession": "0001018724-24-000161",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872424000161/"
+        },
+        {
+          "date": "2025-01-29",
+          "filed": "2025-02-07",
+          "shares": 10597729352,
+          "form": "10-K",
+          "accession": "0001018724-25-000004",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872425000004/"
+        },
+        {
+          "date": "2025-04-23",
+          "filed": "2025-05-02",
+          "shares": 10616352407,
+          "form": "10-Q",
+          "accession": "0001018724-25-000036",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872425000036/"
+        },
+        {
+          "date": "2025-07-23",
+          "filed": "2025-08-01",
+          "shares": 10664912097,
+          "form": "10-Q",
+          "accession": "0001018724-25-000086",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872425000086/"
+        },
+        {
+          "date": "2025-10-22",
+          "filed": "2025-10-31",
+          "shares": 10690216011,
+          "form": "10-Q",
+          "accession": "0001018724-25-000123",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872425000123/"
+        },
+        {
+          "date": "2026-01-28",
+          "filed": "2026-02-06",
+          "shares": 10734920870,
+          "form": "10-K",
+          "accession": "0001018724-26-000004",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/"
+        },
+        {
+          "date": "2026-04-22",
+          "filed": "2026-04-30",
+          "shares": 10757109436,
+          "form": "10-Q",
+          "accession": "0001018724-26-000014",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000014/"
+        },
+        {
+          "date": "2026-07-22",
+          "filed": "2026-07-31",
+          "shares": 10786313572,
+          "form": "10-Q",
+          "accession": "0001018724-26-000026",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/"
         }
       ],
       "yoy_pct": null
