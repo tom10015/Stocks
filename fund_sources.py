@@ -21,7 +21,7 @@ ISSUERS = {
     "COIW":"https://www.roundhillinvestments.com/etf/coiw/",
     "XOVR":"https://www.ershares.com/xovr",
     "QQQA":"https://www.proshares.com/our-etfs/strategic/qqqa",
-    "AVGG":"https://leverageshares.com/en/etfs/leverage-shares-2x-long-avgo-daily-etf/",
+    "AVGG":"https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
     "ORCU":"https://www.direxion.com/product/daily-orcl-bull-and-bear-leveraged-single-stock-etfs",
     "CRF":"https://www.cefconnect.com/fund/CRF",
     "CLM":"https://www.cefconnect.com/fund/CLM",
