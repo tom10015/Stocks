@@ -889,9 +889,18 @@
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "shares": 307902500,
+          "date": "2026-10-23",
+          "form": "Fund report",
+          "source": "Secondary source citing issuer",
+          "url": "https://companiesmarketcap.com/vaneck-gold-miners-etf/shares-outstanding/"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "CRWV": {
       "ticker": "CRWV",
@@ -2343,9 +2352,18 @@
     },
     "YMAX": {
       "ticker": "YMAX",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "shares": 48225000,
+          "date": "2026-10-07",
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ymax/"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "ULTY": {
       "ticker": "ULTY",
@@ -2355,15 +2373,33 @@
     },
     "CONY": {
       "ticker": "CONY",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "shares": 19857457,
+          "date": "2026-10-21",
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/cony/"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "AIYY": {
       "ticker": "AIYY",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "shares": 6212473,
+          "date": "2026-10-05",
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/aiyy/"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "F": {
       "ticker": "F",
@@ -2714,15 +2750,33 @@
     },
     "BND": {
       "ticker": "BND",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "shares": 2301723018,
+          "date": "2026-09-30",
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://advisors.vanguard.com/investments/products/bnd/vanguard-total-bond-market-etf"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "QQQI": {
       "ticker": "QQQI",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "shares": 275500000,
+          "date": "2026-10-14",
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://neosfunds.com/qqqi/"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "BRK-B": {
       "ticker": "BRK-B",
