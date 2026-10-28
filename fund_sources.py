@@ -11,7 +11,7 @@ ISSUERS = {
     **{t:f"https://yieldmaxetfs.com/our-etfs/{t.lower()}/" for t in YIELDMAX},
     "SCHD":"https://www.schwabassetmanagement.com/products/schd",
     "GDX":"https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/",
-    "BND":"https://investor.vanguard.com/investment-products/etfs/profile/bnd",
+    "BND":"https://advisors.vanguard.com/investments/products/bnd/vanguard-total-bond-market-etf",
     "QQQI":"https://neosfunds.com/qqqi/",
     "HYDB":"https://www.ishares.com/us/products/284686/ishares-edge-high-yield-defensive-bond-etf",
     "IAU":"https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
@@ -23,8 +23,8 @@ ISSUERS = {
     "QQQA":"https://www.proshares.com/our-etfs/strategic/qqqa",
     "AVGG":"https://www.roundhillinvestments.com/etf/avgg/",
     "ORCU":"https://www.roundhillinvestments.com/",
-    "CRF":"https://www.cornerstonestrategicinvestment.com/",
-    "CLM":"https://www.cornerstonestrategicinvestment.com/",
+    "CRF":"https://www.cefconnect.com/fund/CRF",
+    "CLM":"https://www.cefconnect.com/fund/CLM",
     "UTF":"https://www.cohenandsteers.com/funds/infrastructure-fund/",
     "BTC":"https://www.grayscale.com/crypto-products/grayscale-bitcoin-mini-trust",
 }
@@ -35,6 +35,7 @@ NUMBER=r"([\\d,]+(?:\\.\\d+)?)\\s*([KMBT]?)"
 SHARES_PATTERNS=[
     re.compile(r"Shares\\s+Outstanding(?:\\s+As\\s+of\\s+\\d{1,2}/\\d{1,2}/\\d{4})?\\s*[:\\-]?\\s*"+NUMBER, re.I),
     re.compile(r"Outstanding\\s+Shares\\s*[:\\-]?\\s*"+NUMBER, re.I),
+    re.compile(r"Common Shares Outstanding\\s*[:\\-]?\\s*"+NUMBER, re.I),
 ]
 DATE_PATTERN=re.compile(r"(?:as of|As of)\\s+(\\d{1,2}/\\d{1,2}/\\d{4}|\\d{4}-\\d{2}-\\d{2})")
 
