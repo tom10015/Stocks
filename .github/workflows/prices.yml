@@ -1,0 +1,43 @@
+name: Refresh ShareWatch market prices
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - price_update.py
+      - .github/workflows/prices.yml
+  schedule:
+    - cron: "33 2,8,14,20 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: sec-share-update
+  cancel-in-progress: false
+jobs:
+  prices:
+    runs-on: ubuntu-latest
+    timeout-minutes: 27
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify price importer
+        run: python -m py_compile price_update.py
+      - name: Download price history for the active watchlist
+        run: python -u price_update.py
+      - name: Save cached historical prices
+        run: |
+          cp data/prices.json /tmp/sharewatch-prices.json
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/sharewatch-prices.json data/prices.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/prices.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh stored ShareWatch end-of-day prices"
+            git push origin HEAD:main
+          fi
