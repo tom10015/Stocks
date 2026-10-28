@@ -69,6 +69,17 @@ def main():
     out=BASE/'data'/'shares.json'
     previous=json.loads(out.read_text()) if out.exists() else {}
     entries=previous.get('companies',{})
+    # Curated historical fund disclosures are retained even when issuer websites
+    # block automated refresh requests. Dates refer to actual reporting periods.
+    backfill_path=BASE/'data'/'historical_backfill.json'
+    if backfill_path.exists():
+        backfills=json.loads(backfill_path.read_text())
+        for symbol,points in backfills.items():
+            old=entries.get(symbol,{})
+            by_date={p['date']:p for p in old.get('history',[]) if p.get('date') and p.get('shares')}
+            for point in points:
+                by_date[point['date']]=point
+            entries[symbol]={**old,'ticker':symbol,'history':sorted(by_date.values(),key=lambda p:p['date']),'type':'fund','status':old.get('status','fund')}
     try:
         mapping=fetch('https://www.sec.gov/files/company_tickers.json')
         lookup={v['ticker'].upper():v for v in mapping.values()}
