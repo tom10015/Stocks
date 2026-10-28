@@ -1,0 +1,47 @@
+name: Onboard newly added stocks automatically
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - onboard.py
+      - .github/workflows/onboard.yml
+  schedule:
+    - cron: "9,39 * * * *"
+permissions:
+  contents: write
+concurrency:
+  group: sec-share-update
+  cancel-in-progress: false
+jobs:
+  onboard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 26
+    steps:
+      - name: Check out history
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check scripts for syntax errors
+        run: python -m py_compile onboard.py update.py historical_backfill.py fund_sources.py merge_data.py
+      - name: Import historical data for new Supabase tickers
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'ShareWatch tom10015@users.noreply.github.com' }}
+        run: python -u onboard.py --max-tickers 5
+      - name: Preserve every chart observation when committing
+        run: |
+          cp data/shares.json /tmp/sharewatch-onboard.json
+          cp data/onboarding_status.json /tmp/sharewatch-onboarding-status.json
+          git fetch origin main
+          git reset --hard origin/main
+          python merge_data.py /tmp/sharewatch-onboard.json data/shares.json
+          cp /tmp/sharewatch-onboarding-status.json data/onboarding_status.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/shares.json data/onboarding_status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Automatically backfill new watchlist entries"
+            git push origin HEAD:main
+          fi
