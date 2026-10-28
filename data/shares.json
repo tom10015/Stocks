@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T21:37:53.107485+00:00",
+  "updated_at": "2026-10-28T22:35:22.562919+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -4368,15 +4368,17 @@
           "date": "2025-10-01",
           "shares": 370000,
           "form": "Fund report",
-          "source": "Official Leverage Shares factsheet",
-          "url": "https://leverageshares.com/us/documents/fact_sheets/Leverage-Shares-ETFs-Factsheet-AVGG.pdf"
+          "source": "Leverage Shares AVGG issuer factsheet (October 2025)",
+          "url": "https://leverageshares.com/us/documents/fact_sheets/Leverage-Shares-ETFs-Factsheet-AVGG.pdf",
+          "note": "Official issuer factsheet, dated October 1 2025"
         },
         {
           "date": "2026-09-16",
           "shares": 2165000,
           "form": "Fund report",
-          "source": "Official Leverage Shares ETF trading details",
-          "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf"
+          "source": "Leverage Shares AVGG issuer fund facts",
+          "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
+          "note": "Issuer trading details displayed as of September 16 2026"
         },
         {
           "date": "2026-10-22",
