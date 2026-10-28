@@ -1718,17 +1718,35 @@
     },
     "CRF": {
       "ticker": "CRF",
-      "status": "error",
-      "history": [],
-      "reason": "SEC reader returned an error page; backup: HTTP Error 404: Not Found",
-      "name": "Cornerstone Total Return Fund Inc"
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-10-13",
+          "shares": 168890411,
+          "form": "Fund report",
+          "source": "CEFConnect fund capital structure",
+          "url": "https://www.cefconnect.com/fund/CRF"
+        }
+      ],
+      "reason": "",
+      "name": "Cornerstone Total Return Fund Inc",
+      "type": "fund"
     },
     "CLM": {
       "ticker": "CLM",
-      "status": "error",
-      "history": [],
-      "reason": "SEC reader returned an error page; backup: HTTP Error 404: Not Found",
-      "name": "Cornerstone Strategic Investment Fund, Inc."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "shares": 309676340,
+          "form": "Fund report",
+          "source": "CEFConnect fund capital structure",
+          "url": "https://www.cefconnect.com/fund/CLM"
+        }
+      ],
+      "reason": "",
+      "name": "Cornerstone Strategic Investment Fund, Inc.",
+      "type": "fund"
     },
     "ENB": {
       "ticker": "ENB",
@@ -2367,9 +2385,18 @@
     },
     "ULTY": {
       "ticker": "ULTY",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-10-20",
+          "shares": 27477464,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ulty/"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "CONY": {
       "ticker": "CONY",
