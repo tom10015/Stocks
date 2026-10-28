@@ -1,0 +1,116 @@
+{
+  "checked_at": "2026-10-28T15:17:53.392226+00:00",
+  "results": {
+    "ASST": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "AVGG": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "BND": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "CAN": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "CLM": {
+      "status": "no matching, explicitly dated disclosure found",
+      "history_points": 1,
+      "next_offset": 7
+    },
+    "COIW": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "CRWV": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "ECC": {
+      "status": "no matching, explicitly dated disclosure found",
+      "history_points": 1,
+      "next_offset": 7
+    },
+    "FINV": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "HYDB": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "MSTY": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "NVDY": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "ORCU": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "QQQA": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "SCHD": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "STRC": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "TSLW": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "UTF": {
+      "status": "no matching, explicitly dated disclosure found",
+      "history_points": 1,
+      "next_offset": 7
+    },
+    "XOVR": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 1
+    },
+    "AIYY": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 2
+    },
+    "CONY": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 2
+    },
+    "CRSH": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 2
+    },
+    "GDX": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 2
+    },
+    "QQQI": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 2
+    },
+    "TSLY": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 2
+    },
+    "ULTY": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 2
+    },
+    "YMAX": {
+      "status": "no supported historical provider; retain actual future observations",
+      "history_points": 2
+    }
+  }
+}
