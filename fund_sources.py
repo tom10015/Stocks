@@ -33,6 +33,7 @@ HEADERS={"User-Agent":"Mozilla/5.0 (compatible; ShareWatch/1.0; contact via GitH
 MULT={"":1,"K":1000,"M":1000000,"B":1000000000,"T":1000000000000}
 NUMBER=r"([\d,]+(?:\.\d+)?)\s*([KMBT]?)"
 SHARES_PATTERNS=[
+    re.compile(r"Shares\\s+Out\\b\\s*[:\\-]?\\s*"+NUMBER, re.I),
     re.compile(r"Shares\s+Outstanding(?:\s+As\s+of\s+\d{1,2}/\d{1,2}/\d{4})?\s*[:\-]?\s*"+NUMBER, re.I),
     re.compile(r"Outstanding\s+Shares\s*[:\-]?\s*"+NUMBER, re.I),
     re.compile(r"Common Shares Outstanding\s*[:\-]?\s*"+NUMBER, re.I),
