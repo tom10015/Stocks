@@ -2307,9 +2307,18 @@
     },
     "SCHD": {
       "ticker": "SCHD",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-10-08",
+          "shares": 3336350000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://www.schwabassetmanagement.com/products/schd"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "COIW": {
       "ticker": "COIW",
@@ -2319,9 +2328,18 @@
     },
     "NVDY": {
       "ticker": "NVDY",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-10-21",
+          "shares": 113325000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/nvdy/"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "YMAX": {
       "ticker": "YMAX",
@@ -3612,15 +3630,33 @@
     },
     "MSTY": {
       "ticker": "MSTY",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-10-22",
+          "shares": 74319959,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/msty/"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "TSLY": {
       "ticker": "TSLY",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-10-20",
+          "shares": 30729965,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/tsly/"
+        }
+      ],
+      "reason": "",
+      "type": "fund"
     },
     "O": {
       "ticker": "O",
