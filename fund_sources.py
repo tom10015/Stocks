@@ -31,13 +31,13 @@ ISSUERS = {
 FUND_TICKERS=set(ISSUERS)
 HEADERS={"User-Agent":"Mozilla/5.0 (compatible; ShareWatch/1.0; contact via GitHub tom10015/Stocks)","Accept":"text/html,application/xhtml+xml"}
 MULT={"":1,"K":1000,"M":1000000,"B":1000000000,"T":1000000000000}
-NUMBER=r"([\\d,]+(?:\\.\\d+)?)\\s*([KMBT]?)"
+NUMBER=r"([\d,]+(?:\.\d+)?)\s*([KMBT]?)"
 SHARES_PATTERNS=[
-    re.compile(r"Shares\\s+Outstanding(?:\\s+As\\s+of\\s+\\d{1,2}/\\d{1,2}/\\d{4})?\\s*[:\\-]?\\s*"+NUMBER, re.I),
-    re.compile(r"Outstanding\\s+Shares\\s*[:\\-]?\\s*"+NUMBER, re.I),
-    re.compile(r"Common Shares Outstanding\\s*[:\\-]?\\s*"+NUMBER, re.I),
+    re.compile(r"Shares\s+Outstanding(?:\s+As\s+of\s+\d{1,2}/\d{1,2}/\d{4})?\s*[:\-]?\s*"+NUMBER, re.I),
+    re.compile(r"Outstanding\s+Shares\s*[:\-]?\s*"+NUMBER, re.I),
+    re.compile(r"Common Shares Outstanding\s*[:\-]?\s*"+NUMBER, re.I),
 ]
-DATE_PATTERN=re.compile(r"(?:as of|As of)\\s+(\\d{1,2}/\\d{1,2}/\\d{4}|\\d{4}-\\d{2}-\\d{2})")
+DATE_PATTERN=re.compile(r"(?:as of|As of)\s+(\d{1,2}/\d{1,2}/\d{4}|\d{4}-\d{2}-\d{2})")
 
 def read_page(url):
     request=urllib.request.Request(url,headers=HEADERS)
@@ -50,9 +50,9 @@ def read_page(url):
             raw=response.read(1700000).decode("utf-8","replace")
     if "Just a moment" in raw[:400] or "Performing security verification" in raw[:800]:
         raise ValueError("Website returned a bot challenge")
-    raw=re.sub(r"<(script|style)\\b[^>]*>.*?</\\1>"," ",raw,flags=re.I|re.S)
+    raw=re.sub(r"<(script|style)\b[^>]*>.*?</\1>"," ",raw,flags=re.I|re.S)
     raw=re.sub(r"<[^>]+>"," ",raw)
-    return re.sub(r"\\s+"," ",html.unescape(raw))
+    return re.sub(r"\s+"," ",html.unescape(raw))
 
 def get_count(text):
     for pattern in SHARES_PATTERNS:
