@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T15:23:14.272249+00:00",
+  "updated_at": "2026-10-28T16:46:30.902921+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1963,8 +1963,32 @@
     },
     "ASST": {
       "ticker": "ASST",
-      "status": "stale",
+      "status": "ok",
       "history": [
+        {
+          "date": "2022-12-31",
+          "shares": 8385276,
+          "filed": "2023-11-14",
+          "form": "10-Q",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1920406/000121390023086956/"
+        },
+        {
+          "date": "2023-06-30",
+          "shares": 5375724,
+          "filed": "2023-08-14",
+          "form": "10-Q",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1920406/000121390023067069/"
+        },
+        {
+          "date": "2023-12-31",
+          "shares": 1677056,
+          "filed": "2024-08-14",
+          "form": "10-Q",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1920406/000121390024069032/"
+        },
         {
           "date": "2026-10-25",
           "filed": null,
@@ -1976,7 +2000,8 @@
       ],
       "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Asset Entities Inc.",
-      "yoy_pct": 3905.98
+      "yoy_pct": 3905.98,
+      "cik": "0001920406"
     },
     "CRSH": {
       "ticker": "CRSH",
@@ -4883,8 +4908,88 @@
     },
     "CAN": {
       "ticker": "CAN",
-      "status": "stale",
+      "status": "ok",
       "history": [
+        {
+          "date": "2018-12-31",
+          "shares": 1948376000,
+          "filed": "2020-04-15",
+          "form": "20-F",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1780652/000156459020016788/"
+        },
+        {
+          "date": "2019-12-31",
+          "shares": 2350123270,
+          "filed": "2021-04-21",
+          "form": "20-F",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1780652/000119312521123558/"
+        },
+        {
+          "date": "2020-01-01",
+          "shares": 2350123270,
+          "filed": "2023-04-19",
+          "form": "20-F",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1780652/000110465923047189/"
+        },
+        {
+          "date": "2020-11-25",
+          "shares": 2328326132,
+          "filed": "2021-04-21",
+          "form": "20-F",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1780652/000119312521123558/"
+        },
+        {
+          "date": "2020-12-31",
+          "shares": 2328326132,
+          "filed": "2022-04-29",
+          "form": "20-F",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1780652/000119312522133564/"
+        },
+        {
+          "date": "2021-01-01",
+          "shares": 2328326132,
+          "filed": "2024-04-17",
+          "form": "20-F",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1780652/000110465924048300/"
+        },
+        {
+          "date": "2021-12-31",
+          "shares": 2577386552,
+          "filed": "2023-04-19",
+          "form": "20-F",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1780652/000110465923047189/"
+        },
+        {
+          "date": "2022-12-31",
+          "shares": 2496001757,
+          "filed": "2024-04-17",
+          "form": "20-F",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1780652/000110465924048300/"
+        },
+        {
+          "date": "2023-12-31",
+          "shares": 3514973327,
+          "filed": "2025-04-18",
+          "form": "20-F",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1780652/000141057825000805/"
+        },
+        {
+          "date": "2024-12-31",
+          "shares": 4614163022,
+          "filed": "2025-04-18",
+          "form": "20-F",
+          "source": "SEC EDGAR XBRL historical backfill",
+          "url": "https://www.sec.gov/Archives/edgar/data/1780652/000141057825000805/"
+        },
         {
           "date": "2026-10-25",
           "filed": null,
@@ -4896,7 +5001,8 @@
       ],
       "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Canaan Inc.",
-      "yoy_pct": 96.61
+      "yoy_pct": 96.61,
+      "cik": "0001780652"
     },
     "TSLW": {
       "ticker": "TSLW",
