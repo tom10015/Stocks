@@ -6,6 +6,7 @@ on:
     paths:
       - update.py
       - fund_sources.py
+      - merge_data.py
       - tickers.json
       - .github/workflows/update.yml
   schedule:
@@ -30,13 +31,16 @@ jobs:
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'ShareWatch tom10015@users.noreply.github.com' }}
         run: python update.py
-      - name: Commit refreshed share counts
+      - name: Merge refreshed data onto latest main
         run: |
+          cp data/shares.json /tmp/sharewatch-incoming.json
+          git fetch origin main
+          git reset --hard origin/main
+          python merge_data.py /tmp/sharewatch-incoming.json data/shares.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/shares.json
           if ! git diff --cached --quiet; then
-            git commit -m "Refresh SEC share count data"
-            git pull --rebase origin main
-            git push
+            git commit -m "Refresh shares outstanding from SEC and fund issuers"
+            git push origin HEAD:main
           fi
