@@ -254,9 +254,18 @@
     },
     "ORCU": {
       "ticker": "ORCU",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-10-23",
+          "shares": 22330000,
+          "form": "Fund snapshot",
+          "source": "Third-party snapshot (rounded)",
+          "url": "https://stockanalysis.com/etf/orcu/"
+        }
+      ],
+      "reason": "Historical sourced observation; newer data may be available",
+      "type": "fund"
     },
     "QUBT": {
       "ticker": "QUBT",
@@ -920,15 +929,33 @@
     },
     "QQQA": {
       "ticker": "QQQA",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-09-10",
+          "shares": 740001,
+          "form": "Fund snapshot",
+          "source": "Third-party snapshot",
+          "url": "https://stockanalysis.com/etf/qqqa/"
+        }
+      ],
+      "reason": "Historical sourced observation; newer data may be available",
+      "type": "fund"
     },
     "STRC": {
       "ticker": "STRC",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "preferred",
+      "history": [
+        {
+          "date": "2026-08-21",
+          "shares": 99720000,
+          "form": "Preferred report",
+          "source": "Strategy investor briefing (rounded 99.72M)",
+          "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526363557/d431748dfwp.htm"
+        }
+      ],
+      "reason": "Historical sourced observation; newer data may be available",
+      "type": "preferred"
     },
     "ASST": {
       "ticker": "ASST",
@@ -949,9 +976,18 @@
     },
     "CRSH": {
       "ticker": "CRSH",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-09-04",
+          "shares": 754975,
+          "form": "Fund snapshot",
+          "source": "Third-party snapshot",
+          "url": "https://stockanalysis.com/etf/crsh/"
+        }
+      ],
+      "reason": "Historical sourced observation; newer data may be available",
+      "type": "fund"
     },
     "T": {
       "ticker": "T",
@@ -1366,9 +1402,18 @@
     },
     "XOVR": {
       "ticker": "XOVR",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-09-30",
+          "shares": 69830000,
+          "form": "Fund snapshot",
+          "source": "Third-party snapshot (rounded)",
+          "url": "https://stockanalysis.com/etf/xovr/"
+        }
+      ],
+      "reason": "Historical sourced observation; newer data may be available",
+      "type": "fund"
     },
     "ORCL": {
       "ticker": "ORCL",
@@ -1646,9 +1691,18 @@
     },
     "AVGG": {
       "ticker": "AVGG",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-10-22",
+          "shares": 2330000,
+          "form": "Fund snapshot",
+          "source": "Third-party snapshot (rounded)",
+          "url": "https://stockanalysis.com/etf/avgg/"
+        }
+      ],
+      "reason": "Historical sourced observation; newer data may be available",
+      "type": "fund"
     },
     "FINV": {
       "ticker": "FINV",
@@ -1887,16 +1941,34 @@
     },
     "HYDB": {
       "ticker": "HYDB",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-09-01",
+          "shares": 34500000,
+          "form": "Fund snapshot",
+          "source": "Third-party snapshot (rounded)",
+          "url": "https://stockanalysis.com/etf/hydb/"
+        }
+      ],
+      "reason": "Historical sourced observation; newer data may be available",
+      "type": "fund"
     },
     "UTF": {
       "ticker": "UTF",
-      "status": "error",
-      "history": [],
-      "reason": "SEC reader returned an error page; backup: HTTP Error 404: Not Found",
-      "name": "Cohen & Steers Infrastructure Fund Inc"
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-09-14",
+          "shares": 111810099,
+          "form": "Fund snapshot",
+          "source": "CEFConnect common shares",
+          "url": "https://www.cefconnect.com/fund/UTF"
+        }
+      ],
+      "reason": "Historical sourced observation; newer data may be available",
+      "name": "Cohen & Steers Infrastructure Fund Inc",
+      "type": "fund"
     },
     "CAN": {
       "ticker": "CAN",
@@ -1917,9 +1989,18 @@
     },
     "TSLW": {
       "ticker": "TSLW",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-09-11",
+          "shares": 4140000,
+          "form": "Fund snapshot",
+          "source": "Third-party snapshot (rounded)",
+          "url": "https://stockanalysis.com/etf/tslw/"
+        }
+      ],
+      "reason": "Historical sourced observation; newer data may be available",
+      "type": "fund"
     },
     "PEP": {
       "ticker": "PEP",
@@ -2349,9 +2430,18 @@
     },
     "COIW": {
       "ticker": "COIW",
-      "status": "unsupported",
-      "history": [],
-      "reason": "No company-stock SEC ticker mapping; ETFs, funds and leveraged products need fund-share data from a separate provider."
+      "status": "fund",
+      "history": [
+        {
+          "date": "2026-09-30",
+          "shares": 4960000,
+          "form": "Fund snapshot",
+          "source": "Third-party snapshot (rounded)",
+          "url": "https://stockanalysis.com/etf/coiw/"
+        }
+      ],
+      "reason": "Historical sourced observation; newer data may be available",
+      "type": "fund"
     },
     "NVDY": {
       "ticker": "NVDY",
