@@ -1,0 +1,52 @@
+name: Update quarterly EPS markers
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - earnings_update.py
+      - .github/workflows/earnings.yml
+  schedule:
+    - cron: "21 1,7,13,19 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: sec-share-update
+  cancel-in-progress: false
+jobs:
+  earnings:
+    runs-on: ubuntu-latest
+    timeout-minutes: 27
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check EPS importer syntax
+        run: python -m py_compile earnings_update.py
+      - name: Retrieve historical reported EPS
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'ShareWatch tom10015@users.noreply.github.com' }}
+        run: python -u earnings_update.py --limit 20
+      - name: Save earnings history
+        run: |
+          cp data/earnings.json /tmp/sharewatch-earnings.json
+          git fetch origin main
+          git reset --hard origin/main
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          f=Path('data/earnings.json')
+          old=json.loads(f.read_text()) if f.exists() else {'companies':{}}
+          new=json.loads(Path('/tmp/sharewatch-earnings.json').read_text())
+          old.setdefault('companies',{}).update(new.get('companies',{}))
+          old['updated_at']=new.get('updated_at')
+          f.write_text(json.dumps(old,separators=(',',':'))+'\n')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/earnings.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh reported quarterly EPS chart markers"
+            git push origin HEAD:main
+          fi
