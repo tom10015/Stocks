@@ -82,8 +82,8 @@ def find_as_of(text):
             continue
     return None
 
-def update_fund(ticker,old):
-    url=ISSUERS[ticker]
+def update_fund(ticker,old,issuer_url=None):
+    url=issuer_url or ISSUERS.get(ticker) or f'https://stockanalysis.com/etf/{ticker.lower()}/'
     text=read_page(url)
     count=get_count(text)
     if not count:
