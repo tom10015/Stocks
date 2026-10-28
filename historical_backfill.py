@@ -111,7 +111,7 @@ def parse_fund_report(document,report_date,source_url,form):
  n=next(iter(matches))
  return [{"date":report_date,"shares":n,"form":"Fund report","source":"SEC N-CSR historical backfill","url":source_url}]
 
-def fund_backfill(ticker,cik,known,limit):
+def fund_backfill(ticker,cik,known,limit,offset=0):
  submission=json_get(f"https://data.sec.gov/submissions/CIK{int(cik):010d}.json")
  recent=submission.get("filings",{}).get("recent",{})
  forms=recent.get("form",[])
@@ -127,14 +127,14 @@ def fund_backfill(ticker,cik,known,limit):
   candidates.append((period,form,url))
  # Newest first and bounded so scheduled runs are inexpensive.
  result=[]
- for period,form,url in candidates[:limit]:
+ for period,form,url in (candidates[offset:offset+limit] or candidates[:limit]):
   try:
    points=parse_fund_report(get(url,timeout=48),period,url,form)
    result+=points
    print(f"  {ticker} {period}: "+(str(points[0]["shares"]) if points else "no unambiguous share disclosure"),flush=True)
   except Exception as ex:print(f"  {ticker} {period}: {type(ex).__name__}: {str(ex)[:120]}",flush=True)
   time.sleep(1.8)
- return result
+ return result, (offset+limit if offset+limit<len(candidates) else 0)
 
 def main():
  parser=argparse.ArgumentParser()
@@ -143,7 +143,7 @@ def main():
  args=parser.parse_args()
  if not DATA.exists():raise SystemExit("Missing share file")
  payload=json.loads(DATA.read_text());companies=payload.get("companies",{})
- status={"checked_at":dt.datetime.now(dt.timezone.utc).isoformat(),"results":{}}
+ previous_status=json.loads(STATE.read_text()) if STATE.exists() else {}\n status={"checked_at":dt.datetime.now(dt.timezone.utc).isoformat(),"results":{}}
  # Iterate across all companies that need more than one data point first.
  items=sorted(companies.items(),key=lambda kv:(len(kv[1].get("history",[])),kv[0]))
  total=0
@@ -154,15 +154,14 @@ def main():
   try:
    if ticker in CEF_CIK:
     known={v.get("date") for v in company.get("history",[])}
-    found=fund_backfill(ticker,CEF_CIK[ticker],known,args.max_filing_per_fund)
-    added=merge(company,found)
+    offset=previous_status.get("results",{}).get(ticker,{}).get("next_offset",0)\n    found,next_offset=fund_backfill(ticker,CEF_CIK[ticker],known,args.max_filing_per_fund,offset)\n    added=merge(company,found)
     result="added "+str(added)+" SEC N-CSR observations" if added else "no matching, explicitly dated disclosure found"
    elif company.get("cik") and company.get("type") not in ("fund","preferred"):
     found=company_backfill(company,company["cik"]);added=merge(company,found)
     result="added "+str(added)+" company XBRL observations" if added else "no new XBRL observations"
    else:
     result="no supported historical provider; retain actual future observations"
-   status["results"][ticker]={"status":result,"history_points":len(company.get("history",[]))}
+   status["results"][ticker]={"status":result,"history_points":len(company.get("history",[]))}\n   if ticker in CEF_CIK:status["results"][ticker]["next_offset"]=next_offset
    print(ticker,result,flush=True)
   except Exception as ex:
    status["results"][ticker]={"status":"source unavailable","reason":str(ex)[:160]}
