@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T15:13:01.064095+00:00",
+  "updated_at": "2026-10-28T15:17:43.025025+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -3266,7 +3266,7 @@
           "url": "https://stockanalysis.com/etf/xovr/"
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
+      "reason": "The read operation timed out",
       "type": "fund"
     },
     "ORCL": {
