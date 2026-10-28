@@ -38,7 +38,7 @@ def yahoo_prices(ticker):
     err=None
     for host in ("query2.finance.yahoo.com","query1.finance.yahoo.com"):
         try:
-            url=f"https://{host}/v8/finance/chart/{path}?range=5y&interval=1d"
+            url=f"https://{host}/v8/finance/chart/{path}?range=10y&interval=1d"
             body=json.loads(read(url))
             result=(body.get("chart",{}).get("result") or [None])[0]
             if not result:raise ValueError("No chart result")
@@ -59,7 +59,7 @@ def stooq_prices(ticker):
     symbol=ticker.lower().replace(".","-")+".us"
     if not re.fullmatch(r"[a-z0-9^-]+\.us",symbol):raise ValueError("Invalid symbol")
     # Weekly history is enough for a fallback timeline; no adjustment assumptions.
-    date1=(NOW-dt.timedelta(days=366*5)).strftime("%Y%m%d")
+    date1=(NOW-dt.timedelta(days=366*10)).strftime("%Y%m%d")
     url="https://stooq.com/q/d/l/?"+urllib.parse.urlencode({"s":symbol,"i":"w","d1":date1})
     raw=read(url)
     if not raw.lstrip().startswith("Date,"):raise ValueError("No valid Stooq CSV (access may require a key)")
@@ -83,7 +83,7 @@ def compress(points):
             week=dt.date.fromisoformat(day).isocalendar()
             weekly[(week.year,week.week)]=(day,close)
     for day,close in weekly.values():selected[day]=close
-    return [[day,close] for day,close in sorted(selected.items())][-600:]
+    return [[day,close] for day,close in sorted(selected.items())
 
 def main():
     watch=load_watchlist()
