@@ -4362,8 +4362,22 @@
     },
     "AVGG": {
       "ticker": "AVGG",
-      "status": "stale",
+      "status": "fund",
       "history": [
+        {
+          "date": "2025-10-01",
+          "shares": 370000,
+          "form": "Fund report",
+          "source": "Official Leverage Shares factsheet",
+          "url": "https://leverageshares.com/us/documents/fact_sheets/Leverage-Shares-ETFs-Factsheet-AVGG.pdf"
+        },
+        {
+          "date": "2026-09-16",
+          "shares": 2165000,
+          "form": "Fund report",
+          "source": "Official Leverage Shares ETF trading details",
+          "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf"
+        },
         {
           "date": "2026-10-22",
           "shares": 2330000,
@@ -4372,7 +4386,7 @@
           "url": "https://stockanalysis.com/etf/avgg/"
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
+      "reason": "Official issuer history added; ongoing checks use corrected US issuer source",
       "type": "fund"
     },
     "FINV": {
