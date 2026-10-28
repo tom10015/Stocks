@@ -20,9 +20,13 @@ for ticker, update in incoming.get("companies",{}).items():
             update={**update,"history":old_history,"status":saved.get("status","ok")}
         elif saved.get("type")=="fund" and update.get("type")=="fund":
             merged={(h.get("date"),h.get("shares"),h.get("form")):h for h in old_history+new_history}
-            update={**update,"history":sorted(merged.values(),key=lambda h:(h.get("date") or "",h.get("checked_at") or ""))[-30:]}
+            update={**update,"history":sorted(merged.values(),key=lambda h:(h.get("date") or "",h.get("checked_at") or ""))}
         elif not new_filing and update.get("status") in ("error","unavailable","stale"):
             update={**update,"history":old_history}
+    # Keep every unique valid historical point, even when an incoming update is stale.
+    if saved.get("type")=="fund" and update.get("type")=="fund" and old_history and new_history:
+        merged={(h.get("date"),h.get("shares"),h.get("form")):h for h in old_history+new_history if h.get("date") and h.get("shares")}
+        update={**update,"history":sorted(merged.values(),key=lambda h:(h.get("date") or "",h.get("checked_at") or ""))}
     if saved.get("yoy_pct") is not None and update.get("yoy_pct") is None:
         update["yoy_pct"]=saved["yoy_pct"]
     companies[ticker]={**saved,**update}
