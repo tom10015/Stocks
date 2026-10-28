@@ -45,7 +45,7 @@ function drawSharesPanel(){
   const choose=i=>{const p=shown[i],position=h.findIndex(x=>x.date===p.date),prior=h[position-1],diff=prior?Number(p.shares)-Number(prior.shares):null,pct=prior&&prior.shares?100*diff/prior.shares:null;info.textContent=p.date+' · '+Number(p.shares).toLocaleString()+' shares'+(diff===null?' · First observation':' · '+(diff>=0?'+':'')+diff.toLocaleString()+' ('+(pct>=0?'+':'')+pct.toFixed(2)+'%)');};
   chart.querySelectorAll('.chartdot').forEach(el=>{el.addEventListener('click',()=>choose(+el.dataset.i));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(+el.dataset.i)}})});choose(shown.length-1);
  }
- document.getElementById('detailNote').textContent=shown.length+' dated share-count observations in this range. Share counts are reported periodically, not daily; missing years do not mean no change.';
+ document.getElementById('detailNote').textContent=shown.length+' observations in selected '+(sharedRange==='all'?'available history':sharedRange)+' window'+(shown.length?' ('+shown[0].date+' to '+shown.at(-1).date+')':'')+'. '+(h.length?'Full available share-count history starts '+h[0].date+'. ':'')+'Shares are reported periodically, not daily.';
  const table=document.getElementById('detailHistory');
  table.innerHTML=shown.length?'<table><thead><tr><th>Date</th><th>Shares outstanding</th><th>Change</th><th>Source</th></tr></thead><tbody>'+shown.slice().reverse().map(p=>{
  const i=h.findIndex(x=>x.date===p.date),prior=h[i-1],diff=prior?Number(p.shares)-Number(prior.shares):null,pct=prior&&prior.shares?100*diff/prior.shares:null;
@@ -56,6 +56,7 @@ function openStock(ticker){
  const d=data.find(x=>x.ticker===ticker);if(!d)return;
  activeStock=d;
  const h=historyPoints(d);
+ sharedRange=document.getElementById('chartRange').value;
  document.getElementById('detailTitle').textContent=ticker+' — Shares and Price';
  document.getElementById('detailSubtitle').textContent=(d.name||ticker)+' · '+h.length+' recorded share-count observation'+(h.length===1?'':'s');
  document.getElementById('detailStatus').textContent=d.type==='fund'?'ETF / fund':d.status==='ok'?'SEC filing history':'Issuer / other disclosures';
