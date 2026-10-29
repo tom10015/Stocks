@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-29T19:51:45.802870+00:00",
+  "updated_at": "2026-10-29T22:45:55.498428+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1901,7 +1901,7 @@
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 307902500,
@@ -1929,7 +1929,7 @@
           "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
+      "reason": "",
       "type": "fund",
       "source_updated_at": "2026-10-29"
     },
@@ -5947,6 +5947,15 @@
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/nvdy/"
+        },
+        {
+          "date": "2026-10-29",
+          "checked_at": "2026-10-29",
+          "shares": 113175000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/nvdy/",
+          "date_is_check_only": true
         }
       ],
       "reason": "",
@@ -5993,6 +6002,15 @@
           "date": "2026-10-28",
           "checked_at": "2026-10-28",
           "shares": 27352464,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
+          "date_is_check_only": true
+        },
+        {
+          "date": "2026-10-29",
+          "checked_at": "2026-10-29",
+          "shares": 27252464,
           "form": "Fund snapshot",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
@@ -9993,6 +10011,15 @@
           "date": "2026-10-28",
           "checked_at": "2026-10-28",
           "shares": 29529965,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/tsly/",
+          "date_is_check_only": true
+        },
+        {
+          "date": "2026-10-29",
+          "checked_at": "2026-10-29",
+          "shares": 29429965,
           "form": "Fund snapshot",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/tsly/",
