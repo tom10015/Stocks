@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-29T07:39:21.363321+00:00",
+  "updated_at": "2026-10-29T12:59:46.046704+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1883,6 +1883,15 @@
           "source": "Official fund issuer",
           "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-10-29",
+          "checked_at": "2026-10-29",
+          "shares": 365900000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
+          "date_is_check_only": true
         }
       ],
       "yoy_pct": null,
@@ -1892,7 +1901,7 @@
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "shares": 307902500,
@@ -1920,7 +1929,7 @@
           "date_is_check_only": true
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-10-29"
     },
@@ -7203,6 +7212,14 @@
           "form": "10-Q",
           "accession": "0000764180-26-000094",
           "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418026000094/"
+        },
+        {
+          "date": "2026-10-21",
+          "filed": "2026-10-29",
+          "shares": 1663436915,
+          "form": "10-Q",
+          "accession": "0000764180-26-000114",
+          "url": "https://www.sec.gov/Archives/edgar/data/764180/000076418026000114/"
         }
       ],
       "yoy_pct": null
@@ -7237,6 +7254,15 @@
           "date": "2026-10-27",
           "checked_at": "2026-10-28",
           "shares": 286100000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://neosfunds.com/qqqi/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-10-28",
+          "checked_at": "2026-10-29",
+          "shares": 286010000,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://neosfunds.com/qqqi/",
