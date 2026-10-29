@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-29T01:12:59.584696+00:00",
+  "checked_at": "2026-10-29T07:38:26.217078+00:00",
   "results": {
     "ASST": {
       "checked_at": "2026-10-28T16:44:24.494715+00:00",
@@ -87,6 +87,30 @@
     },
     "SCHD": {
       "checked_at": "2026-10-29T01:12:59.584696+00:00",
+      "points_added": 0,
+      "history_points": 1,
+      "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
+    },
+    "STRC": {
+      "checked_at": "2026-10-29T07:38:26.217078+00:00",
+      "points_added": 0,
+      "history_points": 1,
+      "note": "No SEC company CIK mapping; a fund or preferred-share source may be required."
+    },
+    "TSLW": {
+      "checked_at": "2026-10-29T07:38:26.217078+00:00",
+      "points_added": 0,
+      "history_points": 1,
+      "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
+    },
+    "UTF": {
+      "checked_at": "2026-10-29T07:38:26.217078+00:00",
+      "points_added": 0,
+      "history_points": 1,
+      "note": "Fund snapshot: Website returned a bot challenge; "
+    },
+    "XOVR": {
+      "checked_at": "2026-10-29T07:38:26.217078+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
