@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T22:35:22.562919+00:00",
+  "updated_at": "2026-10-29T01:13:22.715831+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -5933,7 +5933,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-28"
+      "source_updated_at": "2026-10-29"
     },
     "YMAX": {
       "ticker": "YMAX",
@@ -9941,7 +9941,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-28"
+      "source_updated_at": "2026-10-29"
     },
     "TSLY": {
       "ticker": "TSLY",
