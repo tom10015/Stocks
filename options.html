@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="description" content="ShareWatch options trade analyzer using the same active stock watchlist and admin portal.">
  <title>Options Analyzer · ShareWatch</title>
- <link rel="stylesheet" href="./options.css?v=20261030-chain1">
+ <link rel="stylesheet" href="./options.css?v=20261030-chain2">
 </head>
 <body>
 <header>
@@ -19,9 +19,9 @@
  </nav>
 </header>
 <main>
- <div class="eyebrow">New · Separate dashboard</div>
+ <div class="eyebrow">New · Separate dashboard · Private market data</div>
  <h1>Options Trade Analyzer</h1>
- <p class="intro muted">Analyze <strong>covered calls, cash-secured puts, long calls, and long puts</strong> for all your active stocks. The app retrieves delayed option-chain quotes automatically where available, then uses real bid/ask premiums. You can still enter quotes manually when a contract isn't available. No trades are placed and no return is guaranteed.</p>
+ <p class="intro muted">Analyze <strong>covered calls, cash-secured puts, long calls, and long puts</strong> for all your active stocks. Once you're signed in as an admin and have configured an authorized provider, the app retrieves option strikes, expirations, bid/ask premiums, and Greeks automatically. You can still enter quotes manually when a contract isn't available. No trades are placed and no return is guaranteed.</p>
  <section class="top-stats" aria-label="Watchlist overview">
   <div class="stat"><div class="label">Active tracked tickers</div><div class="value" id="statTickers">—</div><div class="mini">Managed by your existing admin</div></div>
   <div class="stat"><div class="label">Saved price quotes</div><div class="value" id="statPriced">—</div><div class="mini">End-of-day closes, not live quotes</div></div>
@@ -106,6 +106,7 @@
    <label for="scanStrategy">Strategy <select id="scanStrategy"><option value="put">Cash-secured puts</option><option value="call">Covered calls</option><option value="long_call">Buy calls</option><option value="long_put">Buy puts</option></select></label>
    <label for="scanDte">Expiration window <select id="scanDte"><option value="14">Next 14 days</option><option value="30" selected>Next 30 days</option><option value="60">Next 60 days</option><option value="120">Next 120 days</option></select></label>
    <label for="scanLiquidity">Min. open interest <select id="scanLiquidity"><option value="0">Any / unknown</option><option value="10" selected>At least 10</option><option value="100">At least 100</option></select></label>
+   <button type="button" class="ghost" id="scanLoadAll">Load private quotes for all active tickers</button>
   </div>
   <div class="table-scroll"><table class="trade-table"><thead><tr><th>Ticker</th><th>Expires</th><th>Strike</th><th>Bid</th><th>Ask</th><th>Delta</th><th>Open interest</th><th>Approx. premium/notional</th><th>Analyze</th></tr></thead><tbody id="scanRows"><tr><td colspan="9" class="muted">Loading market data…</td></tr></tbody></table></div>
   <p class="footnote">Rows require non-stale options data; select a row to load the exact contract into the analyzer. For buying, cost uses the ask; for selling, premium uses the bid. Premium/notional is not a probability of profit, and a negative result is possible even for high-probability options.</p>
@@ -118,6 +119,6 @@
  <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Option-chain quotes, when available, are delayed snapshots rather than live executable offers; do not assume fills at displayed bid/ask. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability, premium yield, nor a positive assumed expected value guarantees profitability.</footer>
 </main>
-<script src="./options.js?v=20261030-chain1" defer></script><script src="./option-chain-ui.js?v=20261030-chain1" defer></script>
+<script src="./options.js?v=20261030-chain2" defer></script><script src="./option-chain-ui.js?v=20261030-chain2" defer></script>
 </body>
 </html>
