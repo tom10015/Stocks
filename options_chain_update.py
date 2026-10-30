@@ -1,11 +1,9 @@
 """Import delayed option-chain quotes for the ACTIVE ShareWatch watchlist.
 
-Primary source: Cboe public delayed-options JSON. Standard OCC contracts only.
-Quotes are NOT executable, might be delayed/stale, and are never fabricated.
-The presence of a public endpoint is not a guarantee of continued availability.
-
-Optional: provide TRADIER_ACCESS_TOKEN as a GitHub Actions secret to use the
-official Tradier option chain as a fallback when Cboe is unavailable.
+Authorized source: the official Tradier options API, requiring a user-provided
+TRADIER_ACCESS_TOKEN and appropriate market-data permissions. Standard OCC
+contracts only. No third-party public quote-table auto-extraction is performed.
+Quotes are not executable and may be delayed. Never invent values.
 """
 import argparse
 import datetime as dt
@@ -76,36 +74,6 @@ def parse_occ(symbol,expected):
     if not 0<strike_price<1000000:return None
     return (expiry.isoformat(),"call" if side=="C" else "put",round(strike_price,3))
 
-def cboe(symbol):
-    url=f"https://cdn.cboe.com/api/global/delayed_quotes/options/{urllib.parse.quote(symbol,safe='.-')}.json"
-    payload=request_json(url)
-    data=payload.get("data")
-    if not isinstance(data,dict) or not isinstance(data.get("options"),list):
-        raise ValueError("Cboe response contains no options list")
-    result=[]
-    for raw in data["options"]:
-        if not isinstance(raw,dict):continue
-        occ_symbol=raw.get("option","")
-        info=parse_occ(occ_symbol,symbol)
-        if not info:continue # exclude adjusted/nonstandard option roots
-        expiry,side,strike=info
-        bid=n(raw.get("bid"),0,100000)
-        ask=n(raw.get("ask"),0,100000)
-        if bid is None and ask is None:continue
-        if bid is not None and ask is not None and ask>0 and bid>ask:
-            continue # bad/crossed quote, no artificial valid price
-        result.append({
-            "symbol":str(occ_symbol).strip(),"expiration":expiry,
-            "type":side,"strike":strike,"bid":bid,"ask":ask,
-            "last":n(raw.get("last_trade_price"),0,100000),
-            "delta":n(raw.get("delta"),-1,1),
-            "iv":n(raw.get("iv"),0,1000),
-            "volume":count(raw.get("volume")),
-            "open_interest":count(raw.get("open_interest"))
-        })
-    spot=n(data.get("current_price"),0.0001,1000000)
-    return result,{"provider":"Cboe delayed options","url":url,"delay":"At least 15 minutes during trading hours; may be older or stale","underlying_price":spot}
-
 def extract_tradier_dates(payload):
     entries=payload.get("expirations",{}).get("date")
     if isinstance(entries,str):return [entries]
@@ -150,7 +118,7 @@ def tradier(symbol):
                 "delta":n(greeks.get("delta"),-1,1),"iv":n(greeks.get("mid_iv"),0,1000),
                 "volume":count(raw.get("volume")),"open_interest":count(raw.get("open_interest"))})
         time.sleep(.3)
-    return result,{"provider":"Tradier option chain","url":"https://tradier.com/markets/options","delay":"Depends on account entitlements; snapshots are not live","underlying_price":None}
+    return result,{"provider":"Tradier option chain","url":"https://docs.tradier.com/market-data/get-options-chains","delay":"Depends on the account plan and feed; verify at broker","underlying_price":None}
 
 def reduce_contracts(contracts,spot):
     """Bound stored size; retain 10 nearest expirations, 30 strikes each side."""
@@ -179,16 +147,22 @@ def main():
         active=[s for s in active if s in requested]
     else:active=active[:max(0,args.limit)]
     previous=json.loads(DEST.read_text()) if DEST.exists() else {"chains":{}}
-    entries=previous.get("chains",{})
+    # Never reuse earlier public quote-table data.
+    entries={k:v for k,v in previous.get("chains",{}).items() if isinstance(v,dict) and v.get("provider")=="Tradier option chain"}
     if not isinstance(entries,dict):entries={}
+    if not os.getenv("TRADIER_ACCESS_TOKEN","").strip():
+        print("Tradier market-data token is not configured; no automated quote requests were made.",flush=True)
+        DEST.parent.mkdir(exist_ok=True)
+        if not DEST.exists() or entries!=previous.get("chains",{}):
+            DEST.write_text(json.dumps({"generated_at":NOW.isoformat(),"chains":entries},separators=(",",":"))+"\n")
+        return
     refreshed=0
     for symbol in active:
         existing=entries.get(symbol,{})
         errors=[]
         result=None
-        # No user credentials required for the primary, delayed Cboe feed.
-        for fn in (cboe,tradier):
-            if fn is tradier and not os.getenv("TRADIER_ACCESS_TOKEN"):continue
+        # Only request option quotes with an authorized provider token.
+        for fn in (tradier,):
             try:
                 rows,source=fn(symbol)
                 if not rows:raise ValueError("No standard OCC contracts or usable bid/ask quotes")
