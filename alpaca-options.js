@@ -85,7 +85,7 @@ async function alpacaLoad(force=false){
  }catch(error){
   if(id!==alpacaRequestId||selected?.ticker!==ticker)return;
   alpacaCurrent=null;alpacaStatus(error.message);
-  alpacaEmpty('Alpaca data unavailable. You can still enter option premiums manually.');
+  alpacaEmpty('Alpaca request failed: '+error.message+' You can still enter premiums manually.');
  }
 }
 function alpacaSelect(symbol){
