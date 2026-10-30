@@ -39,12 +39,6 @@ def request_json(url,extra_headers=None):
     if not isinstance(payload,dict):raise ValueError("Invalid option data response")
     return payload
 
-def watchlist():
-    # Deliberately no fallback to the old tickers.json: that could re-import
-    # securities hidden/deleted through the admin portal.
-    rows=request_json(WATCHLIST_URL,{"apikey":PUBLISHABLE_KEY})
-    return [] # replaced below for the list-shaped Supabase response
-
 def active_symbols():
     req=urllib.request.Request(WATCHLIST_URL,headers={"apikey":PUBLISHABLE_KEY,"Accept":"application/json","User-Agent":AGENT})
     with urllib.request.urlopen(req,timeout=24) as response:
