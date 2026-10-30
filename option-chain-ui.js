@@ -4,8 +4,9 @@
 */
 'use strict';
 let selectedOptionQuote=null;
-let optionChainPromise=null;
-let optionChainsFile=null;
+const optionRequests=new Map();
+const optionCachedAt=new Map();
+let optionChainsFile={generated_at:null,chains:{}};
 let currentChainTicker=null;
 let currentChain=null;
 let pendingScannerContract=null;
@@ -33,27 +34,43 @@ function resetSelectedQuote(){
  selectedOptionQuote=null;
  if($('selectedContract'))$('selectedContract').textContent='No current automatic contract selected. You can still enter a premium manually.';
 }
-async function readChainFeed(){
- if(optionChainsFile)return optionChainsFile;
- if(!optionChainPromise){
-  const candidates=['./data/options_chains.json?t='+Date.now(),
-                    'https://raw.githubusercontent.com/tom10015/Stocks/main/data/options_chains.json?t='+Date.now()];
-  optionChainPromise=(async()=>{
-   let error;
-   for(const url of candidates){
-    try{
-     const r=await fetch(url,{cache:'no-store'});
-     if(!r.ok)throw Error('HTTP '+r.status);
-     const d=await r.json();
-     if(!d||typeof d.chains!=='object')throw Error('Invalid options cache format');
-     optionChainsFile=d;
-     return d;
-    }catch(ex){error=ex;}
-   }
-   throw Error('No saved option-chain data yet: '+(error?.message||'market data not available'));
-  })().catch(error=>{optionChainPromise=null;throw error;});
- }
- return optionChainPromise;
+async function currentAdminToken(){
+ const saved=sessionStorage.getItem('sharewatch-admin-session');
+ if(!saved)throw Error('Sign in through the existing ShareWatch Admin Portal to access private option-chain data.');
+ let session;
+ try{session=JSON.parse(saved);}catch{throw Error('Your admin login could not be read. Please sign in again.');}
+ if(typeof session.access_token!=='string'||!session.access_token)throw Error('Sign in through the Admin Portal first.');
+ if(Date.now()<(Number(session.expires_at)||0)*1000-60000)return session.access_token;
+ if(!session.refresh_token)throw Error('Admin session has expired; sign in again.');
+ const response=await fetch('https://fmtfskcgnlxusipaxdog.supabase.co/auth/v1/token?grant_type=refresh_token',{
+  method:'POST',headers:{'apikey':API_KEY,'Content-Type':'application/json'},
+  body:JSON.stringify({refresh_token:session.refresh_token})});
+ if(!response.ok)throw Error('Admin login has expired; return to the Admin Portal and sign in again.');
+ session=await response.json();
+ sessionStorage.setItem('sharewatch-admin-session',JSON.stringify(session));
+ return session.access_token;
+}
+async function readChainFeed(ticker){
+ if(optionChainsFile.chains?.[ticker]&&Date.now()-(optionCachedAt.get(ticker)||0)<10*60*1000)
+  return optionChainsFile;
+ if(optionRequests.has(ticker))return optionRequests.get(ticker);
+ const operation=(async()=>{
+  const token=await currentAdminToken();
+  const endpoint='https://fmtfskcgnlxusipaxdog.supabase.co/functions/v1/sharewatch-options?ticker='+encodeURIComponent(ticker);
+  const response=await fetch(endpoint,{cache:'no-store',headers:{
+   'apikey':API_KEY,'Authorization':'Bearer '+token,'Accept':'application/json'}});
+  const data=await response.json().catch(()=>({error:'Invalid response from private options API'}));
+  if(!response.ok){
+   if(data.status==='setup_required')throw Error('Market data provider not connected: add a Tradier API token in Supabase Edge Function Secrets.');
+   throw Error(data.error||'Private option-data service returned HTTP '+response.status);
+  }
+  if(!data||typeof data!=='object')throw Error('Invalid private options response');
+  optionChainsFile.chains[ticker]=data;
+  optionCachedAt.set(ticker,Date.now());
+  return optionChainsFile;
+ })().finally(()=>optionRequests.delete(ticker));
+ optionRequests.set(ticker,operation);
+ return operation;
 }
 function optionSide(strategy){
  return strategy==='put'||strategy==='long_put'?'put':'call';
@@ -79,7 +96,7 @@ function loadOptionChain(ticker){
  showChainEmpty('Checking saved delayed option quotes…');
  chainMessage('Loading listed option contracts…');
  statusBadge('Loading',false);
- readChainFeed().then(data=>{
+ readChainFeed(ticker).then(data=>{
   if(currentChainTicker!==ticker)return;
   const item=data.chains?.[ticker];
   if(!item||!Array.isArray(item.contracts)||!item.contracts.length){
@@ -121,7 +138,8 @@ function loadOptionChain(ticker){
   if(currentChainTicker!==ticker)return;
   statusBadge('Manual only',false);
   chainMessage('Automatic option data could not load. '+error.message);
-  showChainEmpty('No delayed option-chain file is available yet. Use your own option quotes below.');
+  showChainEmpty('Private option quotes require an admin login and an authorized provider token. Use the manual form, or sign in through the Admin Portal.');
+  if($('scanStatus'))$('scanStatus').textContent='Private option quotes unavailable: '+error.message;
  });
 }
 function renderOptionChain(){
