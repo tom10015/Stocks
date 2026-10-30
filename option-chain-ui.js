@@ -312,3 +312,32 @@ $('scanRows').addEventListener('click',e=>{
  selectStock(ticker);
  window.scrollTo({top:0,behavior:'smooth'});
 });
+
+$('scanLoadAll').addEventListener('click',async()=>{
+ const button=$('scanLoadAll');
+ button.disabled=true;
+ let ok=0,fail=0;
+ let haltedReason='';
+ try{
+  for(let i=0;i<activeStocks.length;i++){
+   const ticker=activeStocks[i].ticker;
+   $('scanStatus').textContent='Loading private authorized options data: '+(i+1)+' / '+activeStocks.length+' ('+ticker+') · '+ok+' available, '+fail+' unavailable.';
+   try{
+    const snapshot=await readChainFeed(ticker);
+    const chain=snapshot.chains?.[ticker];
+    if(chain?.status==='ok'&&chain.contracts?.length)ok++;else fail++;
+    renderScanner();
+   }catch(err){
+    fail++;
+    if(/admin|sign in|provider not connected|market data provider|session|403|401/i.test(err.message)){
+     haltedReason=err.message;break;
+    }
+   }
+   // Avoid excessive API usage while inspecting all monitored companies.
+   if(i+1<activeStocks.length)await new Promise(resolve=>setTimeout(resolve,4500));
+  }
+  renderScanner();
+  $('scanStatus').textContent=haltedReason?('Options scan stopped: '+haltedReason):
+   ('Fetched '+ok+' private option chains; '+fail+' tickers lacked available quotes. Results are cached in this browser session.');
+ }finally{button.disabled=false;}
+});
