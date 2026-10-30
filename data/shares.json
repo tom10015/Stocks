@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T11:35:50.826820+00:00",
+  "updated_at": "2026-10-30T12:54:02.591937+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1588,6 +1588,14 @@
           "form": "10-Q",
           "accession": "0000050863-26-000157",
           "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000157/"
+        },
+        {
+          "date": "2026-10-23",
+          "filed": "2026-10-30",
+          "shares": 5315000000,
+          "form": "10-Q",
+          "accession": "0000050863-26-000191",
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000191/"
         }
       ],
       "yoy_pct": null
@@ -1888,6 +1896,15 @@
           "date": "2026-10-29",
           "checked_at": "2026-10-29",
           "shares": 365900000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
+          "date_is_check_only": true
+        },
+        {
+          "date": "2026-10-30",
+          "checked_at": "2026-10-30",
+          "shares": 365100000,
           "form": "Fund snapshot",
           "source": "Official fund issuer",
           "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
@@ -4418,6 +4435,15 @@
           "date": "2026-10-28",
           "checked_at": "2026-10-28",
           "shares": 2405000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-10-30",
+          "checked_at": "2026-10-30",
+          "shares": 2640000,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
@@ -12400,6 +12426,14 @@
           "form": "10-Q",
           "accession": "0001018724-26-000026",
           "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/"
+        },
+        {
+          "date": "2026-10-21",
+          "filed": "2026-10-30",
+          "shares": 10813138306,
+          "form": "10-Q",
+          "accession": "0001018724-26-000040",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/"
         }
       ],
       "yoy_pct": null
