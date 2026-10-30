@@ -26,7 +26,7 @@ function massiveBlank(message){
 }
 async function massiveToken(){
  const raw=sessionStorage.getItem('sharewatch-admin-session');
- if(!raw)throw Error('Sign in through the existing Admin Portal to use private Massive market data. The free theoretical calculator still works without signing in.');
+ if(!raw)throw Error('Sign in through the existing Admin Portal, then open Options Analyzer in the same tab to test Massive. The free theoretical calculator still works without signing in.');
  let session;
  try{session=JSON.parse(raw);}catch{throw Error('Admin login not readable; sign in again using the existing Admin Portal.');}
  if(typeof session.access_token!=='string'||session.access_token.length<30)
@@ -123,8 +123,8 @@ async function massiveLoad(force=false){
  const cache=massiveContractCache.get(cacheKey);
  if(!force&&cache&&Date.now()-cache.at<massivePanelExpiry){
   massiveCurrent=cache.value;
-  massiveBadge('Listed contracts',true);
-  massiveStatus('Massive reference • '+massiveCurrent.contracts.length+' actual listed '+side+' contracts'+(massiveCurrent.partial?' (first page only)':'')+'. Historical option closes require a separate request.',true);
+  massiveBadge('Connected',true);
+  massiveStatus('Massive API connected (cached results) • '+massiveCurrent.contracts.length+' actual listed '+side+' contracts'+(massiveCurrent.partial?' (first page only)':'')+'. Historical option closes require a separate request.',true);
   massiveRender();return;
  }
  try{
@@ -132,8 +132,8 @@ async function massiveLoad(force=false){
   if(reqId!==massiveSequence||selected?.ticker!==ticker)return;
   massiveCurrent=data;
   massiveContractCache.set(cacheKey,{at:Date.now(),value:data});
-  massiveBadge(data.contracts?.length?'Listed contracts':'No listings',Boolean(data.contracts?.length));
-  massiveStatus('Massive reference • '+(data.contracts?.length||0)+' actual listed '+side+' contracts.'+
+  massiveBadge('Connected',true);
+  massiveStatus('Massive API connection successful • '+(data.contracts?.length||0)+' actual listed '+side+' contracts.'+
    (data.partial?' First page only; not every strike/expiration is shown.':'')+
    ' Real market bid/ask is not included in the free plan.',Boolean(data.contracts?.length));
   massiveRender();
