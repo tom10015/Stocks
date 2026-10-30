@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="description" content="ShareWatch options trade analyzer using the same active stock watchlist and admin portal.">
  <title>Options Analyzer · ShareWatch</title>
- <link rel="stylesheet" href="./options.css?v=20261030-massive1">
+ <link rel="stylesheet" href="./options.css?v=20261030-alpaca-only1">
 </head>
 <body>
 <header>
@@ -19,9 +19,9 @@
  </nav>
 </header>
 <main>
- <div class="eyebrow">Separate dashboard · Massive data + free models</div>
+ <div class="eyebrow">Separate dashboard · Alpaca data + free models</div>
  <h1>Options Trade Analyzer</h1>
- <p class="intro muted">Analyze <strong>covered calls, cash-secured puts, long calls, and long puts</strong> for all your active stocks. Use <strong>Alpaca</strong> for indicative option-chain quotes and Greeks, and keep your <strong>Massive</strong> integration for listed contracts and previous-session closing prices. The free Black–Scholes estimator remains available for all stocks. <strong>Historical option closes are not live bid/ask quotes</strong>, and no orders are placed. No trades are placed and no return is guaranteed.</p>
+ <p class="intro muted">Analyze <strong>covered calls, cash-secured puts, long calls, and long puts</strong> for all your active stocks. Use <strong>Alpaca</strong> for indicative option-chain quotes and Greeks. The free Black–Scholes estimator remains available for all stocks. <strong>Historical option closes are not live bid/ask quotes</strong>, and no orders are placed. No trades are placed and no return is guaranteed.</p>
  <section class="top-stats" aria-label="Watchlist overview">
   <div class="stat"><div class="label">Active tracked tickers</div><div class="value" id="statTickers">—</div><div class="mini">Managed by your existing admin</div></div>
   <div class="stat"><div class="label">Saved price quotes</div><div class="value" id="statPriced">—</div><div class="mini">End-of-day closes, not live quotes</div></div>
@@ -51,32 +51,6 @@
  <div class="table-scroll"><table class="chain-table"><thead><tr><th>Expires</th><th>Strike</th><th>Bid (indic.)</th><th>Ask (indic.)</th><th>Delta</th><th>IV</th><th>Quote time</th><th>Analyze</th></tr></thead><tbody id="alpacaRows"><tr><td colspan="8" class="muted">Select a ticker to load indicative option prices.</td></tr></tbody></table></div>
  <div id="alpacaSelection" class="small muted" aria-live="polite" style="margin-top:10px">Selling uses modified indicative bid; buying uses modified indicative ask, not an executable premium.</div>
  </section>
-<section class="auto-chain-box" aria-labelledby="massiveHeading" id="massivePanel">
- <div class="panel-head">
-  <div>
-   <div class="eyebrow">Massive · verified listed options</div>
-   <h3 id="massiveHeading">Actual contracts &amp; previous-day closing prices</h3>
-   <div class="section-sub" id="massiveStatus" role="status" aria-live="polite">Checking Massive connection…</div>
-  </div>
-  <span id="massiveBadge" class="badge">Checking…</span>
- </div>
- <p class="small muted">Massive's free options reference data confirms which <strong>strikes and expiration dates are listed</strong>. Selecting a contract retrieves its <strong>previous-session closing price</strong> if a trade occurred. The close is <strong>not</strong> a live bid or ask and may differ from what you can trade at.</p>
- <div class="chain-toolbar">
-  <label for="massiveDays">Expiration horizon
-   <select id="massiveDays"><option value="14">Next 14 days</option><option value="30" selected>Next 30 days</option><option value="60">Next 60 days</option><option value="120">Next 120 days</option></select>
-  </label>
-  <button type="button" id="massiveRefresh" class="ghost">Test Massive &amp; load contracts</button>
- </div>
- <div class="table-scroll">
-  <table class="chain-table"><thead><tr><th>Expiration</th><th>Strike</th><th>Type</th><th>Model estimate</th><th>Last market close</th><th>Contract</th><th>Action</th></tr></thead>
-   <tbody id="massiveRows"><tr><td colspan="7" class="muted">Checking your Massive connection…</td></tr></tbody>
-  </table>
- </div>
- <div id="massiveSelection" class="small muted" aria-live="polite" style="margin-top:10px">No Massive option close loaded yet.</div>
- <details style="margin-top:13px"><summary>Connect your existing Massive account (one-time setup)</summary>
-  <p>The Massive connection you use in ChatGPT cannot automatically be transferred to GitHub Pages. Open your <a href="https://massive.com/dashboard" target="_blank" rel="noopener noreferrer">Massive dashboard</a> to find its API key. In <a href="https://supabase.com/dashboard/project/fmtfskcgnlxusipaxdog" target="_blank" rel="noopener noreferrer">your existing Supabase project</a>, open <strong>Edge Function Secrets</strong> and add a secret named <code>MASSIVE_API_KEY</code> containing that key. Do not paste the key into this website, this chat, or a public GitHub file. Your existing ShareWatch admin login still controls access; to share the current sign-in session, open the Options Analyzer from the admin portal in the same browser tab. The free plan has a limited request rate and does not include live options bid/ask snapshots.</p>
- </details>
-</section>
 <div class="auto-chain-box" aria-labelledby="autoChainHeading">
       <div class="panel-head"><div><div class="eyebrow">Free automatic estimates · no account needed</div><h3 id="autoChainHeading">Theoretical options calculator</h3><div class="section-sub" id="autoQuoteStatus">Calculating examples from the stock's saved price history…</div></div><span id="autoChainFreshness" class="badge">Model only</span></div>
       <p class="small muted">These are <strong>Black–Scholes estimates, not real bid/ask quotes or verified listed contracts</strong>. They use realized stock-price volatility, not market-implied volatility. Real prices, spreads, dividend effects, and available strikes may differ substantially.</p>
@@ -155,6 +129,6 @@
  <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Theoretical option premiums are not tradable quotes. Use a broker to verify actual listed contracts, market bid/ask, liquidity and current expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability, premium yield, nor a positive assumed expected value guarantees profitability.</footer>
 </main>
-<script src="./options.js?v=20261030-alpaca1" defer></script><script src="./option-chain-ui.js?v=20261030-massive1" defer></script><script src="./massive-options.js?v=20261030-massive2" defer></script><script src="./alpaca-options.js?v=20261030-alpaca1" defer></script>
+<script src="./options.js?v=20261030-alpaca1" defer></script><script src="./option-chain-ui.js?v=20261030-alpaca-only1" defer></script><script src="./alpaca-options.js?v=20261030-alpaca1" defer></script>
 </body>
 </html>
