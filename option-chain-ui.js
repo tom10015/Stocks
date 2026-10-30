@@ -193,6 +193,7 @@ function selectSampleContract(){
 }
 function loadOptionChain(ticker){
  modelCurrentTicker=ticker;
+ $('realChainLink').href='https://finance.yahoo.com/quote/'+encodeURIComponent(ticker.replace('.','-'))+'/options/';
  resetSelectedQuote();
  const expiries=hypotheticalFridays();
  $('autoExpiration').innerHTML=expiries.map(day=>'<option value="'+day+'">'+day+' ('+daysRemaining(day)+' days; hypothetical)</option>').join('');
@@ -283,4 +284,4 @@ for(const id of ['strike','premium','dte','delta','spotOverride','contracts','fe
   resetMetrics();
  });
 }
-$('clearTrade').addEventListener('click',resetSelectedQuote);
+$('clearTrade').addEventListener('click',()=>{resetSelectedQuote();renderOptionChain();});
