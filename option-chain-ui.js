@@ -1,343 +1,286 @@
-/* ShareWatch automatic option contracts.
-   No API tokens in browser: uses Github Actions generated delayed quote cache.
-   Calls/puts sold at BID; calls/puts purchased at ASK. Never invent a quote.
-*/
+/* Free theoretical options simulator for ShareWatch.
+ * NO brokerage API, NO account registration, NO option-chain scraping.
+ * Every premium/strike/date is HYPOTHETICAL, not a listed contract or quote.
+ * Black-Scholes European approximation, using historical stock-close volatility.
+ */
 'use strict';
 let selectedOptionQuote=null;
-const optionRequests=new Map();
-const optionCachedAt=new Map();
-let optionChainsFile={generated_at:null,chains:{}};
-let currentChainTicker=null;
-let currentChain=null;
-let pendingScannerContract=null;
-const CHAIN_MAX_AGE_HOURS=96;
-const msDay=86400000;
+let modelCurrentTicker=null;
+const MODEL_DAY=86400000;
+const MODEL_EPS=1e-10;
+
 function daysRemaining(iso){
- const a=new Date().toISOString().slice(0,10);
- return Math.round((Date.parse(iso+'T00:00:00Z')-Date.parse(a+'T00:00:00Z'))/msDay);
+ const today=new Date().toISOString().slice(0,10);
+ return Math.round((Date.parse(iso+'T00:00:00Z')-Date.parse(today+'T00:00:00Z'))/MODEL_DAY);
 }
-function quoteFresh(entry){
- if(!entry||entry.status!=='ok'||!entry.retrieved_at)return false;
- const age=(Date.now()-Date.parse(entry.retrieved_at))/(60*60*1000);
- return Number.isFinite(age)&&age>=-1&&age<=CHAIN_MAX_AGE_HOURS;
+function modelKind(strategy){return strategy==='put'||strategy==='long_put'?'put':'call';}
+function modelBuying(strategy){return strategy==='long_put'||strategy==='long_call';}
+function normalCDF(z){
+ // Abramowitz-Stegun 7.1.26; maximum absolute error about 7.5e-8.
+ const x=Math.abs(z);
+ const t=1/(1+.2316419*x);
+ const poly=t*(.319381530+t*(-.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));
+ const v=1-Math.exp(-.5*x*x)/Math.sqrt(2*Math.PI)*poly;
+ return z>=0?v:1-v;
 }
-function chainMessage(message,good=false){
+function blackScholes(spot,strike,dte,vol,rate,dividend,type){
+ if(![spot,strike,dte,vol,rate,dividend].every(Number.isFinite)||
+  spot<=0||strike<=0||dte<=0||vol<=0)return null;
+ const T=dte/365,root=vol*Math.sqrt(T);
+ const d1=(Math.log(spot/strike)+(rate-dividend+vol*vol/2)*T)/root;
+ const d2=d1-root;
+ const discountShare=spot*Math.exp(-dividend*T),discountStrike=strike*Math.exp(-rate*T);
+ const call=discountShare*normalCDF(d1)-discountStrike*normalCDF(d2);
+ const put=discountStrike*normalCDF(-d2)-discountShare*normalCDF(-d1);
+ const delta=type==='call'?Math.exp(-dividend*T)*normalCDF(d1):
+   -Math.exp(-dividend*T)*normalCDF(-d1);
+ return {price:Math.max(0,type==='call'?call:put),delta};
+}
+function cleanHistory(stock){
+ const raw=(stock?.priceHistory||[]).filter(p=>Array.isArray(p)&&
+   /^\d{4}-\d{2}-\d{2}$/.test(p[0]||'')&&Number.isFinite(Number(p[1]))&&Number(p[1])>0)
+   .sort((a,b)=>a[0].localeCompare(b[0]));
+ const unique=new Map(raw.map(p=>[p[0],Number(p[1])]));
+ return [...unique].map(([date,close])=>({date,close,t:Date.parse(date+'T00:00:00Z')}));
+}
+function historicalVol(stock,windowDays=90){
+ const list=cleanHistory(stock);
+ if(list.length<14)return null;
+ const latest=list.at(-1);
+ const recent=list.filter(p=>p.t>=latest.t-windowDays*MODEL_DAY);
+ if(recent.length<13)return null;
+ const returns=[];
+ for(let i=1;i<recent.length;i++){
+  const gap=(recent[i].t-recent[i-1].t)/MODEL_DAY;
+  if(gap>=1&&gap<=4)returns.push(Math.log(recent[i].close/recent[i-1].close));
+ }
+ let periods=252,rs=returns;
+ if(rs.length<12){
+  rs=[];
+  for(let i=1;i<recent.length;i++){
+   const gap=(recent[i].t-recent[i-1].t)/MODEL_DAY;
+   if(gap>=4&&gap<=9)rs.push(Math.log(recent[i].close/recent[i-1].close));
+  }
+  periods=52;
+ }
+ if(rs.length<12)return null;
+ const mean=rs.reduce((x,y)=>x+y,0)/rs.length;
+ const variance=rs.reduce((x,y)=>x+(y-mean)**2,0)/(rs.length-1);
+ const volatility=Math.sqrt(variance*periods);
+ if(!Number.isFinite(volatility)||volatility<=0)return null;
+ return {sigma:volatility,periods,observations:rs.length,start:recent[0].date,
+   end:latest.date,windowDays,warning:volatility>2.5?'Extremely high observed volatility; estimates may be very unreliable.':''};
+}
+function modelAssumptions(){
+ const r=Number($('modelRiskFreeRate').value),q=Number($('modelDividendYield').value);
+ const windowDays=Number($('modelVolWindow').value);
+ if(!Number.isFinite(r)||r< -5||r>30||!Number.isFinite(q)||q<0||q>100)throw Error('Interest must be between −5% and 30%; dividend yield between 0% and 100%.');
+ if(![30,90,180].includes(windowDays))throw Error('Unsupported price-history range');
+ return {rate:r/100,dividend:q/100,windowDays};
+}
+function hypotheticalFridays(){
+ const today=new Date(),utc=new Date(Date.UTC(today.getUTCFullYear(),today.getUTCMonth(),today.getUTCDate()));
+ const daysUntilFriday=(5-utc.getUTCDay()+7)%7;
+ const offset=daysUntilFriday<2?daysUntilFriday+7:daysUntilFriday;
+ const result=[];
+ for(let i=0;i<19;i++){
+  const d=new Date(utc.getTime()+(offset+i*7)*MODEL_DAY);
+  result.push(d.toISOString().slice(0,10));
+ }
+ return result;
+}
+function syntheticStrikes(spot){
+ const step=spot<5?.5:spot<20?1:spot<50?2.5:spot<100?5:spot<200?10:spot<500?20:50;
+ const middle=Math.max(1,Math.round(spot/step));
+ const result=[];
+ for(let i=-20;i<=20;i++){
+  const strike=(middle+i)*step;
+  if(strike>0&&strike>spot*.4&&strike<spot*1.8)result.push(Number(strike.toFixed(3)));
+ }
+ return result;
+}
+function modelContracts(stock,expiry,type,assumptions=modelAssumptions()){
+ if(!stock||!(stock.price>0))return [];
+ const vol=historicalVol(stock,assumptions.windowDays);
+ const DTE=daysRemaining(expiry);
+ if(!vol||DTE<1)return [];
+ return syntheticStrikes(stock.price).map(strike=>{
+  const estimated=blackScholes(stock.price,strike,DTE,vol.sigma,assumptions.rate,assumptions.dividend,type);
+  return {...estimated,type,strike,expiration:expiry,days:DTE,spot:stock.price,volatility:vol.sigma,
+    observations:vol.observations,model:true,
+    symbol:'MODEL:'+stock.ticker+':'+expiry+':'+type+':'+strike.toFixed(3)};
+ }).filter(row=>Number.isFinite(row.price)&&row.price>MODEL_EPS);
+}
+function formatEstimate(amount){return amount>=.01?dollars(amount):'$'+amount.toFixed(4);}
+function modelError(message){
  $('autoQuoteStatus').textContent=message;
- $('autoQuoteStatus').className='section-sub '+(good?'status-good':'muted');
-}
-function statusBadge(message,available){
- const el=$('autoChainFreshness');
- el.textContent=message;
- el.className='badge '+(available?'feed-ok':'feed-old');
+ $('autoChainRows').innerHTML='<tr><td colspan="6" class="muted">'+esc(message)+'</td></tr>';
+ $('autoChainFreshness').textContent='Model unavailable';
+ $('autoChainFreshness').className='badge feed-old';
 }
 function resetSelectedQuote(){
  selectedOptionQuote=null;
- if($('selectedContract'))$('selectedContract').textContent='No current automatic contract selected. You can still enter a premium manually.';
-}
-async function currentAdminToken(){
- const saved=sessionStorage.getItem('sharewatch-admin-session');
- if(!saved)throw Error('Sign in through the existing ShareWatch Admin Portal to access private option-chain data.');
- let session;
- try{session=JSON.parse(saved);}catch{throw Error('Your admin login could not be read. Please sign in again.');}
- if(typeof session.access_token!=='string'||!session.access_token)throw Error('Sign in through the Admin Portal first.');
- if(Date.now()<(Number(session.expires_at)||0)*1000-60000)return session.access_token;
- if(!session.refresh_token)throw Error('Admin session has expired; sign in again.');
- const response=await fetch('https://fmtfskcgnlxusipaxdog.supabase.co/auth/v1/token?grant_type=refresh_token',{
-  method:'POST',headers:{'apikey':API_KEY,'Content-Type':'application/json'},
-  body:JSON.stringify({refresh_token:session.refresh_token})});
- if(!response.ok)throw Error('Admin login has expired; return to the Admin Portal and sign in again.');
- session=await response.json();
- sessionStorage.setItem('sharewatch-admin-session',JSON.stringify(session));
- return session.access_token;
-}
-async function readChainFeed(ticker){
- if(optionChainsFile.chains?.[ticker]&&Date.now()-(optionCachedAt.get(ticker)||0)<10*60*1000)
-  return optionChainsFile;
- if(optionRequests.has(ticker))return optionRequests.get(ticker);
- const operation=(async()=>{
-  const token=await currentAdminToken();
-  const endpoint='https://fmtfskcgnlxusipaxdog.supabase.co/functions/v1/sharewatch-options?ticker='+encodeURIComponent(ticker);
-  const response=await fetch(endpoint,{cache:'no-store',headers:{
-   'apikey':API_KEY,'Authorization':'Bearer '+token,'Accept':'application/json'}});
-  const data=await response.json().catch(()=>({error:'Invalid response from private options API'}));
-  if(!response.ok){
-   if(data.status==='setup_required')throw Error('Market data provider not connected: add a Tradier API token in Supabase Edge Function Secrets.');
-   throw Error(data.error||'Private option-data service returned HTTP '+response.status);
-  }
-  if(!data||typeof data!=='object')throw Error('Invalid private options response');
-  optionChainsFile.chains[ticker]=data;
-  optionCachedAt.set(ticker,Date.now());
-  return optionChainsFile;
- })().finally(()=>optionRequests.delete(ticker));
- optionRequests.set(ticker,operation);
- return operation;
-}
-function optionSide(strategy){
- return strategy==='put'||strategy==='long_put'?'put':'call';
-}
-function isBuying(strategy){
- return strategy==='long_put'||strategy==='long_call';
-}
-function quoteFor(row){
- return isBuying($('strategy').value)?row.ask:row.bid;
-}
-function expirationChoices(entry){
- const list=Array.isArray(entry?.available_expirations)?entry.available_expirations:[...new Set((entry?.contracts||[]).map(x=>x.expiration))];
- return list.filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x)&&daysRemaining(x)>=1).sort();
-}
-function showChainEmpty(message){
- $('autoChainRows').innerHTML='<tr><td colspan="8" class="muted">'+esc(message)+'</td></tr>';
-}
-function loadOptionChain(ticker){
- currentChainTicker=ticker;
- currentChain=null;
- resetSelectedQuote();
- $('autoExpiration').innerHTML='<option value="">Loading…</option>';
- showChainEmpty('Checking saved delayed option quotes…');
- chainMessage('Loading listed option contracts…');
- statusBadge('Loading',false);
- readChainFeed(ticker).then(data=>{
-  if(currentChainTicker!==ticker)return;
-  const item=data.chains?.[ticker];
-  if(!item||!Array.isArray(item.contracts)||!item.contracts.length){
-   const reason=item?.error||'No valid standard option-chain quotes are available for this ticker yet.';
-   const msg=item?.status==='unavailable'?'No option quotes imported: '+reason:'Automatic quotes not available: '+reason;
-   $('autoExpiration').innerHTML='<option value="">No expirations available</option>';
-   showChainEmpty(msg+' Use the manual trade fields below.');
-   chainMessage(msg);
-   renderScanner();
-   statusBadge('Manual only',false);
-   return;
-  }
-  currentChain=item;
-  const list=expirationChoices(item);
-  const previous=$('autoExpiration').value;
-  $('autoExpiration').innerHTML=list.map(day=>'<option value="'+esc(day)+'">'+esc(day)+' ('+daysRemaining(day)+' days)</option>').join('')||'<option value="">No future expiration</option>';
-  const suggested=list.find(day=>{const d=daysRemaining(day);return d>=7&&d<=30;})||list[0]||'';
-  $('autoExpiration').value=list.includes(previous)?previous:suggested;
-  const fresh=quoteFresh(item);
-  const date=item.retrieved_at?new Date(item.retrieved_at).toLocaleString():'unknown time';
-  chainMessage((item.provider||'Options market feed')+' · last retrieved '+date+' · '+item.contracts.length+' stored contracts. '+(fresh?'':'Quotes are stale or the last update failed. Verify a new quote with a brokerage.'),fresh);
-  statusBadge(fresh?'Delayed feed':'Stale · manual',fresh);
-  renderOptionChain();
-  if(fresh){
-   if(pendingScannerContract?.ticker===ticker){
-    const plan=pendingScannerContract;
-    pendingScannerContract=null;
-    $('strategy').value=plan.strategy;
-    $('premiumHint').textContent=isBuying(plan.strategy)?'Use option ask (buying)':'Use option bid (selling)';
-    $('basisField').hidden=plan.strategy!=='call';
-    if(list.includes(plan.expiration))$('autoExpiration').value=plan.expiration;
-    renderOptionChain();
-    const exact=item.contracts.find(x=>x.symbol===plan.symbol);
-    if(exact)selectOptionContract(exact);else selectSampleContract();
-   }else selectSampleContract();
-  }
-  renderScanner();
- }).catch(error=>{
-  if(currentChainTicker!==ticker)return;
-  statusBadge('Manual only',false);
-  chainMessage('Automatic option data could not load. '+error.message);
-  showChainEmpty('Private option quotes require an admin login and an authorized provider token. Use the manual form, or sign in through the Admin Portal.');
-  if($('scanStatus'))$('scanStatus').textContent='Private option quotes unavailable: '+error.message;
- });
+ $('selectedContract').textContent='No model estimate loaded. Enter a real option premium manually, or select a theoretical example.';
 }
 function renderOptionChain(){
- const entry=currentChain,expiration=$('autoExpiration').value,strategy=$('strategy').value;
- if(!entry||!expiration){showChainEmpty('Choose a ticker with available option contracts.');return;}
- const spot=Number(entry.underlying_price)||selected?.price||0;
- const type=optionSide(strategy),filter=$('autoStrikeFilter').value,upward=type==='call';
- let rows=entry.contracts.filter(x=>x.type===type&&x.expiration===expiration&&Number.isFinite(x.strike));
- if(filter==='otm')rows=rows.filter(c=>spot>0&&(upward?c.strike>spot:c.strike<spot));
- if(filter==='near'&&spot>0)rows=rows.slice().sort((a,b)=>Math.abs(a.strike-spot)-Math.abs(b.strike-spot)).slice(0,26);
- else if(filter==='all')rows=rows.slice(0,120);
- rows.sort((a,b)=>a.strike-b.strike);
- if(!rows.length){showChainEmpty('No '+type+' contracts match this expiration and strike filter.');return;}
- const fresh=quoteFresh(entry);
- $('autoChainRows').innerHTML=rows.map(c=>{
-  const quote=quoteFor(c),available=fresh&&Number.isFinite(quote)&&quote>0;
-  const live=selectedOptionQuote?.symbol===c.symbol&&selectedOptionQuote?.ticker===selected?.ticker;
-  return '<tr class="'+(live?'selected-contract':'')+'"><td><strong>'+dollars(c.strike)+'</strong></td>'
-  +'<td>'+priceCell(c.bid)+'</td><td>'+priceCell(c.ask)+'</td>'
-  +'<td>'+((typeof c.delta==='number'&&Number.isFinite(c.delta))?c.delta.toFixed(3):'—')+'</td>'
-  +'<td>'+((typeof c.iv==='number'&&Number.isFinite(c.iv))?(c.iv*100).toFixed(1)+'%':'—')+'</td>'
-  +'<td>'+((typeof c.volume==='number')?number(c.volume):'—')+'</td>'
-  +'<td>'+((typeof c.open_interest==='number')?number(c.open_interest):'—')+'</td>'
-  +'<td><button type="button" data-occ="'+esc(c.symbol)+'" '+(available?'':'disabled')+' title="'+(fresh?'Use the '+(isBuying(strategy)?'ask':'bid')+' quote':'This quote is missing or stale')+'">'+(available?'Use '+(isBuying(strategy)?'ask':'bid'):'Unavailable')+'</button></td></tr>';
- }).join('');
+ const stock=selected;
+ if(!stock)return;
+ let a;
+ try{a=modelAssumptions();}catch(err){modelError(err.message);return;}
+ const exp=$('autoExpiration').value,type=modelKind($('strategy').value);
+ const h=historicalVol(stock,a.windowDays);
+ if(!h){
+  modelError('Not enough recent closing-price observations to estimate volatility for '+stock.ticker+'. Real quotes can still be entered manually.');
+  return;
+ }
+ let contracts=modelContracts(stock,exp,type,a);
+ const filter=$('autoStrikeFilter').value;
+ if(filter==='otm')contracts=contracts.filter(c=>type==='call'?c.strike>stock.price:c.strike<stock.price);
+ if(filter==='near')contracts=contracts.slice().sort((a,b)=>Math.abs(a.strike-stock.price)-Math.abs(b.strike-stock.price)).slice(0,16);
+ contracts.sort((a,b)=>a.strike-b.strike);
+ const asOf=stock.priceDate||'Unknown';
+ const lastAge=(Date.now()-Date.parse(asOf+'T00:00:00Z'))/MODEL_DAY;
+ const ageWarning=Number.isFinite(lastAge)&&lastAge>7?' Caution: reference stock close is '+Math.floor(lastAge)+' days old.':'';
+ const fundWarning=isFund(stock)?' Funds/ETFs may have large distributions or leverage, making estimates especially unreliable.':'';
+ $('autoQuoteStatus').textContent='Historical realized volatility '+percent(100*h.sigma)+
+  ' ('+h.observations+' returns, '+h.start+' to '+h.end+'); underlying '+dollars(stock.price)+' as of '+asOf+'.'+ageWarning+fundWarning+(h.warning?' '+h.warning:'');
+ $('autoChainFreshness').textContent='Hypothetical only';
+ $('autoChainFreshness').className='badge feed-old';
+ $('autoChainRows').innerHTML=contracts.length?contracts.map(c=>
+  '<tr><td><strong>'+dollars(c.strike)+'</strong></td><td>'+formatEstimate(c.price)+'</td>'+
+  '<td>'+c.delta.toFixed(3)+'</td><td>'+percent(100*c.volatility)+'</td><td>'+c.days+'</td>'+
+  '<td><button type="button" data-model="'+esc(c.symbol)+'" title="Load theoretical model estimate, not a real option quote">Use model</button></td></tr>'
+ ).join(''):'<tr><td colspan="6" class="muted">No hypothetical examples match this strike filter. Choose another range.</td></tr>';
 }
-function priceCell(value){return Number.isFinite(value)?dollars(value):'—';}
-function selectOptionContract(row){
- const chain=currentChain;
- if(!selected||!chain||!quoteFresh(chain))return;
- const premium=quoteFor(row),dte=daysRemaining(row.expiration);
- if(!Number.isFinite(premium)||premium<=0||dte<1)return;
- const buying=isBuying($('strategy').value);
+function selectModelContract(row){
+ if(!selected||!row||row.price<=0)return;
  $('strike').value=String(row.strike);
- $('premium').value=String(premium);
- $('dte').value=String(dte);
- $('delta').value=Number.isFinite(row.delta)?String(Math.abs(row.delta)):'';
+ $('premium').value=String(Number(row.price.toFixed(4)));
+ $('dte').value=String(row.days);
+ $('delta').value=String(Math.abs(row.delta.toFixed(4)));
  selectedOptionQuote={
-  ticker:selected.ticker,symbol:row.symbol,expiration:row.expiration,
-  side:row.type,provider:chain.provider,retrieved_at:chain.retrieved_at,
-  quote_type:buying?'ask':'bid',bid:row.bid,ask:row.ask,underlying_price:Number.isFinite(chain.underlying_price)?chain.underlying_price:null,
-  volume:row.volume,open_interest:row.open_interest,
-  iv:row.iv,delta:row.delta
+  ticker:selected.ticker,symbol:row.symbol,provider:'Black–Scholes THEORETICAL model (NOT market data)',
+  model:true,underlying_price:row.spot,volatility:row.volatility,assumptions:modelAssumptions(),
+  retrieved_at:new Date().toISOString(),hypothetical_expiration:row.expiration,
+  model_price:row.price
  };
- $('selectedContract').textContent='Auto-filled '+row.symbol+' · '+row.expiration+
-  ' · '+(buying?'BUY at ask ':'SELL at bid ')+dollars(premium)+' per share · '+chain.provider+
-  ' · retrieved '+chain.retrieved_at+'. DELAYED quote; verify at broker before trading.';
- renderOptionChain();
+ $('selectedContract').textContent='THEORETICAL MODEL: '+selected.ticker+' '+row.type.toUpperCase()+
+  ' · hypothetical '+row.expiration+' $'+row.strike+' · estimated premium '+formatEstimate(row.price)+
+  '/share. Not a real option contract, executable quote, bid or ask.';
+ resetMetrics();
  calculate();
 }
-function selectSampleContract(){
- const entry=currentChain;
- if(!entry||!quoteFresh(entry))return;
- const expiry=$('autoExpiration').value,type=optionSide($('strategy').value),spot=Number(entry.underlying_price)||selected?.price||0;
- const list=entry.contracts.filter(x=>x.type===type&&x.expiration===expiry&&Number.isFinite(quoteFor(x))&&quoteFor(x)>0);
- if(!list.length){chainMessage('No usable '+(isBuying($('strategy').value)?'ask':'bid')+' for this expiration. Choose a different date or enter a quote manually.');return;}
- // Select a liquid contract closest to a neutral illustration target; never
- // call it "best" or rank based on profitability. Liquidity must be verified.
- const sell=!isBuying($('strategy').value);
- const target=spot*(sell?(type==='put'?.95:1.05):1);
- const preferred=list.filter(x=>!sell||!spot||(type==='put'?x.strike<spot:x.strike>spot));
- const candidate=(preferred.length?preferred:list).slice().sort((a,b)=>{
-  const liquidityA=(a.open_interest||0)>=10?0:5;
-  const liquidityB=(b.open_interest||0)>=10?0:5;
-  const targetA=(sell&&Number.isFinite(a.delta)?Math.abs(Math.abs(a.delta)-.20)*spot:Math.abs(a.strike-target));
-  const targetB=(sell&&Number.isFinite(b.delta)?Math.abs(Math.abs(b.delta)-.20)*spot:Math.abs(b.strike-target));
-  return targetA+liquidityA-(targetB+liquidityB);
+function exampleContractFor(stock,strategy,expiry,assumptions){
+ const type=modelKind(strategy);
+ const contracts=modelContracts(stock,expiry,type,assumptions);
+ if(!contracts.length)return null;
+ const sell=!modelBuying(strategy);
+ const preferred=sell?contracts.filter(c=>type==='put'?c.strike<stock.price:c.strike>stock.price):contracts;
+ const pool=preferred.length?preferred:contracts;
+ return pool.slice().sort((a,b)=>{
+  const target=sell?.2:.5;
+  return Math.abs(Math.abs(a.delta)-target)-Math.abs(Math.abs(b.delta)-target);
  })[0];
- if(candidate)selectOptionContract(candidate);
 }
-const baseSelectStock=selectStock;
+function selectSampleContract(){
+ if(!selected)return;
+ let a;
+ try{a=modelAssumptions();}catch(err){modelError(err.message);return;}
+ const expir=$('autoExpiration').value||hypotheticalFridays()[0];
+ const sample=exampleContractFor(selected,$('strategy').value,expir,a);
+ if(!sample){$('selectedContract').textContent='No valid historical volatility estimate for this stock. Enter an actual premium manually.';return;}
+ selectModelContract(sample);
+}
+function loadOptionChain(ticker){
+ modelCurrentTicker=ticker;
+ resetSelectedQuote();
+ const expiries=hypotheticalFridays();
+ $('autoExpiration').innerHTML=expiries.map(day=>'<option value="'+day+'">'+day+' ('+daysRemaining(day)+' days; hypothetical)</option>').join('');
+ $('autoExpiration').value=expiries.find(day=>daysRemaining(day)>=7)||expiries[0];
+ renderOptionChain();
+ selectSampleContract();
+ renderScanner();
+}
+function scannerExample(stock,strategy,maxDays,assumptions){
+ const date=hypotheticalFridays().filter(day=>daysRemaining(day)<=maxDays);
+ const expiry=date.find(day=>daysRemaining(day)>=10)||date.at(-1);
+ if(!expiry)return null;
+ return exampleContractFor(stock,strategy,expiry,assumptions);
+}
+function renderScanner(){
+ const tbody=$('scanRows');
+ if(!tbody||!activeStocks.length)return;
+ let a;
+ try{a=modelAssumptions();}catch(err){
+  $('scanStatus').textContent='Model assumptions invalid: '+err.message;
+  tbody.innerHTML='<tr><td colspan="8">'+esc(err.message)+'</td></tr>';return;
+ }
+ const strategy=$('scanStrategy').value,maxDays=Number($('scanDte').value);
+ const rows=[];
+ for(const stock of activeStocks){
+  const candidate=scannerExample(stock,strategy,maxDays,a);
+  if(!candidate)continue;
+  const notional=strategy==='put'?candidate.strike:stock.price;
+  rows.push({stock,c:candidate,ratio:100*candidate.price/notional});
+ }
+ rows.sort((a,b)=>a.stock.ticker.localeCompare(b.stock.ticker));
+ const unavailable=activeStocks.length-rows.length;
+ $('scanStatus').textContent=rows.length+' theoretical examples calculated from '+activeStocks.length+' active tickers; '+unavailable+
+ ' need more price data. These are NOT real option-chain quotes or known listed strikes.';
+ tbody.innerHTML=rows.length?rows.map(({stock,c,ratio})=>'<tr>'+
+  '<td><strong>'+esc(stock.ticker)+'</strong></td>'+
+  '<td>'+esc(c.expiration)+'<div class="small muted">'+c.days+' days</div></td>'+
+  '<td>'+dollars(c.strike)+'</td>'+
+  '<td>'+formatEstimate(c.price)+'</td>'+
+  '<td>'+c.delta.toFixed(3)+'</td>'+
+  '<td>'+percent(c.volatility*100)+'</td>'+
+  '<td>'+percent(ratio)+'</td>'+
+  '<td><button type="button" data-scanticker="'+esc(stock.ticker)+'" data-scanexpiry="'+esc(c.expiration)+'" data-scanstrategy="'+esc(strategy)+'" title="Analyze hypothetical model premium; not a real quote">Analyze</button></td>'+
+  '</tr>').join(''):'<tr><td colspan="8" class="muted">No valid models for this filter. Check that stored stock-price history is available.</td></tr>';
+}
+// Preserve the existing active-watchlist and admin portal. This wrapper
+// runs after options.js creates the main stock-selection function.
+const originalSelectStock=selectStock;
 selectStock=function(ticker){
- baseSelectStock(ticker);
+ originalSelectStock(ticker);
  if(selected?.ticker===ticker)loadOptionChain(ticker);
 };
-$('autoExpiration').addEventListener('change',()=>{
- resetSelectedQuote();renderOptionChain();if(quoteFresh(currentChain))selectSampleContract();
-});
-$('strategy').addEventListener('change',()=>{if(quoteFresh(currentChain))selectSampleContract();});
+$('autoExpiration').addEventListener('change',()=>{resetSelectedQuote();renderOptionChain();selectSampleContract();});
 $('autoStrikeFilter').addEventListener('change',renderOptionChain);
 $('autoSuggestion').addEventListener('click',selectSampleContract);
-$('autoChainRows').addEventListener('click',e=>{
- const button=e.target.closest('button[data-occ]');if(!button||button.disabled)return;
- const row=currentChain?.contracts.find(c=>c.symbol===button.dataset.occ&&c.expiration===$('autoExpiration').value);
- if(row)selectOptionContract(row);
+$('autoChainRows').addEventListener('click',event=>{
+ const button=event.target.closest('button[data-model]');
+ if(!button||!selected)return;
+ let a;try{a=modelAssumptions();}catch{return;}
+ const row=modelContracts(selected,$('autoExpiration').value,modelKind($('strategy').value),a)
+   .find(c=>c.symbol===button.dataset.model);
+ if(row)selectModelContract(row);
+});
+$('strategy').addEventListener('change',()=>{renderOptionChain();selectSampleContract();});
+for(const id of ['modelRiskFreeRate','modelDividendYield','modelVolWindow']){
+ $(id).addEventListener('change',()=>{resetSelectedQuote();renderOptionChain();renderScanner();selectSampleContract();});
+}
+$('scanStrategy').addEventListener('change',renderScanner);
+$('scanDte').addEventListener('change',renderScanner);
+$('scanRows').addEventListener('click',event=>{
+ const button=event.target.closest('button[data-scanticker]');
+ if(!button)return;
+ const ticker=button.dataset.scanticker,expiry=button.dataset.scanexpiry,strategy=button.dataset.scanstrategy;
+ if(!activeStocks.some(s=>s.ticker===ticker))return;
+ $('strategy').value=strategy;
+ selectStock(ticker);
+ $('basisField').hidden=strategy!=='call';
+ $('autoExpiration').value=expiry;
+ renderOptionChain();selectSampleContract();
+ window.scrollTo({top:0,behavior:'smooth'});
 });
 for(const id of ['strike','premium','dte','delta','spotOverride','contracts','fees','basis','account']){
  $(id).addEventListener('input',()=>{
   if(selectedOptionQuote){
    resetSelectedQuote();
-   $('selectedContract').textContent='Quote inputs edited manually. Re-check with your broker before trading.';
-   renderOptionChain();
+   $('selectedContract').textContent='You edited the estimate manually. Current inputs are no longer the original theoretical model values.';
   }
-  // Editing after an earlier calculation must invalidate stale results.
   resetMetrics();
  });
 }
-$('autoSuggestion').title='Automatically selects an illustrative near-term listed contract. Not a recommendation.';
-
-/* Scan the saved chain feed across the ACTIVE admin watchlist. */
-function scanTradeCandidate(ticker,chain,strategy,maxDte,minOI){
- const stock=activeStocks.find(x=>x.ticker===ticker);
- if(!stock||!quoteFresh(chain))return null;
- const type=optionSide(strategy),spot=Number(chain.underlying_price)||stock.price||0;
- if(!(spot>0))return null;
- const buying=isBuying(strategy);
- const rows=(chain.contracts||[]).filter(c=>{
-  if(c.type!==type||!Number.isFinite(c.strike))return false;
-  const dte=daysRemaining(c.expiration);
-  if(dte<1||dte>maxDte)return false;
-  const q=buying?c.ask:c.bid;
-  if(!Number.isFinite(q)||q<=0)return false;
-  if(minOI>0&&(!Number.isFinite(c.open_interest)||c.open_interest<minOI))return false;
-  // Avoid zero-liquidity or crossed quotes in scanner, even if source data
-  // happens to include them.
-  if(!(Number.isFinite(c.ask)&&Number.isFinite(c.bid))||c.ask<c.bid||c.ask<=0)return false;
-  if(c.ask-c.bid>Math.max(c.bid,0.25))return false;
-  return true;
- });
- if(!rows.length)return null;
- const prefer=rows.filter(c=>buying|| (type==='put'?c.strike<spot:c.strike>spot));
- const choices=prefer.length?prefer:rows;
- const target=buying?spot:spot*(type==='put'?.95:1.05);
- choices.sort((a,b)=>{
-  const score=c=>{
-   const deltaTarget=buying?.5:.2;
-   const deltaScore=Number.isFinite(c.delta)?Math.abs(Math.abs(c.delta)-deltaTarget)*12:Math.abs(c.strike-target)/spot*22;
-   const expirationScore=Math.abs(daysRemaining(c.expiration)-14)*.09;
-   const spreadPct=c.ask>0?(c.ask-c.bid)/c.ask:1;
-   return deltaScore+expirationScore+spreadPct*3;
-  };
-  return score(a)-score(b);
- });
- const c=choices[0];
- return {ticker,stock,contract:c,spot,premium:buying?c.ask:c.bid,ratio:100*(buying?c.ask/spot:c.bid/(strategy==='put'?c.strike:spot)),dte:daysRemaining(c.expiration),strategy};
-}
-function renderScanner(){
- const box=$('scanRows'),message=$('scanStatus');
- if(!box||!message)return;
- if(!optionChainsFile){
-  box.innerHTML='<tr><td colspan="9" class="muted">Option-chain data has not loaded yet.</td></tr>';
-  return;
- }
- const strategy=$('scanStrategy').value,maxDte=Number($('scanDte').value),minOI=Number($('scanLiquidity').value);
- const results=[];
- for(const ticker of activeStocks.map(x=>x.ticker)){
-  const item=optionChainsFile.chains?.[ticker];
-  if(!item)continue;
-  const selected=scanTradeCandidate(ticker,item,strategy,maxDte,minOI);
-  if(selected)results.push(selected);
- }
- results.sort((a,b)=>a.ticker.localeCompare(b.ticker));
- const eligible=activeStocks.filter(x=>quoteFresh(optionChainsFile.chains?.[x.ticker])).length;
- message.textContent='Showing '+results.length+' illustrative option contracts from '+eligible+' tickers with non-stale chain data ('+activeStocks.length+' active tracked securities). No ranking guarantees a profit.';
- box.innerHTML=results.length?results.map(x=>{
-  const c=x.contract;
-  return '<tr><td><strong>'+esc(x.ticker)+'</strong></td><td>'+esc(c.expiration)+'<div class="small muted">'+x.dte+' days</div></td><td>'+dollars(c.strike)+'</td><td>'+priceCell(c.bid)+'</td><td>'+priceCell(c.ask)+'</td>'
-   +'<td>'+(Number.isFinite(c.delta)?c.delta.toFixed(3):'—')+'</td><td>'+(Number.isFinite(c.open_interest)?number(c.open_interest):'—')+'</td><td>'+percent(x.ratio)+'</td>'
-   +'<td><button type="button" data-scan-symbol="'+esc(c.symbol)+'" data-scan-ticker="'+esc(x.ticker)+'" data-scan-strategy="'+esc(strategy)+'" data-scan-expiry="'+esc(c.expiration)+'">Analyze</button></td></tr>';
- }).join(''):'<tr><td colspan="9" class="muted">No valid delayed option quotes match these filters. Try a wider expiration range or lower open-interest minimum. Missing/unsupported tickers remain available for manual analysis.</td></tr>';
-}
-for(const key of ['scanStrategy','scanDte','scanLiquidity'])$(key).addEventListener('change',renderScanner);
-$('scanRows').addEventListener('click',e=>{
- const btn=e.target.closest('button[data-scan-symbol]');if(!btn)return;
- const ticker=btn.dataset.scanTicker,contract=btn.dataset.scanSymbol;
- if(!activeStocks.some(x=>x.ticker===ticker))return;
- pendingScannerContract={ticker,symbol:contract,expiration:btn.dataset.scanExpiry,strategy:btn.dataset.scanStrategy};
- $('strategy').value=pendingScannerContract.strategy;
- $('basisField').hidden=pendingScannerContract.strategy!=='call';
- selectStock(ticker);
- window.scrollTo({top:0,behavior:'smooth'});
-});
-
-$('scanLoadAll').addEventListener('click',async()=>{
- const button=$('scanLoadAll');
- button.disabled=true;
- let ok=0,fail=0;
- let haltedReason='';
- try{
-  for(let i=0;i<activeStocks.length;i++){
-   const ticker=activeStocks[i].ticker;
-   $('scanStatus').textContent='Loading private authorized options data: '+(i+1)+' / '+activeStocks.length+' ('+ticker+') · '+ok+' available, '+fail+' unavailable.';
-   try{
-    const snapshot=await readChainFeed(ticker);
-    const chain=snapshot.chains?.[ticker];
-    if(chain?.status==='ok'&&chain.contracts?.length)ok++;else fail++;
-    renderScanner();
-   }catch(err){
-    fail++;
-    if(/admin|sign in|provider not connected|market data provider|session|403|401/i.test(err.message)){
-     haltedReason=err.message;break;
-    }
-   }
-   // Avoid excessive API usage while inspecting all monitored companies.
-   if(i+1<activeStocks.length)await new Promise(resolve=>setTimeout(resolve,4500));
-  }
-  renderScanner();
-  $('scanStatus').textContent=haltedReason?('Options scan stopped: '+haltedReason):
-   ('Fetched '+ok+' private option chains; '+fail+' tickers lacked available quotes. Results are cached in this browser session.');
- }finally{button.disabled=false;}
-});
+$('clearTrade').addEventListener('click',resetSelectedQuote);
