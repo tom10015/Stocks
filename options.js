@@ -94,7 +94,9 @@ function resetMetrics(){
  latestCalc=null;
 }
 function clearInputs(updateStatus=true){
+ const currentStrategy=$('strategy').value;
  $('tradeForm').reset();
+ $('strategy').value=currentStrategy;
  // Preserve the chosen strategy when clearing trade inputs or switching stocks.
  $('contracts').value='1';$('dte').value='7';$('fees').value='0';
  syncStrategyUI();
