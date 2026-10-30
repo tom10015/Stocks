@@ -34,3 +34,20 @@ footer{margin-top:28px;border-top:1px solid #31445a;padding:18px 0;color:#96a8bd
 .badge.feed-ok{background:#234e3e;color:#8de6bc}
 .badge.feed-old{background:#573f2c;color:#ffcf90}
 @media(max-width:650px){.auto-chain-box{padding:10px}.chain-toolbar{align-items:stretch}.chain-toolbar label,.chain-toolbar label select{width:100%}.chain-toolbar>button{width:100%}}
+
+/* Four clear option strategy choices */
+.strategy-switcher{border:1px solid #345671;border-radius:15px;padding:16px;margin:18px 0;background:#111f31}
+.strategy-switcher>h3{font-size:19px;margin:5px 0 15px}
+.strategy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.strategy-choice{text-align:left;display:flex;flex-direction:column;gap:7px;min-height:121px;background:#14283d;border:1px solid #34516b;border-radius:12px;padding:15px;transition:border-color .12s,background .12s}
+.strategy-choice strong{font-size:17px;color:#f1f7ff}
+.strategy-choice>span:last-child{color:#a8bdd2;font-size:12px;line-height:1.45;font-weight:400}
+.strategy-choice .strategy-mark{font-size:10px;letter-spacing:1.2px;color:#81c9e3;font-weight:800}
+.strategy-choice.active{border:2px solid #6ce6b3;background:#193e3b;padding:14px;box-shadow:0 0 0 2px rgba(108,230,179,.1)}
+.strategy-choice:focus-visible{outline:3px solid #88ddff;outline-offset:2px}
+.strategy-context{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap;margin-top:15px;padding:14px;background:#0b1929;border-radius:10px;border:1px solid #2b435b}
+.strategy-context h3{margin:4px 0 7px}.strategy-context p{margin:0;max-width:440px;font-size:13px;line-height:1.6}
+.strategy-facts{display:flex;flex-direction:column;justify-content:center;gap:6px;font-size:12px;color:#d7e8f7}
+.strategy-mini-note{font-size:12px;color:#ffcc97;margin-top:11px;line-height:1.55}
+.trade-form-title{padding:2px 0 12px}.trade-form-title h3{margin:5px 0 4px}
+@media(max-width:650px){.strategy-switcher{padding:12px}.strategy-grid{grid-template-columns:1fr}.strategy-choice{min-height:100px}.strategy-context{display:block}.strategy-facts{margin-top:12px}}
