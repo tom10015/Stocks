@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="description" content="ShareWatch options trade analyzer using the same active stock watchlist and admin portal.">
+ <title>Options Analyzer · ShareWatch</title>
+ <link rel="stylesheet" href="./options.css?v=20261029a">
+</head>
+<body>
+<header>
+ <nav aria-label="ShareWatch navigation">
+  <a class="brand" href="./index.html">◈ Share<span>Watch</span></a>
+  <div class="navlinks">
+   <a href="./index.html">Share Count Dashboard</a>
+   <a class="active" href="./options.html" aria-current="page">Options Analyzer</a>
+   <a href="./admin.html">Admin Portal</a>
+  </div>
+ </nav>
+</header>
+<main>
+ <div class="eyebrow">New · Separate dashboard</div>
+ <h1>Options Trade Analyzer</h1>
+ <p class="intro muted">Compare cash-secured puts and covered calls across the <strong>same active ShareWatch stock list</strong>. Share prices come from the existing scheduled price tracker; <strong>option strikes, premiums, and Greeks must be entered from a current option chain</strong>. No trades are placed and no profitability is guaranteed.</p>
+ <section class="top-stats" aria-label="Watchlist overview">
+  <div class="stat"><div class="label">Active tracked tickers</div><div class="value" id="statTickers">—</div><div class="mini">Managed by your existing admin</div></div>
+  <div class="stat"><div class="label">Saved price quotes</div><div class="value" id="statPriced">—</div><div class="mini">End-of-day closes, not live quotes</div></div>
+  <div class="stat"><div class="label">ETF / fund tickers</div><div class="value" id="statFunds">—</div><div class="mini">Some have no listed options</div></div>
+  <div class="stat"><div class="label">Price data last checked</div><div class="value" id="statUpdated" style="font-size:17px">—</div><div class="mini">GitHub Actions auto-refresh</div></div>
+ </section>
+ <div id="loadStatus" role="status" aria-live="polite" class="small muted" style="margin:4px 0 13px">Loading your live active watchlist…</div>
+ <div class="layout">
+  <aside class="panel" aria-labelledby="watchlistHeading">
+   <div class="panel-head"><div><h2 id="watchlistHeading">Your stocks</h2><div class="section-sub">Select any active ticker to analyze</div></div><a href="./admin.html" class="small">Manage ↗</a></div>
+   <div class="filters"><input id="stockSearch" aria-label="Search stock ticker or name" placeholder="Search ticker or company…"><select id="stockFilter" aria-label="Filter watchlist"><option value="all">All active</option><option value="company">Stocks</option><option value="fund">Funds / ETFs</option><option value="unpriced">No price yet</option></select></div>
+   <div id="stockList" class="stock-list" role="listbox" aria-label="Active ShareWatch stock tickers"><p class="muted">Loading stocks…</p></div>
+   <p class="footnote">Add, hide, restore, or permanently delete tickers in the <a href="./admin.html">same admin portal</a>. Those changes automatically affect both dashboards. This analyzer does not create a second watchlist.</p>
+  </aside>
+  <section>
+   <div class="panel" aria-labelledby="builderHeading">
+    <div class="panel-head"><div><div class="eyebrow">Trade builder</div><h2 id="builderHeading">Analyze a potential trade</h2></div><span class="badge">Educational calculations</span></div>
+    <div class="selected-banner">
+     <div><div class="small muted">Selected security</div><div class="selected-name" id="selectedTicker">Choose a stock</div><div class="small muted" id="selectedCompany">Active ShareWatch watchlist</div></div>
+     <div><div class="selected-price" id="selectedPrice">—<small id="priceAsOf">Most recent saved close</small></div><a id="sharesLink" class="small" href="./index.html">View share history ↗</a></div>
+    </div>
+    <form id="tradeForm" novalidate>
+     <div class="formgrid">
+      <div class="field"><label for="strategy">Option strategy</label><select id="strategy"><option value="put">Sell cash-secured put</option><option value="call">Sell covered call</option></select></div>
+      <div class="field"><label for="strike">Strike price ($)</label><input id="strike" type="number" min="0.01" step="any" inputmode="decimal" placeholder="Enter option strike" required><small>Use an actual listed strike</small></div>
+      <div class="field"><label for="premium">Premium per share ($)</label><input id="premium" type="number" min="0.01" step="any" inputmode="decimal" placeholder="Enter bid/credit" required><small>1 contract normally represents 100 shares</small></div>
+      <div class="field"><label for="contracts">Number of contracts</label><input id="contracts" type="number" min="1" max="10000" step="1" value="1" required></div>
+      <div class="field"><label for="dte">Days to expiration</label><input id="dte" type="number" min="1" max="3650" step="1" value="7" required><small>For simple annualized premium only</small></div>
+      <div class="field"><label for="delta">Absolute option delta (optional)</label><input id="delta" type="number" min="0" max="1" step="0.01" placeholder="e.g. 0.15"><small>0–1, from current option chain</small></div>
+      <div class="field" id="basisField" hidden><label for="basis">Average share cost basis ($)</label><input id="basis" type="number" min="0.01" step="any" placeholder="Your actual share basis"><small>For total covered-call expiration P/L</small></div>
+      <div class="field"><label for="fees">Total transaction fees ($)</label><input id="fees" type="number" min="0" step="any" value="0"><small>Combined open/close fees for whole position</small></div>
+      <div class="field"><label for="account">Trading account size ($, optional)</label><input id="account" type="number" min="0.01" step="any" placeholder="For concentration warning"></div>
+     </div>
+     <div class="actions"><button id="calculate" class="primary" type="submit">Calculate trade</button><button id="saveTrade" type="button" disabled>Save to comparison</button><button id="clearTrade" class="ghost" type="button">Clear inputs</button></div>
+     <div id="calcStatus" class="calc-status" role="status" aria-live="polite"></div>
+    </form>
+    <div class="metrics" aria-live="polite">
+     <div class="metric"><div class="label">Net premium received</div><div class="number good" id="metricPremium">—</div></div>
+     <div class="metric"><div class="label">Capital tied up / share value</div><div class="number" id="metricCapital">—</div></div>
+     <div class="metric"><div class="label">Premium yield (period)</div><div class="number" id="metricYield">—</div></div>
+     <div class="metric"><div class="label" id="maxGainLabel">Maximum gain at expiration</div><div class="number good" id="metricMaxGain">—</div></div>
+     <div class="metric"><div class="label">Maximum downside loss</div><div class="number bad" id="metricMaxLoss">—</div></div>
+     <div class="metric"><div class="label">Breakeven share price</div><div class="number" id="metricBreakeven">—</div></div>
+     <div class="metric"><div class="label">Simple annualized premium yield</div><div class="number" id="metricAnnual">—</div></div>
+     <div class="metric"><div class="label">Delta-based OTM approximation</div><div class="number" id="metricDelta">—</div></div>
+     <div class="metric"><div class="label">Expiration share obligation</div><div class="number" id="metricShares">—</div></div>
+    </div>
+    <div class="chart-container">
+     <div class="chart-title"><strong>Expiration payoff scenarios</strong><span class="small muted" id="payoffType">Enter trade details</span></div>
+     <div id="payoffChart"><p class="muted small">Enter a strike and actual premium, then calculate to see the possible outcomes.</p></div>
+    </div>
+    <div id="riskChecks" class="risk-checks"></div>
+    <div class="below"><h3>Possible expiration outcomes</h3><div class="section-sub">Illustrative stock prices at expiry, not forecasts. Includes the selected premium and entered fees.</div><div class="table-scroll"><table><thead><tr><th>Stock at expiry</th><th>Stock move</th><th>Net position P/L</th><th>What happens</th></tr></thead><tbody id="scenarioRows"><tr><td colspan="4" class="muted">Calculate a trade to see scenarios.</td></tr></tbody></table></div></div>
+   </div>
+   <div class="panel trade-panel" aria-labelledby="evHeading">
+    <div class="panel-head"><div><h2 id="evHeading">Expected-value estimate</h2><div class="section-sub">Optional: enter your own evidence-based trade outcome assumptions</div></div></div>
+    <div class="formgrid">
+     <div class="field"><label for="winProbability">Estimated win rate (%)</label><input id="winProbability" type="number" min="0" max="100" step="any" placeholder="e.g. 85"></div>
+     <div class="field"><label for="avgWin">Average winning P/L ($)</label><input id="avgWin" type="number" min="0" step="any" placeholder="e.g. 35"></div>
+     <div class="field"><label for="avgLoss">Average losing P/L ($)</label><input id="avgLoss" type="number" min="0" step="any" placeholder="e.g. 250"></div>
+    </div>
+    <div class="actions"><button id="calculateEV" type="button">Calculate expected value</button><span id="evResult" class="small muted" aria-live="polite">Provide all three assumptions.</span></div>
+    <p class="footnote">EV = win probability × average win − loss probability × average loss. Estimates are only as useful as the assumed probabilities and realized gains/losses. An option's delta is <strong>not</strong> a verified probability of profit, and this analysis cannot guarantee profitable trades.</p>
+   </div>
+  </section>
+ </div>
+ <section class="panel below" aria-labelledby="compareHeading">
+  <div class="panel-head"><div><h2 id="compareHeading">Saved trade comparisons</h2><div class="section-sub">Compare your own candidate trades without placing orders</div></div><div class="actions" style="margin-top:0"><button id="exportTrades" type="button" class="ghost">Export CSV</button><button id="clearSaved" type="button" class="danger">Clear saved</button></div></div>
+  <div class="table-scroll"><table class="trade-table"><thead><tr><th>Stock</th><th>Strategy</th><th>Strike</th><th>Credit</th><th>Days</th><th>Period yield</th><th>Breakeven</th><th>Max downside</th><th>Remove</th></tr></thead><tbody id="savedTrades"><tr><td colspan="9" class="muted">No candidate trades saved on this device.</td></tr></tbody></table></div>
+  <p class="footnote">Saved comparisons remain only in this browser's local storage—not in the admin database or your brokerage account. The shared admin portal controls which stocks appear in both dashboards; hiding or deleting a ticker also hides its saved trade comparisons here.</p>
+ </section>
+ <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: net premium minus the stock purchase obligation if assigned. If the stock falls to zero, the seller may lose almost the full strike value. Covered calls: the calculation assumes you already own 100 shares per contract and uses your entered share cost basis; upside is capped at the call strike, and downside resembles holding the stock. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. All quotes displayed here are end-of-day stock closes and are not live or executable option-chain quotes.</p></details></div>
+ <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability, premium yield, nor a positive assumed expected value guarantees profitability.</footer>
+</main>
+<script src="./options.js?v=20261029a" defer></script>
+</body>
+</html>
