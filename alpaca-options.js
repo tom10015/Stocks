@@ -5,6 +5,7 @@
 'use strict';
 const ALPACA_ENDPOINT=SUPABASE+'/functions/v1/sharewatch-alpaca';
 let alpacaCurrent=null,alpacaRequestId=0,alpacaCurrentTicker=null;
+function daysRemaining(iso){const target=Date.parse(iso+'T00:00:00Z');const today=new Date().toISOString().slice(0,10);return Number.isFinite(target)?Math.round((target-Date.parse(today+'T00:00:00Z'))/86400000):-1;}
 const alpacaCache=new Map();
 function alpacaStatus(message,connected=false){
  $('alpacaStatus').textContent=message;
@@ -84,7 +85,7 @@ async function alpacaLoad(force=false){
  }catch(error){
   if(id!==alpacaRequestId||selected?.ticker!==ticker)return;
   alpacaCurrent=null;alpacaStatus(error.message);
-  alpacaEmpty('Alpaca data unavailable. Massive and the free theoretical calculator remain available.');
+  alpacaEmpty('Alpaca data unavailable. You can still enter option premiums manually.');
  }
 }
 function alpacaSelect(symbol){
@@ -122,3 +123,12 @@ $('alpacaRows').addEventListener('click',e=>{
  const button=e.target.closest('button[data-alpaca-symbol]');
  if(button&&!button.disabled)alpacaSelect(button.dataset.alpacaSymbol);
 });
+
+// Invalidate a loaded indicative quote when the user modifies the quote fields.
+for(const id of ['strike','premium','dte','delta','spotOverride']){
+ $(id).addEventListener('input',()=>{
+  if(selectedOptionQuote){resetSelectedQuote();$('alpacaSelection').textContent='Inputs edited manually; previous Alpaca quote no longer applies.';}
+  resetMetrics();
+ });
+}
+$('clearTrade').addEventListener('click',resetSelectedQuote);
