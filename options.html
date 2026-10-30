@@ -54,6 +54,7 @@
       <div class="field" id="basisField" hidden><label for="basis">Average share cost basis ($)</label><input id="basis" type="number" min="0.01" step="any" placeholder="Your actual share basis"><small>For total covered-call expiration P/L</small></div>
       <div class="field"><label for="fees">Total transaction fees ($)</label><input id="fees" type="number" min="0" step="any" value="0"><small>Combined open/close fees for whole position</small></div>
       <div class="field"><label for="account">Trading account size ($, optional)</label><input id="account" type="number" min="0.01" step="any" placeholder="For concentration warning"></div>
+      <div class="field"><label for="spotOverride">Underlying stock price ($, optional)</label><input id="spotOverride" type="number" min="0.01" step="any" placeholder="Override saved closing price"><small>Use a current quote if preferred</small></div>
      </div>
      <div class="actions"><button id="calculate" class="primary" type="submit">Calculate trade</button><button id="saveTrade" type="button" disabled>Save to comparison</button><button id="clearTrade" class="ghost" type="button">Clear inputs</button></div>
      <div id="calcStatus" class="calc-status" role="status" aria-live="polite"></div>
