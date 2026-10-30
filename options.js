@@ -84,7 +84,8 @@ function computeTrade(){
  if(delta!==null&&(!valid(delta)||delta<0||delta>1))throw Error('Absolute option delta must be between 0 and 1, or left blank.');
  if(budget!==null&&(!valid(budget)||budget<=0))throw Error('Account size must be positive or left blank.');
  if(override!==null&&(!valid(override)||override<=0))throw Error('Underlying stock price override must be positive or blank.');
- const spot=override??selected.price;
+ const chainSpot=typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?.ticker===selected.ticker&&valid(selectedOptionQuote.underlying_price)?selectedOptionQuote.underlying_price:null;
+ const spot=override??chainSpot??selected.price;
  if(!valid(spot)||spot<=0)throw Error('No valid saved underlying price: enter a current stock price override.');
  const shares=CONTRACT_SIZE*n,grossPremium=premium*shares;
  const credit=selling?grossPremium-fees:-(grossPremium+fees);
@@ -101,7 +102,7 @@ function computeTrade(){
   strategy==='call'?(Math.min(price,K)-basis)*shares+credit:
   strategy==='long_call'?Math.max(0,price-K)*shares-debit:
   Math.max(0,K-price)*shares-debit;
- return {ticker:selected.ticker,name:selected.name,spot,spotDate:override!==null?'Manually entered':selected.priceDate||'Saved close',
+ return {ticker:selected.ticker,name:selected.name,spot,spotDate:override!==null?'Manually entered':chainSpot!==null?'Delayed '+selectedOptionQuote.provider+' underlying quote':selected.priceDate||'Saved close',
   strike:K,premium,contracts:n,dte,fees,delta,basis:strategy==='call'?basis:null,budget,strategy,shares,grossPremium,credit,debit,
   capital,breakeven,maxProfit,maxLoss,yieldPct,annualized,otm,payoff,buying,selling};
 }
@@ -152,7 +153,7 @@ function payoffChart(calc){
  +'<text x="'+(W-r)+'" y="'+(H-19)+'" text-anchor="end" fill="#a6bcd5" font-size="12">'+esc(dollars(ceiling))+'</text>'
  +'<text x="'+(W/2)+'" y="'+(H-5)+'" text-anchor="middle" fill="#a6bcd5" font-size="12">Stock price at expiration</text>'
  +'</svg>';
- $('payoffType').textContent='Strike '+dollars(calc.strike)+' · saved/entered stock price '+dollars(calc.spot);
+ $('payoffType').textContent='Strike '+dollars(calc.strike)+' · stock price '+dollars(calc.spot)+' ('+calc.spotDate+')';
 }
 function scenarios(calc){
  const prices=[0,calc.spot*.7,calc.spot*.85,calc.spot,calc.strike,Math.max(0,calc.breakeven),calc.spot*1.15,calc.spot*1.3];
