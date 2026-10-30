@@ -90,7 +90,7 @@ function hypotheticalFridays(){
  return result;
 }
 function syntheticStrikes(spot){
- const step=spot<5?.5:spot<20?1:spot<50?2.5:spot<100?5:spot<200?10:spot<500?20:50;
+ const step=spot<.5?.025:spot<1?.05:spot<5?.5:spot<20?1:spot<50?2.5:spot<100?5:spot<200?10:spot<500?20:50;
  const middle=Math.max(1,Math.round(spot/step));
  const result=[];
  for(let i=-20;i<=20;i++){
