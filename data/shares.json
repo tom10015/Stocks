@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T21:29:40.083446+00:00",
+  "updated_at": "2026-10-30T22:19:30.872242+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1738,6 +1738,15 @@
           "date": "2026-10-28",
           "checked_at": "2026-10-28",
           "shares": 790700000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
+          "date_is_check_only": true
+        },
+        {
+          "date": "2026-10-30",
+          "checked_at": "2026-10-30",
+          "shares": 790300000,
           "form": "Fund snapshot",
           "source": "Official fund issuer",
           "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
@@ -6075,6 +6084,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/cony/",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-10-29",
+          "checked_at": "2026-10-30",
+          "shares": 20057457,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/cony/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -10025,6 +10043,15 @@
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/msty/"
+        },
+        {
+          "date": "2026-10-29",
+          "checked_at": "2026-10-30",
+          "shares": 74369959,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/msty/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
