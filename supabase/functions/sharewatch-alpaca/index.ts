@@ -47,7 +47,7 @@ Deno.serve(async req=>{
  if(!await checkAuth(jwt))return json({error:"Sign in through the existing ShareWatch Admin Portal."},401);
  const key=Deno.env.get("ALPACA_API_KEY")?.trim();
  const secret=Deno.env.get("ALPACA_SECRET_KEY")?.trim();
- if(!key||!secret)return json({status:"setup_required",error:"Alpaca keys are not configured in Supabase Edge Function Secrets."},503);
+ if(!key||!secret){const missing=[!key?"ALPACA_API_KEY":null,!secret?"ALPACA_SECRET_KEY":null].filter(Boolean);return json({status:"setup_required",error:"Missing Supabase Edge Function secret"+(missing.length>1?"s":"")+": "+missing.join(", ")+". Verify the secret names and save them in this project (fmtfskcgnlxusipaxdog). The API key values remain private.",missing_secret_names:missing},503);}
  const params=new URL(req.url).searchParams;
  const ticker=(params.get("ticker")||"").trim().toUpperCase();
  const side=params.get("side")||"put";
