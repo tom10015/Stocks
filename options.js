@@ -197,6 +197,8 @@ function riskChecks(calc){
    add('PREMIUM IS THEORETICAL: '+selectedOptionQuote.provider+'. It is not a market quote or verified option contract.','warn');
   }else if(selectedOptionQuote.quote_kind==='eod_close'){
    add('MASSIVE PREVIOUS-SESSION CLOSE: '+selectedOptionQuote.symbol+' closed at '+dollars(selectedOptionQuote.close)+' on '+selectedOptionQuote.option_as_of+'. This historical trade close is NOT a live bid or ask. Check current pricing before any trade.','warn');
+  }else if(selectedOptionQuote.quote_kind==='indicative_modified'){
+   add('ALPACA INDICATIVE MODIFIED QUOTE: '+selectedOptionQuote.symbol+' uses simulated/modified price data, NOT actual OPRA bid/ask or guaranteed executable premium. Validate live bid/ask at your broker.','warn');
   }else{
    add('The option premium source is '+selectedOptionQuote.provider+'. Check bid, ask, and trade execution assumptions.','warn');
   }
@@ -210,7 +212,7 @@ function calculate(event){
   latestCalc=calc;
   renderMetrics(calc);payoffChart(calc);scenarios(calc);riskChecks(calc);
   $('saveTrade').disabled=false;
-  $('calcStatus').textContent='Calculated from '+(typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?(selectedOptionQuote.model?'a THEORETICAL model premium':selectedOptionQuote.quote_kind==='eod_close'?'a REAL MASSIVE PREVIOUS-DAY CLOSE (not a live bid/ask)':'an external premium'):'your manually entered premium')+'. No order was placed.';
+  $('calcStatus').textContent='Calculated from '+(typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?(selectedOptionQuote.model?'a THEORETICAL model premium':selectedOptionQuote.quote_kind==='eod_close'?'a REAL MASSIVE PREVIOUS-DAY CLOSE (not a live bid/ask)':selectedOptionQuote.quote_kind==='indicative_modified'?'an ALPACA INDICATIVE MODIFIED QUOTE (not executable)':'an external premium'):'your manually entered premium')+'. No order was placed.';
   $('calcStatus').className='calc-status status-good';
  }catch(ex){
   resetMetrics();$('calcStatus').textContent=ex.message;$('calcStatus').className='calc-status status-warn';
@@ -244,7 +246,7 @@ function saveCurrent(){
   ticker:c.ticker,strategy:c.strategy,strike:c.strike,premium:c.premium,contracts:c.contracts,
   dte:c.dte,basis:c.basis,delta:c.delta,fees:c.fees,spot:c.spot,spotDate:c.spotDate,
   credit:c.credit,yieldPct:c.yieldPct,breakeven:c.breakeven,maxLoss:c.maxLoss,quoteInfo:typeof selectedOptionQuote==='undefined'?null:selectedOptionQuote,
-  priceMethod:typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?(selectedOptionQuote.model?'Theoretical model':selectedOptionQuote.quote_kind==='eod_close'?'Massive prior-day close':'External'): 'Manual entry',savedAt:new Date().toISOString()};
+  priceMethod:typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?(selectedOptionQuote.model?'Theoretical model':selectedOptionQuote.quote_kind==='eod_close'?'Massive prior-day close':selectedOptionQuote.quote_kind==='indicative_modified'?'Alpaca indicative modified quote':'External'): 'Manual entry',savedAt:new Date().toISOString()};
  storedTrades.unshift(record);
  storedTrades=storedTrades.slice(0,100);
  if(!persistSaved())storedTrades.shift();
