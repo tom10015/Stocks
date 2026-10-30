@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="description" content="ShareWatch options trade analyzer using the same active stock watchlist and admin portal.">
  <title>Options Analyzer · ShareWatch</title>
- <link rel="stylesheet" href="./options.css?v=20261029a">
+ <link rel="stylesheet" href="./options.css?v=20261030-chain1">
 </head>
 <body>
 <header>
@@ -21,7 +21,7 @@
 <main>
  <div class="eyebrow">New · Separate dashboard</div>
  <h1>Options Trade Analyzer</h1>
- <p class="intro muted">Compare cash-secured puts and covered calls across the <strong>same active ShareWatch stock list</strong>. Share prices come from the existing scheduled price tracker; <strong>option strikes, premiums, and Greeks must be entered from a current option chain</strong>. No trades are placed and no profitability is guaranteed.</p>
+ <p class="intro muted">Analyze <strong>covered calls, cash-secured puts, long calls, and long puts</strong> for all your active stocks. The app retrieves delayed option-chain quotes automatically where available, then uses real bid/ask premiums. You can still enter quotes manually when a contract isn't available. No trades are placed and no return is guaranteed.</p>
  <section class="top-stats" aria-label="Watchlist overview">
   <div class="stat"><div class="label">Active tracked tickers</div><div class="value" id="statTickers">—</div><div class="mini">Managed by your existing admin</div></div>
   <div class="stat"><div class="label">Saved price quotes</div><div class="value" id="statPriced">—</div><div class="mini">End-of-day closes, not live quotes</div></div>
@@ -43,11 +43,21 @@
      <div><div class="small muted">Selected security</div><div class="selected-name" id="selectedTicker">Choose a stock</div><div class="small muted" id="selectedCompany">Active ShareWatch watchlist</div></div>
      <div><div class="selected-price" id="selectedPrice">—<small id="priceAsOf">Most recent saved close</small></div><a id="sharesLink" class="small" href="./index.html">View share history ↗</a></div>
     </div>
-    <form id="tradeForm" novalidate>
+    <div class="auto-chain-box" aria-labelledby="autoChainHeading">
+      <div class="panel-head"><div><div class="eyebrow">Automated market data</div><h3 id="autoChainHeading">Available option contracts</h3><div class="section-sub" id="autoQuoteStatus">Checking saved option-chain quotes…</div></div><span id="autoChainFreshness" class="badge">Loading…</span></div>
+      <div class="chain-toolbar">
+       <label for="autoExpiration">Expiration <select id="autoExpiration" aria-label="Option expiration date"><option value="">Loading expirations…</option></select></label>
+       <label for="autoStrikeFilter">Strikes <select id="autoStrikeFilter" aria-label="Filter option strikes"><option value="near">Closest to stock price</option><option value="otm">Out of the money</option><option value="all">All saved strikes</option></select></label>
+       <button id="autoSuggestion" type="button" class="ghost">Select a sample contract</button>
+      </div>
+      <div class="table-scroll"><table class="chain-table"><thead><tr><th>Strike</th><th>Bid</th><th>Ask</th><th>Delta</th><th>IV</th><th>Vol.</th><th>Open int.</th><th>Load contract</th></tr></thead><tbody id="autoChainRows"><tr><td colspan="8" class="muted">Loading delayed option contracts…</td></tr></tbody></table></div>
+      <div class="small muted" id="autoChainHelp">Selling covered calls/puts uses bid; buying calls/puts uses ask. Quotes may be delayed or stale, and availability varies by ticker.</div>
+     </div>
+     <form id="tradeForm" novalidate>
      <div class="formgrid">
-      <div class="field"><label for="strategy">Option strategy</label><select id="strategy"><option value="put">Sell cash-secured put</option><option value="call">Sell covered call</option></select></div>
+      <div class="field"><label for="strategy">Option strategy</label><select id="strategy"><option value="put">Sell cash-secured put</option><option value="call">Sell covered call</option><option value="long_call">Buy call (long)</option><option value="long_put">Buy put (long)</option></select></div>
       <div class="field"><label for="strike">Strike price ($)</label><input id="strike" type="number" min="0.01" step="any" inputmode="decimal" placeholder="Enter option strike" required><small>Use an actual listed strike</small></div>
-      <div class="field"><label for="premium">Premium per share ($)</label><input id="premium" type="number" min="0.01" step="any" inputmode="decimal" placeholder="Enter bid/credit" required><small>1 contract normally represents 100 shares</small></div>
+      <div class="field"><label for="premium" id="premiumInputLabel">Option premium per share ($)</label><input id="premium" type="number" min="0.01" step="any" inputmode="decimal" placeholder="Enter bid/credit" required><small id="premiumHint">Selling uses bid; buying uses ask</small></div>
       <div class="field"><label for="contracts">Number of contracts</label><input id="contracts" type="number" min="1" max="10000" step="1" value="1" required></div>
       <div class="field"><label for="dte">Days to expiration</label><input id="dte" type="number" min="1" max="3650" step="1" value="7" required><small>For simple annualized premium only</small></div>
       <div class="field"><label for="delta">Absolute option delta (optional)</label><input id="delta" type="number" min="0" max="1" step="0.01" placeholder="e.g. 0.15"><small>0–1, from current option chain</small></div>
@@ -57,18 +67,18 @@
       <div class="field"><label for="spotOverride">Underlying stock price ($, optional)</label><input id="spotOverride" type="number" min="0.01" step="any" placeholder="Override saved closing price"><small>Use a current quote if preferred</small></div>
      </div>
      <div class="actions"><button id="calculate" class="primary" type="submit">Calculate trade</button><button id="saveTrade" type="button" disabled>Save to comparison</button><button id="clearTrade" class="ghost" type="button">Clear inputs</button></div>
-     <div id="calcStatus" class="calc-status" role="status" aria-live="polite"></div>
+     <div id="selectedContract" class="small muted" aria-live="polite">No automatic option contract selected. You may enter a quote manually.</div><div id="calcStatus" class="calc-status" role="status" aria-live="polite"></div>
     </form>
     <div class="metrics" aria-live="polite">
-     <div class="metric"><div class="label">Net premium received</div><div class="number good" id="metricPremium">—</div></div>
-     <div class="metric"><div class="label">Capital tied up / share value</div><div class="number" id="metricCapital">—</div></div>
-     <div class="metric"><div class="label">Premium yield (period)</div><div class="number" id="metricYield">—</div></div>
+     <div class="metric"><div class="label" id="premiumMetricLabel">Net premium received</div><div class="number good" id="metricPremium">—</div></div>
+     <div class="metric"><div class="label" id="capitalMetricLabel">Capital secured / share value</div><div class="number" id="metricCapital">—</div></div>
+     <div class="metric"><div class="label" id="yieldMetricLabel">Premium yield (period)</div><div class="number" id="metricYield">—</div></div>
      <div class="metric"><div class="label" id="maxGainLabel">Maximum gain at expiration</div><div class="number good" id="metricMaxGain">—</div></div>
      <div class="metric"><div class="label">Maximum downside loss</div><div class="number bad" id="metricMaxLoss">—</div></div>
      <div class="metric"><div class="label">Breakeven share price</div><div class="number" id="metricBreakeven">—</div></div>
-     <div class="metric"><div class="label">Simple annualized premium yield</div><div class="number" id="metricAnnual">—</div></div>
-     <div class="metric"><div class="label">Delta-based OTM approximation</div><div class="number" id="metricDelta">—</div></div>
-     <div class="metric"><div class="label">Expiration share obligation</div><div class="number" id="metricShares">—</div></div>
+     <div class="metric"><div class="label" id="annualMetricLabel">Simple annualized premium yield</div><div class="number" id="metricAnnual">—</div></div>
+     <div class="metric"><div class="label" id="deltaMetricLabel">Delta-based OTM approximation</div><div class="number" id="metricDelta">—</div></div>
+     <div class="metric"><div class="label" id="shareMetricLabel">Expiration share obligation</div><div class="number" id="metricShares">—</div></div>
     </div>
     <div class="chart-container">
      <div class="chart-title"><strong>Expiration payoff scenarios</strong><span class="small muted" id="payoffType">Enter trade details</span></div>
@@ -94,9 +104,9 @@
   <div class="table-scroll"><table class="trade-table"><thead><tr><th>Stock</th><th>Strategy</th><th>Strike</th><th>Credit</th><th>Days</th><th>Period yield</th><th>Breakeven</th><th>Max downside</th><th>Remove</th></tr></thead><tbody id="savedTrades"><tr><td colspan="9" class="muted">No candidate trades saved on this device.</td></tr></tbody></table></div>
   <p class="footnote">Saved comparisons remain only in this browser's local storage—not in the admin database or your brokerage account. The shared admin portal controls which stocks appear in both dashboards; hiding or deleting a ticker also hides its saved trade comparisons here.</p>
  </section>
- <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: net premium minus the stock purchase obligation if assigned. If the stock falls to zero, the seller may lose almost the full strike value. Covered calls: the calculation assumes you already own 100 shares per contract and uses your entered share cost basis; upside is capped at the call strike, and downside resembles holding the stock. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. All quotes displayed here are end-of-day stock closes and are not live or executable option-chain quotes.</p></details></div>
- <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability, premium yield, nor a positive assumed expected value guarantees profitability.</footer>
+ <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Option-chain quotes, when available, are delayed snapshots rather than live executable offers; do not assume fills at displayed bid/ask. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
+ <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability, premium yield, nor a positive assumed expected value guarantees profitability.</footer>
 </main>
-<script src="./options.js?v=20261029a" defer></script>
+<script src="./options.js?v=20261030-chain1" defer></script><script src="./option-chain-ui.js?v=20261030-chain1" defer></script>
 </body>
 </html>
