@@ -12,6 +12,35 @@ const $=id=>document.getElementById(id);
 let activeStocks=[],selected=null,latestCalc=null,storedTrades=[],pricesChecked=null;
 let selectedOptionQuote=null;
 function resetSelectedQuote(){selectedOptionQuote=null;const info=$('selectedContract');if(info)info.textContent='Choose an Alpaca indicative contract or enter a manual quote.';}
+
+const STRATEGY_CONFIG={
+ put:{name:'Cash-Secured Put',mode:'SELL · PUT',direction:'Outlook: Neutral to bullish',capital:'Required: Cash to secure assignment',premium:'Premium: Received (indicative bid)',description:'Sell a put to collect an indicative premium. You must have cash available to purchase 100 shares per contract at the strike if assigned.',note:'Risk: Shares may fall significantly below the strike. Your premium does not remove the risk of substantial stock losses.',label:'Available puts for your cash-secured put'},
+ call:{name:'Covered Call',mode:'SELL · CALL',direction:'Outlook: Neutral to moderately bullish',capital:'Required: Own 100 shares per contract',premium:'Premium: Received (indicative bid)',description:'Sell a call against 100 shares per contract that you already own. You collect premium but may have to sell the shares at the strike.',note:'Risk: Your stock can fall substantially and upside is capped. Enter your actual cost basis below.',label:'Available calls for your covered call'},
+ long_call:{name:'Buy a Call',mode:'BUY · CALL',direction:'Outlook: Bullish',capital:'Required: Premium paid + fees',premium:'Premium: Paid (indicative ask)',description:'Buy a call if you expect the stock to rise. You pay an option premium and have the right, but not the obligation, to buy shares at the strike.',note:'Risk: The entire premium and fees can be lost if the call expires without sufficient value.',label:'Available calls to buy'},
+ long_put:{name:'Buy a Put',mode:'BUY · PUT',direction:'Outlook: Bearish',capital:'Required: Premium paid + fees',premium:'Premium: Paid (indicative ask)',description:'Buy a put if you expect the stock to fall. You pay an option premium and have the right, but not the obligation, to sell shares at the strike.',note:'Risk: The entire premium and fees can be lost if the put expires without sufficient value.',label:'Available puts to buy'}
+};
+function syncStrategyUI(){
+ const strategy=$('strategy').value,c=STRATEGY_CONFIG[strategy]||STRATEGY_CONFIG.put;
+ document.querySelectorAll('.strategy-choice').forEach(button=>{
+  const active=button.dataset.strategy===strategy;
+  button.classList.toggle('active',active);
+  button.setAttribute('aria-pressed',String(active));
+ });
+ $('strategyMode').textContent=c.mode;
+ $('strategySummaryTitle').textContent=c.name;
+ $('strategyDescription').textContent=c.description;
+ $('strategyDirection').textContent=c.direction;
+ $('strategyCapital').textContent=c.capital;
+ $('strategyPremium').textContent=c.premium;
+ $('strategyNote').textContent=c.note;
+ $('tradeDetailsHeading').textContent='Enter your '+c.name+' details';
+ $('tradeDetailsHelper').textContent=strategy==='call'?'Enter your actual stock cost basis, then the strike and premium. You must own the shares.':'Choose an Alpaca indicative option above or enter the strike and premium yourself.';
+ $('alpacaHeading').textContent=c.label;
+ $('basisField').hidden=strategy!=='call';
+ $('premiumInputLabel').textContent=strategy==='put'||strategy==='call'?'Premium RECEIVED per share ($)':'Premium PAID per share ($)';
+ $('premium').placeholder=strategy==='put'||strategy==='call'?'Indicative bid or manual credit':'Indicative ask or manual debit';
+}
+
 let listError=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const dollars=n=>Number.isFinite(n)?new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(n):'—';
@@ -66,9 +95,9 @@ function resetMetrics(){
 }
 function clearInputs(updateStatus=true){
  $('tradeForm').reset();
- $('strategy').value='put';
+ // Preserve the chosen strategy when clearing trade inputs or switching stocks.
  $('contracts').value='1';$('dte').value='7';$('fees').value='0';
- $('basisField').hidden=true;
+ syncStrategyUI();
  resetMetrics();
  $('calcStatus').textContent=updateStatus?'Inputs cleared.':'';
 }
@@ -331,12 +360,19 @@ async function init(){
  if(pricesResult.status==='fulfilled')setStatus('Loaded '+activeStocks.length+' active tickers. Alpaca indicative option data and manual quote entry are available.','good');
  else setStatus('Watchlist loaded. Saved share prices could not be read; use the price override field when analyzing a trade.','error');
 }
+document.querySelectorAll('.strategy-choice').forEach(button=>button.addEventListener('click',()=>{
+ if($('strategy').value===button.dataset.strategy)return;
+ $('strategy').value=button.dataset.strategy;
+ $('strategy').dispatchEvent(new Event('change',{bubbles:true}));
+}));
+syncStrategyUI();
 $('stockSearch').addEventListener('input',renderList);
 $('stockFilter').addEventListener('change',renderList);
 $('stockList').addEventListener('click',event=>{const button=event.target.closest('button[data-ticker]');if(button)selectStock(button.dataset.ticker);});
 $('strategy').addEventListener('change',()=>{$('basisField').hidden=$('strategy').value!=='call';
  $('premiumHint').textContent=$('strategy').value==='put'||$('strategy').value==='call'?'Selling uses indicative bid (not executable)':'Buying uses indicative ask (not executable)';
  if(typeof resetSelectedQuote==='function')resetSelectedQuote();
+ syncStrategyUI();
  resetMetrics();$('calcStatus').textContent='Strategy changed. Recalculate to update outcomes.';});
 $('tradeForm').addEventListener('submit',calculate);
 $('clearTrade').addEventListener('click',()=>clearInputs(true));
