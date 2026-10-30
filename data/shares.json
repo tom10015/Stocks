@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-29T23:54:53.763285+00:00",
+  "updated_at": "2026-10-30T05:35:14.479232+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -9994,7 +9994,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-29"
+      "source_updated_at": "2026-10-30"
     },
     "TSLY": {
       "ticker": "TSLY",

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-29T23:54:17.028575+00:00",
+  "checked_at": "2026-10-30T05:35:04.073338+00:00",
   "results": {
     "ASST": {
       "checked_at": "2026-10-28T16:44:24.494715+00:00",
@@ -62,7 +62,7 @@
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "MSTY": {
-      "checked_at": "2026-10-29T01:12:59.584696+00:00",
+      "checked_at": "2026-10-30T05:35:04.073338+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "No verified historical fund share series is available from configured providers."
@@ -74,19 +74,19 @@
       "note": "No verified historical fund share series is available from configured providers."
     },
     "ORCU": {
-      "checked_at": "2026-10-29T01:12:59.584696+00:00",
+      "checked_at": "2026-10-30T05:35:04.073338+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "QQQA": {
-      "checked_at": "2026-10-29T01:12:59.584696+00:00",
+      "checked_at": "2026-10-30T05:35:04.073338+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "SCHD": {
-      "checked_at": "2026-10-29T01:12:59.584696+00:00",
+      "checked_at": "2026-10-30T05:35:04.073338+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
