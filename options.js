@@ -1,6 +1,6 @@
 /* ShareWatch Options Analyzer
  * Separate from share-count dashboard. Shared ACTIVE Supabase watchlist.
- * Model premiums are explicitly hypothetical, or manually entered quotes.
+ * Alpaca indicative premiums and manually entered quotes; no theoretical option pricing.
  * A saved comparison never sends account assumptions to Supabase.
  */
 'use strict';
@@ -10,6 +10,8 @@ const STORAGE_KEY='sharewatch-options-comparisons-v1';
 const CONTRACT_SIZE=100;
 const $=id=>document.getElementById(id);
 let activeStocks=[],selected=null,latestCalc=null,storedTrades=[],pricesChecked=null;
+let selectedOptionQuote=null;
+function resetSelectedQuote(){selectedOptionQuote=null;const info=$('selectedContract');if(info)info.textContent='Choose an Alpaca indicative contract or enter a manual quote.';}
 let listError=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const dollars=n=>Number.isFinite(n)?new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(n):'—';
@@ -41,6 +43,7 @@ function selectStock(ticker){
  const found=activeStocks.find(x=>x.ticker===ticker);
  if(!found)return;
  selected=found;
+ resetSelectedQuote();
  $('selectedTicker').textContent=found.ticker;
  $('selectedCompany').textContent=found.name+(isFund(found)?' · ETF / fund':' · Company stock');
  $('selectedPrice').replaceChildren(document.createTextNode(valid(found.price)?dollars(found.price):'No saved price'));
@@ -55,7 +58,7 @@ function resetMetrics(){
  for(const id of ['metricPremium','metricCapital','metricYield','metricMaxGain','metricMaxLoss','metricBreakeven','metricAnnual','metricDelta','metricShares'])$(id).textContent='—';
  $('maxGainLabel').textContent='Maximum gain at expiration';
  $('payoffType').textContent='Enter trade details';
- $('payoffChart').innerHTML='<p class="muted small">Enter a hypothetical model estimate or a real option quote, then calculate expiration outcomes.</p>';
+ $('payoffChart').innerHTML='<p class="muted small">Select an Alpaca indicative contract or enter a manual premium, then calculate expiration outcomes.</p>';
  $('scenarioRows').innerHTML='<tr><td colspan="4" class="muted">Calculate a trade to see scenarios.</td></tr>';
  $('riskChecks').replaceChildren();
  $('saveTrade').disabled=true;
@@ -75,7 +78,7 @@ function computeTrade(){
  const selling=strategy==='put'||strategy==='call',buying=strategy==='long_call'||strategy==='long_put';
  if(!selling&&!buying)throw Error('Choose a supported option strategy.');
  if(!valid(K)||K<=0)throw Error('Enter an option strike greater than $0. Check with your broker that it is actually listed.');
- if(!valid(premium)||premium<=0)throw Error('Enter a positive premium from a model estimate or a real option chain.');
+ if(!valid(premium)||premium<=0)throw Error('Enter a positive indicative or manually entered option premium.');
  if((strategy==='put'||strategy==='long_put')&&premium>=K)throw Error('A put premium at or above its strike is not a plausible standard quote. Check the quote.');
  if(!Number.isInteger(n)||n<1||n>10000)throw Error('Contracts must be a whole number from 1 to 10,000.');
  if(!Number.isInteger(dte)||dte<1||dte>3650)throw Error('Days to expiration must be from 1 to 3,650.');
@@ -170,7 +173,7 @@ function scenarios(calc){
 function riskChecks(calc){
  const notes=[];
  const add=(txt,severity='')=>notes.push('<div class="risk-item '+esc(severity)+'">'+esc(txt)+'</div>');
- add('Expiration payoff is based on an estimated or manually entered premium. Model estimates are NOT actual option quotes; no trade is guaranteed or recommended.','warn');
+ add('Expiration payoff is based on an Alpaca indicative or manually entered premium. Indicative quotes are modified, not executable market bid/ask; no trade is guaranteed or recommended.','warn');
  if(calc.dte<=7)add('Short-dated options can move rapidly, especially near expiration.','warn');
  if(calc.strategy==='put'){
   if(calc.strike>=calc.spot)add('The sold put strike is at or above the underlying price; assignment is possible.','warn');
@@ -193,9 +196,7 @@ function riskChecks(calc){
  if(calc.delta!==null)add('Delta is only a rough approximation for expiring out of the money, not an estimate of profit probability.','');
  if(isFund(selected))add('Verify this ETF/fund actually has standard, listed options and a 100-share contract multiplier.','warn');
  if(typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote){
-  if(selectedOptionQuote.model){
-   add('PREMIUM IS THEORETICAL: '+selectedOptionQuote.provider+'. It is not a market quote or verified option contract.','warn');
-  }else if(selectedOptionQuote.quote_kind==='indicative_modified'){
+  if(selectedOptionQuote.quote_kind==='indicative_modified'){
    add('ALPACA INDICATIVE MODIFIED QUOTE: '+selectedOptionQuote.symbol+' uses simulated/modified price data, NOT actual OPRA bid/ask or guaranteed executable premium. Validate live bid/ask at your broker.','warn');
   }else{
    add('The option premium source is '+selectedOptionQuote.provider+'. Check bid, ask, and trade execution assumptions.','warn');
@@ -210,7 +211,7 @@ function calculate(event){
   latestCalc=calc;
   renderMetrics(calc);payoffChart(calc);scenarios(calc);riskChecks(calc);
   $('saveTrade').disabled=false;
-  $('calcStatus').textContent='Calculated from '+(typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?(selectedOptionQuote.model?'a THEORETICAL model premium':selectedOptionQuote.quote_kind==='indicative_modified'?'an ALPACA INDICATIVE MODIFIED QUOTE (not executable)':'an external premium'):'your manually entered premium')+'. No order was placed.';
+  $('calcStatus').textContent='Calculated from '+(typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?(selectedOptionQuote.quote_kind==='indicative_modified'?'an ALPACA INDICATIVE MODIFIED QUOTE (not executable)':'an external premium'):'your manually entered premium')+'. No order was placed.';
   $('calcStatus').className='calc-status status-good';
  }catch(ex){
   resetMetrics();$('calcStatus').textContent=ex.message;$('calcStatus').className='calc-status status-warn';
@@ -244,7 +245,7 @@ function saveCurrent(){
   ticker:c.ticker,strategy:c.strategy,strike:c.strike,premium:c.premium,contracts:c.contracts,
   dte:c.dte,basis:c.basis,delta:c.delta,fees:c.fees,spot:c.spot,spotDate:c.spotDate,
   credit:c.credit,yieldPct:c.yieldPct,breakeven:c.breakeven,maxLoss:c.maxLoss,quoteInfo:typeof selectedOptionQuote==='undefined'?null:selectedOptionQuote,
-  priceMethod:typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?(selectedOptionQuote.model?'Theoretical model':selectedOptionQuote.quote_kind==='indicative_modified'?'Alpaca indicative modified quote':'External'): 'Manual entry',savedAt:new Date().toISOString()};
+  priceMethod:typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?(selectedOptionQuote.quote_kind==='indicative_modified'?'Alpaca indicative modified quote':'External'): 'Manual entry',savedAt:new Date().toISOString()};
  storedTrades.unshift(record);
  storedTrades=storedTrades.slice(0,100);
  if(!persistSaved())storedTrades.shift();
@@ -327,16 +328,16 @@ async function init(){
  renderStats();renderList();renderSaved();
  if(activeStocks.length)selectStock(activeStocks.find(x=>valid(x.price))?.ticker||activeStocks[0].ticker);
  else $('stockList').innerHTML='<p class="muted small">No active tickers. <a href="./admin.html">Add one from your existing admin portal</a>.</p>';
- if(pricesResult.status==='fulfilled')setStatus('Loaded '+activeStocks.length+' active tickers. Theoretical option estimates use stored stock price history; actual quote entry remains manual.','good');
+ if(pricesResult.status==='fulfilled')setStatus('Loaded '+activeStocks.length+' active tickers. Alpaca indicative option data and manual quote entry are available.','good');
  else setStatus('Watchlist loaded. Saved share prices could not be read; use the price override field when analyzing a trade.','error');
 }
 $('stockSearch').addEventListener('input',renderList);
 $('stockFilter').addEventListener('change',renderList);
 $('stockList').addEventListener('click',event=>{const button=event.target.closest('button[data-ticker]');if(button)selectStock(button.dataset.ticker);});
 $('strategy').addEventListener('change',()=>{$('basisField').hidden=$('strategy').value!=='call';
- $('premiumHint').textContent=$('strategy').value==='put'||$('strategy').value==='call'?'Real sale uses bid; model gives an estimate':'Real purchase uses ask; model gives an estimate';
+ $('premiumHint').textContent=$('strategy').value==='put'||$('strategy').value==='call'?'Selling uses indicative bid (not executable)':'Buying uses indicative ask (not executable)';
  if(typeof resetSelectedQuote==='function')resetSelectedQuote();
- if(typeof renderOptionChain==='function')renderOptionChain();resetMetrics();$('calcStatus').textContent='Strategy changed. Recalculate to update outcomes.';});
+ resetMetrics();$('calcStatus').textContent='Strategy changed. Recalculate to update outcomes.';});
 $('tradeForm').addEventListener('submit',calculate);
 $('clearTrade').addEventListener('click',()=>clearInputs(true));
 $('saveTrade').addEventListener('click',saveCurrent);
