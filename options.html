@@ -52,6 +52,9 @@
       </div>
       <div class="table-scroll"><table class="chain-table"><thead><tr><th>Strike</th><th>Bid</th><th>Ask</th><th>Delta</th><th>IV</th><th>Vol.</th><th>Open int.</th><th>Load contract</th></tr></thead><tbody id="autoChainRows"><tr><td colspan="8" class="muted">Loading delayed option contracts…</td></tr></tbody></table></div>
       <div class="small muted" id="autoChainHelp">Selling covered calls/puts uses bid; buying calls/puts uses ask. Quotes may be delayed or stale, and availability varies by ticker.</div>
+      <details style="margin-top:13px"><summary>Connect automatic option quotes (one-time setup)</summary>
+        <p>Option quotes are private to approved ShareWatch admins. First obtain a Tradier market-data API token for your own authorized use from <a href="https://web.tradier.com/user/api" target="_blank" rel="noopener noreferrer">Tradier API Settings</a>. Then open <a href="https://supabase.com/dashboard/project/fmtfskcgnlxusipaxdog" target="_blank" rel="noopener noreferrer">your Supabase project</a>, find <strong>Edge Function Secrets</strong>, and save the token under the name <code>TRADIER_ACCESS_TOKEN</code>. Sign into the existing <a href="./admin.html">ShareWatch admin portal</a> and return here. Never put the token in your public GitHub files or browser code. No trading orders are submitted.</p>
+      </details>
      </div>
      <form id="tradeForm" novalidate>
      <div class="formgrid">
