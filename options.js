@@ -188,8 +188,8 @@ function persistSaved(){
  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(storedTrades));return true;}catch{$('calcStatus').textContent='Browser storage is unavailable. Trade comparison could not be saved on this device.';return false;}
 }
 function savedVisible(){
- const validTickers=new Set(activeStocks.map(x=>x.ticker));
- return storedTrades.filter(x=>validTickers.has(x.ticker));
+ const byTicker=new Map(activeStocks.map(x=>[x.ticker,x]));
+ return storedTrades.filter(x=>{const stock=byTicker.get(x.ticker);return stock&&(!stock.addedAt||!x.savedAt||Date.parse(x.savedAt)>=Date.parse(stock.addedAt));});
 }
 function renderSaved(){
  const list=savedVisible();
@@ -254,7 +254,7 @@ function calculateEV(){
 async function loadWatchlist(){
  // Query live active records. If Supabase fails, NEVER fall back to the full
  // cached JSON, which could display hidden/deleted stocks as active.
- const endpoint=SUPABASE+'/rest/v1/stocks_watchlist?select=ticker,name,security_type,active&active=eq.true&order=ticker.asc&limit=1000';
+ const endpoint=SUPABASE+'/rest/v1/stocks_watchlist?select=ticker,name,security_type,active,added_at&active=eq.true&order=ticker.asc&limit=1000';
  const r=await fetch(endpoint,{headers:{'apikey':API_KEY,'Accept':'application/json'},cache:'no-store'});
  if(!r.ok)throw Error('Admin watchlist is unavailable (HTTP '+r.status+').');
  const records=await r.json();
@@ -282,7 +282,7 @@ async function init(){
  pricesChecked=priceData.updated_at||null;
  activeStocks=watchResult.value.map(x=>{
   const quote=priceQuote(priceData.prices?.[x.ticker]),shares=shareData.companies?.[x.ticker];
-  return {ticker:x.ticker,name:x.name||shares?.name||x.ticker,security_type:x.security_type,shareType:shares?.type||'',
+  return {ticker:x.ticker,name:x.name||shares?.name||x.ticker,security_type:x.security_type,shareType:shares?.type||'',addedAt:x.added_at||null,
    price:quote?Number(quote[1]):null,priceDate:quote?.[0]||null,priceProvider:priceData.prices?.[x.ticker]?.source?.provider||null};
  });
  activeStocks.sort((a,b)=>a.ticker.localeCompare(b.ticker));
