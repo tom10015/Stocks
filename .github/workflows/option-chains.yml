@@ -30,7 +30,7 @@ jobs:
       - name: Download delayed real option quotes
         env:
           TRADIER_ACCESS_TOKEN: ${{ secrets.TRADIER_ACCESS_TOKEN }}
-        run: python -u options_chain_update.py --symbols AAPL,SOFI
+        run: python -u options_chain_update.py --limit 100
       - name: Commit market quotes
         run: |
           cp data/options_chains.json /tmp/sharewatch-options-chains-incoming.json
