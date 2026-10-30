@@ -57,7 +57,7 @@
   <label for="massiveDays">Expiration horizon
    <select id="massiveDays"><option value="14">Next 14 days</option><option value="30" selected>Next 30 days</option><option value="60">Next 60 days</option><option value="120">Next 120 days</option></select>
   </label>
-  <button type="button" id="massiveRefresh" class="ghost">Load listed contracts</button>
+  <button type="button" id="massiveRefresh" class="ghost">Test Massive &amp; load contracts</button>
  </div>
  <div class="table-scroll">
   <table class="chain-table"><thead><tr><th>Expiration</th><th>Strike</th><th>Type</th><th>Model estimate</th><th>Last market close</th><th>Contract</th><th>Action</th></tr></thead>
@@ -66,7 +66,7 @@
  </div>
  <div id="massiveSelection" class="small muted" aria-live="polite" style="margin-top:10px">No Massive option close loaded yet.</div>
  <details style="margin-top:13px"><summary>Connect your existing Massive account (one-time setup)</summary>
-  <p>The Massive connection you use in ChatGPT cannot automatically be transferred to GitHub Pages. Open your <a href="https://massive.com/dashboard" target="_blank" rel="noopener noreferrer">Massive dashboard</a> to find its API key. In <a href="https://supabase.com/dashboard/project/fmtfskcgnlxusipaxdog" target="_blank" rel="noopener noreferrer">your existing Supabase project</a>, open <strong>Edge Function Secrets</strong> and add a secret named <code>MASSIVE_API_KEY</code> containing that key. Do not paste the key into this website, this chat, or a public GitHub file. Your existing ShareWatch admin login still controls access. The free plan has a limited request rate and does not include live options bid/ask snapshots.</p>
+  <p>The Massive connection you use in ChatGPT cannot automatically be transferred to GitHub Pages. Open your <a href="https://massive.com/dashboard" target="_blank" rel="noopener noreferrer">Massive dashboard</a> to find its API key. In <a href="https://supabase.com/dashboard/project/fmtfskcgnlxusipaxdog" target="_blank" rel="noopener noreferrer">your existing Supabase project</a>, open <strong>Edge Function Secrets</strong> and add a secret named <code>MASSIVE_API_KEY</code> containing that key. Do not paste the key into this website, this chat, or a public GitHub file. Your existing ShareWatch admin login still controls access; to share the current sign-in session, open the Options Analyzer from the admin portal in the same browser tab. The free plan has a limited request rate and does not include live options bid/ask snapshots.</p>
  </details>
 </section>
 <div class="auto-chain-box" aria-labelledby="autoChainHeading">
@@ -147,6 +147,6 @@
  <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Theoretical option premiums are not tradable quotes. Use a broker to verify actual listed contracts, market bid/ask, liquidity and current expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability, premium yield, nor a positive assumed expected value guarantees profitability.</footer>
 </main>
-<script src="./options.js?v=20261030-massive1" defer></script><script src="./option-chain-ui.js?v=20261030-massive1" defer></script><script src="./massive-options.js?v=20261030-massive1" defer></script>
+<script src="./options.js?v=20261030-massive1" defer></script><script src="./option-chain-ui.js?v=20261030-massive1" defer></script><script src="./massive-options.js?v=20261030-massive2" defer></script>
 </body>
 </html>
