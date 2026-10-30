@@ -147,7 +147,7 @@ function selectOptionContract(row){
  selectedOptionQuote={
   ticker:selected.ticker,symbol:row.symbol,expiration:row.expiration,
   side:row.type,provider:chain.provider,retrieved_at:chain.retrieved_at,
-  quote_type:buying?'ask':'bid',bid:row.bid,ask:row.ask,
+  quote_type:buying?'ask':'bid',bid:row.bid,ask:row.ask,underlying_price:Number.isFinite(chain.underlying_price)?chain.underlying_price:null,
   volume:row.volume,open_interest:row.open_interest,
   iv:row.iv,delta:row.delta
  };
@@ -183,8 +183,9 @@ selectStock=function(ticker){
  if(selected?.ticker===ticker)loadOptionChain(ticker);
 };
 $('autoExpiration').addEventListener('change',()=>{
- resetSelectedQuote();renderOptionChain();
+ resetSelectedQuote();renderOptionChain();if(quoteFresh(currentChain))selectSampleContract();
 });
+$('strategy').addEventListener('change',()=>{if(quoteFresh(currentChain))selectSampleContract();});
 $('autoStrikeFilter').addEventListener('change',renderOptionChain);
 $('autoSuggestion').addEventListener('click',selectSampleContract);
 $('autoChainRows').addEventListener('click',e=>{
@@ -192,7 +193,7 @@ $('autoChainRows').addEventListener('click',e=>{
  const row=currentChain?.contracts.find(c=>c.symbol===button.dataset.occ&&c.expiration===$('autoExpiration').value);
  if(row)selectOptionContract(row);
 });
-for(const id of ['strike','premium','dte','delta','spotOverride']){
+for(const id of ['strike','premium','dte','delta','spotOverride','contracts','fees','basis','account']){
  $(id).addEventListener('input',()=>{
   if(selectedOptionQuote){
    resetSelectedQuote();
