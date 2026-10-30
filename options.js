@@ -72,45 +72,61 @@ function clearInputs(updateStatus=true){
 function computeTrade(){
  if(!selected)throw Error('Select a stock from the watchlist.');
  const strategy=$('strategy').value,K=parsed('strike'),premium=parsed('premium'),n=parsed('contracts'),dte=parsed('dte'),fees=parsed('fees'),basis=parsed('basis'),delta=parsed('delta'),budget=parsed('account'),override=parsed('spotOverride');
- if(!['put','call'].includes(strategy))throw Error('Choose a supported strategy.');
+ const selling=strategy==='put'||strategy==='call',buying=strategy==='long_call'||strategy==='long_put';
+ if(!selling&&!buying)throw Error('Choose a supported option strategy.');
  if(!valid(K)||K<=0)throw Error('Enter a valid listed option strike greater than $0.');
- if(!valid(premium)||premium<=0)throw Error('Enter the actual premium from an option chain.');
- if(strategy==='put'&&premium>=K)throw Error('A put premium at or above the strike is not a plausible standard quote. Check the values.');
+ if(!valid(premium)||premium<=0)throw Error('Enter a positive bid/ask premium from an option chain.');
+ if((strategy==='put'||strategy==='long_put')&&premium>=K)throw Error('A put premium at or above its strike is not a plausible standard quote. Check the quote.');
  if(!Number.isInteger(n)||n<1||n>10000)throw Error('Contracts must be a whole number from 1 to 10,000.');
- if(!Number.isInteger(dte)||dte<1||dte>3650)throw Error('Days to expiration must be between 1 and 3,650.');
+ if(!Number.isInteger(dte)||dte<1||dte>3650)throw Error('Days to expiration must be from 1 to 3,650.');
  if(!valid(fees)||fees<0)throw Error('Enter non-negative total transaction fees.');
- if(strategy==='call'&&(!valid(basis)||basis<=0))throw Error('For a covered call, enter the actual average cost basis of shares you already own.');
- if(delta!==null&&(!valid(delta)||delta<0||delta>1))throw Error('Delta must be between 0 and 1, or leave it blank.');
+ if(strategy==='call'&&(!valid(basis)||basis<=0))throw Error('Covered calls require your actual average share cost basis; they also require already owning the shares.');
+ if(delta!==null&&(!valid(delta)||delta<0||delta>1))throw Error('Absolute option delta must be between 0 and 1, or left blank.');
  if(budget!==null&&(!valid(budget)||budget<=0))throw Error('Account size must be positive or left blank.');
- if(override!==null&&(!valid(override)||override<=0))throw Error('Underlying price override must be positive or blank.');
+ if(override!==null&&(!valid(override)||override<=0))throw Error('Underlying stock price override must be positive or blank.');
  const spot=override??selected.price;
- if(!valid(spot)||spot<=0)throw Error('No recent stock close available. Enter an underlying stock price override.');
- const shares=CONTRACT_SIZE*n;
- const grossPremium=premium*shares;
- const credit=grossPremium-fees;
- const capital=strategy==='put'?K*shares:spot*shares;
- const breakeven=strategy==='put'?K-credit/shares:basis-credit/shares;
- const maxProfit=strategy==='put'?credit:(K-basis)*shares+credit;
- const maxLoss=strategy==='put'?Math.max(0,K*shares-credit):Math.max(0,basis*shares-credit);
- const yieldPct=capital>0?100*credit/capital:NaN;
- const annualized=yieldPct*365/dte; // simple, not compounded or predictive
- const otm=delta===null?null:100*(1-Math.abs(delta));
- const payoff=price=>strategy==='put'?credit-Math.max(0,K-price)*shares:(Math.min(price,K)-basis)*shares+credit;
- return {ticker:selected.ticker,name:selected.name,spot,spotDate:override!==null?'Manually entered':selected.priceDate||'Saved close',strike:K,premium,contracts:n,dte,fees,delta,basis:strategy==='call'?basis:null,budget,strategy,shares,grossPremium,credit,capital,breakeven,maxProfit,maxLoss,yieldPct,annualized,otm,payoff};
+ if(!valid(spot)||spot<=0)throw Error('No valid saved underlying price: enter a current stock price override.');
+ const shares=CONTRACT_SIZE*n,grossPremium=premium*shares;
+ const credit=selling?grossPremium-fees:-(grossPremium+fees);
+ const debit=buying?grossPremium+fees:0;
+ const capital=strategy==='put'?K*shares:strategy==='call'?spot*shares:debit;
+ const breakeven=strategy==='put'?K-credit/shares:strategy==='call'?basis-credit/shares:strategy==='long_call'?K+debit/shares:K-debit/shares;
+ const maxProfit=strategy==='put'?credit:strategy==='call'?(K-basis)*shares+credit:strategy==='long_call'?Infinity:K*shares-debit;
+ const maxLoss=strategy==='put'?Math.max(0,K*shares-credit):strategy==='call'?Math.max(0,basis*shares-credit):debit;
+ const yieldPct=capital>0?(selling?100*credit/capital:100*debit/(spot*shares)):NaN;
+ const annualized=selling?yieldPct*365/dte:NaN; // simple reference only; no implied reinvestment
+ const otm=delta===null?null:100*(1-Math.abs(delta)); // NOT probability of profit
+ const payoff=price=>
+  strategy==='put'?credit-Math.max(0,K-price)*shares:
+  strategy==='call'?(Math.min(price,K)-basis)*shares+credit:
+  strategy==='long_call'?Math.max(0,price-K)*shares-debit:
+  Math.max(0,K-price)*shares-debit;
+ return {ticker:selected.ticker,name:selected.name,spot,spotDate:override!==null?'Manually entered':selected.priceDate||'Saved close',
+  strike:K,premium,contracts:n,dte,fees,delta,basis:strategy==='call'?basis:null,budget,strategy,shares,grossPremium,credit,debit,
+  capital,breakeven,maxProfit,maxLoss,yieldPct,annualized,otm,payoff,buying,selling};
 }
 function renderMetrics(calc){
  const set=(id,value)=>$(id).textContent=value;
- set('metricPremium',dollars(calc.credit));
+ set('metricPremium',(calc.buying?'−':'')+dollars(Math.abs(calc.credit)));
  set('metricCapital',dollars(calc.capital));
  set('metricYield',percent(calc.yieldPct));
- set('metricMaxGain',dollars(calc.maxProfit));
+ set('metricMaxGain',calc.maxProfit===Infinity?'Unlimited':dollars(calc.maxProfit));
  set('metricMaxLoss',dollars(calc.maxLoss));
  set('metricBreakeven',dollars(calc.breakeven));
- set('metricAnnual',percent(calc.annualized));
- set('metricDelta',calc.otm===null?'Not entered':'≈ '+percent(calc.otm));
- set('metricShares',number(calc.shares)+' shares');
- $('maxGainLabel').textContent=calc.strategy==='put'?'Max option profit at expiration':'Max total P/L vs share cost basis';
- for(const id of ['metricPremium','metricMaxGain'])$(id).className='number '+(calc[id==='metricPremium'?'credit':'maxProfit']<0?'bad':'good');
+ set('metricAnnual',calc.buying?'N/A':percent(calc.annualized));
+ set('metricDelta',calc.otm===null?'Not available':'≈ '+percent(calc.otm));
+ set('metricShares',number(calc.shares)+(calc.strategy==='call'?' owned shares':calc.strategy==='put'?' purchasable shares':' underlying shares'));
+ $('premiumMetricLabel').textContent=calc.buying?'Option premium + fees paid':'Net option credit received';
+ $('capitalMetricLabel').textContent=calc.buying?'Maximum debit at risk':calc.strategy==='put'?'Cash securing assignment':'Value of underlying shares';
+ $('yieldMetricLabel').textContent=calc.buying?'Debit as % of stock notional':'Premium yield for this expiration';
+ $('annualMetricLabel').textContent=calc.buying?'Premium annualization':'Simple annualized premium yield';
+ $('deltaMetricLabel').textContent='Approx. expiring OTM (not POP)';
+ $('shareMetricLabel').textContent=calc.buying?'Contract underlying exposure':'Expiration share obligation';
+ $('maxGainLabel').textContent=calc.strategy==='put'?'Maximum net option premium':
+  calc.strategy==='call'?'Maximum total P/L vs cost basis':
+  calc.strategy==='long_call'?'Maximum upside at expiration':'Maximum upside if stock falls to zero';
+ $('metricPremium').className='number '+(calc.credit<0?'bad':'good');
+ $('metricMaxGain').className='number '+(calc.maxProfit<0?'bad':'good');
 }
 function payoffChart(calc){
  const W=770,H=300,l=90,r=20,t=20,b=60;
@@ -143,29 +159,42 @@ function scenarios(calc){
  const dedup=[...new Set(prices.filter(x=>valid(x)&&x>=0).map(x=>Math.round(x*100)/100))].sort((a,b)=>a-b);
  $('scenarioRows').innerHTML=dedup.map(s=>{
   const profit=calc.payoff(s),move=100*(s/calc.spot-1);
-  const desc=calc.strategy==='put'?(s<calc.strike?'Likely assigned: buy shares at strike':'Put expires OTM (at expiry)'):(s>calc.strike?'Shares likely called away':'Keep shares; call OTM');
+  const desc=calc.strategy==='put'?(s<calc.strike?'Shares assigned at strike (if held short through expiry)':'Short put expires out of money'):
+    calc.strategy==='call'?(s>calc.strike?'Shares called away at strike':'Keep owned shares, call OTM'):
+    calc.strategy==='long_call'?(s>calc.strike?'Call has exercise value':'Call expires out of money'):
+    s<calc.strike?'Put has exercise value':'Put expires out of money';
   return '<tr><td>'+dollars(s)+'</td><td class="'+(move>=0?'good':'bad')+'">'+(move>=0?'+':'')+percent(move)+'</td><td class="'+(profit>=0?'good':'bad')+'">'+dollars(profit)+'</td><td>'+esc(desc)+'</td></tr>';
  }).join('');
 }
 function riskChecks(calc){
  const notes=[];
  const add=(txt,severity='')=>notes.push('<div class="risk-item '+esc(severity)+'">'+esc(txt)+'</div>');
- add('This is a payoff model using an entered options quote and a saved or manually entered stock price; it is not a real-time trade recommendation.','');
- if(calc.dte<=7)add('Short-dated options may have high gamma/assignment risk, particularly around expiration.','warn');
+ add('Calculated expiration payoff using selected or manually entered bid/ask quotes; not a guaranteed fill, real-time signal, or recommendation.');
+ if(calc.dte<=7)add('Short-dated options can move rapidly, especially near expiration.','warn');
  if(calc.strategy==='put'){
-  if(calc.strike>=calc.spot)add('The put strike is at or above the entered stock price (ITM or ATM); assignment risk may be higher.','warn');
-  add('You must be prepared to purchase '+number(calc.shares)+' shares for '+dollars(calc.strike*calc.shares)+' if assigned.','');
+  if(calc.strike>=calc.spot)add('The sold put strike is at or above the underlying price; assignment is possible.','warn');
+  add('Prepare '+dollars(calc.strike*calc.shares)+' to buy '+number(calc.shares)+' shares if assigned.');
+ }else if(calc.strategy==='call'){
+  add('This strategy requires ALREADY OWNING '+number(calc.shares)+' deliverable shares. Holdings are not verified.','warn');
+  if(calc.strike<calc.basis)add('The covered-call strike is below your cost basis. Assignment may lock in a stock loss.','warn');
+ }else if(calc.strategy==='long_call'){
+  add('This purchased call loses its full premium and fees ('+dollars(calc.debit)+') if it expires without intrinsic value.','warn');
+  add('Long calls have theoretically unlimited upside at expiration, but time decay and volatility changes can still cause losses.');
  }else{
-  add('A covered call requires owning at least '+number(calc.shares)+' deliverable shares. The analyzer cannot verify your holdings.','');
-  if(calc.strike<calc.basis)add('The strike is below your entered share cost basis. Assignment can lock in a loss despite collecting the premium.','warn');
+  add('This purchased put loses its full premium and fees ('+dollars(calc.debit)+') if it expires without intrinsic value.','warn');
+  add('Maximum long-put expiration profit occurs near a zero share price and is not unlimited.');
  }
  if(calc.budget!==null){
-  const fraction=100*calc.capital/calc.budget;
-  add('This exposure equals '+percent(fraction)+' of the entered account size.'+(fraction>20?' Consider concentration risk.':''),fraction>20?'warn':'goodline');
+  const exposure=100*calc.capital/calc.budget;
+  add('Capital exposure is '+percent(exposure)+' of entered account size.'+(exposure>20?' Consider concentration risk.':''),exposure>20?'warn':'goodline');
  }
- if(calc.credit<=0)add('Fees exceed or equal the option credit; the net premium is not positive.','warn');
- if(calc.delta!==null)add('Delta estimates expiring out of the money only approximately. It does not measure actual profitability, slippage, gap risk, or expected value.','');
- if(isFund(selected))add('Some ETFs/funds do not have listed options, or may have different deliverables after corporate actions. Verify the option contract.','warn');
+ if(calc.selling&&calc.credit<=0)add('Transaction fees eliminate the net premium credit.','warn');
+ if(calc.delta!==null)add('Delta is only a rough approximation for expiring out of the money, not an estimate of profit probability.','');
+ if(isFund(selected))add('Verify this ETF/fund actually has standard, listed options and a 100-share contract multiplier.','warn');
+ if(typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote){
+  add('Automatic quote source: '+selectedOptionQuote.provider+' · retrieved '+selectedOptionQuote.retrieved_at+
+    '. Confirm bid/ask and options volume before entering any actual trade.','warn');
+ }
  $('riskChecks').innerHTML=notes.join('');
 }
 function calculate(event){
@@ -194,7 +223,7 @@ function savedVisible(){
 function renderSaved(){
  const list=savedVisible();
  $('savedTrades').innerHTML=list.map(x=>{
- const type=x.strategy==='put'?'Cash-secured put':'Covered call';
+ const type=({put:'Cash-secured put',call:'Covered call',long_call:'Buy call',long_put:'Buy put'})[x.strategy]||x.strategy;
  return '<tr><td><button type="button" class="ghost" data-load="'+esc(x.id)+'">'+esc(x.ticker)+'</button></td><td><span class="badge '+(x.strategy==='put'?'put':'call')+'">'+esc(type)+'</span></td><td>'+dollars(x.strike)+'</td><td>'+dollars(x.premium)+'</td><td>'+number(x.dte)+'</td><td>'+percent(x.yieldPct)+'</td><td>'+dollars(x.breakeven)+'</td><td>'+dollars(x.maxLoss)+'</td><td><button type="button" class="danger" aria-label="Remove '+esc(x.ticker)+' saved trade" data-remove="'+esc(x.id)+'">Trash</button></td></tr>';
  }).join('')||'<tr><td colspan="9" class="muted">No saved candidate trades for currently active stocks on this device.</td></tr>';
  $('exportTrades').disabled=!list.length;
@@ -208,7 +237,7 @@ function saveCurrent(){
  const record={id:String(Date.now())+'-'+Math.random().toString(36).slice(2,8),
   ticker:c.ticker,strategy:c.strategy,strike:c.strike,premium:c.premium,contracts:c.contracts,
   dte:c.dte,basis:c.basis,delta:c.delta,fees:c.fees,spot:c.spot,spotDate:c.spotDate,
-  credit:c.credit,yieldPct:c.yieldPct,breakeven:c.breakeven,maxLoss:c.maxLoss,
+  credit:c.credit,yieldPct:c.yieldPct,breakeven:c.breakeven,maxLoss:c.maxLoss,quoteInfo:typeof selectedOptionQuote==='undefined'?null:selectedOptionQuote,
   savedAt:new Date().toISOString()};
  storedTrades.unshift(record);
  storedTrades=storedTrades.slice(0,100);
@@ -295,7 +324,10 @@ async function init(){
 $('stockSearch').addEventListener('input',renderList);
 $('stockFilter').addEventListener('change',renderList);
 $('stockList').addEventListener('click',event=>{const button=event.target.closest('button[data-ticker]');if(button)selectStock(button.dataset.ticker);});
-$('strategy').addEventListener('change',()=>{$('basisField').hidden=$('strategy').value!=='call';resetMetrics();$('calcStatus').textContent='Strategy changed. Recalculate to update outcomes.';});
+$('strategy').addEventListener('change',()=>{$('basisField').hidden=$('strategy').value!=='call';
+ $('premiumHint').textContent=$('strategy').value==='put'||$('strategy').value==='call'?'Use option bid (selling)':'Use option ask (buying)';
+ if(typeof resetSelectedQuote==='function')resetSelectedQuote();
+ if(typeof renderOptionChain==='function')renderOptionChain();resetMetrics();$('calcStatus').textContent='Strategy changed. Recalculate to update outcomes.';});
 $('tradeForm').addEventListener('submit',calculate);
 $('clearTrade').addEventListener('click',()=>clearInputs(true));
 $('saveTrade').addEventListener('click',saveCurrent);
