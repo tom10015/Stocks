@@ -19,3 +19,18 @@ footer{margin-top:28px;border-top:1px solid #31445a;padding:18px 0;color:#96a8bd
 @media(max-width:1070px){.layout{grid-template-columns:1fr}.stock-list{max-height:310px}.formgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:650px){main{padding:18px 12px 35px}nav{padding:13px 12px}.top-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat,.panel{padding:14px}.formgrid,.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.stock-item .company-name{max-width:170px}.metric .number{font-size:18px}.navlinks{gap:2px}.navlinks a{padding:8px}.filters select{width:115px}}
 @media(max-width:390px){.formgrid{grid-template-columns:1fr}}
+
+/* Optional delayed chain feed; existing manual calculator stays available. */
+.auto-chain-box{background:#0c1a2b;border:1px solid #2b5060;border-radius:14px;padding:16px;margin:0 0 20px}
+.auto-chain-box .panel-head{margin-bottom:9px}.auto-chain-box .eyebrow{font-size:10px}
+.chain-toolbar{display:flex;align-items:end;flex-wrap:wrap;gap:10px;margin:12px 0}
+.chain-toolbar label{display:flex;flex-direction:column;gap:5px;color:#9db5cb;font-size:12px}
+.chain-toolbar label select{min-width:140px}.chain-toolbar>button{min-width:190px}
+.chain-table{min-width:630px}.chain-table td,.chain-table th{padding:9px 10px}
+.chain-table button{font-size:12px;padding:6px 10px;white-space:nowrap}
+.chain-table tr.selected-contract td{background:#193f3c}
+#autoChainHelp{font-size:11px;line-height:1.55;margin-top:9px}
+#selectedContract{margin:12px 0 4px;line-height:1.5;max-width:720px}
+.badge.feed-ok{background:#234e3e;color:#8de6bc}
+.badge.feed-old{background:#573f2c;color:#ffcf90}
+@media(max-width:650px){.auto-chain-box{padding:10px}.chain-toolbar{align-items:stretch}.chain-toolbar label,.chain-toolbar label select{width:100%}.chain-toolbar>button{width:100%}}
