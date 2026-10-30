@@ -21,7 +21,7 @@
 <main>
  <div class="eyebrow">Separate dashboard · Massive data + free models</div>
  <h1>Options Trade Analyzer</h1>
- <p class="intro muted">Analyze <strong>covered calls, cash-secured puts, long calls, and long puts</strong> for all your active stocks. Use your connected <strong>Massive</strong> account to look up actual listed options and previous-session closing prices once its API key is securely linked to ShareWatch. The free Black–Scholes estimator remains available for all stocks. <strong>Historical option closes are not live bid/ask quotes</strong>, and no orders are placed. No trades are placed and no return is guaranteed.</p>
+ <p class="intro muted">Analyze <strong>covered calls, cash-secured puts, long calls, and long puts</strong> for all your active stocks. Use <strong>Alpaca</strong> for indicative option-chain quotes and Greeks, and keep your <strong>Massive</strong> integration for listed contracts and previous-session closing prices. The free Black–Scholes estimator remains available for all stocks. <strong>Historical option closes are not live bid/ask quotes</strong>, and no orders are placed. No trades are placed and no return is guaranteed.</p>
  <section class="top-stats" aria-label="Watchlist overview">
   <div class="stat"><div class="label">Active tracked tickers</div><div class="value" id="statTickers">—</div><div class="mini">Managed by your existing admin</div></div>
   <div class="stat"><div class="label">Saved price quotes</div><div class="value" id="statPriced">—</div><div class="mini">End-of-day closes, not live quotes</div></div>
@@ -43,7 +43,15 @@
      <div><div class="small muted">Selected security</div><div class="selected-name" id="selectedTicker">Choose a stock</div><div class="small muted" id="selectedCompany">Active ShareWatch watchlist</div></div>
      <div><div class="selected-price" id="selectedPrice">—<small id="priceAsOf">Most recent saved close</small></div><a id="sharesLink" class="small" href="./index.html">View share history ↗</a></div>
     </div>
-    <section class="auto-chain-box" aria-labelledby="massiveHeading" id="massivePanel">
+    <section class="auto-chain-box" aria-labelledby="alpacaHeading" id="alpacaPanel">
+ <div class="panel-head"><div><div class="eyebrow">Alpaca · Free indicative option-chain data</div><h3 id="alpacaHeading">Indicative options quotes · Greeks · strikes</h3><div class="section-sub" id="alpacaStatus" aria-live="polite">Preparing secure option chain…</div></div><span id="alpacaBadge" class="badge">Not tested</span></div>
+ <p class="small muted">The free <strong>indicative</strong> feed offers modified option bids and asks, plus Greeks where available. <strong>These are not real exchange NBBO quotes and cannot be assumed executable.</strong> Trades are delayed at least 15 minutes. Verify live pricing with your broker.</p>
+ <div class="chain-toolbar"><label for="alpacaDays">Expiration range<select id="alpacaDays"><option value="14">14 days</option><option value="30" selected>30 days</option><option value="60">60 days</option><option value="120">120 days</option></select></label>
+ <button type="button" id="alpacaRefresh" class="primary">Load Alpaca indicative quotes</button></div>
+ <div class="table-scroll"><table class="chain-table"><thead><tr><th>Expires</th><th>Strike</th><th>Bid (indic.)</th><th>Ask (indic.)</th><th>Delta</th><th>IV</th><th>Quote time</th><th>Analyze</th></tr></thead><tbody id="alpacaRows"><tr><td colspan="8" class="muted">Select a ticker to load indicative option prices.</td></tr></tbody></table></div>
+ <div id="alpacaSelection" class="small muted" aria-live="polite" style="margin-top:10px">Selling uses modified indicative bid; buying uses modified indicative ask, not an executable premium.</div>
+ </section>
+<section class="auto-chain-box" aria-labelledby="massiveHeading" id="massivePanel">
  <div class="panel-head">
   <div>
    <div class="eyebrow">Massive · verified listed options</div>
@@ -147,6 +155,6 @@
  <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Theoretical option premiums are not tradable quotes. Use a broker to verify actual listed contracts, market bid/ask, liquidity and current expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability, premium yield, nor a positive assumed expected value guarantees profitability.</footer>
 </main>
-<script src="./options.js?v=20261030-massive1" defer></script><script src="./option-chain-ui.js?v=20261030-massive1" defer></script><script src="./massive-options.js?v=20261030-massive2" defer></script>
+<script src="./options.js?v=20261030-alpaca1" defer></script><script src="./option-chain-ui.js?v=20261030-massive1" defer></script><script src="./massive-options.js?v=20261030-massive2" defer></script><script src="./alpaca-options.js?v=20261030-alpaca1" defer></script>
 </body>
 </html>
