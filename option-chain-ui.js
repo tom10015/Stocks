@@ -276,7 +276,7 @@ $('scanRows').addEventListener('click',event=>{
 });
 for(const id of ['strike','premium','dte','delta','spotOverride','contracts','fees','basis','account']){
  $(id).addEventListener('input',()=>{
-  if(selectedOptionQuote){
+  if(selectedOptionQuote&&['strike','premium','dte','delta','spotOverride'].includes(id)){
    resetSelectedQuote();
    $('selectedContract').textContent='You edited the estimate manually. Current inputs are no longer the original theoretical model values.';
   }
