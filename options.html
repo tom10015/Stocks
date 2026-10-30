@@ -19,9 +19,9 @@
  </nav>
 </header>
 <main>
- <div class="eyebrow">Separate dashboard · Alpaca data + free models</div>
+ <div class="eyebrow">Separate dashboard · Alpaca options data</div>
  <h1>Options Trade Analyzer</h1>
- <p class="intro muted">Analyze <strong>covered calls, cash-secured puts, long calls, and long puts</strong> for all your active stocks. Use <strong>Alpaca</strong> for indicative option-chain quotes and Greeks. The free Black–Scholes estimator remains available for all stocks. <strong>Historical option closes are not live bid/ask quotes</strong>, and no orders are placed. No trades are placed and no return is guaranteed.</p>
+ <p class="intro muted">Analyze <strong>covered calls, cash-secured puts, long calls, and long puts</strong> for all your active stocks. Use <strong>Alpaca</strong> for indicative option-chain quotes and Greeks. Alpaca provides modified indicative quotes, not guaranteed executable bid/ask prices. No orders are placed or returns guaranteed.</p>
  <section class="top-stats" aria-label="Watchlist overview">
   <div class="stat"><div class="label">Active tracked tickers</div><div class="value" id="statTickers">—</div><div class="mini">Managed by your existing admin</div></div>
   <div class="stat"><div class="label">Saved price quotes</div><div class="value" id="statPriced">—</div><div class="mini">End-of-day closes, not live quotes</div></div>
@@ -51,25 +51,11 @@
  <div class="table-scroll"><table class="chain-table"><thead><tr><th>Expires</th><th>Strike</th><th>Bid (indic.)</th><th>Ask (indic.)</th><th>Delta</th><th>IV</th><th>Quote time</th><th>Analyze</th></tr></thead><tbody id="alpacaRows"><tr><td colspan="8" class="muted">Select a ticker to load indicative option prices.</td></tr></tbody></table></div>
  <div id="alpacaSelection" class="small muted" aria-live="polite" style="margin-top:10px">Selling uses modified indicative bid; buying uses modified indicative ask, not an executable premium.</div>
  </section>
-<div class="auto-chain-box" aria-labelledby="autoChainHeading">
-      <div class="panel-head"><div><div class="eyebrow">Free automatic estimates · no account needed</div><h3 id="autoChainHeading">Theoretical options calculator</h3><div class="section-sub" id="autoQuoteStatus">Calculating examples from the stock's saved price history…</div></div><span id="autoChainFreshness" class="badge">Model only</span></div>
-      <p class="small muted">These are <strong>Black–Scholes estimates, not real bid/ask quotes or verified listed contracts</strong>. They use realized stock-price volatility, not market-implied volatility. Real prices, spreads, dividend effects, and available strikes may differ substantially.</p>
-      <div class="chain-toolbar">
-       <label for="autoExpiration">Illustrative expiration <select id="autoExpiration" aria-label="Illustrative option expiration date"><option value="">Loading model dates…</option></select></label>
-       <label for="autoStrikeFilter">Hypothetical strikes <select id="autoStrikeFilter" aria-label="Filter hypothetical strike prices"><option value="near">Near stock price</option><option value="otm">Out of the money</option><option value="all">All examples</option></select></label>
-       <label for="modelRiskFreeRate">Annual interest assumption (%) <input id="modelRiskFreeRate" type="number" value="4" step="0.25" min="-5" max="30" style="width:105px" aria-label="Annual interest rate assumption percent"></label>
-       <label for="modelDividendYield">Dividend yield assumption (%) <input id="modelDividendYield" type="number" value="0" step="0.25" min="0" max="100" style="width:105px" aria-label="Dividend yield assumption percent"></label>
-       <label for="modelVolWindow">History window <select id="modelVolWindow" aria-label="Historical price volatility window"><option value="30">30 days</option><option value="90" selected>90 days</option><option value="180">180 days</option></select></label>
-       <button id="autoSuggestion" type="button" class="ghost">Load example estimate</button>
-      </div>
-      <div class="table-scroll"><table class="chain-table"><thead><tr><th>Hypothetical strike</th><th>Model premium</th><th>Model delta</th><th>Historic volatility</th><th>Days</th><th>Load estimate</th></tr></thead><tbody id="autoChainRows"><tr><td colspan="6" class="muted">Calculating theoretical premiums…</td></tr></tbody></table></div>
-      <div class="small muted" id="autoChainHelp">No signup, brokerage login, or subscription. Select an estimate to fill the trade builder, then replace it with an actual option quote before making a real decision. This is not an options chain. <a id="realChainLink" href="https://finance.yahoo.com/quote/AAPL/options/" target="_blank" rel="noopener noreferrer">Check the actual option chain on Yahoo Finance ↗</a></div>
-     </div>
-     <form id="tradeForm" novalidate>
+<form id="tradeForm" novalidate>
      <div class="formgrid">
       <div class="field"><label for="strategy">Option strategy</label><select id="strategy"><option value="put">Sell cash-secured put</option><option value="call">Sell covered call</option><option value="long_call">Buy call (long)</option><option value="long_put">Buy put (long)</option></select></div>
       <div class="field"><label for="strike">Strike price ($)</label><input id="strike" type="number" min="0.01" step="any" inputmode="decimal" placeholder="Enter option strike" required><small>Use an actual listed strike</small></div>
-      <div class="field"><label for="premium" id="premiumInputLabel">Premium per share ($) · estimate or real quote</label><input id="premium" type="number" min="0.01" step="any" inputmode="decimal" placeholder="Enter bid/credit" required><small id="premiumHint">Selling uses bid; buying uses ask</small></div>
+      <div class="field"><label for="premium" id="premiumInputLabel">Premium per share ($) · indicative or manual</label><input id="premium" type="number" min="0.01" step="any" inputmode="decimal" placeholder="Enter bid/credit" required><small id="premiumHint">Selling uses bid; buying uses ask</small></div>
       <div class="field"><label for="contracts">Number of contracts</label><input id="contracts" type="number" min="1" max="10000" step="1" value="1" required></div>
       <div class="field"><label for="dte">Days to expiration</label><input id="dte" type="number" min="1" max="3650" step="1" value="7" required><small>For simple annualized premium only</small></div>
       <div class="field"><label for="delta">Absolute option delta (optional)</label><input id="delta" type="number" min="0" max="1" step="0.01" placeholder="e.g. 0.15"><small>0–1, from current option chain</small></div>
@@ -79,7 +65,7 @@
       <div class="field"><label for="spotOverride">Underlying stock price ($, optional)</label><input id="spotOverride" type="number" min="0.01" step="any" placeholder="Override saved closing price"><small>Use a current quote if preferred</small></div>
      </div>
      <div class="actions"><button id="calculate" class="primary" type="submit">Calculate trade</button><button id="saveTrade" type="button" disabled>Save to comparison</button><button id="clearTrade" class="ghost" type="button">Clear inputs</button></div>
-     <div id="selectedContract" class="small muted" aria-live="polite">No theoretical example loaded. You may enter a real option quote manually.</div><div id="calcStatus" class="calc-status" role="status" aria-live="polite"></div>
+     <div id="selectedContract" class="small muted" aria-live="polite">Choose an Alpaca indicative contract above or enter an option premium manually.</div><div id="calcStatus" class="calc-status" role="status" aria-live="polite"></div>
     </form>
     <div class="metrics" aria-live="polite">
      <div class="metric"><div class="label" id="premiumMetricLabel">Net premium received</div><div class="number good" id="metricPremium">—</div></div>
@@ -111,24 +97,14 @@
    </div>
   </section>
  </div>
- <section class="panel below" aria-labelledby="scanHeading">
-  <div class="panel-head"><div><div class="eyebrow">Across your active ShareWatch watchlist</div><h2 id="scanHeading">Free theoretical options scanner</h2><div class="section-sub" id="scanStatus">Calculating examples from your stored closing-price history…</div></div><span class="badge">Model estimates only</span></div>
-  <p class="small muted">Automatically calculates one <strong>hypothetical</strong> example per stock for each strategy using historical volatility and Black–Scholes. This does <strong>not</strong> check which strikes or expirations are listed and does not retrieve actual bids, asks, or open interest. The examples are not trade recommendations.</p>
-  <div class="chain-toolbar">
-   <label for="scanStrategy">Strategy <select id="scanStrategy"><option value="put">Cash-secured puts</option><option value="call">Covered calls</option><option value="long_call">Buy calls</option><option value="long_put">Buy puts</option></select></label>
-   <label for="scanDte">Illustrative expiration window <select id="scanDte"><option value="14">Within 14 days</option><option value="30" selected>Within 30 days</option><option value="60">Within 60 days</option><option value="120">Within 120 days</option></select></label>
-  </div>
-  <div class="table-scroll"><table class="trade-table"><thead><tr><th>Ticker</th><th>Hypothetical expiry</th><th>Strike</th><th>Model premium</th><th>Model delta</th><th>Historic volatility</th><th>Premium / reference capital</th><th>Analyze</th></tr></thead><tbody id="scanRows"><tr><td colspan="8" class="muted">Calculating theoretical examples…</td></tr></tbody></table></div>
-  <p class="footnote">Theoretical premium is computed from the last saved stock price, selected realized-volatility window, and interest/dividend assumptions. A model price can differ greatly from an actual option's market price. Never treat it as an executable quote or as confirmation that a listed contract exists.</p>
- </section>
  <section class="panel below" aria-labelledby="compareHeading">
   <div class="panel-head"><div><h2 id="compareHeading">Saved trade comparisons</h2><div class="section-sub">Compare your own candidate trades without placing orders</div></div><div class="actions" style="margin-top:0"><button id="exportTrades" type="button" class="ghost">Export CSV</button><button id="clearSaved" type="button" class="danger">Clear saved</button></div></div>
   <div class="table-scroll"><table class="trade-table"><thead><tr><th>Stock</th><th>Strategy</th><th>Strike</th><th>Credit / debit</th><th>Days</th><th>Period yield</th><th>Breakeven</th><th>Max downside</th><th>Remove</th></tr></thead><tbody id="savedTrades"><tr><td colspan="9" class="muted">No candidate trades saved on this device.</td></tr></tbody></table></div>
   <p class="footnote">Saved comparisons remain only in this browser's local storage—not in the admin database or your brokerage account. The shared admin portal controls which stocks appear in both dashboards; hiding or deleting a ticker also hides its saved trade comparisons here.</p>
  </section>
- <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Theoretical option premiums are not tradable quotes. Use a broker to verify actual listed contracts, market bid/ask, liquidity and current expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
+ <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability, premium yield, nor a positive assumed expected value guarantees profitability.</footer>
 </main>
-<script src="./options.js?v=20261030-alpaca1" defer></script><script src="./option-chain-ui.js?v=20261030-alpaca-only1" defer></script><script src="./alpaca-options.js?v=20261030-alpaca1" defer></script>
+<script src="./options.js?v=20261030-alpaca-only2" defer></script><script src="./alpaca-options.js?v=20261030-alpaca-only2" defer></script>
 </body>
 </html>
