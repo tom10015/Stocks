@@ -8,6 +8,7 @@ let optionChainPromise=null;
 let optionChainsFile=null;
 let currentChainTicker=null;
 let currentChain=null;
+let pendingScannerContract=null;
 const CHAIN_MAX_AGE_HOURS=96;
 const msDay=86400000;
 function daysRemaining(iso){
@@ -87,6 +88,7 @@ function loadOptionChain(ticker){
    $('autoExpiration').innerHTML='<option value="">No expirations available</option>';
    showChainEmpty(msg+' Use the manual trade fields below.');
    chainMessage(msg);
+   renderScanner();
    statusBadge('Manual only',false);
    return;
   }
@@ -101,7 +103,20 @@ function loadOptionChain(ticker){
   chainMessage((item.provider||'Options market feed')+' · last retrieved '+date+' · '+item.contracts.length+' stored contracts. '+(fresh?'':'Quotes are stale or the last update failed. Verify a new quote with a brokerage.'),fresh);
   statusBadge(fresh?'Delayed feed':'Stale · manual',fresh);
   renderOptionChain();
-  if(fresh)selectSampleContract();
+  if(fresh){
+   if(pendingScannerContract?.ticker===ticker){
+    const plan=pendingScannerContract;
+    pendingScannerContract=null;
+    $('strategy').value=plan.strategy;
+    $('premiumHint').textContent=isBuying(plan.strategy)?'Use option ask (buying)':'Use option bid (selling)';
+    $('basisField').hidden=plan.strategy!=='call';
+    if(list.includes(plan.expiration))$('autoExpiration').value=plan.expiration;
+    renderOptionChain();
+    const exact=item.contracts.find(x=>x.symbol===plan.symbol);
+    if(exact)selectOptionContract(exact);else selectSampleContract();
+   }else selectSampleContract();
+  }
+  renderScanner();
  }).catch(error=>{
   if(currentChainTicker!==ticker)return;
   statusBadge('Manual only',false);
@@ -205,3 +220,77 @@ for(const id of ['strike','premium','dte','delta','spotOverride','contracts','fe
  });
 }
 $('autoSuggestion').title='Automatically selects an illustrative near-term listed contract. Not a recommendation.';
+
+/* Scan the saved chain feed across the ACTIVE admin watchlist. */
+function scanTradeCandidate(ticker,chain,strategy,maxDte,minOI){
+ const stock=activeStocks.find(x=>x.ticker===ticker);
+ if(!stock||!quoteFresh(chain))return null;
+ const type=optionSide(strategy),spot=Number(chain.underlying_price)||stock.price||0;
+ if(!(spot>0))return null;
+ const buying=isBuying(strategy);
+ const rows=(chain.contracts||[]).filter(c=>{
+  if(c.type!==type||!Number.isFinite(c.strike))return false;
+  const dte=daysRemaining(c.expiration);
+  if(dte<1||dte>maxDte)return false;
+  const q=buying?c.ask:c.bid;
+  if(!Number.isFinite(q)||q<=0)return false;
+  if(minOI>0&&(!Number.isFinite(c.open_interest)||c.open_interest<minOI))return false;
+  // Avoid zero-liquidity or crossed quotes in scanner, even if source data
+  // happens to include them.
+  if(!(Number.isFinite(c.ask)&&Number.isFinite(c.bid))||c.ask<c.bid||c.ask<=0)return false;
+  if(c.ask-c.bid>Math.max(c.bid,0.25))return false;
+  return true;
+ });
+ if(!rows.length)return null;
+ const prefer=rows.filter(c=>buying|| (type==='put'?c.strike<spot:c.strike>spot));
+ const choices=prefer.length?prefer:rows;
+ const target=buying?spot:spot*(type==='put'?.95:1.05);
+ choices.sort((a,b)=>{
+  const score=c=>{
+   const deltaTarget=buying?.5:.2;
+   const deltaScore=Number.isFinite(c.delta)?Math.abs(Math.abs(c.delta)-deltaTarget)*12:Math.abs(c.strike-target)/spot*22;
+   const expirationScore=Math.abs(daysRemaining(c.expiration)-14)*.09;
+   const spreadPct=c.ask>0?(c.ask-c.bid)/c.ask:1;
+   return deltaScore+expirationScore+spreadPct*3;
+  };
+  return score(a)-score(b);
+ });
+ const c=choices[0];
+ return {ticker,stock,contract:c,spot,premium:buying?c.ask:c.bid,ratio:100*(buying?c.ask/spot:c.bid/(strategy==='put'?c.strike:spot)),dte:daysRemaining(c.expiration),strategy};
+}
+function renderScanner(){
+ const box=$('scanRows'),message=$('scanStatus');
+ if(!box||!message)return;
+ if(!optionChainsFile){
+  box.innerHTML='<tr><td colspan="9" class="muted">Option-chain data has not loaded yet.</td></tr>';
+  return;
+ }
+ const strategy=$('scanStrategy').value,maxDte=Number($('scanDte').value),minOI=Number($('scanLiquidity').value);
+ const results=[];
+ for(const ticker of activeStocks.map(x=>x.ticker)){
+  const item=optionChainsFile.chains?.[ticker];
+  if(!item)continue;
+  const selected=scanTradeCandidate(ticker,item,strategy,maxDte,minOI);
+  if(selected)results.push(selected);
+ }
+ results.sort((a,b)=>a.ticker.localeCompare(b.ticker));
+ const eligible=activeStocks.filter(x=>quoteFresh(optionChainsFile.chains?.[x.ticker])).length;
+ message.textContent='Showing '+results.length+' illustrative option contracts from '+eligible+' tickers with non-stale chain data ('+activeStocks.length+' active tracked securities). No ranking guarantees a profit.';
+ box.innerHTML=results.length?results.map(x=>{
+  const c=x.contract;
+  return '<tr><td><strong>'+esc(x.ticker)+'</strong></td><td>'+esc(c.expiration)+'<div class="small muted">'+x.dte+' days</div></td><td>'+dollars(c.strike)+'</td><td>'+priceCell(c.bid)+'</td><td>'+priceCell(c.ask)+'</td>'
+   +'<td>'+(Number.isFinite(c.delta)?c.delta.toFixed(3):'—')+'</td><td>'+(Number.isFinite(c.open_interest)?number(c.open_interest):'—')+'</td><td>'+percent(x.ratio)+'</td>'
+   +'<td><button type="button" data-scan-symbol="'+esc(c.symbol)+'" data-scan-ticker="'+esc(x.ticker)+'" data-scan-strategy="'+esc(strategy)+'" data-scan-expiry="'+esc(c.expiration)+'">Analyze</button></td></tr>';
+ }).join(''):'<tr><td colspan="9" class="muted">No valid delayed option quotes match these filters. Try a wider expiration range or lower open-interest minimum. Missing/unsupported tickers remain available for manual analysis.</td></tr>';
+}
+for(const key of ['scanStrategy','scanDte','scanLiquidity'])$(key).addEventListener('change',renderScanner);
+$('scanRows').addEventListener('click',e=>{
+ const btn=e.target.closest('button[data-scan-symbol]');if(!btn)return;
+ const ticker=btn.dataset.scanTicker,contract=btn.dataset.scanSymbol;
+ if(!activeStocks.some(x=>x.ticker===ticker))return;
+ pendingScannerContract={ticker,symbol:contract,expiration:btn.dataset.scanExpiry,strategy:btn.dataset.scanStrategy};
+ $('strategy').value=pendingScannerContract.strategy;
+ $('basisField').hidden=pendingScannerContract.strategy!=='call';
+ selectStock(ticker);
+ window.scrollTo({top:0,behavior:'smooth'});
+});
