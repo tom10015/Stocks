@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - quick_new_tickers.py
+      - price_update.py
+      - merge_prices.py
       - .github/workflows/new-tickers.yml
   schedule:
     - cron: "*/5 * * * *"
@@ -22,32 +24,50 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate collection scripts
-        run: python -m py_compile quick_new_tickers.py update.py historical_backfill.py merge_data.py
-      - name: Check for new active tickers
+      - name: Validate collectors and merge scripts
+        run: python -m py_compile quick_new_tickers.py update.py historical_backfill.py merge_data.py price_update.py merge_prices.py
+      - name: Check for missing shares and price history
         id: check
         run: python quick_new_tickers.py
       - name: Collect current and historical share counts
-        if: steps.check.outputs.new_tickers != ''
+        if: steps.check.outputs.new_shares != ''
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'ShareWatch tom10015@users.noreply.github.com' }}
-          NEW_TICKERS: ${{ steps.check.outputs.new_tickers }}
+          NEW_SHARES: ${{ steps.check.outputs.new_shares }}
         run: |
           python update.py
-          python historical_backfill.py --tickers "$NEW_TICKERS" --max-tickers 25
-      - name: Merge collected shares onto latest main
-        if: steps.check.outputs.new_tickers != ''
+          python historical_backfill.py --tickers "$NEW_SHARES" --max-tickers 25
+      - name: Collect missing historical stock prices
+        if: steps.check.outputs.new_prices != ''
+        env:
+          NEW_PRICES: ${{ steps.check.outputs.new_prices }}
+        run: python -u price_update.py --tickers "$NEW_PRICES"
+      - name: Merge newly collected data onto latest main
+        if: steps.check.outputs.new_shares != '' || steps.check.outputs.new_prices != ''
+        env:
+          NEW_SHARES: ${{ steps.check.outputs.new_shares }}
+          NEW_PRICES: ${{ steps.check.outputs.new_prices }}
         run: |
-          cp data/shares.json /tmp/sharewatch-new-shares.json
-          cp data/backfill_status.json /tmp/sharewatch-new-status.json
+          if [ -n "$NEW_SHARES" ]; then
+            cp data/shares.json /tmp/sharewatch-new-shares.json
+            cp data/backfill_status.json /tmp/sharewatch-new-status.json
+          fi
+          if [ -n "$NEW_PRICES" ]; then
+            cp data/prices.json /tmp/sharewatch-new-prices.json
+          fi
           git fetch origin main
           git reset --hard origin/main
-          python merge_data.py /tmp/sharewatch-new-shares.json data/shares.json
-          cp /tmp/sharewatch-new-status.json data/backfill_status.json
+          if [ -n "$NEW_SHARES" ]; then
+            python merge_data.py /tmp/sharewatch-new-shares.json data/shares.json
+            cp /tmp/sharewatch-new-status.json data/backfill_status.json
+          fi
+          if [ -n "$NEW_PRICES" ]; then
+            python merge_prices.py /tmp/sharewatch-new-prices.json data/prices.json --tickers "$NEW_PRICES"
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/shares.json data/backfill_status.json
+          git add data/shares.json data/backfill_status.json data/prices.json
           if ! git diff --cached --quiet; then
-            git commit -m "Collect newly added stock and historical share-count data"
+            git commit -m "Collect newly added stock shares and daily price history"
             git push origin HEAD:main
           fi
