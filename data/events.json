@@ -1,0 +1,9 @@
+{
+  "updated_at": null,
+  "provider": "Nasdaq public calendar (unofficial)",
+  "coverage_end": null,
+  "source_requests_successful": 0,
+  "source_requests_failed": 0,
+  "note": "Calendar collection has not run yet. No dates are estimated.",
+  "events": []
+}
