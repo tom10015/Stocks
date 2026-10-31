@@ -72,8 +72,8 @@ document.getElementById('chartRange').addEventListener('change',e=>{
  drawSharesPanel();
  if(typeof redrawPriceForRange==='function')redrawPriceForRange();
 });
-document.getElementById('rows').addEventListener('click',e=>{if(e.target.closest('a'))return;const row=e.target.closest('tr[data-ticker]');if(row)openStock(row.dataset.ticker)});
-document.getElementById('rows').addEventListener('keydown',e=>{const row=e.target.closest('tr[data-ticker]');if(row&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openStock(row.dataset.ticker)}});
+document.getElementById('rows').addEventListener('click',e=>{if(e.target.closest('a,button[data-favorite]'))return;const row=e.target.closest('tr[data-ticker]');if(row)openStock(row.dataset.ticker)});
+document.getElementById('rows').addEventListener('keydown',e=>{if(e.target.closest('button[data-favorite],a'))return;const row=e.target.closest('tr[data-ticker]');if(row&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openStock(row.dataset.ticker)}});
 document.getElementById('detailClose').addEventListener('click',closeStock);
 backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeStock()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&backdrop.classList.contains('open'))closeStock()});
