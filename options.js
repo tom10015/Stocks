@@ -286,7 +286,7 @@ async function init(){
    price:quote?Number(quote[1]):null,priceDate:quote?.[0]||null,priceProvider:priceData.prices?.[x.ticker]?.source?.provider||null,priceHistory};
  });
  activeStocks.sort((a,b)=>a.ticker.localeCompare(b.ticker));
- renderStats();renderList();
+ renderStats();renderList();document.dispatchEvent(new Event('sharewatch:watchlist-loaded'));
  if(activeStocks.length)selectStock(activeStocks.find(x=>valid(x.price))?.ticker||activeStocks[0].ticker);
  else $('stockList').innerHTML='<p class="muted small">No active tickers. <a href="./admin.html">Add one from your existing admin portal</a>.</p>';
  if(pricesResult.status==='fulfilled')setStatus('Loaded '+activeStocks.length+' active tickers. Alpaca indicative option data and manual quote entry are available.','good');
