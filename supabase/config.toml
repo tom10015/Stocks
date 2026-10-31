@@ -1,0 +1,4 @@
+# The indicative Alpaca options feed is public, read-only, and checks the active watchlist.
+# Alpaca API secrets stay inside the Edge Function environment.
+[functions.sharewatch-alpaca]
+verify_jwt = false
