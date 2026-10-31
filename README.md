@@ -27,3 +27,9 @@ The public site at https://tom10015.github.io/Stocks/ includes an **Admin portal
 - Do not place Supabase secret or service_role keys in this public repository. The current app uses a public publishable key with row-level security.
 
 **Note:** This Supabase project also hosts the campus event scheduling system. Stocks is isolated by its `stocks_` tables and policies, but both apps currently share the same Supabase Auth user directory. Do not give an unrelated campus user a Stocks admin role.
+
+## Public Options Analyzer
+
+The [Options Analyzer](https://tom10015.github.io/Stocks/options.html) reads Alpaca's **modified indicative** option-chain quotes through the Supabase `sharewatch-alpaca` Edge Function. Viewing options does **not** require a ShareWatch admin login. The function serves GET requests for active watchlist tickers only; brokerage credentials stay in Supabase environment secrets and are never sent to the browser. Basic per-instance request throttling and short-lived caching reduce unnecessary calls but are not a substitute for a global rate limiter if the site receives significant public traffic. Option quotes are indicative, not executable market bids/asks.
+
+The Admin portal still requires authorization to manage stocks. The Edge Function must be deployed with `verify_jwt = false` (see `supabase/config.toml`).
