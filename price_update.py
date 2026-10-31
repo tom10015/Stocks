@@ -4,6 +4,7 @@ Uses Yahoo Finance chart data (daily unadjusted close) with Stooq as a
 best-effort fallback. Neither provider is an exchange-licensed real-time feed.
 Never invent prices; keep last saved records when a provider fails.
 """
+import argparse
 import csv
 import datetime as dt
 import io
@@ -86,7 +87,15 @@ def compress(points):
     return [[day,close] for day,close in sorted(selected.items())]
 
 def main():
+    parser=argparse.ArgumentParser(description="Collect ShareWatch closing-price history")
+    parser.add_argument("--tickers",default="",help="Comma-separated active watchlist symbols to refresh; omit for full refresh")
+    args=parser.parse_args()
     watch=load_watchlist()
+    requested={s.strip().upper() for s in args.tickers.split(",") if s.strip()}
+    if requested:
+        invalid=sorted(requested-set(watch))
+        if invalid:raise SystemExit("Not active in the admin watchlist: "+", ".join(invalid))
+        watch={ticker:watch[ticker] for ticker in sorted(requested)}
     prior=json.loads(DEST.read_text()) if DEST.exists() else {"prices":{}}
     prices=prior.get("prices",{})
     for ticker in sorted(watch):
@@ -113,6 +122,7 @@ def main():
             print(ticker,"unavailable:",errors,flush=True)
         time.sleep(0.7)
     DEST.parent.mkdir(exist_ok=True)
-    DEST.write_text(json.dumps({"updated_at":NOW.isoformat(),"prices":prices},separators=(",",":"))+"\n")
-    print("Completed market price refresh for",len(watch),"tracked tickers",flush=True)
+    checked_at=prior.get("updated_at") if requested else NOW.isoformat()
+    DEST.write_text(json.dumps({"updated_at":checked_at or NOW.isoformat(),"prices":prices},separators=(",",":"))+"\n")
+    print("Completed", "targeted" if requested else "full","market price refresh for",len(watch),"tracked tickers",flush=True)
 if __name__=="__main__":main()
