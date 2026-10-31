@@ -39,7 +39,13 @@ def event_rows(body,kind,date,watch):
             url="https://www.nasdaq.com/market-activity/earnings"
         else:
             ex=str(r.get("exDividendDate") or r.get("exDate") or "").strip()
-            # The API query date is the ex-dividend calendar date; display unchanged.
+            # Nasdaq may return a month-wide calendar even for a day query.
+            # Trust the row's actual ex-dividend date, NOT the request date.
+            checked=None
+            for fmt in ("%Y-%m-%d","%m/%d/%Y","%b %d, %Y","%B %d, %Y"):
+                try:checked=dt.datetime.strptime(ex,fmt).date().isoformat();break
+                except ValueError:pass
+            if checked!=date:continue
             details="Reported ex-dividend date"
             amount=str(r.get("dividendRate") or r.get("cashAmount") or r.get("amount") or "").strip()
             if amount and amount not in ("N/A","—"):details+=" · "+amount[:35]
