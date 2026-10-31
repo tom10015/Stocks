@@ -34,6 +34,6 @@ def main():
     print("Missing closing-price histories:",price_value or "none")
     if os.getenv("GITHUB_OUTPUT"):
         with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as output:
-            output.write("new_shares="+share_value+"\\n")
-            output.write("new_prices="+price_value+"\\n")
+            output.write("new_shares="+share_value+"\n")
+            output.write("new_prices="+price_value+"\n")
 if __name__=="__main__":main()
