@@ -29,7 +29,7 @@ wire('optionForm','optError',optIds,()=>{
  const put=strategy==='put';
  $('optShareField').hidden=put;$('optBasisField').hidden=put;
  $('optCapitalLabel').textContent=put?'Required cash collateral':'Reference value of owned shares';
- $('optExtraLabel').textContent=put?'Net credit at expiration':'P/L if assigned (with basis)';
+ $('optExtraLabel').textContent=put?'Maximum loss if stock reaches $0':'P/L if assigned (with basis)';
  const strike=read('optStrike','Strike price',{min:0.01,max:1e6});
  const premium=read('optPremium','Premium per share',{min:0,max:1e6});
  const contracts=read('optContracts','Number of contracts',{min:1,max:10000,integer:true});
@@ -44,12 +44,12 @@ wire('optionForm','optError',optIds,()=>{
  const roi=net/capital*100;
  const annual=roi*365/days;
  const breakeven=(put?strike:basis)-net/shares;
- const assigned=put?net:basis==null?null:(strike-basis)*shares+net;
+ const assigned=put?Math.max(0,capital-net):basis==null?null:(strike-basis)*shares+net;
  values({optNet:usd(net),optCapital:usd(capital),optRoi:percent(roi),optAnnual:percent(annual),
   optBreak:!put&&basis==null?'Enter basis':usd(breakeven),
   optExtra:assigned===null?'Enter basis':usd(assigned)});
  $('optNote').textContent=put?
- 'Put: collateral is strike × 100 × contracts; breakeven subtracts net option credit per share. Potential stock downside can be substantial, and early assignment is possible.':
+ 'Put: collateral is strike × 100 × contracts; breakeven subtracts the net option premium per share. Maximum loss assumes the stock falls to $0, ignoring assignment-related costs. Early assignment is possible.':
  'Call: assumes you already own '+number(shares)+' deliverable shares (not verified). Yield uses their current reference value; assignment P/L includes entered share basis. Stock downside remains, and gains above the strike are capped.';
 });
 wire('riskForm','riskError',['riskShares','riskBudget','riskLoss','riskCapital'],()=>{
