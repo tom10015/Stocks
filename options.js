@@ -309,17 +309,6 @@ function downloadCsv(){
  const link=document.createElement('a'),url=URL.createObjectURL(new Blob([content],{type:'text/csv;charset=utf-8'}));
  link.href=url;link.download='sharewatch-option-comparisons.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),600);
 }
-function calculateEV(){
- const p=parsed('winProbability'),w=parsed('avgWin'),l=parsed('avgLoss');
- const el=$('evResult');
- if(!valid(p)||p<0||p>100||!valid(w)||w<0||!valid(l)||l<0){
-  el.textContent='Enter a win rate from 0–100% and non-negative average win/loss amounts.';
-  el.className='small status-warn';return;
- }
- const ev=(p/100)*w-(1-p/100)*l;
- el.textContent='Estimated EV: '+dollars(ev)+' per trade, before unmodeled costs. '+(ev<0?'Negative expectancy under these assumptions.':ev>0?'Positive expectancy under these assumptions.':'Breakeven expectancy under these assumptions.');
- el.className='small '+(ev>0?'status-good':ev<0?'status-warn':'muted');
-}
 async function loadWatchlist(){
  // Query live active records. If Supabase fails, NEVER fall back to the full
  // cached JSON, which could display hidden/deleted stocks as active.
@@ -379,7 +368,7 @@ $('strategy').addEventListener('change',()=>{$('basisField').hidden=$('strategy'
 $('tradeForm').addEventListener('submit',calculate);
 $('clearTrade').addEventListener('click',()=>clearInputs(true));
 $('saveTrade').addEventListener('click',saveCurrent);
-$('calculateEV').addEventListener('click',calculateEV);
+
 $('savedTrades').addEventListener('click',event=>{
  const remove=event.target.closest('button[data-remove]'),load=event.target.closest('button[data-load]');
  if(remove){storedTrades=storedTrades.filter(x=>x.id!==remove.dataset.remove);persistSaved();renderSaved();}
