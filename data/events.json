@@ -4,286 +4,146 @@
   "coverage_end": "2026-12-15",
   "source_requests_successful": 64,
   "source_requests_failed": 0,
-  "note": "64 source queries successful; 0 unavailable. Dates are source-reported and may change.",
+  "note": "Earnings dates are source-reported. Dividend rows temporarily withheld pending per-row ex-date validation; daily collector will restore only confirmed date-matched events.",
   "events": [
     {
       "ticker": "AAPL",
       "date": "2026-11-02",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $1.98",
+      "details": "Reported earnings date · time-after-hours · EPS estimate $1.98",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "O",
       "date": "2026-11-02",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $1.11",
+      "details": "Reported earnings date · time-after-hours · EPS estimate $1.11",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-02",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "LTC",
       "date": "2026-11-03",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $0.70",
+      "details": "Reported earnings date · time-after-hours · EPS estimate $0.70",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-03",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "TSLX",
       "date": "2026-11-03",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $0.43",
+      "details": "Reported earnings date · time-after-hours · EPS estimate $0.43",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "OBDC",
       "date": "2026-11-04",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $0.32",
+      "details": "Reported earnings date · time-after-hours · EPS estimate $0.32",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-04",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "IREN",
       "date": "2026-11-05",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($0.46)",
+      "details": "Reported earnings date · time-after-hours · EPS estimate ($0.46)",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "MAIN",
       "date": "2026-11-05",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $0.91",
+      "details": "Reported earnings date · time-after-hours · EPS estimate $0.91",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "SOUN",
       "date": "2026-11-05",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($0.12)",
+      "details": "Reported earnings date · time-after-hours · EPS estimate ($0.12)",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-05",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "ENB",
       "date": "2026-11-06",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-pre-market \u00b7 EPS estimate $0.36",
+      "details": "Reported earnings date · time-pre-market · EPS estimate $0.36",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-06",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "ASST",
       "date": "2026-11-09",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $3.44",
+      "details": "Reported earnings date · time-not-supplied · EPS estimate $3.44",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "QUBT",
       "date": "2026-11-09",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($0.07)",
+      "details": "Reported earnings date · time-after-hours · EPS estimate ($0.07)",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-09",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "CRWV",
       "date": "2026-11-10",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($1.45)",
+      "details": "Reported earnings date · time-after-hours · EPS estimate ($1.45)",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-10",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "CSCO",
       "date": "2026-11-11",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $1.15",
+      "details": "Reported earnings date · time-not-supplied · EPS estimate $1.15",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-12",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "SBUX",
-      "date": "2026-11-13",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/sbux/dividend-history"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-13",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-16",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "CAN",
       "date": "2026-11-17",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate ($0.06)",
+      "details": "Reported earnings date · time-not-supplied · EPS estimate ($0.06)",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "DIS",
       "date": "2026-11-17",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-pre-market \u00b7 EPS estimate $1.67",
+      "details": "Reported earnings date · time-pre-market · EPS estimate $1.67",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "HD",
       "date": "2026-11-17",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-pre-market \u00b7 EPS estimate $3.86",
+      "details": "Reported earnings date · time-pre-market · EPS estimate $3.86",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "NVDA",
       "date": "2026-11-17",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $2.49",
+      "details": "Reported earnings date · time-after-hours · EPS estimate $2.49",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-17",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "FINV",
       "date": "2026-11-18",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied",
+      "details": "Reported earnings date · time-not-supplied",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-18",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-19",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-20",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-23",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "CLSK",
       "date": "2026-11-24",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate ($0.36)",
+      "details": "Reported earnings date · time-not-supplied · EPS estimate ($0.36)",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-24",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-25",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-27",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-30",
-      "type": "dividend",
-      "details": "Reported ex-dividend date",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
       "ticker": "ORCL",
       "date": "2026-12-09",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $1.57",
+      "details": "Reported earnings date · time-not-supplied · EPS estimate $1.57",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     }
   ]
