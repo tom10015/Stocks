@@ -1,4 +1,4 @@
-/* Alpaca free indicative options — separate, read-only, admin-authenticated.
+/* Alpaca free indicative options — public, read-only quote access.
  * Modified quotes are NOT OPRA NBBO and may not be executable.
  * Actual trading requires broker quote verification.
  */
@@ -16,24 +16,9 @@ function alpacaStatus(message,connected=false){
 function alpacaEmpty(message){
  $('alpacaRows').innerHTML='<tr><td colspan="9" class="muted">'+esc(message)+'</td></tr>';
 }
-async function alpacaToken(){
- const raw=sessionStorage.getItem('sharewatch-admin-session');
- if(!raw)throw Error('Sign in through ShareWatch Admin Portal in this tab to access private Alpaca data.');
- let session;try{session=JSON.parse(raw)}catch{throw Error('Admin session invalid. Sign in again.')}
- if(typeof session.access_token!=='string'||session.access_token.length<30)throw Error('Admin session missing; sign in again.');
- if(Date.now()<Number(session.expires_at||0)*1000-60000)return session.access_token;
- if(!session.refresh_token)throw Error('Admin session expired; sign in again.');
- const r=await fetch(SUPABASE+'/auth/v1/token?grant_type=refresh_token',{method:'POST',
-  headers:{apikey:API_KEY,'Content-Type':'application/json'},
-  body:JSON.stringify({refresh_token:session.refresh_token})});
- if(!r.ok)throw Error('Could not renew ShareWatch login. Sign in through admin.');
- session=await r.json();sessionStorage.setItem('sharewatch-admin-session',JSON.stringify(session));
- return session.access_token;
-}
 async function alpacaFetch(params){
- const jwt=await alpacaToken();
  const url=ALPACA_ENDPOINT+'?'+new URLSearchParams(params);
- const r=await fetch(url,{cache:'no-store',headers:{apikey:API_KEY,Authorization:'Bearer '+jwt,Accept:'application/json'}});
+ const r=await fetch(url,{cache:'no-store',headers:{apikey:API_KEY,Accept:'application/json'}});
  let payload;try{payload=await r.json()}catch{throw Error('Alpaca service returned unreadable data.')}
  if(!r.ok)throw Error(payload.error||'Alpaca service returned HTTP '+r.status);
  return payload;
