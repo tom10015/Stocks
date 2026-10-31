@@ -6,7 +6,11 @@ const safe=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':
 const money=n=>Number.isFinite(Number(n))?'$'+Number(n).toFixed(2):'—';
 const pct=n=>Number.isFinite(n)?(n*100).toFixed(2)+'%':'—';
 const dateValid=s=>/^\d{4}-\d{2}-\d{2}$/.test(String(s||''))&&!Number.isNaN(Date.parse(s+'T12:00:00Z'));
-const today=()=>new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'});
+const today=()=>{
+ const parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ const m=Object.fromEntries(parts.map(p=>[p.type,p.value]));
+ return [m.year,m.month,m.day].join('-');
+};
 function dte(s){return Math.ceil((Date.parse(s+'T12:00:00Z')-Date.now())/86400000);}
 const account=()=>window.ShareWatchUser;
 let scanResults=[],scanPage=0,running=false,journalRows=[],lastJournalUser=null,calendarEvents=[];
@@ -183,10 +187,11 @@ async function fetchCalendar(){
   if(!response.ok)throw Error('Feed not yet generated (HTTP '+response.status+')');
   const data=await response.json();
   calendarEvents=(Array.isArray(data.events)?data.events:[]).filter(x=>dateValid(x.date)&&/^[A-Z0-9][A-Z0-9.^-]{0,15}$/.test(x.ticker)&&['earnings','dividend'].includes(x.type));
-  $('eventsStatus').textContent='Calendar source: '+(data.provider||'Unavailable')+' · checked '+(data.updated_at||'not yet')+' · '+calendarEvents.length+' source-reported events. '+(data.note||'');
+  $('eventsStatus').textContent='Calendar source: '+(data.provider||'Unavailable')+' · checked '+(data.updated_at||'not yet')+' · '+calendarEvents.length+' source-reported events. Coverage through '+(data.coverage_end||'unknown')+'. '+(data.note||'');
   drawEvents();
  }catch(e){$('eventsStatus').textContent='Calendar unavailable: '+e.message+'. Event dates are not estimated or fabricated.';drawEvents();}
 }
+document.addEventListener('sharewatch:watchlist-loaded',drawEvents);
 for(const id of ['eventsKind','eventsWindow','eventsSearch'])$(id).addEventListener(id==='eventsSearch'?'input':'change',drawEvents);
 fetchCalendar();
 })();
