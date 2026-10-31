@@ -79,3 +79,68 @@ footer{margin-top:28px;border-top:1px solid #31445a;padding:18px 0;color:#96a8bd
 .chain-table .pop-cell{text-align:right;white-space:nowrap;min-width:118px;font-variant-numeric:tabular-nums}
 .chain-table .pop-cell strong{color:#d7ebfa;font-size:13px}
 #profitProbabilityHelp{border-left:3px solid #4f8da8;padding:4px 0 4px 10px;max-width:900px}
+
+/* Compact option chain: keep estimated profit visible without sideways scrolling.
+   Secondary IV/spread/sizes/quote data expands beneath each strike. */
+.auto-chain-box{container-type:inline-size}
+.chain-core{max-width:100%;width:100%;overflow-x:visible}
+.chain-core .chain-table{width:100%;min-width:0;table-layout:fixed}
+.chain-core .chain-table th,.chain-core .chain-table td{
+ padding:9px 6px;overflow-wrap:anywhere;vertical-align:middle
+}
+.chain-core .chain-table th{font-size:10px;letter-spacing:.25px;line-height:1.35}
+.chain-core .chain-table td{font-size:12px}
+.chain-core .chain-table th:nth-child(1){width:18%}
+.chain-core .chain-table th:nth-child(2){width:19%}
+.chain-core .chain-table th:nth-child(3){width:15%}
+.chain-core .chain-table th:nth-child(4){width:21%}
+.chain-core .chain-table th:nth-child(5){width:10%}
+.chain-core .chain-table th:nth-child(6){width:17%}
+.chain-core .chain-table .chain-strike-cell strong{white-space:nowrap;font-size:14px;display:block}
+.chain-core .chain-table .pop-cell{text-align:left;min-width:0;white-space:nowrap}
+.chain-core .chain-table .pop-cell strong{color:#8ff2c9;font-size:16px}
+.chain-core .chain-quote-cell{font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.5}
+.chain-core .chain-quote-label{color:#a1b9d0;font-size:10px}
+.chain-core .chain-quote-break{display:block}
+.chain-core .chain-detail-toggle{display:block;margin-top:4px;background:none;border:0;color:#8acbff;
+ cursor:pointer;font-size:11px;padding:2px 0;text-align:left;font-weight:500;white-space:nowrap}
+.chain-core .chain-detail-toggle:hover{text-decoration:underline;background:none}
+.chain-core .chain-detail-toggle:focus-visible{outline:2px solid #64d6b1}
+.chain-core .chain-action button{padding:7px 7px;font-size:11px;white-space:nowrap;max-width:100%}
+.chain-core .chain-delta{white-space:nowrap;font-variant-numeric:tabular-nums}
+.chain-core .chain-more-row[hidden]{display:none!important}
+.chain-core .chain-more-row td{background:#14283b!important;border-bottom:1px solid #344b64!important;padding:11px!important}
+.chain-core .chain-more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px 15px}
+.chain-core .chain-more-grid span{font-size:11px;color:#9bb5d0}
+.chain-core .chain-more-grid strong{display:block;color:#eef5ff;font-size:12px;margin-top:3px;overflow-wrap:break-word}
+.chain-core .chain-more-row p{margin:8px 0 0}
+.chain-table-tip{margin:0 0 8px;font-size:11px;line-height:1.5}
+.chain-caption{display:block;text-transform:none;letter-spacing:0;color:#7f9bb5;font-size:10px;font-weight:400}
+@container (max-width:700px){
+ .chain-core .chain-table th.chain-optional,.chain-core .chain-table td.chain-optional{display:none}
+ .chain-core .chain-table th:nth-child(1){width:26%}
+ .chain-core .chain-table th:nth-child(2){width:24%}
+ .chain-core .chain-table th:nth-child(4){width:31%}
+ .chain-core .chain-table th:nth-child(6){width:19%}
+ .chain-core .chain-table td{padding:7px 5px}
+}
+@container (max-width:395px){
+ .chain-core .chain-table,.chain-core .chain-table tbody{display:block;width:100%}
+ .chain-core .chain-table thead{display:none}
+ .chain-core .chain-table tr.chain-strike{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-areas:"strike profit" "quote action";align-items:center;gap:3px 10px;
+  padding:8px;margin:8px 0;border:1px solid #344b64;border-radius:9px}
+ .chain-core .chain-table tr.chain-strike td{border:0;padding:3px 4px;min-width:0}
+ .chain-core .chain-table .chain-strike-cell{grid-area:strike}
+ .chain-core .chain-table .pop-cell{grid-area:profit}
+ .chain-core .chain-table .pop-cell::before{content:"Profit estimate";display:block;
+  font-size:10px;line-height:1.4;color:#a0b8ce;margin-bottom:3px}
+ .chain-core .chain-table .chain-quote-cell{grid-area:quote}
+ .chain-core .chain-table .chain-quote-break{display:inline}
+ .chain-core .chain-table .chain-quote-break::after{content:"  "}
+ .chain-core .chain-table .chain-action{grid-area:action}
+ .chain-core .chain-table .chain-action button{width:100%}
+ .chain-core .chain-table tr.stock-price-marker,.chain-core .chain-table tr.chain-more-row{display:block;width:100%}
+ .chain-core .chain-table tr.stock-price-marker td,.chain-core .chain-table tr.chain-more-row td{display:block;width:100%}
+ .chain-core .chain-more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
