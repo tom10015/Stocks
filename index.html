@@ -41,9 +41,9 @@ function render(){
  $('down').textContent=records.filter(x=>x.m.pct!=null&&x.m.pct<0).length;
  $('covered').textContent=records.filter(x=>x.m.a).length;
  const q=$('search').value.trim().toLowerCase(),filter=$('filter').value;
- const visible=records.filter(({d,m})=>(d.ticker.toLowerCase().includes(q)||(d.name||'').toLowerCase().includes(q))&&(filter==='all'||filter==='up'&&m.pct!=null&&m.pct>0||filter==='down'&&m.pct!=null&&m.pct<0||filter==='missing'&&m.pct==null||filter==='favorites'&&Boolean(window.ShareWatchUser?.user)&&window.ShareWatchUser.favorites.has(d.ticker)||filter==='dilution'&&d.type!=='fund'&&m.pct!=null&&m.pct>=Number($('dilutionThreshold').value)));
+ const visible=records.filter(({d,m})=>(d.ticker.toLowerCase().includes(q)||(d.name||'').toLowerCase().includes(q))&&(filter==='all'||filter==='up'&&m.pct!=null&&m.pct>0||filter==='down'&&m.pct!=null&&m.pct<0||filter==='missing'&&m.pct==null||filter==='favorites'&&Boolean(window.ShareWatchUser?.user)&&window.ShareWatchUser.favorites.has(d.ticker)||filter==='dilution'&&(d.type==='company'||!d.type)&&m.b&&m.source==='reported'&&m.pct!=null&&m.pct>=Number($('dilutionThreshold').value)));
  const threshold=Number($('dilutionThreshold').value);
- const alerted=records.filter(({d,m})=>d.type!=='fund'&&m.pct!=null&&m.pct>=threshold);
+ const alerted=records.filter(({d,m})=>(d.type==='company'||!d.type)&&m.b&&m.source==='reported'&&m.pct!=null&&m.pct>=threshold);
  $('shareAlertSummary').textContent=alerted.length+' company stocks show share-count increases of '+threshold+'% or more over the selected period. These are screening flags—not proof of dilution. Stock splits and other actions may cause changes.';
  const order=$('shareSort').value;
  if(order!=='ticker')visible.sort((x,y)=>{
@@ -54,8 +54,9 @@ function render(){
  $('rows').innerHTML=visible.map(({d,m})=>{
   const {a,b,pct,source}=m,cls=pct>0?'up':pct<0?'down':'';
   const change=pct==null?(a?'Not enough history':'Awaiting source'):(pct>0?'+':'')+pct.toFixed(2)+'%';
+  const isShareRise=(d.type==='company'||!d.type)&&b&&source==='reported'&&pct!=null&&pct>=Number($('dilutionThreshold').value);
   const detail=pct!=null&&source==='third-party-yoy'?'Third-party YoY estimate · dates unavailable':a&&b?b.date+' → '+a.date:a?'No report near selected period':'';
-  return `<tr class="row-click" data-ticker="${esc(d.ticker)}" tabindex="0" role="button" aria-label="View ${esc(d.ticker)} share history"><td><div class="ticker">${esc(d.ticker)}${favoriteButton(d)}</div><div class="name" title="${esc(d.name||'')}">${esc(d.name||'Unmapped security')}</div></td><td>${spark(d.history||[])}</td><td><strong>${a?fmt(a.shares):'—'}</strong></td><td><span class="pill ${cls}">${esc(change)}</span><span class="change-detail">${esc(detail)}</span></td><td>${a?esc(a.date)+(a.date_is_check_only?' (checked only)':a.form==='Snapshot'?' (checked)':''):'—'}</td><td>${a?.url?`<a href="${esc(a.url)}" target="_blank" rel="noopener noreferrer">${a.form==='Snapshot'?'Snapshot ↗':a.form==='Fund report'?'Issuer ↗':a.form==='Fund snapshot'?'Fund snapshot ↗':esc(a.form)+' ↗'}</a>`:'—'}</td></tr>`;
+  return `<tr class="row-click" data-ticker="${esc(d.ticker)}" tabindex="0" role="button" aria-label="View ${esc(d.ticker)} share history"><td><div class="ticker">${esc(d.ticker)}${favoriteButton(d)}</div><div class="name" title="${esc(d.name||'')}">${esc(d.name||'Unmapped security')}</div></td><td>${spark(d.history||[])}</td><td><strong>${a?fmt(a.shares):'—'}</strong></td><td><span class="pill ${cls}">${esc(change)}</span><span class="change-detail">${esc(detail)}${isShareRise?' · ⚠ Large increase':''}</span></td><td>${a?esc(a.date)+(a.date_is_check_only?' (checked only)':a.form==='Snapshot'?' (checked)':''):'—'}</td><td>${a?.url?`<a href="${esc(a.url)}" target="_blank" rel="noopener noreferrer">${a.form==='Snapshot'?'Snapshot ↗':a.form==='Fund report'?'Issuer ↗':a.form==='Fund snapshot'?'Fund snapshot ↗':esc(a.form)+' ↗'}</a>`:'—'}</td></tr>`;
  }).join('')||'<tr><td colspan="6" class="empty">'+(filter==='favorites'&&!window.ShareWatchUser?.user?'Sign in to see your favorites.':'No matching securities')+'</td></tr>';
 }
 async function init(){try{let r=await fetch('./data/shares.json?ts='+Date.now());if(!r.ok)throw Error('Data file not generated yet');let j=await r.json();data=Object.values(j.companies||{}).sort((a,b)=>a.ticker.localeCompare(b.ticker));
