@@ -36,7 +36,7 @@ The Admin portal still requires authorization to manage stocks. The Edge Functio
 
 ## Personal accounts and favorites (October 2026)
 
-The [regular user account page](https://tom10015.github.io/Stocks/account.html) offers email/password sign-up, sign-in and sign-out. Signed-in users can star companies from the public share-counter table or manage a private saved ticker list on their account page. The public share-counter also includes a **My favorites** filter. User sessions use their own browser storage key and do not grant admin privileges.
+Regular users sign up, sign in, and sign out through an **inline account panel on both the Share Counter and Options Analyzer**. Users can star/unstar companies on either dashboard and filter each dashboard to **My favorites**. The old `account.html` URL redirects to the Share Counter instead of showing a separate account page. User sessions have their own browser storage key and do not grant admin privileges.
 
 Favorites live in `public.stocks_user_favorites` in Supabase and are protected by row-level security: authenticated users can only select, add and delete their own rows. Admin management continues to be restricted by `public.stocks_admins`. Public guests can browse stocks and options without logging in.
 
