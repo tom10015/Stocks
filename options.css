@@ -51,3 +51,21 @@ footer{margin-top:28px;border-top:1px solid #31445a;padding:18px 0;color:#96a8bd
 .strategy-mini-note{font-size:12px;color:#ffcc97;margin-top:11px;line-height:1.55}
 .trade-form-title{padding:2px 0 12px}.trade-form-title h3{margin:5px 0 4px}
 @media(max-width:650px){.strategy-switcher{padding:12px}.strategy-grid{grid-template-columns:1fr}.strategy-choice{min-height:100px}.strategy-context{display:block}.strategy-facts{margin-top:12px}}
+
+/* Exact-listed expiry navigation and stock reference line */
+#alpacaExpiration{min-width:240px;max-width:100%}
+.chain-explanation{display:flex;flex-wrap:wrap;gap:9px;margin:13px 0 8px}
+.chain-key{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;border:1px solid #34495f;border-radius:7px;font-size:11px;color:#bfcede}
+.chain-key::before{content:"";width:8px;height:8px;border-radius:50%;background:#9fb5c9}
+.chain-key.itm::before{background:#7ee3bc}
+.chain-key.otm::before{background:#82b7f6}
+.chain-key.atm::before{background:#ffc97d}
+.chain-price-note{color:#a8bdd3;font-size:12px;line-height:1.6;margin-bottom:9px}
+.chain-table .chain-strike.itm td{background:rgba(34,108,87,.12)}
+.chain-table .chain-strike.otm td{background:rgba(64,106,170,.08)}
+.chain-table .stock-price-marker td{padding:0 10px!important;border-top:2px solid #ffc77a!important;border-bottom:1px solid #926a39!important;background:#342719!important}
+.stock-price-marker .line-label{display:block;text-align:center;padding:10px 6px;color:#ffda9f;font-size:12px;letter-spacing:.4px;font-weight:800;white-space:normal}
+.moneyness{display:inline-block;border:1px solid #3a506a;padding:3px 6px;border-radius:6px;color:#c7d7e8;font-size:11px;font-weight:750}
+.moneyness.itm{border-color:#367b64;color:#8ae2c0}.moneyness.otm{border-color:#4878ad;color:#8bc3ff}
+.moneyness.atm{border-color:#af8653;color:#ffd5a6}
+@media(max-width:650px){#alpacaExpiration{width:100%;min-width:0}.chain-explanation{gap:5px}.chain-key{font-size:10px}}
