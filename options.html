@@ -33,7 +33,7 @@
   <aside class="panel" aria-labelledby="watchlistHeading">
    <div class="panel-head"><div><h2 id="watchlistHeading">Your stocks</h2><div class="section-sub">Select any active ticker to analyze</div></div><a href="./admin.html" class="small">Manage ↗</a></div>
    <div class="filters"><input id="stockSearch" aria-label="Search stock ticker or name" placeholder="Search ticker or company…"><select id="stockFilter" aria-label="Filter watchlist"><option value="all">All active</option><option value="company">Stocks</option><option value="fund">Funds / ETFs</option><option value="unpriced">No price yet</option><option value="favorites">★ My favorites</option></select></div>
-   <div class="section-sub" style="margin:9px 0"><a id="favoritesAccountLink" href="./account.html">Sign in to save favorites ↗</a></div>
+   <div class="section-sub" style="margin:9px 0"><a id="favoritesAccountLink" href="#account" data-account-toggle>Sign in / Create account</a></div>
     <div id="stockList" class="stock-list" role="listbox" aria-label="Active ShareWatch stock tickers"><p class="muted">Loading stocks…</p></div>
    <p class="footnote">Add, hide, restore, or permanently delete tickers in the <a href="./admin.html">same admin portal</a>. Those changes automatically affect both dashboards. This analyzer does not create a second watchlist.</p>
   </aside>
@@ -108,6 +108,6 @@
  <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability nor premium yield guarantees profitability.</footer>
 </main>
-<script src="./user-favorites.js?v=20261031-users1" defer></script><script src="./options.js?v=20261031-favorites-counter2" defer></script><script src="./alpaca-options.js?v=20261031-public-quotes1" defer></script>
+<script src="./user-favorites.js?v=20261031-inline-user2" defer></script><script src="./inline-account.js?v=20261031-inline-user1" defer></script><script src="./options.js?v=20261031-favorite-stars3" defer></script><script src="./alpaca-options.js?v=20261031-public-quotes1" defer></script>
 </body>
 </html>
