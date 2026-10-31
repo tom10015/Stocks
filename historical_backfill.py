@@ -140,13 +140,16 @@ def main():
  parser=argparse.ArgumentParser()
  parser.add_argument("--max-filing-per-fund",type=int,default=6)
  parser.add_argument("--max-tickers",type=int,default=30)
+ parser.add_argument("--tickers",type=str,default="",help="Optional comma-separated tickers to backfill exclusively")
  args=parser.parse_args()
  if not DATA.exists():raise SystemExit("Missing share file")
  payload=json.loads(DATA.read_text());companies=payload.get("companies",{})
  previous_status=json.loads(STATE.read_text()) if STATE.exists() else {}
  status={"checked_at":dt.datetime.now(dt.timezone.utc).isoformat(),"results":{}}
  # Iterate across all companies that need more than one data point first.
+ requested={x.strip().upper() for x in args.tickers.split(",") if x.strip()}
  items=sorted(companies.items(),key=lambda kv:(len(kv[1].get("history",[])),kv[0]))
+ if requested:items=[(ticker,company) for ticker,company in items if ticker in requested]
  total=0
  for ticker,company in items:
   if len(company.get("history",[]))>=3:continue
