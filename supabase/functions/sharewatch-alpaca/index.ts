@@ -63,37 +63,44 @@ Deno.serve(async req=>{
  const low=Number.isFinite(spot)&&spot>0?Math.max(0.01,spot*.55):0.01;
  const high=Number.isFinite(spot)&&spot>0?spot*1.65:1e6;
  if(mode==="calendar"){
-  // Query the option-contract reference catalog, not an arbitrary 30-day snapshot.
-  // Alpaca defaults to next weekend unless expiration_date_lte is explicit.
-  const calUrl=new URL("https://paper-api.alpaca.markets/v2/options/contracts");
-  calUrl.searchParams.set("underlying_symbols",ticker);
-  calUrl.searchParams.set("type",side);
-  calUrl.searchParams.set("status","active");
-  calUrl.searchParams.set("expiration_date_gte",today);
+  // Read actual listed expirations from the SAME indicative market-data endpoint
+  // that worked with the user's API keys before the date-picker change.
+  // Avoid the separate Alpaca paper-trading endpoint entirely.
+  const from=new Date(Date.now()-86400000).toISOString().slice(0,10);
   const horizon=new Date(Date.now()+3*366*86400000).toISOString().slice(0,10);
-  calUrl.searchParams.set("expiration_date_lte",horizon);
-  calUrl.searchParams.set("strike_price_gte",String(low));
-  calUrl.searchParams.set("strike_price_lte",String(high));
-  calUrl.searchParams.set("limit","10000");
-  let cursor="",pages=0;
-  const expirations=new Set<string>();
+  let cursor="",pages=0,scanned=0;
+  const dates=new Set<string>();
   do{
-   const url=new URL(calUrl);
+   const url=new URL("https://data.alpaca.markets/v1beta1/options/snapshots/"+encodeURIComponent(ticker));
+   url.searchParams.set("feed","indicative");
+   url.searchParams.set("type",side);
+   url.searchParams.set("expiration_date_gte",from);
+   url.searchParams.set("expiration_date_lte",horizon);
+   // Focus on realistic near-stock strikes so enough expiration dates fit in pages.
+   if(Number.isFinite(spot)&&spot>0){
+    url.searchParams.set("strike_price_gte",String(spot*.85));
+    url.searchParams.set("strike_price_lte",String(spot*1.15));
+   }
+   url.searchParams.set("limit","1000");
    if(cursor)url.searchParams.set("page_token",cursor);
    const resp=await request(url.toString(),headers,12_000_000);
-   if(resp.error)return json({error:"Alpaca contract calendar "+resp.error+". This requires an Alpaca paper-trading API key and secret. If your keys are for live trading, create paper keys in your Alpaca dashboard."},resp.code===429?429:502);
-   if(!Array.isArray(resp.data?.option_contracts))return json({error:"Alpaca did not return a valid contract calendar."},502);
-   for(const contract of resp.data.option_contracts){
-    if(contract?.underlying_symbol===ticker&&contract.type===side&&contract.status==="active"&&
-      String(contract.multiplier||contract.size)==="100"&&typeof contract.expiration_date==="string"&&
-      contract.expiration_date>=today&&contract.expiration_date<=horizon)expirations.add(contract.expiration_date);
+   if(resp.error)return json({error:"Alpaca market-data expiration lookup "+resp.error+
+    (resp.code===401||resp.code===403?" — verify the Alpaca market-data key and plan.":"" )},resp.code===429?429:502);
+   const snapshots=resp.data?.snapshots;
+   if(!snapshots||typeof snapshots!=="object"||Array.isArray(snapshots))
+    return json({error:"Alpaca did not return a usable options snapshot for expiration discovery."},502);
+   const entries=Object.keys(snapshots);
+   scanned+=entries.length;
+   for(const symbol of entries){
+    const parsed=parseContract(symbol,ticker);
+    if(parsed&&parsed.type===side&&parsed.expiration>=today&&parsed.expiration<=horizon)dates.add(parsed.expiration);
    }
    cursor=typeof resp.data?.next_page_token==="string"?resp.data.next_page_token:"";
    pages++;
-  }while(cursor&&pages<5);
-  return json({status:"ok",mode:"calendar",ticker,side,expirations:[...expirations].sort(),
-   partial:Boolean(cursor),retrieved_at:new Date().toISOString(),
-   note:"Dates are from active, standard Alpaca option contracts. Dates without usable indicative quotes may still appear."});
+  }while(cursor&&pages<8);
+  return json({status:"ok",mode:"calendar",ticker,side,expirations:[...dates].sort(),
+   partial:Boolean(cursor),pages,scanned,retrieved_at:new Date().toISOString(),
+   note:"Actual expirations present in Alpaca's indicative option snapshots. If paginated, some farther expirations may not appear."});
  }
  let cursor="",pages=0,scanned=0;
  const rows:any[]=[];
