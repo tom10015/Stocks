@@ -33,3 +33,11 @@ The public site at https://tom10015.github.io/Stocks/ includes an **Admin portal
 The [Options Analyzer](https://tom10015.github.io/Stocks/options.html) reads Alpaca's **modified indicative** option-chain quotes through the Supabase `sharewatch-alpaca` Edge Function. Viewing options does **not** require a ShareWatch admin login. The function serves GET requests for active watchlist tickers only; brokerage credentials stay in Supabase environment secrets and are never sent to the browser. Basic per-instance request throttling and short-lived caching reduce unnecessary calls but are not a substitute for a global rate limiter if the site receives significant public traffic. Option quotes are indicative, not executable market bids/asks.
 
 The Admin portal still requires authorization to manage stocks. The Edge Function must be deployed with `verify_jwt = false` (see `supabase/config.toml`).
+
+## Personal accounts and favorites (October 2026)
+
+The [regular user account page](https://tom10015.github.io/Stocks/account.html) offers email/password sign-up, sign-in and sign-out. Signed-in users can star companies from the public share-counter table or manage a private saved ticker list on their account page. The public share-counter also includes a **My favorites** filter. User sessions use their own browser storage key and do not grant admin privileges.
+
+Favorites live in `public.stocks_user_favorites` in Supabase and are protected by row-level security: authenticated users can only select, add and delete their own rows. Admin management continues to be restricted by `public.stocks_admins`. Public guests can browse stocks and options without logging in.
+
+**Supabase Auth setup for confirmation emails:** In the Supabase project `fmtfskcgnlxusipaxdog`, open **Authentication → URL Configuration** and add `https://tom10015.github.io/Stocks/account.html` to the allowed **Redirect URLs**. Keep the existing Site URL for other apps in the same project, and verify **Authentication → Providers → Email** allows email/password signup. Email confirmation may be required. No test user was created by this setup.
