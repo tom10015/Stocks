@@ -1,0 +1,46 @@
+name: Collect newly added stock history
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+permissions:
+  contents: write
+concurrency:
+  group: sec-share-update
+  cancel-in-progress: false
+jobs:
+  collect-new:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check for new active tickers
+        id: check
+        run: python quick_new_tickers.py
+      - name: Collect current and historical share counts
+        if: steps.check.outputs.new_tickers != ''
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'ShareWatch tom10015@users.noreply.github.com' }}
+          NEW_TICKERS: ${{ steps.check.outputs.new_tickers }}
+        run: |
+          python update.py
+          python historical_backfill.py --tickers "$NEW_TICKERS" --max-tickers 25
+      - name: Merge collected shares onto latest main
+        if: steps.check.outputs.new_tickers != ''
+        run: |
+          cp data/shares.json /tmp/sharewatch-new-shares.json
+          cp data/backfill_status.json /tmp/sharewatch-new-status.json
+          git fetch origin main
+          git reset --hard origin/main
+          python merge_data.py /tmp/sharewatch-new-shares.json data/shares.json
+          cp /tmp/sharewatch-new-status.json data/backfill_status.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/shares.json data/backfill_status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Collect newly added stock and historical share-count data"
+            git push origin HEAD:main
+          fi
