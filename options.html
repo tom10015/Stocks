@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="description" content="ShareWatch options trade analyzer using the same active stock watchlist and admin portal.">
  <title>Options Analyzer · ShareWatch</title>
- <link rel="stylesheet" href="./options.css?v=20261031-profit1">
+ <link rel="stylesheet" href="./options.css?v=20261031-compact-chain1">
 <style>.sw-tools{margin-top:18px}.sw-tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:11px;margin:15px 0}.sw-tool-grid label{font-size:12px;color:#afbed3}.sw-tool-grid input,.sw-tool-grid select{display:block;width:100%;margin-top:5px;min-width:0;padding:9px;border-radius:7px;background:#162536;color:#edf3fc;border:1px solid #42536c}.sw-tools .table-scroll{margin-top:12px}.sw-tools td,.sw-tools th{padding:9px 11px;white-space:nowrap}.sw-tools .actions{flex-wrap:wrap}.sw-tools .actions button{margin:0 5px 8px 0}.sw-tools button:disabled{opacity:.48}.sw-warning{color:#f6c86d}</style></head>
 <body>
 <header>
@@ -66,7 +66,7 @@
  <p class="chain-price-note" id="profitProbabilityHelp">Profit probability uses an illustrative lognormal model, the option’s implied volatility, its indicative premium, and the trade’s expiration breakeven. Fees and covered-call share basis affect the estimate. It is not a backtested win rate or a guarantee; unavailable data shows —.</p>
  <div class="chain-price-note" id="alpacaStockReference">The stock price line uses your most recent saved share closing price; see the quote date above.</div>
  <p class="chain-table-tip small muted">Profit estimate stays visible beside the strike. Select <strong>Details</strong> for IV, spread, quote sizes and quote time.</p>
- <div class="chain-core"><table class="chain-table"><thead><tr><th scope="col">Strike</th><th scope="col" title="Illustrative probability of positive expiration profit. Not a guaranteed win rate.">Profit est.</th><th scope="col" class="chain-optional">Position</th><th scope="col">Bid / Ask <span class="chain-caption">(indicative)</span></th><th scope="col" class="chain-optional">Delta</th><th scope="col">Analyze</th></tr></thead><tbody id="alpacaRows"><tr><td colspan="6" class="muted">Choose a stock and its listed expiration date.</td></tr></tbody></table></div>
+ <div class="chain-core"><table class="chain-table"><thead><tr><th scope="col">Strike</th><th scope="col" title="Illustrative probability of positive expiration profit. Not a guaranteed win rate.">Profit chance <span class="chain-caption">(model est.)</span></th><th scope="col" class="chain-optional">Position</th><th scope="col">Bid / Ask <span class="chain-caption">(indicative)</span></th><th scope="col" class="chain-optional">Delta</th><th scope="col">Analyze</th></tr></thead><tbody id="alpacaRows"><tr><td colspan="6" class="muted">Choose a stock and its listed expiration date.</td></tr></tbody></table></div>
  <div id="alpacaSelection" class="small muted" aria-live="polite" style="margin-top:10px">Selling uses modified indicative bid; buying uses modified indicative ask, not an executable premium.</div>
  </section>
 <div class="trade-form-title"><div class="eyebrow">Step 3 · Your trade details</div><h3 id="tradeDetailsHeading">Enter your Cash-Secured Put details</h3><p id="tradeDetailsHelper" class="small muted">Select a contract from Alpaca above or enter your strike and premium manually.</p></div>
