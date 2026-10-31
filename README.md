@@ -7,7 +7,7 @@ Static GitHub Pages dashboard with an automated Python SEC data collector. The t
 - The SEC's API doesn't support browser CORS, so a GitHub Action runs the collector server-side.
 - SEC data is public and free. No market-price service is included.
 - The SEC company concept `dei/EntityCommonStockSharesOutstanding` is not available for every issuer. Funds, ETFs, foreign issuers, crypto assets, and some newly listed companies may show unavailable.
-- Changes are between the two most recent distinct reported **as-of dates**, not necessarily between two filings; splits, corrections, and corporate actions can affect comparisons.
+- The public ShareWatch table defaults to a **1-year** share-count comparison with selectable **2-year, 3-year, 5-year, all-available, and latest-reports** ranges. Each comparison is anchored to that stock's latest reported as-of date. For multi-year ranges, the nearest prior record must be within 120 days of the target; otherwise the table shows insufficient history. The actual start/end dates are displayed and exported. A clearly labeled third-party YoY estimate may appear for 1-year/latest comparisons when reported history is insufficient. Splits, corrections, and corporate actions can affect comparisons.
 - This is a disclosure tracker, not a validated accounting reconciliation of buybacks versus issuance. For precise attribution, read the filings.
 - Some ticker symbols may be ambiguous or may change; edit `tickers.json` as needed.
 - If the SEC blocks requests, check your User-Agent secret and try again later.
