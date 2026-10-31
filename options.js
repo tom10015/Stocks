@@ -1,15 +1,13 @@
 /* ShareWatch Options Analyzer
  * Separate from share-count dashboard. Shared ACTIVE Supabase watchlist.
  * Alpaca indicative premiums and manually entered quotes; no theoretical option pricing.
- * A saved comparison never sends account assumptions to Supabase.
  */
 'use strict';
 const SUPABASE='https://fmtfskcgnlxusipaxdog.supabase.co';
 const API_KEY='sb_publishable__pT9Xdhi40Fu4XLd7YVuAw_bkdpHpUD';
-const STORAGE_KEY='sharewatch-options-comparisons-v1';
 const CONTRACT_SIZE=100;
 const $=id=>document.getElementById(id);
-let activeStocks=[],selected=null,latestCalc=null,storedTrades=[],pricesChecked=null;
+let activeStocks=[],selected=null,latestCalc=null,pricesChecked=null;
 let selectedOptionQuote=null;
 function resetSelectedQuote(){selectedOptionQuote=null;const info=$('selectedContract');if(info)info.textContent='Choose an Alpaca indicative contract or enter a manual quote.';}
 
@@ -90,7 +88,6 @@ function resetMetrics(){
  $('payoffChart').innerHTML='<p class="muted small">Select an Alpaca indicative contract or enter a manual premium, then calculate expiration outcomes.</p>';
  $('scenarioRows').innerHTML='<tr><td colspan="4" class="muted">Calculate a trade to see scenarios.</td></tr>';
  $('riskChecks').replaceChildren();
- $('saveTrade').disabled=true;
  latestCalc=null;
 }
 function clearInputs(updateStatus=true){
@@ -241,73 +238,11 @@ function calculate(event){
   const calc=computeTrade();
   latestCalc=calc;
   renderMetrics(calc);payoffChart(calc);scenarios(calc);riskChecks(calc);
-  $('saveTrade').disabled=false;
   $('calcStatus').textContent='Calculated from '+(typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?(selectedOptionQuote.quote_kind==='indicative_modified'?'an ALPACA INDICATIVE MODIFIED QUOTE (not executable)':'an external premium'):'your manually entered premium')+'. No order was placed.';
   $('calcStatus').className='calc-status status-good';
  }catch(ex){
   resetMetrics();$('calcStatus').textContent=ex.message;$('calcStatus').className='calc-status status-warn';
  }
-}
-function getSaved(){
- try{const a=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');return Array.isArray(a)?a.filter(x=>x&&typeof x.ticker==='string').slice(0,100):[];}catch{return [];}
-}
-function persistSaved(){
- try{localStorage.setItem(STORAGE_KEY,JSON.stringify(storedTrades));return true;}catch{$('calcStatus').textContent='Browser storage is unavailable. Trade comparison could not be saved on this device.';return false;}
-}
-function savedVisible(){
- const byTicker=new Map(activeStocks.map(x=>[x.ticker,x]));
- return storedTrades.filter(x=>{const stock=byTicker.get(x.ticker);return stock&&(!stock.addedAt||!x.savedAt||Date.parse(x.savedAt)>=Date.parse(stock.addedAt));});
-}
-function renderSaved(){
- const list=savedVisible();
- $('savedTrades').innerHTML=list.map(x=>{
- const type=({put:'Cash-secured put',call:'Covered call',long_call:'Buy call',long_put:'Buy put'})[x.strategy]||x.strategy;
- return '<tr><td><button type="button" class="ghost" data-load="'+esc(x.id)+'">'+esc(x.ticker)+'</button><div class="small muted">'+esc(x.priceMethod||'Manual / older saved trade')+'</div></td><td><span class="badge '+(x.strategy==='put'?'put':'call')+'">'+esc(type)+'</span></td><td>'+dollars(x.strike)+'</td><td>'+dollars(x.premium)+'</td><td>'+number(x.dte)+'</td><td>'+percent(x.yieldPct)+'</td><td>'+dollars(x.breakeven)+'</td><td>'+dollars(x.maxLoss)+'</td><td><button type="button" class="danger" aria-label="Remove '+esc(x.ticker)+' saved trade" data-remove="'+esc(x.id)+'">Trash</button></td></tr>';
- }).join('')||'<tr><td colspan="9" class="muted">No saved candidate trades for currently active stocks on this device.</td></tr>';
- $('exportTrades').disabled=!list.length;
- $('clearSaved').disabled=!storedTrades.length;
-}
-function saveCurrent(){
- if(!latestCalc)return;
- // Avoid exposing brokerage/account values in shared storage; trade parameters
- // are stored only in the current browser, not the public database.
- const c=latestCalc;
- const record={id:String(Date.now())+'-'+Math.random().toString(36).slice(2,8),
-  ticker:c.ticker,strategy:c.strategy,strike:c.strike,premium:c.premium,contracts:c.contracts,
-  dte:c.dte,basis:c.basis,delta:c.delta,fees:c.fees,spot:c.spot,spotDate:c.spotDate,
-  credit:c.credit,yieldPct:c.yieldPct,breakeven:c.breakeven,maxLoss:c.maxLoss,quoteInfo:typeof selectedOptionQuote==='undefined'?null:selectedOptionQuote,
-  priceMethod:typeof selectedOptionQuote!=='undefined'&&selectedOptionQuote?(selectedOptionQuote.quote_kind==='indicative_modified'?'Alpaca indicative modified quote':'External'): 'Manual entry',savedAt:new Date().toISOString()};
- storedTrades.unshift(record);
- storedTrades=storedTrades.slice(0,100);
- if(!persistSaved())storedTrades.shift();
- renderSaved();
- $('calcStatus').textContent='Candidate trade saved for comparison on this browser only.';
-}
-function loadSaved(id){
- const record=storedTrades.find(x=>x.id===id);
- if(!record)return;
- if(!activeStocks.some(x=>x.ticker===record.ticker))return;
- selectStock(record.ticker);
- $('strategy').value=record.strategy;
- $('strike').value=String(record.strike);$('premium').value=String(record.premium);
- $('contracts').value=String(record.contracts);$('dte').value=String(record.dte);
- $('fees').value=String(record.fees);
- $('delta').value=record.delta==null?'':String(record.delta);
- $('basisField').hidden=record.strategy!=='call';
- $('basis').value=record.basis==null?'':String(record.basis);
- // Preserve the original underlying quote so a saved trade can be reproduced.
- $('spotOverride').value=String(record.spot);
- if(typeof resetSelectedQuote==='function')resetSelectedQuote();
- $('selectedContract').textContent='Restored a saved '+(record.priceMethod||'manual')+' trade comparison; market quote must be checked independently.';
- calculate();
- window.scrollTo({top:0,behavior:'smooth'});
-}
-function downloadCsv(){
- const rows=savedVisible(),header=['Ticker','Strategy','Strike','Premium per share','Contracts','Days','Stock price at analysis','Price as of','Cost basis','Delta','Total fees','Net credit','Period yield percent','Breakeven','Max downside','Price method','Saved at'];
- const content=[header,...rows.map(x=>[x.ticker,x.strategy,x.strike,x.premium,x.contracts,x.dte,x.spot,x.spotDate,x.basis??'',x.delta??'',x.fees,x.credit,x.yieldPct,x.breakeven,x.maxLoss,x.priceMethod||'Manual / older saved trade',x.savedAt])]
- .map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');
- const link=document.createElement('a'),url=URL.createObjectURL(new Blob([content],{type:'text/csv;charset=utf-8'}));
- link.href=url;link.download='sharewatch-option-comparisons.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),600);
 }
 async function loadWatchlist(){
  // Query live active records. If Supabase fails, NEVER fall back to the full
@@ -325,7 +260,6 @@ async function loadCachedFile(path){
  return r.json();
 }
 async function init(){
- storedTrades=getSaved();
  const [watchResult,pricesResult,sharesResult]=await Promise.allSettled([
   loadWatchlist(),loadCachedFile('./data/prices.json'),loadCachedFile('./data/shares.json')
  ]);
@@ -333,7 +267,7 @@ async function init(){
   listError=watchResult.reason;
   $('stockList').innerHTML='<div class="errorbox">The shared admin watchlist cannot be loaded. Stocks are hidden here until Supabase is available, so deleted/hidden tickers are not shown accidentally. <a href="./admin.html">Open admin portal</a>.</div>';
   $('statTickers').textContent='—';$('statPriced').textContent='—';$('statFunds').textContent='—';
-  setStatus('Unable to load active tickers: '+watchResult.reason.message,'error');renderSaved();return;
+  setStatus('Unable to load active tickers: '+watchResult.reason.message,'error');return;
  }
  const priceData=pricesResult.status==='fulfilled'?pricesResult.value:{prices:{}};
  const shareData=sharesResult.status==='fulfilled'?sharesResult.value:{companies:{}};
@@ -345,7 +279,7 @@ async function init(){
    price:quote?Number(quote[1]):null,priceDate:quote?.[0]||null,priceProvider:priceData.prices?.[x.ticker]?.source?.provider||null,priceHistory};
  });
  activeStocks.sort((a,b)=>a.ticker.localeCompare(b.ticker));
- renderStats();renderList();renderSaved();
+ renderStats();renderList();
  if(activeStocks.length)selectStock(activeStocks.find(x=>valid(x.price))?.ticker||activeStocks[0].ticker);
  else $('stockList').innerHTML='<p class="muted small">No active tickers. <a href="./admin.html">Add one from your existing admin portal</a>.</p>';
  if(pricesResult.status==='fulfilled')setStatus('Loaded '+activeStocks.length+' active tickers. Alpaca indicative option data and manual quote entry are available.','good');
@@ -367,17 +301,4 @@ $('strategy').addEventListener('change',()=>{$('basisField').hidden=$('strategy'
  resetMetrics();$('calcStatus').textContent='Strategy changed. Recalculate to update outcomes.';});
 $('tradeForm').addEventListener('submit',calculate);
 $('clearTrade').addEventListener('click',()=>clearInputs(true));
-$('saveTrade').addEventListener('click',saveCurrent);
-
-$('savedTrades').addEventListener('click',event=>{
- const remove=event.target.closest('button[data-remove]'),load=event.target.closest('button[data-load]');
- if(remove){storedTrades=storedTrades.filter(x=>x.id!==remove.dataset.remove);persistSaved();renderSaved();}
- else if(load)loadSaved(load.dataset.load);
-});
-$('clearSaved').addEventListener('click',()=>{
- if(!storedTrades.length)return;
- if(!window.confirm('Remove all saved option candidate comparisons from this browser? This does not modify your stocks or admin watchlist.'))return;
- storedTrades=[];persistSaved();renderSaved();
-});
-$('exportTrades').addEventListener('click',downloadCsv);
 init().catch(ex=>setStatus('Options dashboard error: '+ex.message,'error'));
