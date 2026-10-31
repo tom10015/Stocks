@@ -1,7 +1,7 @@
-// Private, read-only Alpaca indicative options feed for ShareWatch admin users.
+// Public, read-only Alpaca indicative options for active ShareWatch stocks. Keys stay server-side.
 const SB="https://fmtfskcgnlxusipaxdog.supabase.co";
 const PUB="sb_publishable__pT9Xdhi40Fu4XLd7YVuAw_bkdpHpUD";
-const HEAD={"Access-Control-Allow-Origin":"https://tom10015.github.io","Access-Control-Allow-Methods":"GET,OPTIONS","Access-Control-Allow-Headers":"apikey,authorization,content-type,x-client-info","Cache-Control":"private, no-store","Content-Type":"application/json"};
+const HEAD={"Access-Control-Allow-Origin":"https://tom10015.github.io","Access-Control-Allow-Methods":"GET,OPTIONS","Access-Control-Allow-Headers":"apikey,authorization,content-type,x-client-info","Cache-Control":"no-store","Content-Type":"application/json"};
 const json=(x:unknown,status=200)=>new Response(JSON.stringify(x),{status,headers:HEAD});
 const val=(x:unknown,min=0,max=1e8)=>typeof x==="number"&&Number.isFinite(x)&&x>=min&&x<=max?x:null;
 const clean=(x:string)=>x.replace(/[.\-]/g,"");
@@ -16,19 +16,34 @@ async function request(url:string,headers:Record<string,string>,max=8_000_000){
   return {data:JSON.parse(raw)};
  }catch{return {error:"Market-data request failed",code:502}}finally{clearTimeout(timer)}
 }
-async function checkAuth(jwt:string){
- if(jwt.length<30)return false;
- const headers={apikey:PUB,Authorization:"Bearer "+jwt,Accept:"application/json"};
- const user=await request(SB+"/auth/v1/user",headers,80000);
- const uid=user.data?.id;
- if(user.error||typeof uid!=="string"||!/^[0-9a-f-]{36}$/i.test(uid))return false;
- const admins=await request(SB+"/rest/v1/stocks_admins?select=user_id&user_id=eq."+encodeURIComponent(uid),headers,80000);
- return !admins.error&&Array.isArray(admins.data)&&admins.data.some((row:any)=>row.user_id===uid);
+// Only active public-watchlist symbols can be requested.
+async function active(ticker:string){
+ const r=await request(SB+"/rest/v1/stocks_watchlist?select=ticker&ticker=eq."+encodeURIComponent(ticker)+"&active=eq.true&limit=1",
+  {apikey:PUB,Accept:"application/json"},80000);
+ return !r.error&&Array.isArray(r.data)&&r.data.some((x:any)=>x.ticker===ticker);
 }
-async function active(ticker:string,jwt:string){
- const a=await request(SB+"/rest/v1/stocks_watchlist?select=ticker&ticker=eq."+encodeURIComponent(ticker)+"&active=eq.true&limit=1",
- {apikey:PUB,Authorization:"Bearer "+jwt,Accept:"application/json"},80000);
- return !a.error&&Array.isArray(a.data)&&a.data.some((r:any)=>r.ticker===ticker);
+const responseCache=new Map<string,{until:number,payload:unknown}>();
+function getCached(key:string){
+ const entry=responseCache.get(key);
+ if(!entry)return null;
+ if(Date.now()>=entry.until){responseCache.delete(key);return null;}
+ return entry.payload;
+}
+function cachedJson(key:string,payload:unknown){
+ if(responseCache.size>=64)responseCache.delete(responseCache.keys().next().value!);
+ responseCache.set(key,{until:Date.now()+(key.includes("|calendar|")?240000:90000),payload});
+ return json(payload);
+}
+// Best-effort, per-isolate visitor throttle. Sensitive Alpaca credentials remain on the server.
+const visitorWindows=new Map<string,{since:number,count:number}>();
+function rateLimited(req:Request){
+ const address=(req.headers.get("cf-connecting-ip")||req.headers.get("x-forwarded-for")?.split(",")[0]||"unknown").trim();
+ const now=Date.now();
+ if(visitorWindows.size>1500)visitorWindows.clear();
+ const previous=visitorWindows.get(address);
+ if(!previous||now-previous.since>60000){visitorWindows.set(address,{since:now,count:1});return false;}
+ previous.count++;
+ return previous.count>30;
 }
 const optionRegex=/^([A-Z0-9.\-]+?)(\d{6})([CP])(\d{8})$/;
 function parseContract(symbol:string,ticker:string){
@@ -43,8 +58,6 @@ Deno.serve(async req=>{
  if(req.method==="OPTIONS")return new Response(null,{status:204,headers:HEAD});
  if(req.method!=="GET")return json({error:"GET required"},405);
  if(req.headers.get("Origin")&&req.headers.get("Origin")!=="https://tom10015.github.io")return json({error:"Origin not permitted"},403);
- const jwt=/^Bearer\s+(.+)$/i.exec(req.headers.get("Authorization")||"")?.[1]||"";
- if(!await checkAuth(jwt))return json({error:"Sign in through the existing ShareWatch Admin Portal."},401);
  const key=Deno.env.get("ALPACA_API_KEY")?.trim();
  const secret=Deno.env.get("ALPACA_SECRET_KEY")?.trim();
  if(!key||!secret){const missing=[!key?"ALPACA_API_KEY":null,!secret?"ALPACA_SECRET_KEY":null].filter(Boolean);return json({status:"setup_required",error:"Missing Supabase Edge Function secret"+(missing.length>1?"s":"")+": "+missing.join(", ")+". Verify the secret names and save them in this project (fmtfskcgnlxusipaxdog). The API key values remain private.",missing_secret_names:missing},503);}
@@ -56,9 +69,14 @@ Deno.serve(async req=>{
  const spot=Number(params.get("spot")||0);
  if(!/^[A-Z0-9][A-Z0-9.^-]{0,14}$/.test(ticker))return json({error:"Invalid ticker"},400);
  if(!["put","call"].includes(side)||!["calendar","chain"].includes(mode))return json({error:"Invalid option filter"},400);
- if(!await active(ticker,jwt))return json({error:"Ticker is not active in ShareWatch"},403);
+ if(!Number.isFinite(spot)||spot<0||spot>100000)return json({error:"Invalid stock reference price"},400);
+ if(rateLimited(req))return json({error:"Too many requests. Please retry shortly."},429);
+ if(!await active(ticker))return json({error:"Ticker is not active in ShareWatch"},403);
  const today=new Date().toISOString().slice(0,10);
  if(mode==="chain"&&(!/^\d{4}-\d{2}-\d{2}$/.test(expiration)||expiration<today))return json({error:"Choose an actual unexpired expiration date."},400);
+ const cacheKey=[ticker,side,mode,expiration,spot.toFixed(2)].join("|");
+ const cached=getCached(cacheKey);
+ if(cached)return json(cached);
  const headers={"APCA-API-KEY-ID":key,"APCA-API-SECRET-KEY":secret,Accept:"application/json"};
  const low=Number.isFinite(spot)&&spot>0?Math.max(0.01,spot*.55):0.01;
  const high=Number.isFinite(spot)&&spot>0?spot*1.65:1e6;
@@ -98,7 +116,7 @@ Deno.serve(async req=>{
    cursor=typeof resp.data?.next_page_token==="string"?resp.data.next_page_token:"";
    pages++;
   }while(cursor&&pages<2);
-  return json({status:"ok",mode:"calendar",ticker,side,expirations:[...dates].sort(),
+  return cachedJson(cacheKey,{status:"ok",mode:"calendar",ticker,side,expirations:[...dates].sort(),
    partial:Boolean(cursor),pages,scanned,retrieved_at:new Date().toISOString(),
    note:"Actual expirations present in Alpaca's indicative option snapshots. If paginated, some farther expirations may not appear."});
  }
@@ -137,7 +155,7 @@ Deno.serve(async req=>{
   if(!cursor)break;
  }
  rows.sort((a,b)=>a.strike-b.strike);
- return json({status:"ok",mode:"chain",provider:"Alpaca free indicative options",feed:"indicative",
+ return cachedJson(cacheKey,{status:"ok",mode:"chain",provider:"Alpaca free indicative options",feed:"indicative",
   ticker,side,expiration,retrieved_at:new Date().toISOString(),
   contracts:rows,partial:!!cursor,scanned,pages,
   note:"Indicative quotes are modified prices, not OPRA NBBO or executable bid/ask. Trades are delayed at least 15 minutes. Verify with broker."});
