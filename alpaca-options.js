@@ -178,7 +178,7 @@ function alpacaShowLastRefreshed(result){
  const time=at?new Date(at):null;
  if(!time||!Number.isFinite(time.getTime())){stamp.textContent='Time unavailable';details.textContent='Options data loaded; source did not provide a timestamp';return;}
  stamp.textContent=time.toLocaleString(undefined,{year:'numeric',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
- details.textContent='Alpaca data retrieval time · '+(result.ticker||'selected stock')+' '+(result.expiration||'');
+ details.textContent='Alpaca data retrieval time · '+(result.ticker||'selected stock');
 }
 async function alpacaLoadExpiration(reqId=++alpacaRequestId,force=false){
  if(!selected)return;
