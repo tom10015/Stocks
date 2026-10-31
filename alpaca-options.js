@@ -14,7 +14,7 @@ function alpacaStatus(message,connected=false){
  $('alpacaBadge').className='badge '+(connected?'feed-ok':'feed-old');
 }
 function alpacaEmpty(message){
- $('alpacaRows').innerHTML='<tr><td colspan="8" class="muted">'+esc(message)+'</td></tr>';
+ $('alpacaRows').innerHTML='<tr><td colspan="9" class="muted">'+esc(message)+'</td></tr>';
 }
 async function alpacaToken(){
  const raw=sessionStorage.getItem('sharewatch-admin-session');
@@ -76,6 +76,40 @@ function alpacaMoneyness(strike,spot,type){
  const itm=type==='call'?strike<spot:strike>spot;
  return {name:itm?'ITM':'OTM',kind:itm?'itm':'otm'};
 }
+// Illustrative probability of positive expiration P/L under a zero-drift
+// lognormal stock-price model. Not an empirical win rate or guaranteed outcome.
+function alpacaNormCdf(z){
+ const t=1/(1+0.2316419*Math.abs(z));
+ const density=0.3989422804014327*Math.exp(-0.5*z*z);
+ const p=t*(0.319381530+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));
+ return Math.max(0,Math.min(1,z>=0?1-density*p:density*p));
+}
+function alpacaProfitEstimate(c,spot){
+ const sigma=c.iv,T=daysRemaining(c.expiration)/365;
+ const premium=alpacaBuying()?c.ask:c.bid;
+ if(!(spot>0&&sigma>0&&sigma<5&&T>0&&premium>0&&c.strike>0))return null;
+ const contracts=Number($('contracts').value),fees=Number($('fees').value);
+ if(!Number.isInteger(contracts)||contracts<1||!Number.isFinite(fees)||fees<0)return null;
+ const fee=fees/(contracts*100);
+ let target,above;
+ switch($('strategy').value){
+ case 'put':target=c.strike-premium+fee;above=true;break;
+ case 'call':{
+  const basis=Number($('basis').value);
+  if(!(basis>0))return null;
+  target=basis-premium+fee;
+  if(target>=c.strike)return 0;
+  above=true;break;
+ }
+ case 'long_call':target=c.strike+premium+fee;above=true;break;
+ case 'long_put':target=c.strike-premium-fee;above=false;break;
+ default:return null;
+ }
+ if(target<=0)return above?100:0;
+ const d=(Math.log(spot/target)-0.5*sigma*sigma*T)/(sigma*Math.sqrt(T));
+ return 100*(above?alpacaNormCdf(d):1-alpacaNormCdf(d));
+}
+
 function alpacaRender(){
  const current=alpacaCurrent;
  if(!current||!selected||current.ticker!==selected.ticker||current.expiration!==$('alpacaExpiration').value){
@@ -92,12 +126,13 @@ function alpacaRender(){
  let rows='',lineDrawn=false;
  for(const c of list){
   if(spot!==null&&!lineDrawn&&c.strike>=spot){
-   rows+='<tr class="stock-price-marker"><td colspan="8"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
+   rows+='<tr class="stock-price-marker"><td colspan="9"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
    lineDrawn=true;
   }
   const p=alpacaBuying()?c.ask:c.bid;
   const usable=Number.isFinite(p)&&p>0&&daysRemaining(c.expiration)>=1;
   const money=alpacaMoneyness(c.strike,spot,c.type);
+  const pop=alpacaProfitEstimate(c,spot);
   rows+='<tr class="chain-strike '+money.kind+'"><td><strong>'+dollars(c.strike)+'</strong></td>'+
    '<td><span class="moneyness '+money.kind+'">'+money.name+'</span></td>'+
    '<td>'+(Number.isFinite(c.bid)?dollars(c.bid):'—')+'</td>'+
@@ -106,12 +141,14 @@ function alpacaRender(){
    '<td>'+(Number.isFinite(c.iv)?percent(c.iv*100):'—')+'</td>'+
    '<td class="small muted">'+esc(alpacaTime(c.quote_time))+'</td>'+
    '<td><button type="button" data-alpaca-symbol="'+esc(c.symbol)+'" '+(usable?'':'disabled')+
-   ' title="Use indicative modified option premium">Use '+(alpacaBuying()?'ask':'bid')+'</button></td></tr>';
+   ' title="Use indicative modified option premium">Use '+(alpacaBuying()?'ask':'bid')+'</button></td>'+ 
+   '<td class="pop-cell" title="Illustrative probability of positive profit at expiration, not guaranteed.">'+
+   (pop===null?'<span class="muted">—</span>':'<strong>'+pop.toFixed(1)+'%</strong>')+'</td></tr>';
  }
  if(spot!==null&&!lineDrawn&&list.length){
-  rows+='<tr class="stock-price-marker"><td colspan="8"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
+  rows+='<tr class="stock-price-marker"><td colspan="9"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
  }
- $('alpacaRows').innerHTML=rows||'<tr><td colspan="8" class="muted">No strikes returned for this expiration. Choose another listed date.</td></tr>';
+ $('alpacaRows').innerHTML=rows||'<tr><td colspan="9" class="muted">No strikes returned for this expiration. Choose another listed date.</td></tr>';
 }
 async function alpacaLoad(force=false){
  if(!selected)return;
@@ -223,3 +260,5 @@ for(const id of ['strike','premium','dte','delta','spotOverride']){
  });
 }
 $('clearTrade').addEventListener('click',resetSelectedQuote);
+
+for(const id of ['basis','contracts','fees'])$(id).addEventListener('input',()=>{if(alpacaCurrent)alpacaRender();});
