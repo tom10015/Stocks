@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="description" content="ShareWatch options trade analyzer using the same active stock watchlist and admin portal.">
  <title>Options Analyzer · ShareWatch</title>
- <link rel="stylesheet" href="./options.css?v=20261030-strategies1">
+ <link rel="stylesheet" href="./options.css?v=20261031-actual-expiries1">
 </head>
 <body>
 <header>
@@ -58,9 +58,12 @@
     <section class="auto-chain-box" aria-labelledby="alpacaHeading" id="alpacaPanel">
  <div class="panel-head"><div><div class="eyebrow">Step 2 · Alpaca indicative option-chain data</div><h3 id="alpacaHeading">Available puts for your cash-secured put</h3><div class="section-sub" id="alpacaStatus" aria-live="polite">Preparing secure option chain…</div></div><span id="alpacaBadge" class="badge">Not tested</span></div>
  <p class="small muted">The free <strong>indicative</strong> feed offers modified option bids and asks, plus Greeks where available. <strong>These are not real exchange NBBO quotes and cannot be assumed executable.</strong> Trades are delayed at least 15 minutes. Verify live pricing with your broker.</p>
- <div class="chain-toolbar"><label for="alpacaDays">Expiration range<select id="alpacaDays"><option value="14">14 days</option><option value="30" selected>30 days</option><option value="60">60 days</option><option value="120">120 days</option></select></label>
- <button type="button" id="alpacaRefresh" class="primary">Load Alpaca indicative quotes</button></div>
- <div class="table-scroll"><table class="chain-table"><thead><tr><th>Expires</th><th>Strike</th><th>Bid (indic.)</th><th>Ask (indic.)</th><th>Delta</th><th>IV</th><th>Quote time</th><th>Analyze</th></tr></thead><tbody id="alpacaRows"><tr><td colspan="8" class="muted">Select a ticker to load indicative option prices.</td></tr></tbody></table></div>
+ <div class="chain-toolbar"><label for="alpacaExpiration">Available expiration dates for this stock
+ <select id="alpacaExpiration" aria-label="Select an actual listed option expiration"><option value="">Loading listed expirations…</option></select></label>
+ <button type="button" id="alpacaRefresh" class="primary">Refresh option chain</button></div>
+ <div class="chain-explanation"><span class="chain-key itm">In the money (ITM)</span><span class="chain-key otm">Out of the money (OTM)</span><span class="chain-key atm">Stock price marker</span></div>
+ <div class="chain-price-note" id="alpacaStockReference">The stock price line uses your most recent saved share closing price; see the quote date above.</div>
+ <div class="table-scroll"><table class="chain-table"><thead><tr><th>Strike</th><th>Position</th><th>Bid (indic.)</th><th>Ask (indic.)</th><th>Delta</th><th>IV</th><th>Quote time</th><th>Analyze</th></tr></thead><tbody id="alpacaRows"><tr><td colspan="8" class="muted">Choose a stock and its listed expiration date.</td></tr></tbody></table></div>
  <div id="alpacaSelection" class="small muted" aria-live="polite" style="margin-top:10px">Selling uses modified indicative bid; buying uses modified indicative ask, not an executable premium.</div>
  </section>
 <div class="trade-form-title"><div class="eyebrow">Step 3 · Your trade details</div><h3 id="tradeDetailsHeading">Enter your Cash-Secured Put details</h3><p id="tradeDetailsHelper" class="small muted">Select a contract from Alpaca above or enter your strike and premium manually.</p></div>
@@ -118,6 +121,6 @@
  <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability, premium yield, nor a positive assumed expected value guarantees profitability.</footer>
 </main>
-<script src="./options.js?v=20261030-strategies1" defer></script><script src="./alpaca-options.js?v=20261030-strategies1" defer></script>
+<script src="./options.js?v=20261030-strategies1" defer></script><script src="./alpaca-options.js?v=20261031-actual-expiries1" defer></script>
 </body>
 </html>
