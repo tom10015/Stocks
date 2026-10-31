@@ -59,12 +59,18 @@ function renderStats(){
 }
 function renderList(){
  const q=$('stockSearch').value.trim().toLowerCase(),filter=$('stockFilter').value;
+ const account=window.ShareWatchUser;
+ const favorites=account?.favorites||new Set();
  const display=activeStocks.filter(x=>(x.ticker.toLowerCase().includes(q)||x.name.toLowerCase().includes(q))&&
-  (filter==='all'||filter==='company'&&!isFund(x)||filter==='fund'&&isFund(x)||filter==='unpriced'&&!valid(x.price)));
+  (filter==='all'||filter==='company'&&!isFund(x)||filter==='fund'&&isFund(x)||filter==='unpriced'&&!valid(x.price)||filter==='favorites'&&Boolean(account?.user)&&favorites.has(x.ticker)));
  $('stockList').innerHTML=display.map(x=>{
   const active=selected?.ticker===x.ticker;
   return '<button class="stock-item'+(active?' selected':'')+'" role="option" aria-selected="'+active+'" data-ticker="'+esc(x.ticker)+'"><span style="min-width:0"><span class="ticker">'+esc(x.ticker)+'</span> <span class="ticker-type">'+(isFund(x)?'Fund':'Stock')+'</span><div class="company-name" title="'+esc(x.name)+'">'+esc(x.name)+'</div></span><span style="text-align:right"><span class="price">'+(valid(x.price)?dollars(x.price):'Awaiting price')+'</span><div class="age">'+(x.priceDate?'Close '+esc(x.priceDate):'No saved quote')+'</div></span></button>';
- }).join('')||'<p class="muted small">No active stocks match this filter. You can manage the watchlist in the admin portal.</p>';
+ }).join('')||(filter==='favorites'
+  ? account?.user
+   ? '<p class="muted small">No favorite stocks match. <a href="./account.html">Manage your favorites</a> to save tickers.</p>'
+   : '<p class="muted small">Please <a href="./account.html">sign in</a> to see your favorite stocks.</p>'
+  : '<p class="muted small">No active stocks match this filter. You can manage the watchlist in the admin portal.</p>');
 }
 function selectStock(ticker){
  const found=activeStocks.find(x=>x.ticker===ticker);
@@ -293,6 +299,12 @@ document.querySelectorAll('.strategy-choice').forEach(button=>button.addEventLis
 syncStrategyUI();
 $('stockSearch').addEventListener('input',renderList);
 $('stockFilter').addEventListener('change',renderList);
+document.addEventListener('sharewatch:account',()=>{
+ const user=window.ShareWatchUser?.user;
+ const link=$('favoritesAccountLink');
+ if(link)link.textContent=user?'Manage my favorites ↗':'Sign in to save favorites ↗';
+ renderList();
+});
 $('stockList').addEventListener('click',event=>{const button=event.target.closest('button[data-ticker]');if(button)selectStock(button.dataset.ticker);});
 $('strategy').addEventListener('change',()=>{$('basisField').hidden=$('strategy').value!=='call';
  $('premiumHint').textContent=$('strategy').value==='put'||$('strategy').value==='call'?'Selling uses indicative bid (not executable)':'Buying uses indicative ask (not executable)';
