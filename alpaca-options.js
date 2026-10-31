@@ -14,7 +14,7 @@ function alpacaStatus(message,connected=false){
  $('alpacaBadge').className='badge '+(connected?'feed-ok':'feed-old');
 }
 function alpacaEmpty(message){
- $('alpacaRows').innerHTML='<tr><td colspan="9" class="muted">'+esc(message)+'</td></tr>';
+ $('alpacaRows').innerHTML='<tr><td colspan="11" class="muted">'+esc(message)+'</td></tr>';
 }
 async function alpacaFetch(params){
  const url=ALPACA_ENDPOINT+'?'+new URLSearchParams(params);
@@ -95,6 +95,33 @@ function alpacaProfitEstimate(c,spot){
  return 100*(above?alpacaNormCdf(d):1-alpacaNormCdf(d));
 }
 
+function swLiquidity(c){
+ const b=Number(c.bid),a=Number(c.ask);
+ if(!(b>0&&a>=b))return {spread:null,pct:null,level:'Unavailable'};
+ const spread=a-b,mid=(a+b)/2,pct=mid>0?spread/mid*100:null;
+ const size=Math.min(Number(c.bid_size)||0,Number(c.ask_size)||0);
+ const level=pct===null?'Unavailable':pct<=8&&size>=10?'Tighter spread':pct<=20&&size>=1?'Moderate':'Wide / thin';
+ return {spread,pct,level};
+}
+function alpacaChainSort(a,b){
+ const sel=$('chainSort')?.value||'strike';
+ const roi=c=>{const bid=Number(c.bid),spot=Number(selected?.price);
+  if(!(bid>0))return -Infinity;
+  const capital=alpacaSide()==='put'?c.strike:spot;
+  return capital>0?bid/capital:-Infinity;};
+ const score=c=>{const spread=swLiquidity(c).pct;
+  switch(sel){
+   case 'premium':return Number.isFinite(c.bid)?c.bid:-Infinity;
+   case 'roi':return roi(c);
+   case 'annual':return roi(c)*365/Math.max(1,daysRemaining(c.expiration));
+   case 'delta':return Number.isFinite(c.delta)?-Math.abs(c.delta):-Infinity;
+   case 'spread':return spread===null?-Infinity:-spread;
+   case 'iv':return Number.isFinite(c.iv)?c.iv:-Infinity;
+   default:return -c.strike;
+  }
+ };
+ return score(b)-score(a)||a.strike-b.strike;
+}
 function alpacaRender(){
  const current=alpacaCurrent;
  if(!current||!selected||current.ticker!==selected.ticker||current.expiration!==$('alpacaExpiration').value){
@@ -107,33 +134,36 @@ function alpacaRender(){
  for(const c of sorted){
   if(!grouped.has(c.strike)||(!Number.isFinite(grouped.get(c.strike).ask)&&Number.isFinite(c.ask)))grouped.set(c.strike,c);
  }
- const list=[...grouped.values()];
+ const list=[...grouped.values()].sort(alpacaChainSort);
  let rows='',lineDrawn=false;
  for(const c of list){
-  if(spot!==null&&!lineDrawn&&c.strike>=spot){
-   rows+='<tr class="stock-price-marker"><td colspan="9"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
+  if(($('chainSort')?.value||'strike')==='strike'&&spot!==null&&!lineDrawn&&c.strike>=spot){
+   rows+='<tr class="stock-price-marker"><td colspan="11"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
    lineDrawn=true;
   }
   const p=alpacaBuying()?c.ask:c.bid;
   const usable=Number.isFinite(p)&&p>0&&daysRemaining(c.expiration)>=1;
   const money=alpacaMoneyness(c.strike,spot,c.type);
   const pop=alpacaProfitEstimate(c,spot);
+  const liq=swLiquidity(c);
   rows+='<tr class="chain-strike '+money.kind+'"><td><strong>'+dollars(c.strike)+'</strong></td>'+
    '<td><span class="moneyness '+money.kind+'">'+money.name+'</span></td>'+
    '<td>'+(Number.isFinite(c.bid)?dollars(c.bid):'—')+'</td>'+
    '<td>'+(Number.isFinite(c.ask)?dollars(c.ask):'—')+'</td>'+
    '<td>'+(Number.isFinite(c.delta)?c.delta.toFixed(3):'—')+'</td>'+
    '<td>'+(Number.isFinite(c.iv)?percent(c.iv*100):'—')+'</td>'+
+   '<td>'+(liq.pct===null?'—':liq.pct.toFixed(1)+'%')+'</td>'+ 
+   '<td class="small" title="Indicative bid/ask sizes; NOT daily volume or open interest">'+(Number.isFinite(c.bid_size)?number(c.bid_size):'—')+' / '+(Number.isFinite(c.ask_size)?number(c.ask_size):'—')+'</td>'+ 
    '<td class="small muted">'+esc(alpacaTime(c.quote_time))+'</td>'+
    '<td><button type="button" data-alpaca-symbol="'+esc(c.symbol)+'" '+(usable?'':'disabled')+
    ' title="Use indicative modified option premium">Use '+(alpacaBuying()?'ask':'bid')+'</button></td>'+ 
    '<td class="pop-cell" title="Illustrative probability of positive profit at expiration, not guaranteed.">'+
    (pop===null?'<span class="muted">—</span>':'<strong>'+pop.toFixed(1)+'%</strong>')+'</td></tr>';
  }
- if(spot!==null&&!lineDrawn&&list.length){
-  rows+='<tr class="stock-price-marker"><td colspan="9"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
+ if(($('chainSort')?.value||'strike')==='strike'&&spot!==null&&!lineDrawn&&list.length){
+  rows+='<tr class="stock-price-marker"><td colspan="11"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
  }
- $('alpacaRows').innerHTML=rows||'<tr><td colspan="9" class="muted">No strikes returned for this expiration. Choose another listed date.</td></tr>';
+ $('alpacaRows').innerHTML=rows||'<tr><td colspan="11" class="muted">No strikes returned for this expiration. Choose another listed date.</td></tr>';
 }
 async function alpacaLoad(force=false){
  if(!selected)return;
@@ -241,6 +271,7 @@ selectStock=function(ticker){
  if(selected?.ticker===ticker)alpacaLoad();
 };
 $('alpacaRefresh').addEventListener('click',()=>alpacaLoad(true));
+$('chainSort')?.addEventListener('change',()=>alpacaRender());
 $('alpacaExpiration').addEventListener('change',()=>alpacaLoadExpiration());
 $('strategy').addEventListener('change',()=>alpacaLoad());
 $('alpacaRows').addEventListener('click',e=>{
