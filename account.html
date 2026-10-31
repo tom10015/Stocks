@@ -39,16 +39,9 @@ table{width:100%;border-collapse:collapse;min-width:490px}th,td{text-align:left;
 </form>
 <p class="muted sub" id="verifyHint">Your account is separate from administrator permissions.</p>
 </section>
-<section id="accountPanel" hidden>
-<div class="panel"><div class="topline"><div><h1>My favorite stocks</h1><p id="welcome" class="muted sub"></p></div><button id="signOut" type="button">Sign out</button></div>
-<span id="favoriteCount" class="badge">0 favorites</span>
-<div class="toolbar"><input id="stockSearch" type="search" placeholder="Search a ticker or company…" aria-label="Search stocks">
-<select id="viewMode" aria-label="Show stocks"><option value="all">All tracked stocks</option><option value="saved">My favorites only</option></select></div>
-<div class="tablewrap"><table><thead><tr><th>Stock</th><th>Company / fund</th><th>Favorite</th></tr></thead><tbody id="stockRows"><tr><td colspan="3" class="empty">Loading watchlist…</td></tr></tbody></table></div>
-<p class="muted sub">Select a star to save or remove a stock. Favorites are private to your account and sync through Supabase. If a stock is removed from the shared watchlist, it will no longer appear here.</p>
-</div></section>
+<section id="accountPanel" hidden><div class="panel auth"><h1>Your ShareWatch account</h1><p id="welcome" class="muted sub"></p><p class="muted sub">Your favorite stocks are managed directly in the Share Counter. Click a star next to any stock or select <strong>★ My favorites</strong> in the filter.</p><p><a class="primary" style="display:inline-block;padding:12px 16px;border-radius:10px;text-decoration:none;color:white" href="./index.html">Go to Share Counter</a></p><button id="signOut" type="button">Sign out</button></div></section>
 <footer>Your user account never grants access to the Admin Portal. Only specially authorized administrators can change the shared stock list.</footer>
 </main>
 <script src="./user-favorites.js?v=20261031-users1"></script>
-<script src="./account.js?v=20261031-users1"></script>
+<script src="./account.js?v=20261031-account-simple1"></script>
 </body></html>
