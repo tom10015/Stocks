@@ -38,7 +38,7 @@ def event_rows(body,kind,date,watch):
             if eps and eps not in ("N/A","—"):details+=" · EPS estimate "+eps[:28]
             url="https://www.nasdaq.com/market-activity/earnings"
         else:
-            ex=str(r.get("exDividendDate") or r.get("exDate") or "").strip()
+            ex=str(r.get("dividend_Ex_Date") or r.get("exDividendDate") or r.get("exDate") or "").strip()
             # Nasdaq may return a month-wide calendar even for a day query.
             # Trust the row's actual ex-dividend date, NOT the request date.
             checked=None
@@ -47,9 +47,9 @@ def event_rows(body,kind,date,watch):
                 except ValueError:pass
             if checked!=date:continue
             details="Reported ex-dividend date"
-            amount=str(r.get("dividendRate") or r.get("cashAmount") or r.get("amount") or "").strip()
+            amount=str(r.get("dividend_Rate") or r.get("dividendRate") or r.get("cashAmount") or r.get("amount") or "").strip()
             if amount and amount not in ("N/A","—"):details+=" · "+amount[:35]
-            payment=str(r.get("paymentDate") or "").strip()
+            payment=str(r.get("payment_Date") or r.get("paymentDate") or "").strip()
             if payment and payment not in ("N/A","—"):details+=" · pay "+payment[:30]
             url="https://www.nasdaq.com/market-activity/stocks/"+ticker.lower()+"/dividend-history"
         results.append({"ticker":ticker,"date":date,"type":"dividend" if kind=="dividends" else "earnings",
