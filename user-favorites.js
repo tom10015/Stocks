@@ -79,7 +79,7 @@
   try{return await identify()}catch(err){resetLocal();throw err}
  }
  async function signUp(email,password){
-  const redirect=new URL('./account.html',location.href).href;
+  const redirect=new URL('./index.html',location.href).href;
   const response=await api('/auth/v1/signup?redirect_to='+encodeURIComponent(redirect),{method:'POST',body:{email,password}});
   if(response?.access_token&&response?.refresh_token){setSession(response);await identify();return {signedIn:true}}
   return {signedIn:false};
