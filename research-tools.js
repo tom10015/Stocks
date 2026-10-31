@@ -83,6 +83,10 @@ $('screenRows').addEventListener('click',e=>{
  selectStock(r.ticker);$('strike').value=r.strike;$('premium').value=r.bid;
  $('delta').value=r.delta;$('dte').value=Math.max(1,dte(r.expiration));
  $('journalExpiration').value=r.expiration;
+ selectedOptionQuote={ticker:r.ticker,symbol:r.symbol,provider:'Alpaca indicative modified quotes',
+  quote_kind:'indicative_modified',bid:r.bid,ask:null,quote_as_of:r.quote_time,
+  delta:r.delta,contract_expiration:r.expiration};
+ $('selectedContract').textContent='Indicative modified bid from screener; verify actual fill price with broker.';
  $('alpacaSelection').textContent='Screener candidate '+r.symbol+' · '+r.ticker+' '+r.expiration+' · indicative modified bid '+money(r.bid)+'. Verify with your broker.';
  $('calcStatus').textContent='Selected screener quote; press Calculate trade to update the payoff.';
  $('builderHeading').scrollIntoView({behavior:'smooth',block:'start'});
