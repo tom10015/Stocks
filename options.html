@@ -102,16 +102,6 @@
     <div id="riskChecks" class="risk-checks"></div>
     <div class="below"><h3>Possible expiration outcomes</h3><div class="section-sub">Illustrative stock prices at expiry, not forecasts. Includes the selected premium and entered fees.</div><div class="table-scroll"><table><thead><tr><th>Stock at expiry</th><th>Stock move</th><th>Net position P/L</th><th>What happens</th></tr></thead><tbody id="scenarioRows"><tr><td colspan="4" class="muted">Calculate a trade to see scenarios.</td></tr></tbody></table></div></div>
    </div>
-   <div class="panel trade-panel" aria-labelledby="evHeading">
-    <div class="panel-head"><div><h2 id="evHeading">Expected-value estimate</h2><div class="section-sub">Optional: enter your own evidence-based trade outcome assumptions</div></div></div>
-    <div class="formgrid">
-     <div class="field"><label for="winProbability">Estimated win rate (%)</label><input id="winProbability" type="number" min="0" max="100" step="any" placeholder="e.g. 85"></div>
-     <div class="field"><label for="avgWin">Average winning P/L ($)</label><input id="avgWin" type="number" min="0" step="any" placeholder="e.g. 35"></div>
-     <div class="field"><label for="avgLoss">Average losing P/L ($)</label><input id="avgLoss" type="number" min="0" step="any" placeholder="e.g. 250"></div>
-    </div>
-    <div class="actions"><button id="calculateEV" type="button">Calculate expected value</button><span id="evResult" class="small muted" aria-live="polite">Provide all three assumptions.</span></div>
-    <p class="footnote">EV = win probability × average win − loss probability × average loss. Estimates are only as useful as the assumed probabilities and realized gains/losses. An option's delta is <strong>not</strong> a verified probability of profit, and this analysis cannot guarantee profitable trades.</p>
-   </div>
   </section>
  </div>
  <section class="panel below" aria-labelledby="compareHeading">
@@ -120,7 +110,7 @@
   <p class="footnote">Saved comparisons remain only in this browser's local storage—not in the admin database or your brokerage account. The shared admin portal controls which stocks appear in both dashboards; hiding or deleting a ticker also hides its saved trade comparisons here.</p>
  </section>
  <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
- <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability, premium yield, nor a positive assumed expected value guarantees profitability.</footer>
+ <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability nor premium yield guarantees profitability.</footer>
 </main>
 <script src="./options.js?v=20261030-strategies1" defer></script><script src="./alpaca-options.js?v=20261031-profit1" defer></script>
 </body>
