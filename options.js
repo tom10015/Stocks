@@ -65,11 +65,12 @@ function renderList(){
   (filter==='all'||filter==='company'&&!isFund(x)||filter==='fund'&&isFund(x)||filter==='unpriced'&&!valid(x.price)||filter==='favorites'&&Boolean(account?.user)&&favorites.has(x.ticker)));
  $('stockList').innerHTML=display.map(x=>{
   const active=selected?.ticker===x.ticker;
-  return '<button class="stock-item'+(active?' selected':'')+'" role="option" aria-selected="'+active+'" data-ticker="'+esc(x.ticker)+'"><span style="min-width:0"><span class="ticker">'+esc(x.ticker)+'</span> <span class="ticker-type">'+(isFund(x)?'Fund':'Stock')+'</span><div class="company-name" title="'+esc(x.name)+'">'+esc(x.name)+'</div></span><span style="text-align:right"><span class="price">'+(valid(x.price)?dollars(x.price):'Awaiting price')+'</span><div class="age">'+(x.priceDate?'Close '+esc(x.priceDate):'No saved quote')+'</div></span></button>';
+  const saved=Boolean(window.ShareWatchUser?.favorites.has(x.ticker));
+  return '<div style="display:flex;align-items:stretch;gap:5px;margin-bottom:5px"><button class="stock-item'+(active?' selected':'')+'" role="option" aria-selected="'+active+'" data-ticker="'+esc(x.ticker)+'"><span style="min-width:0"><span class="ticker">'+esc(x.ticker)+'</span> <span class="ticker-type">'+(isFund(x)?'Fund':'Stock')+'</span><div class="company-name" title="'+esc(x.name)+'">'+esc(x.name)+'</div></span><span style="text-align:right"><span class="price">'+(valid(x.price)?dollars(x.price):'Awaiting price')+'</span><div class="age">'+(x.priceDate?'Close '+esc(x.priceDate):'No saved quote')+'</div></span></button><button type="button" data-favorite="'+esc(x.ticker)+'" aria-label="'+(saved?'Remove ':'Add ')+esc(x.ticker)+(saved?' from':' to')+' favorites" aria-pressed="'+saved+'" title="'+(saved?'Remove favorite':'Save favorite')+'" style="flex:0 0 42px;min-width:42px;padding:6px;color:'+(saved?'#f6c86d':'#a9b7c9')+';background:#172538;border:1px solid #344862;border-radius:9px;font-size:22px;cursor:pointer">'+(saved?'★':'☆')+'</button></div>';
  }).join('')||(filter==='favorites'
   ? account?.user
-   ? '<p class="muted small">No favorite stocks match. <a href="./index.html">Open Share Counter</a> to star tickers.</p>'
-   : '<p class="muted small">Please <a href="./account.html">sign in</a> to see your favorite stocks.</p>'
+   ? '<p class="muted small">No favorite stocks match. Select All active to star your stocks here.</p>'
+   : '<p class="muted small">Sign in using the Account button above to view favorites.</p>'
   : '<p class="muted small">No active stocks match this filter. You can manage the watchlist in the admin portal.</p>');
 }
 function selectStock(ticker){
@@ -302,10 +303,21 @@ $('stockFilter').addEventListener('change',renderList);
 document.addEventListener('sharewatch:account',()=>{
  const user=window.ShareWatchUser?.user;
  const link=$('favoritesAccountLink');
- if(link){link.textContent=user?'Manage favorites in Share Counter ↗':'Sign in to save favorites ↗';link.href=user?'./index.html':'./account.html';}
+ if(link){link.textContent=user?'Account / Sign out':'Sign in / Create account';}
  renderList();
 });
-$('stockList').addEventListener('click',event=>{const button=event.target.closest('button[data-ticker]');if(button)selectStock(button.dataset.ticker);});
+$('stockList').addEventListener('click',async event=>{
+ const star=event.target.closest('button[data-favorite]');
+ if(star){
+  if(!window.ShareWatchUser?.user){window.ShareWatchAccount.open();return;}
+  star.disabled=true;
+  try{await window.ShareWatchUser.toggle(star.dataset.favorite);}
+  catch(err){setStatus('Could not update favorites: '+err.message,'error');star.disabled=false;}
+  return;
+ }
+ const button=event.target.closest('button[data-ticker]');
+ if(button)selectStock(button.dataset.ticker);
+});
 $('strategy').addEventListener('change',()=>{$('basisField').hidden=$('strategy').value!=='call';
  $('premiumHint').textContent=$('strategy').value==='put'||$('strategy').value==='call'?'Selling uses indicative bid (not executable)':'Buying uses indicative ask (not executable)';
  if(typeof resetSelectedQuote==='function')resetSelectedQuote();
