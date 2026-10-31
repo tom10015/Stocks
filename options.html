@@ -6,7 +6,7 @@
  <meta name="description" content="ShareWatch options trade analyzer using the same active stock watchlist and admin portal.">
  <title>Options Analyzer · ShareWatch</title>
  <link rel="stylesheet" href="./options.css?v=20261031-profit1">
-</head>
+<style>.sw-tools{margin-top:18px}.sw-tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:11px;margin:15px 0}.sw-tool-grid label{font-size:12px;color:#afbed3}.sw-tool-grid input,.sw-tool-grid select{display:block;width:100%;margin-top:5px;min-width:0;padding:9px;border-radius:7px;background:#162536;color:#edf3fc;border:1px solid #42536c}.sw-tools .table-scroll{margin-top:12px}.sw-tools td,.sw-tools th{padding:9px 11px;white-space:nowrap}.sw-tools .actions{flex-wrap:wrap}.sw-tools .actions button{margin:0 5px 8px 0}.sw-tools button:disabled{opacity:.48}.sw-warning{color:#f6c86d}</style></head>
 <body>
 <header>
  <nav aria-label="ShareWatch navigation">
@@ -61,11 +61,11 @@
  <p class="small muted">The free <strong>indicative</strong> feed offers modified option bids and asks, plus Greeks where available. <strong>These are not real exchange NBBO quotes and cannot be assumed executable.</strong> Trades are delayed at least 15 minutes. Verify live pricing with your broker.</p>
  <div class="chain-toolbar"><label for="alpacaExpiration">Available expiration dates for this stock
  <select id="alpacaExpiration" aria-label="Select an actual listed option expiration"><option value="">Loading listed expirations…</option></select></label>
- <button type="button" id="alpacaRefresh" class="primary">Refresh option chain</button></div>
+ <button type="button" id="alpacaRefresh" class="primary">Refresh option chain</button><label for="chainSort">Sort contracts<select id="chainSort"><option value="strike">Strike (low to high)</option><option value="annual">Annualized premium yield</option><option value="roi">Premium ROI</option><option value="premium">Highest premium</option><option value="delta">Lowest |delta|</option><option value="spread">Narrowest spread</option><option value="iv">Highest implied volatility</option></select></label></div>
  <div class="chain-explanation"><span class="chain-key itm">In the money (ITM)</span><span class="chain-key otm">Out of the money (OTM)</span><span class="chain-key atm">Stock price marker</span></div>
  <p class="chain-price-note" id="profitProbabilityHelp">Profit probability uses an illustrative lognormal model, the option’s implied volatility, its indicative premium, and the trade’s expiration breakeven. Fees and covered-call share basis affect the estimate. It is not a backtested win rate or a guarantee; unavailable data shows —.</p>
  <div class="chain-price-note" id="alpacaStockReference">The stock price line uses your most recent saved share closing price; see the quote date above.</div>
- <div class="table-scroll"><table class="chain-table"><thead><tr><th>Strike</th><th>Position</th><th>Bid (indic.)</th><th>Ask (indic.)</th><th>Delta</th><th>IV</th><th>Quote time</th><th>Analyze</th><th title="Estimated probability of positive expiration profit based on implied volatility, indicative premium, and zero drift. Not a guarantee.">Profit probability (est.)</th></tr></thead><tbody id="alpacaRows"><tr><td colspan="9" class="muted">Choose a stock and its listed expiration date.</td></tr></tbody></table></div>
+ <div class="table-scroll"><table class="chain-table"><thead><tr><th>Strike</th><th>Position</th><th>Bid (indic.)</th><th>Ask (indic.)</th><th>Delta</th><th>IV</th><th title="Indicative bid-ask spread divided by midpoint">Spread %</th><th title="Indicative bid / ask displayed quote sizes, not volume or open interest">Bid/ask size</th><th>Quote time</th><th>Analyze</th><th title="Estimated probability of positive expiration profit based on implied volatility, indicative premium, and zero drift. Not a guarantee.">Profit probability (est.)</th></tr></thead><tbody id="alpacaRows"><tr><td colspan="11" class="muted">Choose a stock and its listed expiration date.</td></tr></tbody></table></div>
  <div id="alpacaSelection" class="small muted" aria-live="polite" style="margin-top:10px">Selling uses modified indicative bid; buying uses modified indicative ask, not an executable premium.</div>
  </section>
 <div class="trade-form-title"><div class="eyebrow">Step 3 · Your trade details</div><h3 id="tradeDetailsHeading">Enter your Cash-Secured Put details</h3><p id="tradeDetailsHelper" class="small muted">Select a contract from Alpaca above or enter your strike and premium manually.</p></div>
@@ -105,9 +105,53 @@
    </div>
   </section>
  </div>
- <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
+ <section class="panel sw-tools" id="optionsScreener" aria-labelledby="swScreenHeading">
+<div class="panel-head"><div><div class="eyebrow">Find contracts</div><h2 id="swScreenHeading">Advanced options screener</h2></div><span class="badge">Indicative quotes</span></div>
+<p class="small muted">Scan up to six selected tickers per request (favorites first). Rank <strong>cash-secured puts or covered calls</strong> by premium return on required collateral, delta and bid-ask spread. Not a guarantee of profit or tradable quotes.</p>
+<div class="sw-tool-grid">
+<label>Tickers (comma-separated, max 6)<input id="screenTickers" placeholder="Blank = favorites, then other tracked tickers"></label>
+<label>Strategy<select id="screenSide"><option value="put">Cash-secured puts</option><option value="call">Covered calls</option></select></label>
+<label>Max DTE<input type="number" id="screenDte" min="1" max="365" value="45"></label>
+<label>Max absolute delta<input type="number" id="screenDelta" min="0" max="1" step="0.01" value="0.30"></label>
+<label>Min premium / contract ($)<input type="number" id="screenPremium" min="0" step="1" value="10"></label>
+<label>Max bid-ask spread (%)<input type="number" id="screenSpread" min="0" max="1000" value="30"></label>
+<label>Sort results<select id="screenSort"><option value="annual">Annualized yield</option><option value="roi">Return on collateral</option><option value="premium">Premium per contract</option><option value="delta">Lowest |delta|</option><option value="spread">Narrowest spread</option></select></label>
+</div>
+<div class="actions"><button id="screenRun" type="button" class="primary">Scan option chains</button><button id="screenNext" type="button" class="ghost">Next 6 tickers</button></div>
+<div id="screenStatus" class="small muted" role="status" aria-live="polite">Choose a scan to find matching contracts.</div>
+<div class="table-scroll"><table><thead><tr><th>Ticker</th><th>Expiration</th><th>Strike</th><th>Bid</th><th>Premium / contract</th><th>ROI</th><th>Annualized</th><th>|Delta|</th><th>Spread</th><th>Quote sizes</th><th>Select</th></tr></thead><tbody id="screenRows"><tr><td colspan="11">No scan performed yet.</td></tr></tbody></table></div>
+<p class="small muted">ROI: premium divided by strike collateral for puts or reference share value for calls. Annualized yield scales ROI linearly; it is not a predicted return. Volume and open interest are unavailable from this feed.</p>
+</section>
+<section class="panel sw-tools" id="tradeJournal" aria-labelledby="swJournalTitle">
+<div class="panel-head"><div><div class="eyebrow">Private trading journal</div><h2 id="swJournalTitle">Options portfolio tracker</h2></div><span class="badge">Account only</span></div>
+<p class="small muted">Record trades manually; these are not broker-connected positions. Only your signed-in account can access your entries. Closed P/L includes entered open and closing premiums and fees, not stock assignment effects.</p>
+<div id="journalAccess" class="small muted">Sign in to save trades.</div>
+<form id="journalForm" class="sw-tool-grid">
+<label>Ticker<input id="journalTicker" required maxlength="16" placeholder="AAPL"></label>
+<label>Strategy<select id="journalStrategy"><option value="put">Sold cash-secured put</option><option value="call">Sold covered call</option><option value="long_call">Bought call</option><option value="long_put">Bought put</option></select></label>
+<label>Expiration<input type="date" id="journalExpiration" required></label>
+<label>Strike ($)<input type="number" id="journalStrike" min="0.01" step="0.01" required></label>
+<label>Open premium / share ($)<input type="number" id="journalPremium" min="0.01" step="0.01" required></label>
+<label>Contracts<input type="number" id="journalContracts" min="1" max="10000" step="1" value="1" required></label>
+<label>Fees ($)<input type="number" id="journalFees" min="0" step="0.01" value="0"></label>
+<label>Opened on<input type="date" id="journalOpened" required></label>
+<label>Notes (optional)<input id="journalNotes" maxlength="500" placeholder="Trade thesis / order details"></label>
+<div class="actions"><button type="submit" id="journalSave" class="primary">Save trade</button><button type="button" id="journalUseCurrent" class="ghost">Use selected trade</button></div>
+</form>
+<p id="journalMessage" class="small muted" role="status" aria-live="polite"></p>
+<div id="journalSummary" class="small muted"></div>
+<div class="table-scroll"><table><thead><tr><th>Ticker</th><th>Strategy</th><th>Expiry</th><th>Strike</th><th>Open credit / debit</th><th>Status</th><th>Realized option P/L</th><th>Action</th></tr></thead><tbody id="journalRows"><tr><td colspan="8">Sign in to load your trades.</td></tr></tbody></table></div>
+</section>
+<section class="panel sw-tools" id="eventsCalendar" aria-labelledby="swEventsTitle">
+<div class="panel-head"><div><div class="eyebrow">Event risk</div><h2 id="swEventsTitle">Earnings and dividend calendar</h2></div><span class="badge">Source-reported dates</span></div>
+<p class="small muted">Upcoming reported earnings and ex-dividend dates for tracked stocks, if the market-calendar feed is available. Dates can change; no events shown does not mean there are none. Verify with issuers before trading options.</p>
+<div class="sw-tool-grid"><label>Event type<select id="eventsKind"><option value="all">Earnings + dividends</option><option value="earnings">Earnings only</option><option value="dividend">Ex-dividend only</option></select></label><label>Ticker / search<input id="eventsSearch" placeholder="Filter stocks"></label><label>Period<select id="eventsWindow"><option value="30">Next 30 days</option><option value="60">Next 60 days</option><option value="90">Next 90 days</option></select></label></div>
+<p id="eventsStatus" class="small muted" role="status" aria-live="polite">Loading verified calendar events…</p>
+<div class="table-scroll"><table><thead><tr><th>Date</th><th>Stock</th><th>Event</th><th>Details</th><th>Source</th></tr></thead><tbody id="eventsRows"><tr><td colspan="5">Calendar data has not loaded.</td></tr></tbody></table></div>
+</section>
+<div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability nor premium yield guarantees profitability.</footer>
 </main>
-<script src="./user-favorites.js?v=20261031-inline-user2" defer></script><script src="./inline-account.js?v=20261031-inline-user1" defer></script><script src="./options.js?v=20261031-favorite-stars3" defer></script><script src="./alpaca-options.js?v=20261031-ticker-only1" defer></script>
+<script src="./user-favorites.js?v=20261031-inline-user2" defer></script><script src="./inline-account.js?v=20261031-inline-user1" defer></script><script src="./options.js?v=20261031-favorite-stars3" defer></script><script src="./alpaca-options.js?v=20261031-research1" defer></script><script src="./research-tools.js?v=20261031-research1" defer></script>
 </body>
 </html>
