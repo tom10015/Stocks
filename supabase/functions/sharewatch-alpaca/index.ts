@@ -145,7 +145,7 @@ Deno.serve(async req=>{
    // Keep the strike even when an indicative quote isn't available.
    const gr=(v as any)?.greeks||{};
    rows.push({symbol,expiration:parsed.expiration,type:parsed.type,strike:parsed.strike,
-    bid,ask,delta:val(gr.delta,-1,1),gamma:val(gr.gamma,-1000,1000),
+    bid,ask,bid_size:val(q?.bs,0,10000000),ask_size:val(q?.as,0,10000000),volume:null,open_interest:null,delta:val(gr.delta,-1,1),gamma:val(gr.gamma,-1000,1000),
     theta:val(gr.theta,-1e6,1e6),vega:val(gr.vega,-1e6,1e6),
     iv:val((v as any)?.impliedVolatility,0,1000),quote_time:typeof q?.t==="string"?q.t:null,
     last_trade:val((v as any)?.latestTrade?.p),quote_kind:"INDICATIVE_MODIFIED",contract_size:100});
