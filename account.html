@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Account & Favorites · ShareWatch</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,sans-serif;background:#0b101a;color:#edf3fc}*{box-sizing:border-box}
+body{margin:0}main{max-width:1100px;margin:0 auto;padding:28px 20px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:30px}
+.brand{font-size:26px;font-weight:850;letter-spacing:-1px}.brand span{color:#55d6ab}nav{display:flex;gap:15px;flex-wrap:wrap}a{color:#8fb9ff;text-decoration:none}a:hover{text-decoration:underline}
+h1{font-size:clamp(26px,5vw,40px);letter-spacing:-1px;margin:0 0 10px}h2{font-size:19px;margin:0 0 12px}
+.muted{color:#a0b1c6}.sub{font-size:14px;line-height:1.6;max-width:680px}
+.panel{background:#141e2d;border:1px solid #2b3a50;border-radius:16px;padding:25px;margin-top:18px}
+.auth{max-width:520px;margin:30px auto}label{display:block;font-size:13px;margin-bottom:7px;color:#b6c8df;font-weight:650}
+input,select,button{font:inherit;border:1px solid #3a4c63;border-radius:10px;background:#1a2a3e;color:#edf3fc;padding:12px}
+input,select{width:100%}input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid #55d6ab;outline-offset:2px}
+.field{margin-bottom:16px}button{cursor:pointer;font-weight:700}button:hover{background:#28405a}
+button:disabled{opacity:.55;cursor:wait}.primary{background:#196d54;border-color:#26896b;color:#fff}.primary:hover{background:#237e64}
+.switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:22px}.switch button[aria-pressed="true"]{border-color:#55d6ab;background:#214738}
+#notice{min-height:23px;line-height:1.55;margin:12px 0;color:#6fe4b8}#notice.error{color:#ff9caa}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.badge{display:inline-block;padding:6px 10px;background:#244034;border-radius:20px;color:#76e9bc;font-size:12px;font-weight:700}
+.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0}.toolbar input{flex:1;min-width:180px}.toolbar select{width:auto;min-width:170px}
+.tablewrap{overflow-x:auto;border:1px solid #2b3a50;border-radius:10px}
+table{width:100%;border-collapse:collapse;min-width:490px}th,td{text-align:left;padding:13px;border-bottom:1px solid #293b51}th{font-size:12px;text-transform:uppercase;color:#a5b6ce}tr:last-child td{border-bottom:0}
+.ticker{font-weight:800;color:#eaf5ff}.star{padding:7px 12px;min-width:116px}.star.saved{background:#3c3321;border-color:#d7ac4c;color:#f8d78a}
+.empty{padding:18px;color:#a6b8cf}footer{font-size:12px;color:#91a2b8;line-height:1.65;margin-top:22px}
+[hidden]{display:none!important}
+@media(max-width:650px){main{padding:15px}.panel{padding:16px}.toolbar select{width:100%}}
+</style></head><body><main>
+<header><div class="brand">◈ Share<span>Watch</span> <small class="muted" style="font-size:13px;letter-spacing:0">/ My Account</small></div>
+<nav><a href="./index.html">Share Counter</a><a href="./options.html">Options Analyzer</a><a href="./admin.html">Admin Portal</a></nav></header>
+<div id="notice" role="status" aria-live="polite"></div>
+<section id="authPanel" class="panel auth">
+<h1>Your ShareWatch account</h1><p class="muted sub">Create a free account to keep your favorite stocks saved across devices. Browsing stocks and options does not require an account.</p>
+<div class="switch" role="group" aria-label="Account access"><button id="tabSignin" type="button" aria-pressed="true">Sign in</button><button id="tabSignup" type="button" aria-pressed="false">Create account</button></div>
+<form id="authForm">
+<div class="field"><label for="email">Email address</label><input type="email" id="email" autocomplete="email" placeholder="you@example.com" required maxlength="320"></div>
+<div class="field"><label for="password">Password</label><input type="password" id="password" autocomplete="current-password" required minlength="6"></div>
+<button class="primary" id="submitAuth" type="submit" style="width:100%">Sign in</button>
+</form>
+<p class="muted sub" id="verifyHint">Your account is separate from administrator permissions.</p>
+</section>
+<section id="accountPanel" hidden>
+<div class="panel"><div class="topline"><div><h1>My favorite stocks</h1><p id="welcome" class="muted sub"></p></div><button id="signOut" type="button">Sign out</button></div>
+<span id="favoriteCount" class="badge">0 favorites</span>
+<div class="toolbar"><input id="stockSearch" type="search" placeholder="Search a ticker or company…" aria-label="Search stocks">
+<select id="viewMode" aria-label="Show stocks"><option value="all">All tracked stocks</option><option value="saved">My favorites only</option></select></div>
+<div class="tablewrap"><table><thead><tr><th>Stock</th><th>Company / fund</th><th>Favorite</th></tr></thead><tbody id="stockRows"><tr><td colspan="3" class="empty">Loading watchlist…</td></tr></tbody></table></div>
+<p class="muted sub">Select a star to save or remove a stock. Favorites are private to your account and sync through Supabase. If a stock is removed from the shared watchlist, it will no longer appear here.</p>
+</div></section>
+<footer>Your user account never grants access to the Admin Portal. Only specially authorized administrators can change the shared stock list.</footer>
+</main>
+<script src="./user-favorites.js?v=20261031-users1"></script>
+<script src="./account.js?v=20261031-users1"></script>
+</body></html>
