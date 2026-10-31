@@ -58,7 +58,7 @@ Deno.serve(async req=>{
  if(!["put","call"].includes(side)||!["calendar","chain"].includes(mode))return json({error:"Invalid option filter"},400);
  if(!await active(ticker,jwt))return json({error:"Ticker is not active in ShareWatch"},403);
  const today=new Date().toISOString().slice(0,10);
- if(mode==="chain"&&(!/^\\d{4}-\\d{2}-\\d{2}$/.test(expiration)||expiration<today))return json({error:"Choose an actual unexpired expiration date."},400);
+ if(mode==="chain"&&(!/^\d{4}-\d{2}-\d{2}$/.test(expiration)||expiration<today))return json({error:"Choose an actual unexpired expiration date."},400);
  const headers={"APCA-API-KEY-ID":key,"APCA-API-SECRET-KEY":secret,Accept:"application/json"};
  const low=Number.isFinite(spot)&&spot>0?Math.max(0.01,spot*.55):0.01;
  const high=Number.isFinite(spot)&&spot>0?spot*1.65:1e6;
