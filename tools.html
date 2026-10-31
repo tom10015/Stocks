@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ShareWatch free trading calculators: options premium, position sizing, average cost, dividend income and compound growth.">
+<title>Trading Tools · ShareWatch</title>
+<link rel="stylesheet" href="./resources.css?v=20261031-tools1">
+<script defer src="./trading-tools.js?v=20261031-tools1"></script></head><body>
+<header class="site-header"><nav class="nav" aria-label="ShareWatch navigation"><a class="brand" href="./index.html">◈ Share<span>Watch</span></a><div class="nav-links">
+<a href="./index.html">Share Counter</a><a href="./options.html">Options Analyzer</a><a href="./tools.html" class="active" aria-current="page">Trading Tools</a><a href="./help.html">Help Guide</a><a href="./admin.html">Admin</a>
+</div></nav></header>
+<main>
+<section class="hero"><div class="kicker">ShareWatch · Trading Tools</div><h1>Make the math easier.</h1>
+<p>Free, straightforward calculators for option premiums, position risk, average share cost, dividend income and long-term growth. Adjust the numbers to explore different scenarios before placing a trade.</p>
+<div class="hero-links"><a href="./options.html">Open live Options Analyzer ↗</a><a href="./help.html">How to use these tools ↗</a></div>
+<p class="small" style="margin-top:14px">These calculators run entirely in your browser. They do not save your inputs, require an account, or place broker orders.</p></section>
+<nav class="tool-grid" aria-label="Jump to a calculator">
+<a class="tile" href="#option-premium"><span class="tile-mark">◈</span><strong>Option premium</strong><span class="muted">CSP and covered-call yield</span></a>
+<a class="tile" href="#position-sizing"><span class="tile-mark">▦</span><strong>Position sizing</strong><span class="muted">Risk budget and share count</span></a>
+<a class="tile" href="#average-cost"><span class="tile-mark">≋</span><strong>Average cost</strong><span class="muted">Average down or add shares</span></a>
+<a class="tile" href="#dividend-income"><span class="tile-mark">◎</span><strong>Dividend income</strong><span class="muted">Cash flow and indicated yield</span></a>
+<a class="tile" href="#compound-growth"><span class="tile-mark">↗</span><strong>Compound growth</strong><span class="muted">Explore monthly investments</span></a>
+</nav>
+<section class="panel" id="option-premium"><div class="panel-head"><div><h2>Option Premium & Yield</h2><p>Compare potential cash-secured put and covered-call premiums from prices you enter. These are not live option quotes.</p></div><span class="pill">CSP / covered call</span></div>
+<div class="calculator"><form id="optionForm" novalidate><div class="formgrid">
+<div class="field"><label for="optStrategy">Strategy</label><select id="optStrategy"><option value="put">Cash-secured put</option><option value="call">Covered call</option></select></div>
+<div class="field"><label for="optStrike">Strike price ($)</label><input id="optStrike" type="number" step="0.01" min="0.01" value="100" required></div>
+<div class="field"><label for="optPremium">Premium per share ($)</label><input id="optPremium" type="number" step="0.01" min="0" value="1.50" required><small>Use an actual broker quote for trading decisions</small></div>
+<div class="field"><label for="optContracts">Contracts</label><input id="optContracts" type="number" min="1" max="10000" step="1" value="1" required></div>
+<div class="field"><label for="optDte">Days until expiration</label><input id="optDte" type="number" min="1" max="3650" step="1" value="7" required></div>
+<div class="field"><label for="optFees">Total fees ($)</label><input id="optFees" type="number" step="0.01" min="0" value="1.30"></div>
+<div class="field" id="optShareField" hidden><label for="optSharePrice">Current stock price ($)</label><input id="optSharePrice" type="number" step="0.01" min="0.01" value="98"><small>For premium yield on covered shares</small></div>
+<div class="field" id="optBasisField" hidden><label for="optBasis">Owned-share cost basis ($, optional)</label><input id="optBasis" type="number" step="0.01" min="0.01" value="90"><small>For assignment P/L; assumes sufficient owned shares</small></div>
+</div><button class="primary" type="submit">Calculate premium</button><p class="result-message error" id="optError" role="status" aria-live="polite"></p></form>
+<div class="results"><h3>Trade estimate</h3><div class="metrics" aria-live="polite">
+<div class="metric"><span>Net premium</span><strong id="optNet" class="good">—</strong></div>
+<div class="metric"><span id="optCapitalLabel">Required cash collateral</span><strong id="optCapital">—</strong></div>
+<div class="metric"><span>Premium return (period)</span><strong id="optRoi">—</strong></div>
+<div class="metric"><span>Simple annualized premium yield</span><strong id="optAnnual">—</strong></div>
+<div class="metric"><span>Breakeven share price</span><strong id="optBreak">—</strong></div>
+<div class="metric"><span id="optExtraLabel">Max premium profit</span><strong id="optExtra">—</strong></div>
+</div><p class="form-note" id="optNote">Enter your trade assumptions to see a calculation.</p></div></div>
+</section>
+<section class="panel" id="position-sizing"><div class="panel-head"><div><h2>Position Size & Risk Budget</h2><p>For a long stock purchase with a planned stop: estimate how many shares fit both your risk budget and cash balance.</p></div><span class="pill">Risk planning</span></div>
+<div class="calculator"><form id="riskForm" novalidate><div class="formgrid">
+<div class="field"><label for="riskAccount">Account size ($)</label><input id="riskAccount" type="number" min="0.01" step="0.01" value="25000" required></div>
+<div class="field"><label for="riskPercent">Max planned loss (% of account)</label><input id="riskPercent" type="number" min="0.01" max="100" step="0.01" value="1" required></div>
+<div class="field"><label for="riskEntry">Planned entry ($)</label><input id="riskEntry" type="number" min="0.01" step="0.01" value="30" required></div>
+<div class="field"><label for="riskStop">Planned stop price ($)</label><input id="riskStop" type="number" min="0" step="0.01" value="28" required></div>
+</div><button class="primary" type="submit">Calculate position size</button><p class="result-message error" id="riskError" role="status" aria-live="polite"></p></form>
+<div class="results"><h3>Position plan</h3><div class="metrics" aria-live="polite"><div class="metric"><span>Maximum whole shares</span><strong id="riskShares" class="good">—</strong></div><div class="metric"><span>Planned risk budget</span><strong id="riskBudget">—</strong></div><div class="metric"><span>Estimated loss at stop</span><strong id="riskLoss">—</strong></div><div class="metric"><span>Cash required</span><strong id="riskCapital">—</strong></div></div><p class="form-note">A stop order does not guarantee execution at your stop price. Gaps, slippage, fees and overnight moves can result in greater losses. No margin assumed.</p></div></div>
+</section>
+<section class="panel" id="average-cost"><div class="panel-head"><div><h2>Average Share Cost</h2><p>See how buying additional shares changes your overall average price and the capital invested.</p></div><span class="pill">Stock holdings</span></div>
+<div class="calculator"><form id="averageForm" novalidate><div class="formgrid">
+<div class="field"><label for="avgShares">Current shares</label><input id="avgShares" type="number" min="0" step="any" value="200" required></div>
+<div class="field"><label for="avgBasis">Current average cost ($)</label><input id="avgBasis" type="number" min="0" step="0.01" value="14" required></div>
+<div class="field"><label for="avgAdded">Shares to buy</label><input id="avgAdded" type="number" min="0" step="any" value="100" required></div>
+<div class="field"><label for="avgBuyPrice">New purchase price ($)</label><input id="avgBuyPrice" type="number" min="0" step="0.01" value="10" required></div>
+<div class="field"><label for="avgFees">Purchase fees ($)</label><input id="avgFees" type="number" min="0" step="0.01" value="0"></div>
+</div><button class="primary" type="submit">Calculate average</button><p class="result-message error" id="avgError" role="status" aria-live="polite"></p></form>
+<div class="results"><h3>Combined position</h3><div class="metrics"><div class="metric"><span>New average cost / share</span><strong id="avgNew" class="good">—</strong></div><div class="metric"><span>Total shares</span><strong id="avgTotalShares">—</strong></div><div class="metric"><span>Total invested cost</span><strong id="avgTotalCost">—</strong></div><div class="metric"><span>Cost of new purchase</span><strong id="avgOrderCost">—</strong></div></div><p class="form-note">This is a weighted average, including entered purchase fees. Actual brokerage tax lots and wash-sale adjustments may differ.</p></div></div>
+</section>
+<section class="panel" id="dividend-income"><div class="panel-head"><div><h2>Dividend Income Calculator</h2><p>Estimate annual and payment-period dividend cash flow using the per-share dividend you enter.</p></div><span class="pill">Income investing</span></div>
+<div class="calculator"><form id="dividendForm" novalidate><div class="formgrid">
+<div class="field"><label for="divShares">Shares owned</label><input id="divShares" type="number" min="0" step="any" value="200" required></div>
+<div class="field"><label for="divPrice">Share price ($)</label><input id="divPrice" type="number" min="0.01" step="0.01" value="50" required></div>
+<div class="field"><label for="divAmount">Dividend per share per payment ($)</label><input id="divAmount" type="number" min="0" step="0.0001" value="0.50" required></div>
+<div class="field"><label for="divFrequency">Payments per year</label><select id="divFrequency"><option value="12">Monthly (12)</option><option value="4" selected>Quarterly (4)</option><option value="2">Semiannual (2)</option><option value="1">Annual (1)</option></select></div>
+</div><button class="primary" type="submit">Calculate dividends</button><p class="result-message error" id="divError" role="status" aria-live="polite"></p></form>
+<div class="results"><h3>Indicated cash distributions</h3><div class="metrics"><div class="metric"><span>Estimated annual dividends</span><strong id="divAnnual" class="good">—</strong></div><div class="metric"><span>Per payment</span><strong id="divPayment">—</strong></div><div class="metric"><span>Indicated dividend yield</span><strong id="divYield">—</strong></div><div class="metric"><span>Share market value</span><strong id="divMarket">—</strong></div></div><p class="form-note">Assumes unchanged dividends, share count and payment frequency. Excludes taxes, reinvestment and changes or suspensions of payouts.</p></div></div>
+</section>
+<section class="panel" id="compound-growth"><div class="panel-head"><div><h2>Compound Growth Calculator</h2><p>Explore what steady monthly contributions might become under a hypothetical constant annual rate.</p></div><span class="pill">Long-term scenario</span></div>
+<div class="calculator"><form id="growthForm" novalidate><div class="formgrid">
+<div class="field"><label for="growthStart">Initial investment ($)</label><input id="growthStart" type="number" min="0" step="0.01" value="10000" required></div>
+<div class="field"><label for="growthMonth">Monthly contribution ($)</label><input id="growthMonth" type="number" min="0" step="0.01" value="300" required></div>
+<div class="field"><label for="growthRate">Hypothetical annual rate (%)</label><input id="growthRate" type="number" min="-99" max="100" step="0.01" value="7" required><small>Assumes monthly compounding, not a forecast</small></div>
+<div class="field"><label for="growthYears">Years</label><input id="growthYears" type="number" min="1" max="50" step="1" value="10" required></div>
+</div><button class="primary" type="submit">Calculate growth</button><p class="result-message error" id="growthError" role="status" aria-live="polite"></p></form>
+<div class="results"><h3>Illustrative future value</h3><div class="metrics"><div class="metric wide"><span>Estimated ending balance</span><strong id="growthValue" class="good">—</strong></div><div class="metric"><span>Total contributions (incl. starting)</span><strong id="growthPrincipal">—</strong></div><div class="metric"><span>Hypothetical investment growth / loss</span><strong id="growthGain">—</strong></div></div>
+<div class="year-bars" id="growthBars" role="img" aria-label="Illustrative account balance over time"></div><p class="form-note">Adds contributions at each month’s end. Constant returns are only a mathematical illustration; real investment returns vary and may be negative. Inflation, fees and taxes are excluded.</p></div></div>
+</section>
+<footer class="footer">ShareWatch Trading Tools are educational calculators, not investment advice. None of these figures are personalized recommendations, broker orders, predictions, guaranteed profits or verified market quotes. Standard U.S. listed equity options usually represent 100 shares, but adjusted contracts may differ. <a href="./help.html">Read the Help Guide</a> to understand the site's data and limitations.</footer>
+</main></body></html>
