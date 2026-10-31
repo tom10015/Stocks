@@ -108,7 +108,8 @@
  }
  async function tradesRequest(query='',options={}){
   if(!user)throw Error('Sign in to access your trade journal.');
-  if(typeof query!=='string'||!query.startsWith('?')&&!query.startsWith(''))throw Error('Invalid trade query');
+  if(typeof query!=='string'||(query!==''&&!query.startsWith('?')))throw Error('Invalid trade query');
+  if(!['GET','POST','PATCH','DELETE'].includes(options.method||'GET'))throw Error('Unsupported trade operation');
   return api('/rest/v1/stocks_option_trades'+query,{...options,token:await token()});
  }
  window.ShareWatchUser={init,signIn,signUp,signOut,toggle,loadFavorites,tradesRequest,get user(){return user},
