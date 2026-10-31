@@ -81,7 +81,7 @@
       <div class="field"><label for="account">Trading account size ($, optional)</label><input id="account" type="number" min="0.01" step="any" placeholder="For concentration warning"></div>
       <div class="field"><label for="spotOverride">Underlying stock price ($, optional)</label><input id="spotOverride" type="number" min="0.01" step="any" placeholder="Override saved closing price"><small>Use a current quote if preferred</small></div>
      </div>
-     <div class="actions"><button id="calculate" class="primary" type="submit">Calculate trade</button><button id="saveTrade" type="button" disabled>Save to comparison</button><button id="clearTrade" class="ghost" type="button">Clear inputs</button></div>
+     <div class="actions"><button id="calculate" class="primary" type="submit">Calculate trade</button><button id="clearTrade" class="ghost" type="button">Clear inputs</button></div>
      <div id="selectedContract" class="small muted" aria-live="polite">Choose an Alpaca indicative contract above or enter an option premium manually.</div><div id="calcStatus" class="calc-status" role="status" aria-live="polite"></div>
     </form>
     <div class="metrics" aria-live="polite">
@@ -104,14 +104,9 @@
    </div>
   </section>
  </div>
- <section class="panel below" aria-labelledby="compareHeading">
-  <div class="panel-head"><div><h2 id="compareHeading">Saved trade comparisons</h2><div class="section-sub">Compare your own candidate trades without placing orders</div></div><div class="actions" style="margin-top:0"><button id="exportTrades" type="button" class="ghost">Export CSV</button><button id="clearSaved" type="button" class="danger">Clear saved</button></div></div>
-  <div class="table-scroll"><table class="trade-table"><thead><tr><th>Stock</th><th>Strategy</th><th>Strike</th><th>Credit / debit</th><th>Days</th><th>Period yield</th><th>Breakeven</th><th>Max downside</th><th>Remove</th></tr></thead><tbody id="savedTrades"><tr><td colspan="9" class="muted">No candidate trades saved on this device.</td></tr></tbody></table></div>
-  <p class="footnote">Saved comparisons remain only in this browser's local storage—not in the admin database or your brokerage account. The shared admin portal controls which stocks appear in both dashboards; hiding or deleting a ticker also hides its saved trade comparisons here.</p>
- </section>
  <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability nor premium yield guarantees profitability.</footer>
 </main>
-<script src="./options.js?v=20261031-remove-ev1" defer></script><script src="./alpaca-options.js?v=20261031-profit1" defer></script>
+<script src="./options.js?v=20261031-remove-comparisons1" defer></script><script src="./alpaca-options.js?v=20261031-profit1" defer></script>
 </body>
 </html>
