@@ -68,7 +68,7 @@ function renderList(){
   return '<button class="stock-item'+(active?' selected':'')+'" role="option" aria-selected="'+active+'" data-ticker="'+esc(x.ticker)+'"><span style="min-width:0"><span class="ticker">'+esc(x.ticker)+'</span> <span class="ticker-type">'+(isFund(x)?'Fund':'Stock')+'</span><div class="company-name" title="'+esc(x.name)+'">'+esc(x.name)+'</div></span><span style="text-align:right"><span class="price">'+(valid(x.price)?dollars(x.price):'Awaiting price')+'</span><div class="age">'+(x.priceDate?'Close '+esc(x.priceDate):'No saved quote')+'</div></span></button>';
  }).join('')||(filter==='favorites'
   ? account?.user
-   ? '<p class="muted small">No favorite stocks match. <a href="./account.html">Manage your favorites</a> to save tickers.</p>'
+   ? '<p class="muted small">No favorite stocks match. <a href="./index.html">Open Share Counter</a> to star tickers.</p>'
    : '<p class="muted small">Please <a href="./account.html">sign in</a> to see your favorite stocks.</p>'
   : '<p class="muted small">No active stocks match this filter. You can manage the watchlist in the admin portal.</p>');
 }
@@ -302,7 +302,7 @@ $('stockFilter').addEventListener('change',renderList);
 document.addEventListener('sharewatch:account',()=>{
  const user=window.ShareWatchUser?.user;
  const link=$('favoritesAccountLink');
- if(link)link.textContent=user?'Manage my favorites ↗':'Sign in to save favorites ↗';
+ if(link){link.textContent=user?'Manage favorites in Share Counter ↗':'Sign in to save favorites ↗';link.href=user?'./index.html':'./account.html';}
  renderList();
 });
 $('stockList').addEventListener('click',event=>{const button=event.target.closest('button[data-ticker]');if(button)selectStock(button.dataset.ticker);});
