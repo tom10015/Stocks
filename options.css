@@ -69,3 +69,13 @@ footer{margin-top:28px;border-top:1px solid #31445a;padding:18px 0;color:#96a8bd
 .moneyness.itm{border-color:#367b64;color:#8ae2c0}.moneyness.otm{border-color:#4878ad;color:#8bc3ff}
 .moneyness.atm{border-color:#af8653;color:#ffd5a6}
 @media(max-width:650px){#alpacaExpiration{width:100%;min-width:0}.chain-explanation{gap:5px}.chain-key{font-size:10px}}
+
+/* Red OTM styling; ITM remains green. */
+.chain-key.otm{border-color:#a14b59;color:#ffbbc4;background:rgba(116,33,48,.18)}
+.chain-key.otm::before{background:#ff6678}
+.chain-table .chain-strike.otm td{background:rgba(128,36,54,.11)}
+.moneyness.otm{border-color:#b84b5b;color:#ff9fab;background:rgba(147,44,56,.22)}
+.chain-table .chain-strike.otm:hover td{background:rgba(149,45,61,.19)}
+.chain-table .pop-cell{text-align:right;white-space:nowrap;min-width:118px;font-variant-numeric:tabular-nums}
+.chain-table .pop-cell strong{color:#d7ebfa;font-size:13px}
+#profitProbabilityHelp{border-left:3px solid #4f8da8;padding:4px 0 4px 10px;max-width:900px}
