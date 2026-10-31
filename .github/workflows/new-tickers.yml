@@ -1,6 +1,11 @@
 name: Collect newly added stock history
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - quick_new_tickers.py
+      - .github/workflows/new-tickers.yml
   schedule:
     - cron: "*/5 * * * *"
 permissions:
@@ -17,6 +22,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Validate collection scripts
+        run: python -m py_compile quick_new_tickers.py update.py historical_backfill.py merge_data.py
       - name: Check for new active tickers
         id: check
         run: python quick_new_tickers.py
