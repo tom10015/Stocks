@@ -171,6 +171,15 @@ async function alpacaLoad(force=false){
   alpacaEmpty('Could not load stock-specific expirations: '+error.message);
  }
 }
+function alpacaShowLastRefreshed(result){
+ const stamp=$('statOptionsRefreshed'),details=$('statOptionsRefreshDetails');
+ if(!stamp||!details)return;
+ const at=result?.retrieved_at;
+ const time=at?new Date(at):null;
+ if(!time||!Number.isFinite(time.getTime())){stamp.textContent='Time unavailable';details.textContent='Options data loaded; source did not provide a timestamp';return;}
+ stamp.textContent=time.toLocaleString(undefined,{year:'numeric',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
+ details.textContent='Alpaca data retrieval time · '+(result.ticker||'selected stock')+' '+(result.expiration||'');
+}
 async function alpacaLoadExpiration(reqId=++alpacaRequestId,force=false){
  if(!selected)return;
  const ticker=selected.ticker,side=alpacaSide(),expiration=$('alpacaExpiration').value;
@@ -191,6 +200,7 @@ async function alpacaLoadExpiration(reqId=++alpacaRequestId,force=false){
   }
   if(reqId!==alpacaRequestId||selected?.ticker!==ticker||alpacaSide()!==side||$('alpacaExpiration').value!==expiration)return;
   alpacaCurrent=result;
+  alpacaShowLastRefreshed(result);
   alpacaStatus('Showing '+result.contracts.length+' strikes for '+ticker+' '+side+' · '+expiration+
    (result.partial?' · partial chain from Alpaca':'')+
    '. Indicative quotes are modified and cannot be assumed executable.',true);
