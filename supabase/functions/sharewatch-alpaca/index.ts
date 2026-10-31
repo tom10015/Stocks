@@ -51,19 +51,59 @@ Deno.serve(async req=>{
  const params=new URL(req.url).searchParams;
  const ticker=(params.get("ticker")||"").trim().toUpperCase();
  const side=params.get("side")||"put";
- const days=Number(params.get("days")||30);
+ const mode=params.get("mode")||"chain";
+ const expiration=(params.get("expiration")||"").trim();
  const spot=Number(params.get("spot")||0);
  if(!/^[A-Z0-9][A-Z0-9.^-]{0,14}$/.test(ticker))return json({error:"Invalid ticker"},400);
- if(!["put","call"].includes(side)||![14,30,60,120].includes(days))return json({error:"Invalid filter"},400);
+ if(!["put","call"].includes(side)||!["calendar","chain"].includes(mode))return json({error:"Invalid option filter"},400);
  if(!await active(ticker,jwt))return json({error:"Ticker is not active in ShareWatch"},403);
  const today=new Date().toISOString().slice(0,10);
- const cutoff=new Date(Date.now()+days*86400000).toISOString().slice(0,10);
+ if(mode==="chain"&&(!/^\\d{4}-\\d{2}-\\d{2}$/.test(expiration)||expiration<today))return json({error:"Choose an actual unexpired expiration date."},400);
  const headers={"APCA-API-KEY-ID":key,"APCA-API-SECRET-KEY":secret,Accept:"application/json"};
+ const low=Number.isFinite(spot)&&spot>0?Math.max(0.01,spot*.55):0.01;
+ const high=Number.isFinite(spot)&&spot>0?spot*1.65:1e6;
+ if(mode==="calendar"){
+  // Query the option-contract reference catalog, not an arbitrary 30-day snapshot.
+  // Alpaca defaults to next weekend unless expiration_date_lte is explicit.
+  const calUrl=new URL("https://paper-api.alpaca.markets/v2/options/contracts");
+  calUrl.searchParams.set("underlying_symbols",ticker);
+  calUrl.searchParams.set("type",side);
+  calUrl.searchParams.set("status","active");
+  calUrl.searchParams.set("expiration_date_gte",today);
+  const horizon=new Date(Date.now()+3*366*86400000).toISOString().slice(0,10);
+  calUrl.searchParams.set("expiration_date_lte",horizon);
+  calUrl.searchParams.set("strike_price_gte",String(low));
+  calUrl.searchParams.set("strike_price_lte",String(high));
+  calUrl.searchParams.set("limit","10000");
+  let cursor="",pages=0;
+  const expirations=new Set<string>();
+  do{
+   const url=new URL(calUrl);
+   if(cursor)url.searchParams.set("page_token",cursor);
+   const resp=await request(url.toString(),headers,12_000_000);
+   if(resp.error)return json({error:"Alpaca contract calendar "+resp.error+". This requires an Alpaca paper-trading API key and secret. If your keys are for live trading, create paper keys in your Alpaca dashboard."},resp.code===429?429:502);
+   if(!Array.isArray(resp.data?.option_contracts))return json({error:"Alpaca did not return a valid contract calendar."},502);
+   for(const contract of resp.data.option_contracts){
+    if(contract?.underlying_symbol===ticker&&contract.type===side&&contract.status==="active"&&
+      String(contract.multiplier||contract.size)==="100"&&typeof contract.expiration_date==="string"&&
+      contract.expiration_date>=today&&contract.expiration_date<=horizon)expirations.add(contract.expiration_date);
+   }
+   cursor=typeof resp.data?.next_page_token==="string"?resp.data.next_page_token:"";
+   pages++;
+  }while(cursor&&pages<5);
+  return json({status:"ok",mode:"calendar",ticker,side,expirations:[...expirations].sort(),
+   partial:Boolean(cursor),retrieved_at:new Date().toISOString(),
+   note:"Dates are from active, standard Alpaca option contracts. Dates without usable indicative quotes may still appear."});
+ }
  let cursor="",pages=0,scanned=0;
  const rows:any[]=[];
- while(pages<4){
+ while(pages<8){
   const url=new URL("https://data.alpaca.markets/v1beta1/options/snapshots/"+encodeURIComponent(ticker));
   url.searchParams.set("feed","indicative");
+  url.searchParams.set("type",side);
+  url.searchParams.set("expiration_date",expiration);
+  url.searchParams.set("strike_price_gte",String(low));
+  url.searchParams.set("strike_price_lte",String(high));
   url.searchParams.set("limit","1000");
   if(cursor)url.searchParams.set("page_token",cursor);
   const resp=await request(url.toString(),headers);
@@ -74,29 +114,24 @@ Deno.serve(async req=>{
   scanned+=items.length;
   for(const [symbol,v] of items){
    const parsed=parseContract(symbol,ticker);
-   if(!parsed||parsed.expiration<today||parsed.expiration>cutoff||parsed.type!==side||parsed.strike<=0)continue;
-   if(Number.isFinite(spot)&&spot>0&&(parsed.strike<spot*.55||parsed.strike>spot*1.65))continue;
+   if(!parsed||parsed.expiration!==expiration||parsed.type!==side||parsed.strike<=0)continue;
    const q=(v as any)?.latestQuote;
    const bid=val(q?.bp),ask=val(q?.ap);
-   if(bid===null||ask===null||ask<bid||ask<=0)continue;
+   // Keep the strike even when an indicative quote isn't available.
    const gr=(v as any)?.greeks||{};
    rows.push({symbol,expiration:parsed.expiration,type:parsed.type,strike:parsed.strike,
-    bid,ask,delta:val(gr.delta,-1,1),gamma:val(gr.gamma,-1000,1000),theta:val(gr.theta,-1e6,1e6),vega:val(gr.vega,-1e6,1e6),
-    iv:val((v as any)?.impliedVolatility,0,1000),quote_time:typeof q.t==="string"?q.t:null,
+    bid,ask,delta:val(gr.delta,-1,1),gamma:val(gr.gamma,-1000,1000),
+    theta:val(gr.theta,-1e6,1e6),vega:val(gr.vega,-1e6,1e6),
+    iv:val((v as any)?.impliedVolatility,0,1000),quote_time:typeof q?.t==="string"?q.t:null,
     last_trade:val((v as any)?.latestTrade?.p),quote_kind:"INDICATIVE_MODIFIED",contract_size:100});
   }
   pages++;
   cursor=typeof resp.data.next_page_token==="string"?resp.data.next_page_token:"";
   if(!cursor)break;
  }
- rows.sort((a,b)=>a.expiration.localeCompare(b.expiration)||
-  (Number.isFinite(spot)&&spot>0?Math.abs(a.strike-spot)-Math.abs(b.strike-spot):a.strike-b.strike));
- const selected:any[]=[],counts=new Map<string,number>();
- for(const x of rows){
-  const count=counts.get(x.expiration)||0;if(count>=20)continue;
-  counts.set(x.expiration,count+1);selected.push(x);if(selected.length>=200)break;
- }
- return json({status:"ok",provider:"Alpaca free indicative options",feed:"indicative",
-  ticker,side,retrieved_at:new Date().toISOString(),contracts:selected,partial:!!cursor,
-  scanned,pages,note:"INDICATIVE MODIFYING QUOTES: not actual OPRA NBBO or executable bid/ask. Trades are delayed at least 15 minutes. Verify broker pricing."});
+ rows.sort((a,b)=>a.strike-b.strike);
+ return json({status:"ok",mode:"chain",provider:"Alpaca free indicative options",feed:"indicative",
+  ticker,side,expiration,retrieved_at:new Date().toISOString(),
+  contracts:rows,partial:!!cursor,scanned,pages,
+  note:"Indicative quotes are modified prices, not OPRA NBBO or executable bid/ask. Trades are delayed at least 15 minutes. Verify with broker."});
 });
