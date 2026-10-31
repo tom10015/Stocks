@@ -14,7 +14,7 @@ function alpacaStatus(message,connected=false){
  $('alpacaBadge').className='badge '+(connected?'feed-ok':'feed-old');
 }
 function alpacaEmpty(message){
- $('alpacaRows').innerHTML='<tr><td colspan="11" class="muted">'+esc(message)+'</td></tr>';
+ $('alpacaRows').innerHTML='<tr><td colspan="6" class="muted">'+esc(message)+'</td></tr>';
 }
 async function alpacaFetch(params){
  const url=ALPACA_ENDPOINT+'?'+new URLSearchParams(params);
@@ -136,34 +136,49 @@ function alpacaRender(){
  }
  const list=[...grouped.values()].sort(alpacaChainSort);
  let rows='',lineDrawn=false;
- for(const c of list){
+ for(let i=0;i<list.length;i++){
+  const c=list[i];
   if(($('chainSort')?.value||'strike')==='strike'&&spot!==null&&!lineDrawn&&c.strike>=spot){
-   rows+='<tr class="stock-price-marker"><td colspan="11"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
+   rows+='<tr class="stock-price-marker"><td colspan="6"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
    lineDrawn=true;
   }
-  const p=alpacaBuying()?c.ask:c.bid;
-  const usable=Number.isFinite(p)&&p>0&&daysRemaining(c.expiration)>=1;
+  const premium=alpacaBuying()?c.ask:c.bid;
+  const usable=Number.isFinite(premium)&&premium>0&&daysRemaining(c.expiration)>=1;
   const money=alpacaMoneyness(c.strike,spot,c.type);
   const pop=alpacaProfitEstimate(c,spot);
   const liq=swLiquidity(c);
-  rows+='<tr class="chain-strike '+money.kind+'"><td><strong>'+dollars(c.strike)+'</strong></td>'+
-   '<td><span class="moneyness '+money.kind+'">'+money.name+'</span></td>'+
-   '<td>'+(Number.isFinite(c.bid)?dollars(c.bid):'—')+'</td>'+
-   '<td>'+(Number.isFinite(c.ask)?dollars(c.ask):'—')+'</td>'+
-   '<td>'+(Number.isFinite(c.delta)?c.delta.toFixed(3):'—')+'</td>'+
-   '<td>'+(Number.isFinite(c.iv)?percent(c.iv*100):'—')+'</td>'+
-   '<td>'+(liq.pct===null?'—':liq.pct.toFixed(1)+'%')+'</td>'+ 
-   '<td class="small" title="Indicative bid/ask sizes; NOT daily volume or open interest">'+(Number.isFinite(c.bid_size)?number(c.bid_size):'—')+' / '+(Number.isFinite(c.ask_size)?number(c.ask_size):'—')+'</td>'+ 
-   '<td class="small muted">'+esc(alpacaTime(c.quote_time))+'</td>'+
-   '<td><button type="button" data-alpaca-symbol="'+esc(c.symbol)+'" '+(usable?'':'disabled')+
-   ' title="Use indicative modified option premium">Use '+(alpacaBuying()?'ask':'bid')+'</button></td>'+ 
-   '<td class="pop-cell" title="Illustrative probability of positive profit at expiration, not guaranteed.">'+
-   (pop===null?'<span class="muted">—</span>':'<strong>'+pop.toFixed(1)+'%</strong>')+'</td></tr>';
+  const detailId='chain-more-'+i;
+  const popHtml=pop===null?'<span class="muted">—</span>':'<strong>'+pop.toFixed(1)+'%</strong>';
+  const bidHtml=Number.isFinite(c.bid)?dollars(c.bid):'—';
+  const askHtml=Number.isFinite(c.ask)?dollars(c.ask):'—';
+  const deltaHtml=Number.isFinite(c.delta)?c.delta.toFixed(3):'—';
+  const ivHtml=Number.isFinite(c.iv)?percent(c.iv*100):'—';
+  const spreadHtml=liq.pct===null?'—':liq.pct.toFixed(1)+'%';
+  const sizeHtml=(Number.isFinite(c.bid_size)?number(c.bid_size):'—')+' / '+(Number.isFinite(c.ask_size)?number(c.ask_size):'—');
+  rows+='<tr class="chain-strike '+money.kind+'">'+
+   '<td class="chain-strike-cell"><strong>'+dollars(c.strike)+'</strong>'+
+   '<button type="button" class="chain-detail-toggle" data-chain-expand="'+detailId+'" aria-controls="'+detailId+'" aria-expanded="false">Details <span aria-hidden="true">⌄</span></button></td>'+
+   '<td class="pop-cell" title="Illustrative probability of positive expiration profit, not guaranteed">'+popHtml+'</td>'+
+   '<td class="chain-optional"><span class="moneyness '+money.kind+'">'+money.name+'</span></td>'+
+   '<td class="chain-quote-cell"><span class="chain-quote-label">Bid</span> '+bidHtml+
+   '<span class="chain-quote-break"></span><span class="chain-quote-label">Ask</span> '+askHtml+'</td>'+
+   '<td class="chain-optional chain-delta">'+deltaHtml+'</td>'+
+   '<td class="chain-action"><button type="button" data-alpaca-symbol="'+esc(c.symbol)+'" '+(usable?'':'disabled')+
+   ' title="Use modified indicative '+(alpacaBuying()?'ask':'bid')+' premium">Use '+(alpacaBuying()?'ask':'bid')+'</button></td>'+
+   '</tr>'+
+   '<tr class="chain-more-row" id="'+detailId+'" hidden><td colspan="6"><div class="chain-more-grid">'+
+   '<span>Position <strong>'+esc(money.name)+'</strong></span>'+
+   '<span>Delta <strong>'+deltaHtml+'</strong></span>'+
+   '<span>IV <strong>'+ivHtml+'</strong></span>'+
+   '<span>Bid–ask spread <strong>'+spreadHtml+'</strong></span>'+
+   '<span>Indicative bid / ask sizes <strong>'+sizeHtml+'</strong></span>'+
+   '<span>Quote time <strong>'+esc(alpacaTime(c.quote_time))+'</strong></span>'+
+   '</div><p class="small muted">Indicative data, not executable NBBO; sizes are not volume or open interest.</p></td></tr>';
  }
  if(($('chainSort')?.value||'strike')==='strike'&&spot!==null&&!lineDrawn&&list.length){
-  rows+='<tr class="stock-price-marker"><td colspan="11"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
+  rows+='<tr class="stock-price-marker"><td colspan="6"><span class="line-label">STOCK PRICE · '+esc(selected.ticker)+' '+dollars(spot)+' · close '+esc(selected.priceDate||'unknown')+'</span></td></tr>';
  }
- $('alpacaRows').innerHTML=rows||'<tr><td colspan="11" class="muted">No strikes returned for this expiration. Choose another listed date.</td></tr>';
+ $('alpacaRows').innerHTML=rows||'<tr><td colspan="6" class="muted">No strikes returned for this expiration. Choose another listed date.</td></tr>';
 }
 async function alpacaLoad(force=false){
  if(!selected)return;
@@ -275,6 +290,12 @@ $('chainSort')?.addEventListener('change',()=>alpacaRender());
 $('alpacaExpiration').addEventListener('change',()=>alpacaLoadExpiration());
 $('strategy').addEventListener('change',()=>alpacaLoad());
 $('alpacaRows').addEventListener('click',e=>{
+ const toggle=e.target.closest('button[data-chain-expand]');
+ if(toggle){
+  const target=document.getElementById(toggle.dataset.chainExpand);
+  if(target){const show=target.hidden;target.hidden=!show;toggle.setAttribute('aria-expanded',String(show));}
+  return;
+ }
  const button=e.target.closest('button[data-alpaca-symbol]');
  if(button&&!button.disabled)alpacaSelect(button.dataset.alpacaSymbol);
 });
