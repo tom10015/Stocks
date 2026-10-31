@@ -67,7 +67,7 @@ Deno.serve(async req=>{
   // that worked with the user's API keys before the date-picker change.
   // Avoid the separate Alpaca paper-trading endpoint entirely.
   const from=new Date(Date.now()-86400000).toISOString().slice(0,10);
-  const horizon=new Date(Date.now()+3*366*86400000).toISOString().slice(0,10);
+  const horizon=new Date(Date.now()+400*86400000).toISOString().slice(0,10);
   let cursor="",pages=0,scanned=0;
   const dates=new Set<string>();
   do{
@@ -97,7 +97,7 @@ Deno.serve(async req=>{
    }
    cursor=typeof resp.data?.next_page_token==="string"?resp.data.next_page_token:"";
    pages++;
-  }while(cursor&&pages<8);
+  }while(cursor&&pages<2);
   return json({status:"ok",mode:"calendar",ticker,side,expirations:[...dates].sort(),
    partial:Boolean(cursor),pages,scanned,retrieved_at:new Date().toISOString(),
    note:"Actual expirations present in Alpaca's indicative option snapshots. If paginated, some farther expirations may not appear."});
