@@ -1,13 +1,21 @@
 /* ShareWatch price chart. Prices are separate from reported shares outstanding. */
 let priceCachePromise=null;
+let priceCacheSavedAt=0;
 
 let currentPriceTicker=null;
 let currentPriceEntry=null;
 function priceHistoryForCurrent(){return currentPriceEntry?.history||[];}
 function redrawPriceForRange(){if(currentPriceTicker&&currentPriceEntry)plotPrice(currentPriceTicker,currentPriceEntry);}
 function priceMoney(v){return Number(v).toLocaleString("en-US",{style:"currency",currency:"USD",minimumFractionDigits:2,maximumFractionDigits:4});}
-function readPrices(){
- if(!priceCachePromise)priceCachePromise=fetch("./data/prices.json?ts="+Date.now()).then(r=>{if(!r.ok)throw Error("Price importer has not saved its first dataset yet");return r.json();}).catch(err=>{priceCachePromise=null;throw err;});
+function readPrices(force=false){
+ if(force||Date.now()-priceCacheSavedAt>120000)priceCachePromise=null;
+ if(!priceCachePromise){
+  priceCacheSavedAt=Date.now();
+  priceCachePromise=fetch("./data/prices.json?ts="+Date.now(),{cache:"no-store"}).then(r=>{
+   if(!r.ok)throw Error("Price importer has not saved its first dataset yet");
+   return r.json();
+  }).catch(err=>{priceCachePromise=null;throw err;});
+ }
  return priceCachePromise;
 }
 function plotPrice(ticker,entry){
@@ -38,7 +46,7 @@ function plotPrice(ticker,entry){
  table.innerHTML='<table><thead><tr><th>Trading date</th><th>Close / share</th><th>Change</th></tr></thead><tbody>'+rows.map((p,i)=>{let index=points.length-1-i,prev=points[index-1],diff=prev?(Number(p[1])-Number(prev[1])):null,pct=prev&&Number(prev[1])?100*diff/Number(prev[1]):null;return '<tr><td>'+esc(p[0])+'</td><td>'+priceMoney(p[1])+'</td><td class="'+(diff>0?'down':diff<0?'up':'')+'">'+(pct===null?'—':(diff>=0?'+':'')+priceMoney(diff)+' ('+(pct>=0?'+':'')+pct.toFixed(2)+'%)')+'</td></tr>';}).join("")+'</tbody></table>';
  document.getElementById("priceCount").textContent=points.length+" closing-price observations ("+earliest[0]+" to "+latest[0]+") · highest "+priceMoney(peak[1]);
 }
-async function loadPricePanel(ticker){
+async function loadPricePanel(ticker,force=false){
  currentPriceTicker=ticker;
  currentPriceEntry=null;
  const chart=document.getElementById("priceChart"),note=document.getElementById("priceNote");
@@ -47,11 +55,22 @@ async function loadPricePanel(ticker){
  document.getElementById("priceLast").textContent='';
  document.getElementById("priceCount").textContent='';
  try{
-  const result=await readPrices();
+  const result=await readPrices(force);
   if(currentPriceTicker!==ticker)return;
   const entry=result.prices?.[ticker];
-  if(!entry){chart.innerHTML='<p class="muted">This ticker has no saved price history yet.</p>';note.textContent="The automatic price collector checks newly added tickers every six hours.";return;}
+  if(!entry){
+   chart.innerHTML='<p class="muted">This ticker has no saved price history yet.</p>';
+   note.innerHTML='A new-stock workflow checks for missing daily closing-price history every five minutes (GitHub Actions may be delayed). The full price refresh still runs every six hours. <button id="refreshMissingPrices" type="button" style="margin-left:8px;padding:7px 10px;border:1px solid #466482;background:#20344b;color:#d6ebfa;border-radius:8px;cursor:pointer">Recheck saved prices</button>';
+   note.querySelector("#refreshMissingPrices").addEventListener("click",()=>loadPricePanel(ticker,true));
+   return;
+  }
   currentPriceEntry=entry;
+  if(!entry.history?.length){
+   chart.innerHTML='<p class="muted">Daily closing-price history is not available from the current providers.</p>';
+   note.innerHTML='Last source check: '+esc((entry.checked_at||"").slice(0,10))+'. '+esc(entry.error||"History may not have been retrieved yet.")+' <button id="refreshMissingPrices" type="button" style="margin-left:8px;padding:7px 10px;border:1px solid #466482;background:#20344b;color:#d6ebfa;border-radius:8px;cursor:pointer">Recheck saved prices</button>';
+   note.querySelector("#refreshMissingPrices").addEventListener("click",()=>loadPricePanel(ticker,true));
+   return;
+  }
   if(sharedRange==="all"){drawSharesPanel();}
   plotPrice(ticker,entry);
  }catch(err){if(currentPriceTicker!==ticker)return;chart.innerHTML='<p class="muted">Price history is being initialized.</p>';note.textContent=err.message;}
