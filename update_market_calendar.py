@@ -39,7 +39,7 @@ def event_rows(body,kind,date,watch):
             url="https://www.nasdaq.com/market-activity/earnings"
         else:
             ex=str(r.get("exDividendDate") or r.get("exDate") or "").strip()
-            if ex and date not in ex and len(ex)==10:continue
+            # The API query date is the ex-dividend calendar date; display unchanged.
             details="Reported ex-dividend date"
             amount=str(r.get("dividendRate") or r.get("cashAmount") or r.get("amount") or "").strip()
             if amount and amount not in ("N/A","—"):details+=" · "+amount[:35]
