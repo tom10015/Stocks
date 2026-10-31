@@ -106,7 +106,12 @@
    notify();
   }finally{pending.delete(ticker)}
  }
- window.ShareWatchUser={init,signIn,signUp,signOut,toggle,loadFavorites,get user(){return user},
+ async function tradesRequest(query='',options={}){
+  if(!user)throw Error('Sign in to access your trade journal.');
+  if(typeof query!=='string'||!query.startsWith('?')&&!query.startsWith(''))throw Error('Invalid trade query');
+  return api('/rest/v1/stocks_option_trades'+query,{...options,token:await token()});
+ }
+ window.ShareWatchUser={init,signIn,signUp,signOut,toggle,loadFavorites,tradesRequest,get user(){return user},
   get favorites(){return favorites},get ready(){return Boolean(user)},get email(){return user?.email||''}};
  init();
 })();
