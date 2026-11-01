@@ -269,9 +269,16 @@ function valCenter(){
    'No recent annual SEC operating cash flow in a standard USD concept.'
  };
  write('valFCFLabel',canFcf?'Last reported annual free cash flow':'Last reported annual operating cash flow');
+ const display=(v,formatter,{notApplicable=false}={})=>valid(v)?formatter(v):
+  notApplicable?'N/A':'Not available';
  for(const [id,v] of Object.entries({
-  valMarketCap:compact(marketCap),valPE:ratio(pe),valPS:ratio(ps),valPB:ratio(pb),
-  valMargin:pct(margin),valFCF:compact(cashFlowValue)}))write(id,v);
+  valMarketCap:display(marketCap,compact,{notApplicable:fund}),
+  valPE:display(pe,ratio,{notApplicable:fund||!!(annualRecent('diluted_eps')&&
+   annualRecent('diluted_eps').value<=0)}),
+  valPS:display(ps,ratio,{notApplicable:fund}),
+  valPB:display(pb,ratio,{notApplicable:fund||equity!==null&&equity<=0}),
+  valMargin:display(margin,pct,{notApplicable:fund}),
+  valFCF:display(cashFlowValue,compact)}))write(id,v);
  for(const [id,reason] of Object.entries(reasons))write(id+'Why',reason);
  const rows=[
   ['Saved stock close',close,refDate,state.prices?.prices?.[ticker]?.source?.url,'USD/share'],
