@@ -61,8 +61,9 @@ def stooq(ticker):
  return sorted({r[0]:r for r in rows}.values()),{"provider":"Stooq","symbol":symbol,"url":"https://stooq.com/q/?s="+urllib.parse.quote(symbol),"interval":"daily","adjustment":"vendor-reported"}
 def main():
  parser=argparse.ArgumentParser()
- parser.add_argument("--max-tickers",type=int,default=12)
+ parser.add_argument("--max-tickers",type=int,default=120)
  parser.add_argument("--tickers",default="",help="Comma-separated active tickers, validated against watchlist")
+ parser.add_argument("--refresh-hours",type=float,default=5.5,help="Minimum age of a successfully saved history before refetching")
  args=parser.parse_args()
  all_active=load_watchlist()
  requested={t.strip().upper() for t in args.tickers.split(",") if t.strip()}
@@ -78,8 +79,8 @@ def main():
  chosen=sorted(requested or all_active,key=lambda t:-age(t))
  complete=0
  for ticker in chosen:
-  if complete>=max(1,min(50,args.max_tickers)):break
-  if not requested and age(ticker)<20*3600:continue
+  if complete>=max(1,min(200,args.max_tickers)):break
+  if not requested and age(ticker)<max(1,args.refresh_hours)*3600 and tickers.get(ticker,{}).get("bars"):continue
   previous=tickers.get(ticker,{})
   errors=[]
   for provider in (yahoo,stooq):
@@ -96,10 +97,11 @@ def main():
       "status":"stale" if previous.get("bars") else "unavailable","error":"; ".join(errors)[:300]}
    print(ticker,"unavailable",errors,flush=True)
   complete+=1
-  time.sleep(.65)
+  time.sleep(.4)
  doc.update({"updated_at":now,"source":"Yahoo Finance daily chart / Stooq fallback: historical unadjusted or vendor-reported OHLCV",
   "note":"Provider OHLCV data is not real-time, and vendor may restrict redistribution. Splits/dividends may distort raw comparisons; technical signals are educational.",
   "tickers":tickers})
  DEST.write_text(json.dumps(doc,separators=(",",":"))+"\n")
- print("Processed",complete,"active symbols",flush=True)
+ print("Processed",complete,"active symbols. Total tracked histories:",len(tickers),
+       "active watchlist symbols:",len(all_active),flush=True)
 if __name__=="__main__":main()
