@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Market Data Lab · ShareWatch</title><meta name="description" content="Advanced stock charts, SEC Form 4 insider filings, short interest research, price-volume signals and financial valuation metrics.">
 <link rel="stylesheet" href="./resources.css?v=20261101-market1"><link rel="stylesheet" href="./market-data.css?v=20261101-market1">
-<script defer src="./market-data.js?v=20261101-market3"></script></head><body>
+<script defer src="./market-data.js?v=20261101-automatic1"></script></head><body>
 <header class="site-header"><nav class="nav" aria-label="ShareWatch navigation"><a class="brand" href="./index.html">◈ Share<span>Watch</span></a><div class="nav-links">
 <a href="./index.html">Share Counter</a><a href="./options.html">Options</a><a href="./research.html">Research & Income</a><a href="./market-data.html" class="active" aria-current="page">Market Data</a><a href="./tools.html">Tools</a><a href="./help.html">Help</a><a href="./admin.html">Admin</a></div></nav></header>
 <main>
@@ -44,26 +44,18 @@
 <p class="sourced-note">Forms 4/4-A can include open-market or private purchases, sales, stock awards, transfers and option exercises. This display does not treat all filings as buying or selling. Unclassified entries need you to open their SEC source; issuer-submission coverage is not an exhaustive insider trade feed.</p>
 </section>
 <section class="panel" id="short-interest">
-<div class="panel-head"><div><h2>Short Interest Tracker</h2><p>Compare genuine reported short-position counts, not daily short-sale volume. Official listed-equity reports may require licensed redistribution.</p></div><span class="pill">Official links + manual data entry</span></div>
-<div class="market-cols"><div>
-<form id="shortForm" novalidate><div class="formgrid">
-<div class="field"><label for="shortDate">Official settlement date</label><input id="shortDate" type="date" required></div>
-<div class="field"><label for="shortCurrent">Current short shares (reported)</label><input id="shortCurrent" type="number" min="0" step="1" placeholder="Enter official figure"></div>
-<div class="field"><label for="shortPrevious">Previous short shares (reported)</label><input id="shortPrevious" type="number" min="0" step="1" placeholder="Enter prior figure"></div>
-</div><button type="submit" class="primary">Calculate short interest change</button></form>
-<p id="shortStatus" class="status-line" role="status" aria-live="polite">No reported figures supplied. Short interest is not available from the existing ShareWatch market feed.</p>
+<div class="panel-head"><div><h2>Short Interest Tracker</h2><p>Automatic FINRA reported short positions for the selected ticker, including settlement dates, change since the previous report, and reported days to cover when available.</p></div><span class="pill">Automatic · FINRA bi-monthly</span></div>
+<p id="shortStatus" class="status-line" role="status" aria-live="polite">Loading automatically collected FINRA short-interest reports…</p>
 <div class="fact-list">
-<div class="fact"><span>Current reported short shares</span><strong id="shortReported">—</strong></div>
-<div class="fact"><span>Change from prior report</span><strong id="shortChange">—</strong></div>
+<div class="fact"><span>Latest reported shares short</span><strong id="shortReported">—</strong><small id="shortDateLabel">Settlement date unavailable</small></div>
+<div class="fact"><span>Change from previous report</span><strong id="shortChange">—</strong></div>
 <div class="fact"><span>Change (%)</span><strong id="shortPct">—</strong></div>
-<div class="fact"><span>Approx. days to cover*</span><strong id="shortDtc">—</strong></div></div>
-<p class="sourced-note">*Days to cover is calculated from entered short shares divided by the recent 20-session average vendor-reported trading volume, if available. This is a mixed-source estimate, not the exchange’s published days-to-cover value. Results are not stored or automatically verified.</p>
-</div><div class="note"><strong>Official reporting sources</strong><p>For U.S. exchange-listed stocks, consult the listing exchange’s published short-interest report. FINRA provides a public short-interest portal for OTC securities and explains why daily short-sale volume must not be called short interest.</p>
-<p><a id="shortNasdaq" href="https://www.nasdaq.com/market-activity/quotes/short-interest" target="_blank" rel="noopener noreferrer">Selected stock: Nasdaq short interest ↗</a></p>
-<p><a href="https://www.nasdaq.com/products/data/equities/short-interest" target="_blank" rel="noopener noreferrer">Nasdaq short-interest data ↗</a></p>
-<p><a href="https://otce.finra.org/otce/equityShortInterest" target="_blank" rel="noopener noreferrer">FINRA OTC equity short interest ↗</a></p>
-<p><a href="https://www.finra.org/sites/default/files/2019-07/information-notice-051019.pdf" target="_blank" rel="noopener noreferrer">FINRA: short-sale volume is not short interest ↗</a></p>
-</div></div></section>
+<div class="fact"><span>Days to cover*</span><strong id="shortDtc">—</strong></div>
+</div>
+<div class="table-scroll"><table class="data-table"><thead><tr><th>Settlement date</th><th>Shares short</th><th>Previous report</th><th>Change</th><th>FINRA days to cover</th></tr></thead><tbody id="shortHistory"><tr><td colspan="5">Awaiting the first verified report.</td></tr></tbody></table></div>
+<div class="flex-actions"><a id="shortNasdaq" href="https://www.nasdaqtrader.com/trader.aspx?id=ShortInterest" target="_blank" rel="noopener noreferrer">Official Nasdaq short-interest reports ↗</a><a href="https://api.finra.org/" target="_blank" rel="noopener noreferrer">FINRA data platform ↗</a><a href="https://www.nasdaq.com/products/data/equities/short-interest" target="_blank" rel="noopener noreferrer">Nasdaq data availability and licensing ↗</a></div>
+<p class="sourced-note">*Days to cover uses the source-reported quantity when provided. These are <strong>historical outstanding short positions</strong>, generally published twice a month after the settlement date—not real-time short trades or daily short-sale volume. The automated collector uses the public FINRA data endpoint. No figures appear when the provider does not return a validated report. Public data access/redistribution can change.</p>
+</section>
 <section class="panel" id="signals"><div class="panel-head"><div><h2>Smart Stock Signals</h2><p>Explainable, rule-based watchlist observations based on source-dated daily bars and actual share-count disclosures. No machine-generated buy/sell advice.</p></div><span class="pill">Research flags · not predictions</span></div>
 <div class="signal-grid" id="signalCards"><div class="signal"><h3>Loading saved data…</h3></div></div>
 <p id="signalStatus" class="status-line">Select a stock above.</p>
