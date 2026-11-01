@@ -62,7 +62,7 @@ def collect(ticker,cik):
    filed=recent["filingDate"][i]
    primary=recent["primaryDocument"][i]
    if not re.fullmatch(r"\d{10}-\d{2}-\d{6}",acc):continue
-   if not primary or "/" in primary or "\\" in primary or ".." in primary:continue
+   if not primary or not re.fullmatch(r"[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*",primary) or ".." in primary:continue
    url="https://www.sec.gov/Archives/edgar/data/"+str(int(cik))+"/"+acc.replace("-","")+"/"+primary
    record={"ticker":ticker,"form":form,"filed":filed,"accession":acc,"source_url":url,
       "classification":"Filing only — transaction type not verified","verified_transactions":[]}
