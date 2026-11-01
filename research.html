@@ -1,0 +1,136 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="ShareWatch income opportunities, wheel and roll planner, SEC fundamentals, dividend research, and hedging tools.">
+<title>Market Research & Income · ShareWatch</title>
+<link rel="stylesheet" href="./resources.css?v=20261101-research1"><link rel="stylesheet" href="./research.css?v=20261101-research1">
+<script defer src="./market-research.js?v=20261101-research1"></script></head><body>
+<header class="site-header"><nav class="nav" aria-label="ShareWatch navigation"><a class="brand" href="./index.html">◈ Share<span>Watch</span></a><div class="nav-links">
+<a href="./index.html">Share Counter</a><a href="./options.html">Options Analyzer</a><a href="./research.html" class="active" aria-current="page">Market Research</a><a href="./tools.html">Trading Tools</a><a href="./help.html">Help Guide</a><a href="./admin.html">Admin</a></div></nav></header>
+<main><section class="hero">
+<div class="kicker">ShareWatch · Research & Income</div><h1>Find opportunities. Measure the risk.</h1>
+<p>Discover indicative option-premium opportunities, plan the wheel strategy, compare option rolls, examine SEC company fundamentals, evaluate dividend coverage, and model protective hedges—all in one place.</p>
+<div class="hero-links"><a href="#income">Explore income opportunities ↓</a><a href="#financials">Explore company financials ↓</a><a href="./help.html">Need help? ↗</a></div>
+<p class="small">Financial figures from SEC filings are dated and source-linked. Stock prices are saved historical closes. Alpaca option bids/asks are <strong>modified indicative data, not actual executable NBBO quotes</strong>. No orders are placed.</p>
+</section>
+<nav class="tool-grid" aria-label="Research tools">
+<a class="tile" href="#income"><span class="tile-mark">↗</span><strong>Income Opportunities</strong><span class="muted">Scan indicative short-option premiums</span></a>
+<a class="tile" href="#wheel"><span class="tile-mark">↻</span><strong>Wheel & Roll</strong><span class="muted">Assignment and rolling scenarios</span></a>
+<a class="tile" href="#financials"><span class="tile-mark">▤</span><strong>Market Intelligence</strong><span class="muted">SEC financials, price and share data</span></a>
+<a class="tile" href="#dividends"><span class="tile-mark">◎</span><strong>Dividend Safety</strong><span class="muted">Yield and payout coverage checks</span></a>
+<a class="tile" href="#hedge"><span class="tile-mark">⬡</span><strong>Risk & Hedge</strong><span class="muted">Protective puts and collar payoffs</span></a>
+</nav>
+<section id="income" class="panel">
+<div class="panel-head"><div><h2>Daily Income Opportunities</h2><p>Scan available contracts on active ShareWatch stocks. Compare cash-secured puts and covered calls across up to two actual listed expiration dates for each ticker. Run a fresh scan whenever you want updated indicative data.</p></div><span class="source-badge caution">Alpaca indicative · delayed/modified</span></div>
+<form id="incomeForm" novalidate>
+<div class="research-grid">
+<div class="field"><label for="incomeTickers">Up to 6 active tickers</label><input id="incomeTickers" placeholder="AAPL, SOFI, INTC (blank = first 6)" autocomplete="off"><small>Enter comma-separated symbols; must be in the active admin watchlist.</small></div>
+<div class="field"><label for="incomeStrategy">Strategy</label><select id="incomeStrategy"><option value="put">Cash-secured put</option><option value="call">Covered call</option></select></div>
+<div class="field"><label for="incomeMaxDte">Max days to expiry</label><input id="incomeMaxDte" type="number" min="1" max="365" step="1" value="30"></div>
+<div class="field"><label for="incomeMaxDelta">Max absolute delta</label><input id="incomeMaxDelta" type="number" min="0" max="1" step=".01" value=".30"></div>
+<div class="field"><label for="incomeMinPremium">Minimum premium / contract ($)</label><input id="incomeMinPremium" type="number" min="0" step=".01" value="10"></div>
+<div class="field"><label for="incomeMaxSpread">Maximum indicative spread (%)</label><input id="incomeMaxSpread" type="number" min="0" max="1000" value="50"></div>
+<div class="field"><label for="incomeRank">Rank matches</label><select id="incomeRank"><option value="annual">Highest annualized premium yield</option><option value="roi">Highest period premium yield</option><option value="credit">Largest premium / contract</option><option value="delta">Lowest absolute delta</option><option value="spread">Tightest indicative spread</option></select></div>
+</div><div class="action-row"><button class="primary" type="submit" id="incomeGo">Scan indicative chains</button><button type="button" id="incomeNext">Next 6 tracked tickers</button><a href="./options.html#optionsScreener" class="small">Open original Options Screener ↗</a></div>
+</form><p id="incomeStatus" class="status-line" role="status" aria-live="polite">Loading your active watchlist…</p>
+<div class="table-scroll"><table class="hub-table"><thead><tr><th>Stock</th><th>Expiry / DTE</th><th>Strike</th><th>Indicative bid</th><th>Premium / contract</th><th>Period yield</th><th>Simple annualized</th><th>|Delta|</th><th>Spread</th><th>Details</th></tr></thead><tbody id="incomeRows"><tr><td colspan="10">Select Scan to check option contracts.</td></tr></tbody></table></div>
+<p class="source-note">Premium yield is estimated using the saved closing share price for covered calls or strike collateral for cash-secured puts, excluding commissions and assignment outcomes. Annualized values simply scale short-period returns. These are <strong>not guaranteed profits, executable quotes, liquidity or success probabilities.</strong> Scans request current API snapshots but may receive cached results; quote timestamps can differ from stock closing dates.</p>
+</section>
+<section id="wheel" class="panel">
+<div class="panel-head"><div><h2>Wheel Strategy & Roll Planner</h2><p>Understand conditional cash-secured-put assignment, a potential subsequent covered call, and how a roll changes your option cash flows.</p></div><span class="pill">Scenario calculators · manual quotes</span></div>
+<div class="tool-columns">
+<div><h3>Wheel: cash-secured put → covered call</h3>
+<form id="wheelForm" class="research-grid" novalidate>
+<div class="field"><label for="wheelContracts">Standard contracts</label><input type="number" id="wheelContracts" value="1" min="1" max="1000" step="1"></div>
+<div class="field"><label for="wheelPutStrike">Sold put strike ($)</label><input type="number" id="wheelPutStrike" value="20" min=".01" step=".01"></div>
+<div class="field"><label for="wheelPutPremium">Put premium received / share ($)</label><input type="number" id="wheelPutPremium" value=".60" min="0" step=".01"></div>
+<div class="field"><label for="wheelCallStrike">Potential covered-call strike ($)</label><input type="number" id="wheelCallStrike" value="21" min=".01" step=".01"></div>
+<div class="field"><label for="wheelCallPremium">Potential call premium / share ($)</label><input type="number" id="wheelCallPremium" value=".40" min="0" step=".01"></div>
+<div class="field"><label for="wheelFees">Total fees across both legs ($)</label><input type="number" id="wheelFees" value="2.60" min="0" step=".01"></div>
+</form>
+<div class="measure-cards">
+<div class="measure"><span>Put collateral</span><strong id="wheelCollateral">—</strong></div>
+<div class="measure"><span>Net combined premiums</span><strong id="wheelCredit">—</strong></div>
+<div class="measure"><span>Effective basis if put assigned</span><strong id="wheelBasis">—</strong></div>
+<div class="measure"><span>Option + share P/L if called away</span><strong id="wheelGain">—</strong></div>
+<div class="measure"><span>P/L if shares fall to $0 after assignment</span><strong id="wheelWorst">—</strong></div>
+<div class="measure"><span>Put expires unassigned: put credit before call</span><strong id="wheelPutOnly">—</strong></div>
+</div><p id="wheelStatus" class="status-line" role="status"></p>
+<p class="section-note warn">The second leg is <strong>conditional</strong>: a covered call requires already owning 100 deliverable shares per contract. If the sold put expires without assignment, the modeled call is not automatically available. Premiums are manually entered, not predicted.</p></div>
+<div><h3>Rolling an existing short option</h3>
+<form id="rollForm" class="research-grid" novalidate>
+<div class="field"><label for="rollContracts">Contracts</label><input type="number" id="rollContracts" value="1" min="1" max="1000" step="1"></div>
+<div class="field"><label for="rollOldCredit">Original sale premium / share ($)</label><input type="number" id="rollOldCredit" value="1.25" min="0" step=".01"></div>
+<div class="field"><label for="rollCloseDebit">Buy to close premium / share ($)</label><input type="number" id="rollCloseDebit" value="1.90" min="0" step=".01"></div>
+<div class="field"><label for="rollNewCredit">New sale premium / share ($)</label><input type="number" id="rollNewCredit" value="2.20" min="0" step=".01"></div>
+<div class="field"><label for="rollOldStrike">Old strike ($)</label><input type="number" id="rollOldStrike" value="20" min=".01" step=".01"></div>
+<div class="field"><label for="rollNewStrike">New strike ($)</label><input type="number" id="rollNewStrike" value="19" min=".01" step=".01"></div>
+<div class="field"><label for="rollExtraDays">Additional days to expiry</label><input type="number" id="rollExtraDays" value="7" min="0" max="3650" step="1"></div>
+<div class="field"><label for="rollFees">Total fees for shown transactions ($)</label><input type="number" id="rollFees" value="3" min="0" step=".01"></div>
+</form><div class="measure-cards">
+<div class="measure"><span>Net credit / debit of the roll</span><strong id="rollCash">—</strong></div>
+<div class="measure"><span>Cumulative net option cash flows</span><strong id="rollTotal">—</strong></div>
+<div class="measure"><span>Strike adjustment</span><strong id="rollStrike">—</strong></div>
+<div class="measure"><span>Days extended</span><strong id="rollDays">—</strong></div>
+</div><p id="rollStatus" class="status-line" role="status"></p>
+<p class="section-note warn">Rolling closes an old contract and opens a new one. A net credit does not undo prior losses or remove assignment/downside risk. This shows option cash flows only, not mark-to-market, share P/L or taxes. Fee entry should cover all shown legs.</p></div>
+</div></section>
+<section id="financials" class="panel">
+<div class="panel-head"><div><h2>Market Intelligence Center</h2><p>Research one active ticker using saved closing prices, SEC shares outstanding, publicly filed annual financials and the upcoming event calendar.</p></div><span class="source-badge">SEC filings · reported</span></div>
+<div class="picker"><div class="field"><label for="intelTicker">Active stock</label><select id="intelTicker"><option value="">Loading tracked stocks…</option></select></div><div class="field"><label for="intelPeriod">Saved close comparison</label><select id="intelPeriod"><option value="30">30 days</option><option value="90">90 days</option><option value="365" selected>1 year</option></select></div></div>
+<p id="intelStatus" class="status-line" aria-live="polite">Loading SEC and market data…</p>
+<div class="measure-cards">
+<div class="measure"><span>Latest saved close</span><strong id="intPrice">—</strong><small id="intPriceDate">Not live</small></div>
+<div class="measure"><span>Price change in selected period</span><strong id="intReturn">—</strong><small>Available trading dates</small></div>
+<div class="measure"><span>Latest reported shares outstanding</span><strong id="intShares">—</strong><small id="intShareDate">SEC/issuer report date</small></div>
+<div class="measure"><span>Annual revenue (last filed)</span><strong id="intRevenue">—</strong><small id="intRevenueDate">SEC 10-K</small></div>
+<div class="measure"><span>Annual net income (last filed)</span><strong id="intNet">—</strong><small id="intNetDate">SEC 10-K</small></div>
+<div class="measure"><span>Annual operating cash flow</span><strong id="intOcf">—</strong><small id="intOcfDate">SEC 10-K</small></div>
+<div class="measure"><span>Cash and equivalents</span><strong id="intCash">—</strong><small id="intCashDate">SEC 10-K / 10-Q</small></div>
+<div class="measure"><span>Long-term debt</span><strong id="intDebt">—</strong><small id="intDebtDate">SEC 10-K / 10-Q</small></div>
+<div class="measure"><span>Annual diluted EPS</span><strong id="intEps">—</strong><small id="intEpsDate">SEC 10-K</small></div>
+</div>
+<p class="section-note">SEC financial figures can have different fiscal periods and filing dates, and not all issuers use comparable accounting concepts. Blank or unavailable metrics are intentionally not estimated. Amounts are historical reports, not market forecasts.</p>
+<div class="action-row"><a id="intSecLink" href="https://www.sec.gov/search-filings" target="_blank" rel="noopener noreferrer">SEC filings ↗</a><a id="intPriceLink" href="./index.html">Share-price and share-count history ↗</a><a href="https://www.investor.gov/introduction-investing/getting-started/researching-investments/using-edgar-research-investments" target="_blank" rel="noopener noreferrer">How to research filings ↗</a></div>
+<div class="table-scroll"><table><thead><tr><th>Next source-reported event</th><th>Reported date</th><th>Data origin</th></tr></thead><tbody id="intEvents"><tr><td colspan="3">Choose a stock to see available events.</td></tr></tbody></table></div>
+</section>
+<section id="dividends" class="panel">
+<div class="panel-head"><div><h2>Dividend Safety Center</h2><p>Calculate an indicated dividend yield and compare it with source-reported annual earnings and cash flow where available. Higher yield does not automatically mean safer income.</p></div><span class="source-badge caution">Historical coverage · not a rating</span></div>
+<div class="tool-columns">
+<div><form id="dividendForm" class="research-grid" novalidate>
+<div class="field"><label for="safeTicker">Stock</label><select id="safeTicker"><option value="">Loading tracked stocks…</option></select></div>
+<div class="field"><label for="safeAnnual">Assumed annual dividend / share ($)</label><input type="number" id="safeAnnual" min="0" step=".0001" value="2.00"><small>Manually entered; not a verified current declaration</small></div>
+<div class="field"><label for="safeShares">Shares owned / modeled</label><input type="number" id="safeShares" min="0" step="1" value="100"></div>
+</form>
+<div class="measure-cards">
+<div class="measure"><span>Indicated yield (vs saved close)</span><strong id="safeYield">—</strong></div>
+<div class="measure"><span>Modeled annual cash income</span><strong id="safeIncome">—</strong></div>
+<div class="measure"><span>Annual SEC diluted EPS</span><strong id="safeEps">—</strong><small id="safeEpsDate">Not verified yet</small></div>
+<div class="measure"><span>Dividend / annual EPS (proxy)</span><strong id="safePayout">—</strong></div>
+<div class="measure"><span>Reported annual free cash flow*</span><strong id="safeFcf">—</strong><small id="safeFcfDate">Operating cash flow − capex</small></div>
+<div class="measure"><span>Reported annual cash dividends paid</span><strong id="safePaid">—</strong><small id="safePaidDate">SEC filing concept</small></div>
+</div><p id="safeStatus" class="status-line" role="status"></p>
+</div><div><div class="note"><strong>How to interpret payout ratios</strong><p>Below 100% of positive earnings can be easier to sustain, but no single threshold determines dividend safety. Earnings may differ from cash available for distribution. REITs and financial companies often require different measures, such as AFFO or statutory capital rules.</p><p>*Free cash flow is only computed if operating cash flow and capital expenditures refer to the <strong>same SEC fiscal period</strong>. The entered annual dividend may describe a different period from the historical EPS, so any payout ratio is a comparison proxy, not an official current payout ratio.</p></div>
+<div class="action-row"><a id="safeSec" href="https://www.sec.gov/search-filings" target="_blank" rel="noopener noreferrer">Verify SEC cash flows ↗</a><a href="./tools.html#dividend-income">Dividend income calculator ↗</a></div></div>
+</div></section>
+<section id="hedge" class="panel">
+<div class="panel-head"><div><h2>Risk & Hedge Center</h2><p>Explore expiration P/L for shares protected by a put, or a put financed in part by selling a covered call (collar). Enter actual option premiums yourself.</p></div><span class="pill">Scenario model · not a quote</span></div>
+<form id="hedgeForm" novalidate><div class="research-grid">
+<div class="field"><label for="hedgeMode">Hedge</label><select id="hedgeMode"><option value="put">Protective put</option><option value="collar">Collar (put + short call)</option></select></div>
+<div class="field"><label for="hedgeContracts">Standard 100-share lots</label><input type="number" id="hedgeContracts" min="1" max="1000" step="1" value="1"></div>
+<div class="field"><label for="hedgeSpot">Current/reference share price ($)</label><input type="number" id="hedgeSpot" min=".01" step=".01" value="100"></div>
+<div class="field"><label for="hedgeBasis">Owned shares' average basis ($)</label><input type="number" id="hedgeBasis" min=".01" step=".01" value="92"></div>
+<div class="field"><label for="hedgePutStrike">Protective put strike ($)</label><input type="number" id="hedgePutStrike" min=".01" step=".01" value="90"></div>
+<div class="field"><label for="hedgePutPremium">Put premium paid / share ($)</label><input type="number" id="hedgePutPremium" min="0" step=".01" value="2.80"></div>
+<div class="field" id="hedgeCallStrikeField" hidden><label for="hedgeCallStrike">Short call strike ($)</label><input type="number" id="hedgeCallStrike" min=".01" step=".01" value="110"></div>
+<div class="field" id="hedgeCallPremiumField" hidden><label for="hedgeCallPremium">Call premium received / share ($)</label><input type="number" id="hedgeCallPremium" min="0" step=".01" value="1.20"></div>
+<div class="field"><label for="hedgeFees">Total fees ($)</label><input type="number" id="hedgeFees" min="0" step=".01" value="2"></div>
+</div></form>
+<div class="measure-cards">
+<div class="measure"><span>Net hedge cost</span><strong id="hedgeCost">—</strong></div>
+<div class="measure"><span>Minimum modeled expiration P/L</span><strong id="hedgeFloor">—</strong></div>
+<div class="measure"><span id="hedgeMaxLabel">Maximum potential upside</span><strong id="hedgeCeiling">—</strong></div>
+</div>
+<p id="hedgeStatus" class="status-line" role="status"></p>
+<div class="table-scroll"><table class="hub-table"><thead><tr><th>Stock at expiration</th><th>Unhedged shares P/L</th><th>With selected hedge</th><th>Hedge difference</th></tr></thead><tbody id="hedgeRows"><tr><td colspan="4">Enter valid assumptions to calculate.</td></tr></tbody></table></div>
+<p class="source-note">Expiration payoff assumes European-style option payoff for comparison. U.S. equity options can be exercised or assigned early. Results exclude dividends, share borrow, margin, financing, taxes, slippage and changes in implied volatility before expiry. A protective put limits downside at expiration but its cost reduces upside. A collar caps upside above the call strike.</p>
+</section>
+<footer class="footer">ShareWatch Market Research is a research and scenario-analysis tool, not personalized financial advice. <strong>Reported SEC data</strong> is historical, <strong>saved market closes</strong> are not live, <strong>Alpaca indicative quotes</strong> are modified/non-executable, and <strong>manual models</strong> are hypothetical. Check broker quotes, the official issuer, disclosures and option exercise terms before trading. No orders are sent or executed.</footer>
+</main></body></html>
