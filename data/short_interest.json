@@ -1,0 +1,7 @@
+{
+  "updated_at": null,
+  "source": "FINRA official consolidatedShortInterest public Data API",
+  "source_url": "https://api.finra.org/data/group/otcMarket/name/consolidatedShortInterest",
+  "note": "No verified reports imported yet. Automated collector is scheduled; FINRA reports are settlement-date snapshots, not live short-sale volume.",
+  "tickers": {}
+}
