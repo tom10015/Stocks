@@ -52,7 +52,7 @@ function fillSymbols(id){
 const wire=(form,keys,fn,status)=>{
  const run=e=>{
   e?.preventDefault();
-  try{fn();set(status,'');}catch(err){reset(keys);set(status,err.message);}
+  try{set(status,'');fn();}catch(err){reset(keys);set(status,err.message);}
  };
  $(form).addEventListener('input',run);
  $(form).addEventListener('change',run);
@@ -62,13 +62,13 @@ const wire=(form,keys,fn,status)=>{
 const wheelRun=wire('wheelForm',['wheelCollateral','wheelCredit','wheelBasis','wheelGain','wheelWorst','wheelPutOnly'],()=>{
  const q=n('wheelContracts',{min:1,max:1000,integer:true})*100,put=n('wheelPutStrike',{min:.01}),call=n('wheelCallStrike',{min:.01}),
  pc=n('wheelPutPremium'),cc=n('wheelCallPremium'),fees=n('wheelFees',{max:1e8});
- const premiums=(pc+cc)*q-fees,putOnly=pc*q-fees/2;
+ const premiums=(pc+cc)*q-fees,putOnly=pc*q;
  set('wheelCollateral',usd(put*q));set('wheelCredit',usd(premiums));
  set('wheelBasis',usd(put-premiums/q));
  set('wheelGain',usd((call-put)*q+premiums));
  set('wheelWorst',usd(-put*q+premiums));
  set('wheelPutOnly',usd(putOnly));
- set('wheelStatus','Scenarios assume shares are acquired at the put strike, then called away at the call strike. The put-only illustration allocates half the total fees to the put; actual fees may differ.');
+ set('wheelStatus','Scenarios assume shares are acquired at the put strike, then called away at the call strike. The put-only figure is gross put premium before its separate fees.');
 },'wheelStatus');
 const rollRun=wire('rollForm',['rollCash','rollTotal','rollStrike','rollDays'],()=>{
  const q=n('rollContracts',{min:1,max:1000,integer:true})*100;
