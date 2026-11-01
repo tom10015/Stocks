@@ -101,8 +101,15 @@ def main():
   prior=entries.get(ticker,{})
   try:
    filings=collect(ticker,cik)
-   entries[ticker]={"ticker":ticker,"cik":cik,"filings":filings,"checked_at":now,"status":"ok"}
-   print(ticker,len(filings),"SEC Form 4 filings indexed",flush=True)
+   old_by_acc={row["accession"]:row for row in prior.get("filings",[]) if row.get("accession")}
+   for row in filings:
+    prior_row=old_by_acc.get(row["accession"])
+    if prior_row and len(prior_row.get("verified_transactions",[]))>len(row.get("verified_transactions",[])):
+     continue
+    old_by_acc[row["accession"]]=row
+   combined=sorted(old_by_acc.values(),key=lambda row:row.get("filed",""),reverse=True)[:120]
+   entries[ticker]={**prior,"ticker":ticker,"cik":cik,"filings":combined,"checked_at":now,"status":"ok"}
+   print(ticker,len(filings),"issuer-index filings; retained",len(combined),"total verified/linked records",flush=True)
   except Exception as e:
    entries[ticker]={**prior,"ticker":ticker,"cik":cik,"checked_at":now,
        "status":"stale" if prior.get("filings") else "unavailable","error":str(e)[:160]}
