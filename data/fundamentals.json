@@ -1,0 +1,6 @@
+{
+  "updated_at": null,
+  "source": "SEC EDGAR XBRL companyfacts (10-K and 10-Q)",
+  "note": "Collector has not yet populated validated issuer fundamentals. Missing fields are not estimated.",
+  "companies": {}
+}
