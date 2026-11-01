@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-01T00:25:56.615090+00:00",
+  "updated_at": "2026-11-01T06:01:44.285341+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1756,7 +1756,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "GLD": {
       "ticker": "GLD",
@@ -1932,7 +1932,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "GDX": {
       "ticker": "GDX",
@@ -1984,7 +1984,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "CRWV": {
       "ticker": "CRWV",
@@ -2097,7 +2097,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "T": {
       "ticker": "T",
@@ -4479,7 +4479,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "FINV": {
       "ticker": "FINV",
@@ -6022,7 +6022,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "YMAX": {
       "ticker": "YMAX",
@@ -6047,7 +6047,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "ULTY": {
       "ticker": "ULTY",
@@ -6077,11 +6077,20 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-10-29",
+          "checked_at": "2026-11-01",
+          "shares": 27377464,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "CONY": {
       "ticker": "CONY",
@@ -6111,11 +6120,20 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/cony/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-10-29",
+          "checked_at": "2026-11-01",
+          "shares": 19882457,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/cony/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "AIYY": {
       "ticker": "AIYY",
@@ -6140,7 +6158,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "F": {
       "ticker": "F",
@@ -7369,7 +7387,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "BRK-B": {
       "ticker": "BRK-B",
@@ -10079,11 +10097,20 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/msty/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-10-29",
+          "checked_at": "2026-11-01",
+          "shares": 74419959,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/msty/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "TSLY": {
       "ticker": "TSLY",
@@ -10117,7 +10144,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-10-31"
+      "source_updated_at": "2026-11-01"
     },
     "O": {
       "ticker": "O",
@@ -13041,6 +13068,87 @@
           "form": "10-K",
           "accession": "0000858877-26-000132",
           "url": "https://www.sec.gov/Archives/edgar/data/858877/000085887726000132/"
+        }
+      ],
+      "yoy_pct": null
+    },
+    "NOK": {
+      "ticker": "NOK",
+      "name": "Nokia Corp",
+      "cik": "0000924613",
+      "status": "ok",
+      "history": [
+        {
+          "date": "2017-12-31",
+          "filed": "2018-03-22",
+          "shares": 5839404303,
+          "form": "20-F",
+          "accession": "0001558370-18-002320",
+          "url": "https://www.sec.gov/Archives/edgar/data/924613/000155837018002320/"
+        },
+        {
+          "date": "2018-12-31",
+          "filed": "2019-03-21",
+          "shares": 5635945159,
+          "form": "20-F",
+          "accession": "0001558370-19-002343",
+          "url": "https://www.sec.gov/Archives/edgar/data/924613/000155837019002343/"
+        },
+        {
+          "date": "2019-12-31",
+          "filed": "2020-03-05",
+          "shares": 5640536159,
+          "form": "20-F",
+          "accession": "0001558370-20-002053",
+          "url": "https://www.sec.gov/Archives/edgar/data/924613/000155837020002053/"
+        },
+        {
+          "date": "2020-12-31",
+          "filed": "2021-03-04",
+          "shares": 5653886159,
+          "form": "20-F",
+          "accession": "0001558370-21-002363",
+          "url": "https://www.sec.gov/Archives/edgar/data/924613/000155837021002363/"
+        },
+        {
+          "date": "2021-12-31",
+          "filed": "2022-03-03",
+          "shares": 5675461159,
+          "form": "20-F",
+          "accession": "0001558370-22-002758",
+          "url": "https://www.sec.gov/Archives/edgar/data/924613/000155837022002758/"
+        },
+        {
+          "date": "2022-12-31",
+          "filed": "2023-03-02",
+          "shares": 5632297576,
+          "form": "20-F",
+          "accession": "0001558370-23-002653",
+          "url": "https://www.sec.gov/Archives/edgar/data/924613/000155837023002653/"
+        },
+        {
+          "date": "2023-12-31",
+          "filed": "2024-02-29",
+          "shares": 5613496565,
+          "form": "20-F",
+          "accession": "0000924613-24-000013",
+          "url": "https://www.sec.gov/Archives/edgar/data/924613/000092461324000013/"
+        },
+        {
+          "date": "2024-12-31",
+          "filed": "2025-03-13",
+          "shares": 5605850345,
+          "form": "20-F",
+          "accession": "0000924613-25-000008",
+          "url": "https://www.sec.gov/Archives/edgar/data/924613/000092461325000008/"
+        },
+        {
+          "date": "2025-12-31",
+          "filed": "2026-03-05",
+          "shares": 5742239696,
+          "form": "20-F",
+          "accession": "0001628280-26-015034",
+          "url": "https://www.sec.gov/Archives/edgar/data/924613/000162828026015034/"
         }
       ],
       "yoy_pct": null
