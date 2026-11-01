@@ -131,6 +131,7 @@ function shortCalculate(e){
  $('shortNasdaq').href='https://www.nasdaq.com/market-activity/stocks/'+encodeURIComponent(selected.toLowerCase())+'/short-interest';
  const current=$('shortCurrent').value.trim(),previous=$('shortPrevious').value.trim(),date=$('shortDate').value;
  for(const id of ['shortReported','shortChange','shortPct','shortDtc'])write(id,'—');
+ if(dateOK(date)&&date>new Date().toISOString().slice(0,10)){write('shortStatus','Settlement dates cannot be in the future.');return;}
  if(!dateOK(date)||!current||!previous){write('shortStatus','Enter an official settlement date and both short-position counts. No figures are automatically supplied.');return;}
  const a=Number(current),b=Number(previous);
  if(!Number.isSafeInteger(a)||a<0||!Number.isSafeInteger(b)||b<0){
@@ -186,17 +187,18 @@ function valCenter(){
  const hist=(state.prices?.prices?.[ticker]?.history||[]).filter(x=>Array.isArray(x)&&dateOK(x[0])&&valid(x[1])&&x[1]>0)
   .sort((a,b)=>a[0].localeCompare(b[0]));
  const price=hist.at(-1),close=price?.[1]||null;
- const mc=close&&share?.shares?close*share.shares:null;
+ const withinMonths=(d,asof,months)=>dateOK(d)&&dateOK(asof)&&Date.parse(d+'T00:00:00Z')>=Date.parse(asof+'T00:00:00Z')-months*31*86400000;
+ const mc=close&&share?.shares&&withinMonths(share.date,price?.[0],18)?close*share.shares:null;
  const v=k=>valid(m[k]?.value)?m[k].value:null;
  const eps=v('diluted_eps'),revenue=v('revenue'),income=v('net_income'),assets=m.assets,liab=m.liabilities;
  const equity=assets&&liab&&assets.period_end===liab.period_end&&valid(assets.value)&&valid(liab.value)?assets.value-liab.value:null;
- const pe=close&&eps>0?close/eps:null;
- const ps=mc&&revenue>0?mc/revenue:null;
- const pb=mc&&equity>0?mc/equity:null;
+ const pe=close&&eps>0&&withinMonths(m.diluted_eps?.period_end,price?.[0],18)?close/eps:null;
+ const ps=mc&&revenue>0&&withinMonths(m.revenue?.period_end,price?.[0],18)?mc/revenue:null;
+ const pb=mc&&equity>0&&withinMonths(assets?.period_end,price?.[0],18)?mc/equity:null;
  const margin=income!==null&&revenue>0&&m.net_income.period_start===m.revenue.period_start&&
-  m.net_income.period_end===m.revenue.period_end?income/revenue*100:null;
+  m.net_income.period_end===m.revenue.period_end&&withinMonths(m.revenue?.period_end,price?.[0],18)?income/revenue*100:null;
  const ocf=m.operating_cash_flow,capex=m.capex,fcf=ocf&&capex&&ocf.period_end===capex.period_end&&
-  ocf.period_start===capex.period_start?ocf.value-capex.value:null;
+  ocf.period_start===capex.period_start&&withinMonths(ocf.period_end,price?.[0],18)?ocf.value-capex.value:null;
  for(const [id,x] of Object.entries({valMarketCap:compact(mc),valPE:ratio(pe),valPS:ratio(ps),valPB:ratio(pb),valMargin:pct(margin),valFCF:compact(fcf)}))write(id,x);
  const rows=[['Saved stock close',close,price?.[0],state.prices?.prices?.[ticker]?.source?.url],
   ['Shares outstanding',share?.shares,share?.date,share?.url],
@@ -208,7 +210,7 @@ function valCenter(){
  const count=[mc,pe,ps,pb,margin,fcf].filter(valid).length;
  write('valuationStatus',count+' of 6 derived measures available for '+ticker+'. SEC companyfacts checked '+
   (rec?.checked_at||'not yet')+'; saved price '+(price?.[0]||'unavailable')+'; shares '+(share?.date||'unavailable')+
-  '. Different dates, corporate actions and filing conventions may make multiples incomparable.');
+  '. Different dates, corporate actions and filing conventions may make multiples incomparable. Inputs older than roughly 18 months are excluded from computed ratios.');
 }
 function update(){
  if(!selected)return;
