@@ -1,0 +1,40 @@
+name: Refresh SEC fundamentals for research
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - fundamentals_update.py
+      - .github/workflows/fundamentals.yml
+  schedule:
+    - cron: "47 1,7,13,19 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: sharewatch-fundamentals
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check SEC collector syntax
+        run: python -m py_compile fundamentals_update.py update.py
+      - name: Collect a batch of SEC companyfacts
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'ShareWatch tom10015@users.noreply.github.com' }}
+        run: python -u fundamentals_update.py --max-tickers 12
+      - name: Save source-labeled research data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/fundamentals.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update dated SEC issuer fundamentals"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
