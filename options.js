@@ -287,7 +287,17 @@ async function init(){
  });
  activeStocks.sort((a,b)=>a.ticker.localeCompare(b.ticker));
  renderStats();renderList();document.dispatchEvent(new Event('sharewatch:watchlist-loaded'));
- if(activeStocks.length)selectStock(activeStocks.find(x=>valid(x.price))?.ticker||activeStocks[0].ticker);
+ if(activeStocks.length){
+  const params=new URLSearchParams(window.location.search);
+  const requestedTicker=(params.get('ticker')||'').toUpperCase();
+  const requestedStrategy=params.get('strategy')||'';
+  if(Object.prototype.hasOwnProperty.call(STRATEGY_CONFIG,requestedStrategy)){
+   $('strategy').value=requestedStrategy;
+   syncStrategyUI();
+  }
+  const stock=activeStocks.find(x=>x.ticker===requestedTicker);
+  selectStock(stock?.ticker||activeStocks.find(x=>valid(x.price))?.ticker||activeStocks[0].ticker);
+ }
  else $('stockList').innerHTML='<p class="muted small">No active tickers. <a href="./admin.html">Add one from your existing admin portal</a>.</p>';
  if(pricesResult.status==='fulfilled')setStatus('Loaded '+activeStocks.length+' active tickers. Alpaca indicative option data and manual quote entry are available.','good');
  else setStatus('Watchlist loaded. Saved share prices could not be read; use the price override field when analyzing a trade.','error');
