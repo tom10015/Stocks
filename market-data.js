@@ -219,10 +219,17 @@ function valCenter(){
    ['Annual capex','capex']].map(([label,key])=>[label,v(key),m[key]?.period_end,m[key]?.source_url])];
  $('valuationInputs').innerHTML=rows.map(([label,n,date,url])=>'<tr><td>'+safe(label)+'</td><td>'+compact(n)+'</td><td>'+
   safe(date||'Unavailable')+'</td><td>'+ (sourceURL(url)?'<a href="'+safe(url)+'" target="_blank" rel="noopener noreferrer">Source ↗</a>':'—')+'</td></tr>').join('');
+ const recordCik=String(state.shares?.companies?.[ticker]?.cik||rec?.cik||'').replace(/\\D/g,'');
+ $('valuationSource').href=recordCik?'https://www.sec.gov/edgar/browse/?CIK='+encodeURIComponent(recordCik):'https://www.sec.gov/search-filings';
+ const coverageCount=Object.keys(state.fund?.companies||{}).length;
+ const hasMetrics=Object.keys(m).length>0;
+ write('valuationCoverage','Automatic SEC fundamentals: '+coverageCount+' issuers in saved dataset · source file updated '+
+   (state.fund?.updated_at||'not yet')+'. '+(hasMetrics?'These are dated annual/quarterly filing values.':'This stock has no supported filed metrics collected yet.'));
  const count=[mc,pe,ps,pb,margin,fcf].filter(valid).length;
- write('valuationStatus',count+' of 6 derived measures available for '+ticker+'. SEC companyfacts checked '+
-  (rec?.checked_at||'not yet')+'; saved price '+(price?.[0]||'unavailable')+'; shares '+(share?.date||'unavailable')+
-  '. Different dates, corporate actions and filing conventions may make multiples incomparable. Inputs older than roughly 18 months are excluded from computed ratios.');
+ write('valuationStatus',count+' of 6 derived measures available for '+ticker+'. '+
+  (rec?.checked_at?'SEC companyfacts checked '+rec.checked_at+'. ':recordCik?'Automatic SEC collection is pending for this stock. ':'No mapped issuer CIK or supported SEC XBRL data for this security. ')+
+  'Saved price '+(price?.[0]||'unavailable')+'; reported shares '+(share?.date||'unavailable')+
+  '. Report periods can differ; inputs older than roughly 18 months are excluded from computed ratios.');
 }
 function update(){
  if(!selected)return;
