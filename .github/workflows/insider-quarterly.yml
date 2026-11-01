@@ -1,0 +1,40 @@
+name: Import official SEC quarterly insider ownership tables
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - insider_quarterly.py
+      - .github/workflows/insider-quarterly.yml
+  schedule:
+    - cron: "41 12 * * 4"
+permissions:
+  contents: write
+concurrency:
+  group: sharewatch-insider-quarterly
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 27
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate official insider dataset parser
+        run: python -m py_compile insider_quarterly.py
+      - name: Read latest two officially published ownership quarters
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'ShareWatch tom10015@users.noreply.github.com' }}
+        run: python -u insider_quarterly.py --quarters 2
+      - name: Publish verified insider records
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/insiders.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Import SEC quarterly verified Form 4 transactions"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
