@@ -84,6 +84,7 @@ const hedgeRun=wire('hedgeForm',['hedgeCost','hedgeFloor','hedgeCeiling'],()=>{
  const shares=n('hedgeContracts',{min:1,max:1000,integer:true})*100;
  const spot=n('hedgeSpot',{min:.01}),basis=n('hedgeBasis',{min:.01}),putK=n('hedgePutStrike',{min:.01}),putPrem=n('hedgePutPremium'),fees=n('hedgeFees',{max:1e9});
  const callK=collar?n('hedgeCallStrike',{min:.01}):null,callPrem=collar?n('hedgeCallPremium'):0;
+ if(collar&&callK<=putK)throw Error('For a standard collar, the short call strike must exceed the protective put strike.');
  const netCost=(putPrem-callPrem)*shares+fees;
  const hedged=s=>shares*(s-basis+Math.max(putK-s,0)-(collar?Math.max(s-callK,0):0))-netCost;
  const floor=hedged(0);
@@ -132,25 +133,31 @@ function intel(){
 }
 function dividend(){
  const ticker=$('safeTicker').value,price=latestPrice(ticker),rec=state.fundamentals?.companies?.[ticker];
- reset(['safeYield','safeIncome','safeEps','safePayout','safeFcf','safePaid']);
- for(const id of ['safeEpsDate','safeFcfDate','safePaidDate'])set(id,'Not reported');
+ reset(['safeYield','safeIncome','safeSecDps','safeEps','safePayout','safeFcf','safePaid']);
+ for(const id of ['safeSecDpsDate','safeEpsDate','safeFcfDate','safePaidDate'])set(id,'Not reported');
  if(!ticker)return;
+ const dps=metric(rec,'dividend_per_share'),eps=value(rec,'diluted_eps');
+ if(dps){set('safeSecDps',usd(dps.value));set('safeSecDpsDate','SEC fiscal year ended '+dps.period_end+' · historical, not current rate');}
+ if(eps!==null){set('safeEps',usd(eps));set('safeEpsDate','FY ended '+report(rec,'diluted_eps'));}
+ const ocf=metric(rec,'operating_cash_flow'),capex=metric(rec,'capex'),paid=metric(rec,'dividends_paid');
+ if(ocf&&capex&&ocf.period_end===capex.period_end&&ocf.period_start===capex.period_start){
+  set('safeFcf',compact(ocf.value-capex.value));set('safeFcfDate','FY '+ocf.period_end);
+ }
+ if(paid){set('safePaid',compact(paid.value));set('safePaidDate','FY '+paid.period_end+' · '+paid.concept);}
+ const cik=state.shares?.companies?.[ticker]?.cik;
+ $('safeSec').href=cik?'https://data.sec.gov/api/xbrl/companyfacts/CIK'+String(cik).padStart(10,'0')+'.json':'https://www.sec.gov/search-filings';
+ const input=$('safeAnnual').value.trim();
+ if(!input){
+  set('safeStatus','Enter a current annual dividend / share to calculate an indicated yield and modeled income. SEC annual per-share payouts, if reported, are historical and must not be treated as a current rate.');
+  return;
+ }
  try{
   const dividend=n('safeAnnual'),shares=n('safeShares',{integer:true,max:1e9});
   set('safeIncome',usd(dividend*shares));
   if(price)set('safeYield',percent(dividend/price.price*100));
-  const eps=value(rec,'diluted_eps');
-  if(eps!==null){set('safeEps',usd(eps));set('safeEpsDate','FY ended '+report(rec,'diluted_eps'))}
   if(eps>0)set('safePayout',percent(dividend/eps*100));
-  const ocf=metric(rec,'operating_cash_flow'),capex=metric(rec,'capex'),paid=metric(rec,'dividends_paid');
-  if(ocf&&capex&&ocf.period_end===capex.period_end&&ocf.period_start===capex.period_start){
-   set('safeFcf',compact(ocf.value-capex.value));set('safeFcfDate','FY '+ocf.period_end);
-  }
-  if(paid){set('safePaid',compact(paid.value));set('safePaidDate','FY '+paid.period_end);}
-  const cik=state.shares?.companies?.[ticker]?.cik;
-  $('safeSec').href=cik?'https://data.sec.gov/api/xbrl/companyfacts/CIK'+String(cik).padStart(10,'0')+'.json':'https://www.sec.gov/search-filings';
-  set('safeStatus',(price?'Yield based on saved closing price '+price.date+'. ':'Saved price is unavailable; yield cannot be computed. ')+
-      (eps===null?'SEC annual EPS unavailable; payout proxy hidden. ':'Annual dividend is user-entered; payout ratio compares it with historical SEC EPS.'));
+  set('safeStatus',(price?'Yield uses historical closing price '+price.date+'. ':'No saved share price; yield cannot be computed. ')+
+      (eps>0?'Payout proxy uses a manually entered dividend versus historical SEC diluted EPS.':'EPS missing or not positive; payout proxy unavailable.'));
  }catch(err){set('safeStatus',err.message);}
 }
 function daysTo(iso){return Math.round((Date.parse(iso+'T12:00:00Z')-Date.now())/86400000);}
