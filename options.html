@@ -155,7 +155,19 @@
 <div class="table-scroll"><table><thead><tr><th>Date</th><th>Stock</th><th>Event</th><th>Details</th><th>Source</th></tr></thead><tbody id="eventsRows"><tr><td colspan="5">Calendar data has not loaded.</td></tr></tbody></table></div>
 </section>
 <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
- <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability nor premium yield guarantees profitability.</footer>
+ 
+<style>
+.sw-quick-links{margin:30px 0 20px;padding:22px;background:#141e2d;border:1px solid #2c3c52;border-radius:16px;color:#edf3fc}
+.sw-quick-links h2{margin:0 0 6px;font-size:23px;color:#edf3fc}
+.sw-quick-links p{margin:0 0 17px;color:#9bacc2;font-size:14px}
+.sw-quick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px}
+.sw-quick-grid a{display:flex;flex-direction:column;gap:7px;padding:16px;border-radius:12px;border:1px solid #34445c;background:#192538;color:#eaf4ff;text-decoration:none;transition:border-color .15s,background .15s}
+.sw-quick-grid a:hover,.sw-quick-grid a:focus-visible{background:#23354b;border-color:#55d6ab}
+.sw-quick-grid strong{font-size:15px;color:#edf3fc}
+.sw-quick-grid span{font-size:12px;line-height:1.5;color:#a9bad1}
+</style>
+<section class="sw-quick-links" id="quick-links" aria-labelledby="sw-quick-links-title"><h2 id="sw-quick-links-title">Quick Links</h2><p>Explore other parts of ShareWatch.</p><div class="sw-quick-grid"><a href="./index.html"><strong>Share Counter</strong><span>Shares and price history</span></a><a href="./options.html"><strong>Options Analyzer</strong><span>Contracts and trade analysis</span></a><a href="./research.html"><strong>Market Research</strong><span>Income, dividends, valuation and risk</span></a><a href="./market-data.html"><strong>Market Data</strong><span>Charts, insiders and short interest</span></a><a href="./tools.html"><strong>Trading Tools</strong><span>Investment calculators</span></a><a href="./help.html"><strong>Help Guide</strong><span>FAQs and source explanations</span></a><a href="./admin.html"><strong>Admin Portal</strong><span>Manage tracked securities</span></a></div></section>
+<footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability nor premium yield guarantees profitability.</footer>
 </main>
 <script src="./user-favorites.js?v=20261031-research-journal1" defer></script><script src="./inline-account.js?v=20261031-inline-user1" defer></script><script src="./options.js?v=20261101-income-deeplink1" defer></script><script src="./alpaca-options.js?v=20261031-compact-profit1" defer></script><script src="./research-tools.js?v=20261031-research4" defer></script>
 </body>
