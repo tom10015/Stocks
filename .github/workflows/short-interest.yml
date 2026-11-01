@@ -1,0 +1,38 @@
+name: Refresh dated FINRA short-interest reports
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - short_interest_update.py
+      - .github/workflows/short-interest.yml
+  schedule:
+    - cron: "21 13 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: sharewatch-finra-short-interest
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 27
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate short-interest parser
+        run: python -m py_compile short_interest_update.py
+      - name: Retrieve official FINRA reported short positions
+        run: python -u short_interest_update.py
+      - name: Commit dated public short-interest observations
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/short_interest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update FINRA dated short-interest records"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
