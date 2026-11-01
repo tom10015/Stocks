@@ -76,15 +76,13 @@
 </section>
 
 <style>
-.sw-quick-links{margin:30px 0 20px;padding:22px;background:#141e2d;border:1px solid #2c3c52;border-radius:16px;color:#edf3fc}
-.sw-quick-links h2{margin:0 0 6px;font-size:23px;color:#edf3fc}
-.sw-quick-links p{margin:0 0 17px;color:#9bacc2;font-size:14px}
-.sw-quick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px}
-.sw-quick-grid a{display:flex;flex-direction:column;gap:7px;padding:16px;border-radius:12px;border:1px solid #34445c;background:#192538;color:#eaf4ff;text-decoration:none;transition:border-color .15s,background .15s}
-.sw-quick-grid a:hover,.sw-quick-grid a:focus-visible{background:#23354b;border-color:#55d6ab}
-.sw-quick-grid strong{font-size:15px;color:#edf3fc}
-.sw-quick-grid span{font-size:12px;line-height:1.5;color:#a9bad1}
+.sw-quick-links{margin:24px 0 14px;padding:12px 0;border-top:1px solid #2c3c52;color:#a9bad1;font-family:inherit}
+.sw-quick-links .sw-quick-label{display:inline-block;margin:0 12px 8px 0;font-size:13px;font-weight:700;color:#d6e3f3}
+.sw-quick-links .sw-quick-nav{display:inline-flex;align-items:center;flex-wrap:wrap;gap:7px 15px}
+.sw-quick-links .sw-quick-nav a{font-size:13px;line-height:1.5;font-weight:500;color:#a9bad1;text-decoration:none;background:none;border:0;padding:0}
+.sw-quick-links .sw-quick-nav a:hover,.sw-quick-links .sw-quick-nav a:focus-visible{color:#75edc1;text-decoration:underline}
+.sw-quick-links .sw-quick-nav a[aria-current="page"]{color:#75edc1;font-weight:700}
 </style>
-<section class="sw-quick-links" id="quick-links" aria-labelledby="sw-quick-links-title"><h2 id="sw-quick-links-title">Quick Links</h2><p>Explore other parts of ShareWatch.</p><div class="sw-quick-grid"><a href="./index.html"><strong>Share Counter</strong><span>Shares and price history</span></a><a href="./options.html"><strong>Options Analyzer</strong><span>Contracts and trade analysis</span></a><a href="./research.html"><strong>Market Research</strong><span>Income, dividends, valuation and risk</span></a><a href="./market-data.html"><strong>Market Data</strong><span>Charts, insiders and short interest</span></a><a href="./tools.html"><strong>Trading Tools</strong><span>Investment calculators</span></a><a href="./help.html"><strong>Help Guide</strong><span>FAQs and source explanations</span></a><a href="./admin.html"><strong>Admin Portal</strong><span>Manage tracked securities</span></a></div></section>
+<section class="sw-quick-links" id="quick-links" aria-label="Quick Links"><span class="sw-quick-label">Quick Links:</span><nav class="sw-quick-nav" aria-label="Footer navigation"><a href="./index.html">Share Counter</a><a href="./options.html">Options Analyzer</a><a href="./research.html">Market Research</a><a href="./market-data.html" aria-current="page">Market Data</a><a href="./tools.html">Trading Tools</a><a href="./help.html">Help Guide</a><a href="./admin.html">Admin Portal</a></nav></section>
 <footer class="footer">ShareWatch Market Data Lab is educational research, not personalized investment advice or investment recommendations. All charts and ratios are historical or derived. Insider records are conditional on SEC parsing, short interest comes from delayed FINRA settlement-dated reports where available, and source availability may vary. No trade orders are executed. <a href="./help.html">Help Guide ↗</a></footer>
 </main></body></html>
