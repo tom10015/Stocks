@@ -13,7 +13,7 @@ const ratio=x=>valid(x)?x.toFixed(2)+'×':'—';
 const pct=x=>valid(x)?x.toFixed(2)+'%':'—';
 const write=(id,x)=>{$(id).textContent=x};
 const dateOK=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&!Number.isNaN(Date.parse(x+'T12:00:00Z'));
-let state={watch:[],prices:null,bars:null,insiders:null,fund:null,shares:null};
+let state={watch:[],prices:null,bars:null,insiders:null,fund:null,shares:null,shorts:null};
 let selected='';
 const sourceURL=(s)=>/^https:\/\/[^\s"'<>]+$/.test(s||'')?s:null;
 const sample=(list,n)=>list.slice(Math.max(0,list.length-n));
@@ -126,25 +126,37 @@ function filingRows(){
   ' · issuer-index collected '+(rec?.checked_at||'not yet')+(rec?.status==='unavailable'?' · SEC source unavailable':'')+
   '. No classification is inferred from a filing alone.');
 }
-function shortCalculate(e){
- e?.preventDefault();
+function renderShortInterest(){
  $('shortNasdaq').href='https://www.nasdaq.com/market-activity/stocks/'+encodeURIComponent(selected.toLowerCase())+'/short-interest';
- const current=$('shortCurrent').value.trim(),previous=$('shortPrevious').value.trim(),date=$('shortDate').value;
  for(const id of ['shortReported','shortChange','shortPct','shortDtc'])write(id,'—');
- if(dateOK(date)&&date>new Date().toISOString().slice(0,10)){write('shortStatus','Settlement dates cannot be in the future.');return;}
- if(!dateOK(date)||!current||!previous){write('shortStatus','Enter an official settlement date and both short-position counts. No figures are automatically supplied.');return;}
- const a=Number(current),b=Number(previous);
- if(!Number.isSafeInteger(a)||a<0||!Number.isSafeInteger(b)||b<0){
-  write('shortStatus','Short shares must be nonnegative whole numbers taken from an official report.');return;
+ write('shortDateLabel','No verified settlement date');
+ const record=state.shorts?.tickers?.[selected];
+ const reports=(record?.reports||[]).filter(x=>dateOK(x.settlement_date)&&Number.isSafeInteger(x.shares_short)&&x.shares_short>=0)
+  .sort((a,b)=>b.settlement_date.localeCompare(a.settlement_date));
+ const current=reports[0];
+ if(!current){
+  $('shortHistory').innerHTML='<tr><td colspan="5">No automatically verified short-interest reports have been collected for this stock. The FINRA provider may be unavailable, or this security may not have coverage.</td></tr>';
+  write('shortStatus','Automatic FINRA collector: '+(state.shorts?.updated_at?'last dataset update '+state.shorts.updated_at:'first successful collection not yet confirmed')+
+   '. '+(state.shorts?.last_error?'Last error: '+state.shorts.last_error:'')+
+   ' Missing data is not replaced with short-sale volume or fabricated figures.');
+  return;
  }
- const {bars}=getBarData(selected),prev=sample(bars,20);
- const avg=prev.length===20?prev.reduce((s,x)=>s+x[5],0)/20:null;
- write('shortReported',num(a));write('shortChange',(a>=b?'+':'')+num(a-b));
- write('shortPct',b>0?pct((a-b)/b*100):'—');
- write('shortDtc',avg>0?(a/avg).toFixed(2)+' days':'—');
- write('shortStatus','Calculated from manually supplied, unverified short-interest numbers with settlement date '+date+
-  '. '+(avg>0?'Days to cover uses saved vendor volume and is only an approximation.':'Volume history unavailable for days-to-cover estimate.')+
-  ' No short-interest feed was downloaded or implied.');
+ const previous=Number.isSafeInteger(current.previous_shares_short)?current.previous_shares_short:reports[1]?.shares_short;
+ const delta=Number.isSafeInteger(previous)?current.shares_short-previous:null;
+ const dpc=previous>0?delta/previous*100:null;
+ write('shortReported',num(current.shares_short));
+ write('shortChange',delta===null?'—':(delta>0?'+':'')+num(delta));
+ write('shortPct',pct(dpc));
+ write('shortDateLabel','FINRA settlement '+current.settlement_date);
+ write('shortDtc',valid(current.days_to_cover_reported)?current.days_to_cover_reported.toFixed(2)+' days':'—');
+ $('shortHistory').innerHTML=reports.slice(0,12).map(x=>{
+  const prior=Number.isSafeInteger(x.previous_shares_short)?x.previous_shares_short:null;
+  return '<tr><td>'+safe(x.settlement_date)+'</td><td>'+num(x.shares_short)+'</td><td>'+num(prior)+'</td><td>'+
+   (prior===null?'—':(x.shares_short>=prior?'+':'')+num(x.shares_short-prior))+'</td><td>'+
+   (valid(x.days_to_cover_reported)?x.days_to_cover_reported.toFixed(2)+' days':'—')+'</td></tr>';
+ }).join('');
+ write('shortStatus',reports.length+' settlement-dated FINRA observations saved for '+selected+'. Last settlement '+current.settlement_date+
+  ' · dataset checked '+(record?.checked_at||'unknown')+'. These are periodic positions, not live shorts or daily short-sale volume.');
 }
 function shareIncrease(){
  const h=(state.shares?.companies?.[selected]?.history||[]).filter(x=>dateOK(x.date)&&valid(x.shares)&&x.shares>0&&x.form!=='Snapshot')
@@ -214,15 +226,13 @@ function valCenter(){
 }
 function update(){
  if(!selected)return;
- drawChart();filingRows();signalCards();valCenter();
- // Discard manual short-interest numbers on stock changes to prevent silently attributing them to another stock.
- $('shortCurrent').value='';$('shortPrevious').value='';$('shortDate').value='';
- shortCalculate();
+ drawChart();filingRows();renderShortInterest();signalCards();valCenter();
+
 }
 $('stockTicker').addEventListener('change',()=>{selected=$('stockTicker').value;update();});
 $('chartRange').addEventListener('change',drawChart);
 $('chartStyle').addEventListener('change',drawChart);
-$('shortForm').addEventListener('submit',shortCalculate);
+
 async function json(path){
  const response=await fetch('./data/'+path+'?v='+Date.now(),{cache:'no-store'});
  if(!response.ok)throw Error(path+' HTTP '+response.status);
@@ -232,10 +242,10 @@ async function load(){
  const [w,...others]=await Promise.allSettled([
   fetch(SB+'/rest/v1/stocks_watchlist?select=ticker,name,security_type&active=eq.true&order=ticker.asc&limit=1000',
    {headers:{apikey:PUB,Accept:'application/json'}}).then(r=>{if(!r.ok)throw Error('Watchlist unavailable');return r.json();}),
-  json('ohlcv.json'),json('insiders.json'),json('fundamentals.json'),json('prices.json'),json('shares.json')
+  json('ohlcv.json'),json('insiders.json'),json('fundamentals.json'),json('prices.json'),json('shares.json'),json('short_interest.json')
  ]);
- const [bars,insiders,fund,prices,shares]=others.map(r=>r.status==='fulfilled'?r.value:null);
- state={watch:[],bars,insiders,fund,prices,shares};
+ const [bars,insiders,fund,prices,shares,shorts]=others.map(r=>r.status==='fulfilled'?r.value:null);
+ state={watch:[],bars,insiders,fund,prices,shares,shorts};
  if(w.status==='fulfilled'&&Array.isArray(w.value))state.watch=w.value.filter(x=>/^[A-Z0-9][A-Z0-9.^-]{0,15}$/.test(x.ticker||''));
  else{
   // Read-only fallback when Supabase temporarily unavailable: preserve saved ticker research.
