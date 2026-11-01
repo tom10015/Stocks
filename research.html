@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="ShareWatch income opportunities, wheel and roll planner, SEC fundamentals, dividend research, and hedging tools.">
 <title>Market Research & Income · ShareWatch</title>
 <link rel="stylesheet" href="./resources.css?v=20261101-research1"><link rel="stylesheet" href="./research.css?v=20261101-research1">
-<script defer src="./market-research.js?v=20261101-research1"></script></head><body>
+<script defer src="./market-research.js?v=20261101-research2"></script></head><body>
 <header class="site-header"><nav class="nav" aria-label="ShareWatch navigation"><a class="brand" href="./index.html">◈ Share<span>Watch</span></a><div class="nav-links">
 <a href="./index.html">Share Counter</a><a href="./options.html">Options Analyzer</a><a href="./research.html" class="active" aria-current="page">Market Research</a><a href="./tools.html">Trading Tools</a><a href="./help.html">Help Guide</a><a href="./admin.html">Admin</a></div></nav></header>
 <main><section class="hero">
@@ -51,7 +51,7 @@
 <div class="measure"><span>Effective basis if put assigned</span><strong id="wheelBasis">—</strong></div>
 <div class="measure"><span>Option + share P/L if called away</span><strong id="wheelGain">—</strong></div>
 <div class="measure"><span>P/L if shares fall to $0 after assignment</span><strong id="wheelWorst">—</strong></div>
-<div class="measure"><span>Put expires unassigned: put credit before call</span><strong id="wheelPutOnly">—</strong></div>
+<div class="measure"><span>Put expires unassigned: gross put credit</span><strong id="wheelPutOnly">—</strong></div>
 </div><p id="wheelStatus" class="status-line" role="status"></p>
 <p class="section-note warn">The second leg is <strong>conditional</strong>: a covered call requires already owning 100 deliverable shares per contract. If the sold put expires without assignment, the modeled call is not automatically available. Premiums are manually entered, not predicted.</p></div>
 <div><h3>Rolling an existing short option</h3>
@@ -96,12 +96,13 @@
 <div class="tool-columns">
 <div><form id="dividendForm" class="research-grid" novalidate>
 <div class="field"><label for="safeTicker">Stock</label><select id="safeTicker"><option value="">Loading tracked stocks…</option></select></div>
-<div class="field"><label for="safeAnnual">Assumed annual dividend / share ($)</label><input type="number" id="safeAnnual" min="0" step=".0001" value="2.00"><small>Manually entered; not a verified current declaration</small></div>
+<div class="field"><label for="safeAnnual">Assumed annual dividend / share ($)</label><input type="number" id="safeAnnual" min="0" step=".0001" placeholder="Enter verified current annual rate"><small>Manually entered; not a verified current declaration</small></div>
 <div class="field"><label for="safeShares">Shares owned / modeled</label><input type="number" id="safeShares" min="0" step="1" value="100"></div>
 </form>
 <div class="measure-cards">
 <div class="measure"><span>Indicated yield (vs saved close)</span><strong id="safeYield">—</strong></div>
 <div class="measure"><span>Modeled annual cash income</span><strong id="safeIncome">—</strong></div>
+<div class="measure"><span>Historical annual SEC dividend / share</span><strong id="safeSecDps">—</strong><small id="safeSecDpsDate">If disclosed</small></div>
 <div class="measure"><span>Annual SEC diluted EPS</span><strong id="safeEps">—</strong><small id="safeEpsDate">Not verified yet</small></div>
 <div class="measure"><span>Dividend / annual EPS (proxy)</span><strong id="safePayout">—</strong></div>
 <div class="measure"><span>Reported annual free cash flow*</span><strong id="safeFcf">—</strong><small id="safeFcfDate">Operating cash flow − capex</small></div>
