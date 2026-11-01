@@ -109,6 +109,7 @@ function filingRows(){
  const rec=state.insiders?.tickers?.[selected],filings=rec?.filings||[];
  const cik=String(state.shares?.companies?.[selected]?.cik||rec?.cik||'').replace(/\D/g,'');
  $('insiderOfficial').href=cik?'https://www.sec.gov/edgar/browse/?CIK='+encodeURIComponent(cik)+'&owner=include':'https://www.sec.gov/search-filings';
+ $('insiderNasdaq').href='https://www.nasdaq.com/market-activity/stocks/'+encodeURIComponent(selected.toLowerCase())+'/insider-activity';
  const verified=filings.flatMap(f=>(f.verified_transactions||[]).map(t=>({...t,filed:f.filed,filing:f.source_url,form:f.form})));
  const notVerified=filings.filter(f=>!f.verified_transactions?.length);
  const rows=[
@@ -127,6 +128,7 @@ function filingRows(){
 }
 function shortCalculate(e){
  e?.preventDefault();
+ $('shortNasdaq').href='https://www.nasdaq.com/market-activity/stocks/'+encodeURIComponent(selected.toLowerCase())+'/short-interest';
  const current=$('shortCurrent').value.trim(),previous=$('shortPrevious').value.trim(),date=$('shortDate').value;
  for(const id of ['shortReported','shortChange','shortPct','shortDtc'])write(id,'—');
  if(!dateOK(date)||!current||!previous){write('shortStatus','Enter an official settlement date and both short-position counts. No figures are automatically supplied.');return;}
