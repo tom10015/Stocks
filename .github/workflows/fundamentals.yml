@@ -27,7 +27,12 @@ jobs:
       - name: Collect a batch of SEC companyfacts
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'ShareWatch tom10015@users.noreply.github.com' }}
-        run: python -u fundamentals_update.py --max-tickers 80
+        run: |
+          if [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            python -u fundamentals_update.py --max-tickers 80 --force
+          else
+            python -u fundamentals_update.py --max-tickers 80
+          fi
       - name: Save source-labeled research data
         run: |
           git config user.name "github-actions[bot]"
