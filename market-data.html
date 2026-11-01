@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Market Data Lab · ShareWatch</title><meta name="description" content="Advanced stock charts, SEC Form 4 insider filings, short interest research, price-volume signals and financial valuation metrics.">
 <link rel="stylesheet" href="./resources.css?v=20261101-market1"><link rel="stylesheet" href="./market-data.css?v=20261101-market1">
-<script defer src="./market-data.js?v=20261101-market1"></script></head><body>
+<script defer src="./market-data.js?v=20261101-market2"></script></head><body>
 <header class="site-header"><nav class="nav" aria-label="ShareWatch navigation"><a class="brand" href="./index.html">◈ Share<span>Watch</span></a><div class="nav-links">
 <a href="./index.html">Share Counter</a><a href="./options.html">Options</a><a href="./research.html">Research & Income</a><a href="./market-data.html" class="active" aria-current="page">Market Data</a><a href="./tools.html">Tools</a><a href="./help.html">Help</a><a href="./admin.html">Admin</a></div></nav></header>
 <main>
@@ -40,7 +40,7 @@
 <div class="panel-head"><div><h2>Insider Buying & Selling</h2><p>Recent SEC Form 4 filings for the selected company. A purchase or sale is shown only when the non-derivative transaction code was verified in ownership XML.</p></div><span class="pill">Official SEC filing references</span></div>
 <p class="status-line" id="insiderStatus">Waiting for SEC data…</p>
 <div class="table-scroll"><table class="data-table"><thead><tr><th>Filed</th><th>Insider</th><th>Transaction</th><th>Shares</th><th>Price / share</th><th>Source</th></tr></thead><tbody id="insiderRows"><tr><td colspan="6">Select a company.</td></tr></tbody></table></div>
-<div class="flex-actions"><a id="insiderOfficial" href="https://www.sec.gov/search-filings" target="_blank" rel="noopener noreferrer">Open SEC company filings ↗</a><a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/form-4" target="_blank" rel="noopener noreferrer">About Form 4 ↗</a></div>
+<div class="flex-actions"><a id="insiderOfficial" href="https://www.sec.gov/search-filings" target="_blank" rel="noopener noreferrer">Open SEC company filings ↗</a><a id="insiderNasdaq" href="https://www.nasdaq.com/market-activity/quotes/insider-activity" target="_blank" rel="noopener noreferrer">Nasdaq insider activity (external) ↗</a><a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/form-4" target="_blank" rel="noopener noreferrer">About Form 4 ↗</a></div>
 <p class="sourced-note">Forms 4/4-A can include open-market or private purchases, sales, stock awards, transfers and option exercises. This display does not treat all filings as buying or selling. Unclassified entries need you to open their SEC source; issuer-submission coverage is not an exhaustive insider trade feed.</p>
 </section>
 <section class="panel" id="short-interest">
@@ -59,7 +59,7 @@
 <div class="fact"><span>Approx. days to cover*</span><strong id="shortDtc">—</strong></div></div>
 <p class="sourced-note">*Days to cover is calculated from entered short shares divided by the recent 20-session average vendor-reported trading volume, if available. This is a mixed-source estimate, not the exchange’s published days-to-cover value. Results are not stored or automatically verified.</p>
 </div><div class="note"><strong>Official reporting sources</strong><p>For U.S. exchange-listed stocks, consult the listing exchange’s published short-interest report. FINRA provides a public short-interest portal for OTC securities and explains why daily short-sale volume must not be called short interest.</p>
-<p><a href="https://www.nasdaq.com/market-activity/stocks" target="_blank" rel="noopener noreferrer">Nasdaq stock reports ↗</a></p>
+<p><a id="shortNasdaq" href="https://www.nasdaq.com/market-activity/quotes/short-interest" target="_blank" rel="noopener noreferrer">Selected stock: Nasdaq short interest ↗</a></p>
 <p><a href="https://www.nasdaq.com/products/data/equities/short-interest" target="_blank" rel="noopener noreferrer">Nasdaq short-interest data ↗</a></p>
 <p><a href="https://otce.finra.org/otce/equityShortInterest" target="_blank" rel="noopener noreferrer">FINRA OTC equity short interest ↗</a></p>
 <p><a href="https://www.finra.org/sites/default/files/2019-07/information-notice-051019.pdf" target="_blank" rel="noopener noreferrer">FINRA: short-sale volume is not short interest ↗</a></p>
