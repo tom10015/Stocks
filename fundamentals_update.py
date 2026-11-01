@@ -8,48 +8,83 @@ from update import load_watchlist,fetch
 ROOT=Path(__file__).resolve().parent
 OUT=ROOT/'data'/'fundamentals.json'
 SHARES=ROOT/'data'/'shares.json'
+# Every concept is an explicit SEC-standard taxonomy and unit.
+# Do not substitute non-USD monetary units for USD-denominated market prices.
 TAGS={
- 'revenue':('RevenueFromContractWithCustomerExcludingAssessedTax','RevenueFromContractWithCustomerIncludingAssessedTax','Revenues','SalesRevenueNet','SalesRevenueGoodsNet'),
- 'net_income':('NetIncomeLoss',),
- 'operating_cash_flow':('NetCashProvidedByUsedInOperatingActivities',),
- 'capex':('PaymentsToAcquirePropertyPlantAndEquipment','PaymentsToAcquireProductiveAssets'),
- 'dividend_per_share':('CommonStockDividendsPerShareDeclared','CommonStockDividendsPerShareCashPaid'),
- 'diluted_eps':('EarningsPerShareDiluted',),
- 'cash':('CashAndCashEquivalentsAtCarryingValue',),
- 'assets':('Assets',),
- 'liabilities':('Liabilities',),
- 'long_term_debt':('LongTermDebtNoncurrent','LongTermDebt'),
- 'dividends_paid':('PaymentsOfDividendsCommonStock','PaymentsOfDividends'), # last excluded in selection below
+ 'revenue':(('us-gaap',('RevenueFromContractWithCustomerExcludingAssessedTax',
+    'RevenueFromContractWithCustomerIncludingAssessedTax','Revenues','SalesRevenueNet',
+    'SalesRevenueGoodsNet','RevenuesNetOfInterestExpense','InterestAndDividendIncomeOperating')),
+   ('ifrs-full',('Revenue','RevenueFromContractsWithCustomers'))),
+ 'net_income':(('us-gaap',('NetIncomeLoss','ProfitLoss')),
+   ('ifrs-full',('ProfitLossAttributableToOwnersOfParent','ProfitLoss'))),
+ 'operating_cash_flow':(('us-gaap',('NetCashProvidedByUsedInOperatingActivities',
+     'NetCashProvidedByUsedInOperatingActivitiesContinuingOperations')),
+   ('ifrs-full',('CashFlowsFromUsedInOperatingActivities',))),
+ 'capex':(('us-gaap',('PaymentsToAcquirePropertyPlantAndEquipment','PaymentsToAcquireProductiveAssets',
+     'PaymentsToAcquireFixedAssets')),
+   ('ifrs-full',('PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities',))),
+ 'dividend_per_share':(('us-gaap',('CommonStockDividendsPerShareDeclared','CommonStockDividendsPerShareCashPaid')),
+   ('ifrs-full',('DividendsRecognisedAsDistributionsToOwnersPerShare',))),
+ 'diluted_eps':(('us-gaap',('EarningsPerShareDiluted',)),
+   ('ifrs-full',('DilutedEarningsLossPerShare',))),
+ 'basic_eps':(('us-gaap',('EarningsPerShareBasic',)),
+   ('ifrs-full',('BasicEarningsLossPerShare',))),
+ 'cash':(('us-gaap',('CashAndCashEquivalentsAtCarryingValue','CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents')),
+   ('ifrs-full',('CashAndCashEquivalents',))),
+ 'assets':(('us-gaap',('Assets',)),('ifrs-full',('Assets',))),
+ 'liabilities':(('us-gaap',('Liabilities',)),('ifrs-full',('Liabilities',))),
+ 'equity':(('us-gaap',('StockholdersEquity',)),
+   ('ifrs-full',('EquityAttributableToOwnersOfParent',))),
+ 'long_term_debt':(('us-gaap',('LongTermDebtNoncurrent','LongTermDebt')),
+   ('ifrs-full',('NoncurrentBorrowings','NoncurrentFinancialLiabilities',))),
+ 'dividends_paid':(('us-gaap',('PaymentsOfDividendsCommonStock','PaymentsOfDividends')),
+   ('ifrs-full',('DividendsPaid',))),
+ 'shares_outstanding':(('us-gaap',('CommonStockSharesOutstanding',)),
+   ('dei',('EntityCommonStockSharesOutstanding',))),
 }
-ANNUAL={'revenue','net_income','operating_cash_flow','capex','dividend_per_share','diluted_eps','dividends_paid'}
+ANNUAL={'revenue','net_income','operating_cash_flow','capex','dividend_per_share',
+        'diluted_eps','basic_eps','dividends_paid'}
+POSITIVE={'capex','dividend_per_share','dividends_paid','cash','assets','liabilities',
+          'long_term_debt','shares_outstanding'}
+PER_SHARE={'dividend_per_share','diluted_eps','basic_eps'}
+
 def is_annual(x):
  if x.get('form') not in ('10-K','20-F','40-F') or not x.get('start'):return False
  try:duration=(dt.date.fromisoformat(x['end'])-dt.date.fromisoformat(x['start'])).days
  except (ValueError,TypeError,KeyError):return False
  return 320<=duration<=410
-def choose(facts,names,metric):
- units=('USD/shares',) if metric in ('dividend_per_share','diluted_eps') else ('USD',)
+
+def choose(facts,definitions,metric):
+ units=('shares',) if metric=='shares_outstanding' else ('USD/shares',) if metric in PER_SHARE else ('USD',)
  records=[]
- for tag in names:
-  block=facts.get('us-gaap',{}).get(tag,{})
-  for unit in units:
-   for x in block.get('units',{}).get(unit,[]):
-    if x.get('form') not in ('10-K','10-Q','20-F','40-F'):continue
-    if metric in ANNUAL and not is_annual(x):continue
-    if metric not in ANNUAL and x.get('start'):continue
-    v=x.get('val')
-    if not isinstance(v,(int,float)) or not -1e15<v<1e15:continue
-    if metric in ('capex','dividend_per_share','dividends_paid','cash','assets','liabilities','long_term_debt') and v<0:continue
-    if metric=='dividends_paid' and tag=='PaymentsForRepurchaseOfCommonStock':continue
-    if not x.get('end') or not x.get('filed'):continue
-    records.append((str(x['end']),str(x['filed']),tag,x))
+ today=dt.datetime.now(dt.timezone.utc).date()
+ for taxonomy,tags in definitions:
+  for tag in tags:
+   block=facts.get(taxonomy,{}).get(tag,{})
+   for unit in units:
+    for x in block.get('units',{}).get(unit,[]):
+     if x.get('form') not in ('10-K','10-Q','20-F','40-F'):continue
+     if metric in ANNUAL and not is_annual(x):continue
+     if metric not in ANNUAL and x.get('start'):continue
+     v=x.get('val')
+     if isinstance(v,bool) or not isinstance(v,(int,float)) or not -1e15<v<1e15:continue
+     if metric in POSITIVE and v<0:continue
+     if metric=='shares_outstanding' and v<=0:continue
+     if not x.get('end') or not x.get('filed'):continue
+     try:
+      end=dt.date.fromisoformat(x['end'])
+      filed=dt.date.fromisoformat(x['filed'])
+      if end>today or filed>today:continue
+     except (TypeError,ValueError):continue
+     records.append((end,filed,taxonomy,tag,unit,x))
  if not records:return None
- # Latest underlying fiscal period, latest filing revision for that period.
- records.sort(key=lambda row:(row[0],row[1]),reverse=True)
- end,filed,tag,x=records[0]
- return {'value':x['val'],'period_end':end,'filed':filed,'form':x['form'],'concept':tag,
-         'period_start':x.get('start'),
-        }
+ # Prefer the newest fiscal date and latest filed correction for that period;
+ # standard GAAP taxonomy is preferred when dates are identical.
+ records.sort(key=lambda r:(r[0],r[1],1 if r[2]=='us-gaap' else 0),reverse=True)
+ end,filed,taxonomy,tag,unit,x=records[0]
+ return {'value':x['val'],'period_end':end.isoformat(),'filed':filed.isoformat(),
+         'form':x['form'],'taxonomy':taxonomy,'concept':tag,'unit':unit,
+         'period_start':x.get('start')}
 def main():
  parser=argparse.ArgumentParser()
  parser.add_argument('--max-tickers',type=int,default=80)
@@ -75,7 +110,7 @@ def main():
   if not args.force and old.get('checked_at'):
    try:
     checked=dt.datetime.fromisoformat(old['checked_at'].replace('Z','+00:00'))
-    if now-checked<dt.timedelta(hours=22):continue
+    if now-checked<dt.timedelta(hours=22) and not args.force:continue
    except (ValueError,TypeError):pass
   cik=str(shares[ticker]['cik']).zfill(10)
   try:
