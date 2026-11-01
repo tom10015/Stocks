@@ -49,6 +49,56 @@ function indicators(bars){
  return {close:last?.[4]??null,sma20:sma(close,20),sma50:sma(close,50),rsi:rsi(close),volume:last?.[5]??null,
   rvol:avgVolume&&last?last[5]/avgVolume:null,avgVolume};
 }
+/* When daily candles are still pending, use existing historical close observations.
+   Their sampling can be weekly/irregular; never invent OHLC, volume, RSI or daily bars. */
+function drawCloseFallback(record,svg){
+ const source=state.prices?.prices?.[selected];
+ const values=(source?.history||[]).filter(x=>Array.isArray(x)&&dateOK(x[0])&&valid(x[1])&&x[1]>0)
+  .sort((a,b)=>a[0].localeCompare(b[0]));
+ const unique=[...new Map(values.map(x=>[x[0],x])).values()];
+ for(const id of ['chartSma20','chartSma50','chartRsi','chartRvol','chartVolume'])write(id,'—');
+ if(unique.length<2){
+  write('chartLast','—');
+  write('chartLastDate','No confirmed historical closing prices');
+  write('chartStatus','No OHLCV or historical closing-price series saved for '+selected+
+   '. The next automatic full-watchlist collector will check this stock. '+(record?.error?'Last OHLCV error: '+record.error:''));
+  svg.innerHTML='<text x="38" y="70" fill="#adbdcf">No verified price history available for this ticker yet.</text>';
+  $('chartSource').textContent='No chart has been fabricated from missing data. Check the source or revisit after the next collector run.';
+  return;
+ }
+ const data=sample(unique,Number($('chartRange').value)||60);
+ const w=960,left=76,right=24,top=27,bottom=345,loRaw=Math.min(...data.map(x=>x[1])),hiRaw=Math.max(...data.map(x=>x[1]));
+ const pad=Math.max((hiRaw-loRaw)*.1,hiRaw*.008,.001),low=Math.max(0,loRaw-pad),high=hiRaw+pad;
+ const minTime=Date.parse(data[0][0]+'T12:00:00Z'),maxTime=Date.parse(data.at(-1)[0]+'T12:00:00Z');
+ const px=d=>left+(Date.parse(d+'T12:00:00Z')-minTime)/Math.max(1,maxTime-minTime)*(w-right-left);
+ const py=v=>top+(high-v)/(high-low)*(bottom-top);
+ const grid=Array.from({length:5},(_,i)=>{
+  const val=low+(high-low)*i/4,y=py(val).toFixed(1);
+  return '<line class="gridline" x1="'+left+'" x2="'+(w-right)+'" y1="'+y+'" y2="'+y+'"/>'+
+   '<text class="axis" text-anchor="end" x="'+(left-7)+'" y="'+(Number(y)+3)+'">'+cash(val)+'</text>';
+ }).join('');
+ const pts=data.map(x=>px(x[0]).toFixed(1)+','+py(x[1]).toFixed(1)).join(' ');
+ const dots=data.map(x=>'<circle cx="'+px(x[0]).toFixed(1)+'" cy="'+py(x[1]).toFixed(1)+
+   '" r="2" fill="#81d4c1"><title>'+safe(x[0])+' close '+cash(x[1])+'</title></circle>').join('');
+ const ticks=[data[0][0],data[Math.floor(data.length/2)][0],data.at(-1)[0]]
+  .map(d=>'<text class="axis" x="'+px(d).toFixed(1)+'" y="385" text-anchor="middle">'+safe(d)+'</text>').join('');
+ svg.innerHTML=grid+'<polyline fill="none" stroke="#81d4c1" stroke-width="2.7" stroke-linejoin="round" points="'+pts+'"/>'+dots+ticks+
+  '<text class="axis" x="70" y="407">Saved historical closes · irregularly sampled · NOT daily candles</text>';
+ write('chartLast',cash(unique.at(-1)[1]));
+ write('chartLastDate','Saved close '+unique.at(-1)[0]+' · not a live quote');
+ write('chartStatus','Showing '+data.length+' actual saved closing-price observations for '+selected+
+  ' ('+data[0][0]+' – '+data.at(-1)[0]+'). Daily candlesticks, volume, and technical indicators are pending source OHLCV collection.');
+ $('chartSource').textContent='';
+ $('chartSource').appendChild(document.createTextNode('Fallback: '+(source?.source?.provider||'Historical close source')+
+  ' closing prices; irregular sampling (often weekly historically). NOT OHLCV; no implied volume, SMA or RSI. '));
+ const url=sourceURL(source?.source?.url);
+ if(url){const a=document.createElement('a');a.href=url;a.rel='noopener noreferrer';a.target='_blank';a.textContent='Historical close source ↗';$('chartSource').appendChild(a);}
+}
+function showChartCoverage(){
+ const ready=state.watch.filter(x=>getBarData(x.ticker).bars.length>=2).length;
+ const total=state.watch.length;
+ write('chartCoverage',ready+' / '+total+' tracked tickers have verified daily candlesticks · other tickers show real historical close lines until collected.');
+}
 function drawChart(){
  const {record,bars}=getBarData(selected),summary=indicators(bars),svg=$('candleChart');
  for(const [id,value] of Object.entries({chartLast:cash(summary.close),chartSma20:cash(summary.sma20),chartSma50:cash(summary.sma50),
@@ -56,9 +106,7 @@ function drawChart(){
   chartVolume:compact(summary.volume)}))write(id,value);
  write('chartLastDate',bars.length?'Close '+bars.at(-1)[0]:'No saved daily bars');
  if(bars.length<2){
-  write('chartStatus',record?.status==='unavailable'?'OHLCV source unavailable: '+(record.error||'No valid data'):'No validated OHLCV bars saved for this stock. The collection workflow runs in batches.');
-  write('chartSource','Charts only display recorded vendor OHLCV. Existing weekly closing-price history cannot be used to invent daily candles or volume.');
-  svg.innerHTML='<text x="40" y="75" fill="#adbdcf">No source-verified daily candles available yet.</text>';
+  drawCloseFallback(record,svg);
   return;
  }
  const sessions=Number($('chartRange').value)||60;
@@ -323,6 +371,17 @@ function update(){
 $('stockTicker').addEventListener('change',()=>{selected=$('stockTicker').value;update();});
 $('chartRange').addEventListener('change',drawChart);
 $('chartStyle').addEventListener('change',drawChart);
+$('chartReload').addEventListener('click',async()=>{
+ const button=$('chartReload');
+ if(button.disabled)return;
+ button.disabled=true;button.textContent='Reloading saved bars…';
+ try{
+  state.bars=await json('ohlcv.json');
+  showChartCoverage();
+  update();
+ }catch(err){write('chartStatus','Could not reload saved OHLCV: '+err.message+'. Existing chart data is preserved.');}
+ finally{button.disabled=false;button.textContent='Reload chart data';}
+});
 
 async function json(path){
  const response=await fetch('./data/'+path+'?v='+Date.now(),{cache:'no-store'});
@@ -346,7 +405,11 @@ async function load(){
  if(!state.watch.length){write('chartStatus','No saved or active tickers available.');return;}
  $('stockTicker').innerHTML=state.watch.map(x=>'<option value="'+safe(x.ticker)+'">'+safe(x.ticker)+' · '+safe(x.name||x.ticker)+'</option>').join('');
  const urlParam=new URLSearchParams(location.search).get('ticker')?.toUpperCase();
- selected=state.watch.find(x=>x.ticker===urlParam)?.ticker||state.watch.find(x=>getBarData(x.ticker).bars.length)?.ticker||state.watch[0].ticker;
+ selected=state.watch.find(x=>x.ticker===urlParam)?.ticker||
+  state.watch.find(x=>getBarData(x.ticker).bars.length>=2)?.ticker||
+  state.watch.find(x=>state.prices?.prices?.[x.ticker]?.history?.length>=2)?.ticker||
+  state.watch[0].ticker;
+ showChartCoverage();
  $('stockTicker').value=selected;update();
 }
 load().catch(e=>{write('chartStatus','Data could not be loaded: '+e.message);});
