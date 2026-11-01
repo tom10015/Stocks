@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Market Data Lab · ShareWatch</title><meta name="description" content="Advanced stock charts, SEC Form 4 insider filings, short interest research, price-volume signals and financial valuation metrics.">
+<link rel="stylesheet" href="./resources.css?v=20261101-market1"><link rel="stylesheet" href="./market-data.css?v=20261101-market1">
+<script defer src="./market-data.js?v=20261101-market1"></script></head><body>
+<header class="site-header"><nav class="nav" aria-label="ShareWatch navigation"><a class="brand" href="./index.html">◈ Share<span>Watch</span></a><div class="nav-links">
+<a href="./index.html">Share Counter</a><a href="./options.html">Options</a><a href="./research.html">Research & Income</a><a href="./market-data.html" class="active" aria-current="page">Market Data</a><a href="./tools.html">Tools</a><a href="./help.html">Help</a><a href="./admin.html">Admin</a></div></nav></header>
+<main>
+<section class="hero"><div class="kicker">ShareWatch · Data & Signals Lab</div><h1>Look beyond the last price.</h1>
+<p>Explore actual historical candles, trading-volume indicators, SEC insider filings, reported short interest, quantitative watchlist signals and valuation ratios based on disclosed financial statements.</p>
+<div class="hero-links"><a href="#advanced-charts">Charts ↓</a><a href="#insiders">Insiders ↓</a><a href="#short-interest">Short interest ↓</a><a href="#signals">Signals ↓</a><a href="#valuation">Valuation ↓</a></div>
+<p class="small">Historical OHLCV is third-party vendor data, not a real-time licensed exchange feed. SEC filings are historical disclosures. Short-interest user inputs are not independently verified. Signals and valuations are computed estimates, not trade recommendations.</p>
+</section>
+<nav class="tool-grid" aria-label="Market data tools">
+<a class="tile" href="#advanced-charts"><span class="tile-mark">▥</span><strong>Advanced Charts</strong><span class="muted">Candles, volume, SMA, RSI</span></a>
+<a class="tile" href="#insiders"><span class="tile-mark">⌁</span><strong>Insider Activity</strong><span class="muted">SEC Form 4 transactions</span></a>
+<a class="tile" href="#short-interest"><span class="tile-mark">◷</span><strong>Short Interest</strong><span class="muted">Official data research and manual comparison</span></a>
+<a class="tile" href="#signals"><span class="tile-mark">⚑</span><strong>Stock Signals</strong><span class="muted">Volume spikes and price trends</span></a>
+<a class="tile" href="#valuation"><span class="tile-mark">▤</span><strong>Valuation Center</strong><span class="muted">P/E, P/S, P/B, market cap</span></a>
+</nav>
+<section class="panel" id="advanced-charts">
+<div class="panel-head"><div><h2>Advanced Stock Charts</h2><p>Historical daily candlesticks, reported trading volume, 20/50-session moving averages and 14-session RSI, when validated OHLCV bars are available.</p></div><span class="pill">Saved daily bars · not live</span></div>
+<div class="picker-row"><div><label for="stockTicker">Select tracked stock</label><select id="stockTicker"><option value="">Loading active stocks…</option></select></div>
+<div><label for="chartRange">Trading sessions</label><select id="chartRange"><option value="30">30 sessions</option><option value="60" selected>60 sessions</option><option value="120">120 sessions</option><option value="240">240 sessions</option></select></div>
+<div><label for="chartStyle">Display style</label><select id="chartStyle"><option value="candles">Candlesticks</option><option value="line">Closing-price line</option></select></div></div>
+<p id="chartStatus" class="status-line" role="status" aria-live="polite">Loading historical market data…</p>
+<div class="market-cols"><div>
+<div class="chart-legend"><span>Higher close</span><span class="down">Lower close</span><span class="sma20">SMA 20</span><span class="sma50">SMA 50</span></div>
+<div class="chart-box"><svg id="candleChart" viewBox="0 0 960 410" role="img" aria-label="Historical daily price and trading volume chart"><text x="30" y="55" fill="#aebed1">Loading historical bars…</text></svg></div>
+<p class="sourced-note" id="chartSource"></p>
+</div><div>
+<div class="fact-list"><div class="fact"><span>Latest saved close</span><strong id="chartLast">—</strong><small id="chartLastDate">—</small></div>
+<div class="fact"><span>20-session SMA</span><strong id="chartSma20">—</strong></div>
+<div class="fact"><span>50-session SMA</span><strong id="chartSma50">—</strong></div>
+<div class="fact"><span>14-session RSI</span><strong id="chartRsi">—</strong></div>
+<div class="fact"><span>Relative volume vs 20 previous sessions</span><strong id="chartRvol">—</strong></div>
+<div class="fact"><span>Latest reported daily volume</span><strong id="chartVolume">—</strong></div></div>
+<p class="section-note">Candlesticks reflect historical vendor OHLCV. SMA and RSI use closes only; relative volume divides the latest reported session volume by the average of the preceding 20 sessions. These measures are not predictions. Corporate actions may distort unadjusted charts.</p>
+</div></div></section>
+<section class="panel" id="insiders">
+<div class="panel-head"><div><h2>Insider Buying & Selling</h2><p>Recent SEC Form 4 filings for the selected company. A purchase or sale is shown only when the non-derivative transaction code was verified in ownership XML.</p></div><span class="pill">Official SEC filing references</span></div>
+<p class="status-line" id="insiderStatus">Waiting for SEC data…</p>
+<div class="table-scroll"><table class="data-table"><thead><tr><th>Filed</th><th>Insider</th><th>Transaction</th><th>Shares</th><th>Price / share</th><th>Source</th></tr></thead><tbody id="insiderRows"><tr><td colspan="6">Select a company.</td></tr></tbody></table></div>
+<div class="flex-actions"><a id="insiderOfficial" href="https://www.sec.gov/search-filings" target="_blank" rel="noopener noreferrer">Open SEC company filings ↗</a><a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/form-4" target="_blank" rel="noopener noreferrer">About Form 4 ↗</a></div>
+<p class="sourced-note">Forms 4/4-A can include open-market or private purchases, sales, stock awards, transfers and option exercises. This display does not treat all filings as buying or selling. Unclassified entries need you to open their SEC source; issuer-submission coverage is not an exhaustive insider trade feed.</p>
+</section>
+<section class="panel" id="short-interest">
+<div class="panel-head"><div><h2>Short Interest Tracker</h2><p>Compare genuine reported short-position counts, not daily short-sale volume. Official listed-equity reports may require licensed redistribution.</p></div><span class="pill">Official links + manual data entry</span></div>
+<div class="market-cols"><div>
+<form id="shortForm" novalidate><div class="formgrid">
+<div class="field"><label for="shortDate">Official settlement date</label><input id="shortDate" type="date" required></div>
+<div class="field"><label for="shortCurrent">Current short shares (reported)</label><input id="shortCurrent" type="number" min="0" step="1" placeholder="Enter official figure"></div>
+<div class="field"><label for="shortPrevious">Previous short shares (reported)</label><input id="shortPrevious" type="number" min="0" step="1" placeholder="Enter prior figure"></div>
+</div><button type="submit" class="primary">Calculate short interest change</button></form>
+<p id="shortStatus" class="status-line" role="status" aria-live="polite">No reported figures supplied. Short interest is not available from the existing ShareWatch market feed.</p>
+<div class="fact-list">
+<div class="fact"><span>Current reported short shares</span><strong id="shortReported">—</strong></div>
+<div class="fact"><span>Change from prior report</span><strong id="shortChange">—</strong></div>
+<div class="fact"><span>Change (%)</span><strong id="shortPct">—</strong></div>
+<div class="fact"><span>Approx. days to cover*</span><strong id="shortDtc">—</strong></div></div>
+<p class="sourced-note">*Days to cover is calculated from entered short shares divided by the recent 20-session average vendor-reported trading volume, if available. This is a mixed-source estimate, not the exchange’s published days-to-cover value. Results are not stored or automatically verified.</p>
+</div><div class="note"><strong>Official reporting sources</strong><p>For U.S. exchange-listed stocks, consult the listing exchange’s published short-interest report. FINRA provides a public short-interest portal for OTC securities and explains why daily short-sale volume must not be called short interest.</p>
+<p><a href="https://www.nasdaq.com/market-activity/stocks" target="_blank" rel="noopener noreferrer">Nasdaq stock reports ↗</a></p>
+<p><a href="https://www.nasdaq.com/products/data/equities/short-interest" target="_blank" rel="noopener noreferrer">Nasdaq short-interest data ↗</a></p>
+<p><a href="https://otce.finra.org/otce/equityShortInterest" target="_blank" rel="noopener noreferrer">FINRA OTC equity short interest ↗</a></p>
+<p><a href="https://www.finra.org/sites/default/files/2019-07/information-notice-051019.pdf" target="_blank" rel="noopener noreferrer">FINRA: short-sale volume is not short interest ↗</a></p>
+</div></div></section>
+<section class="panel" id="signals"><div class="panel-head"><div><h2>Smart Stock Signals</h2><p>Explainable, rule-based watchlist observations based on source-dated daily bars and actual share-count disclosures. No machine-generated buy/sell advice.</p></div><span class="pill">Research flags · not predictions</span></div>
+<div class="signal-grid" id="signalCards"><div class="signal"><h3>Loading saved data…</h3></div></div>
+<p id="signalStatus" class="status-line">Select a stock above.</p>
+<p class="sourced-note">Signals are based on a completed reported trading session, not an intraday stream. A signal can be wrong or misleading after stock splits or data-provider corrections. Share increases alone are not proof of an issuance or dilution.</p>
+</section>
+<section class="panel" id="valuation"><div class="panel-head"><div><h2>Stock Valuation Center</h2><p>Historical screening multiples calculated from the latest saved closing share price, shares outstanding and dated SEC XBRL filing values.</p></div><span class="pill">Derived metrics · not a fair-value estimate</span></div>
+<div class="market-grid">
+<div class="market-stat"><span>Approximate market capitalization</span><strong id="valMarketCap">—</strong><small>Saved closing price × last reported shares</small></div>
+<div class="market-stat"><span>Price / last annual diluted EPS</span><strong id="valPE">—</strong><small>Not necessarily trailing-12-month P/E</small></div>
+<div class="market-stat"><span>Approximate price / annual sales</span><strong id="valPS">—</strong><small>Mixed-period market cap ÷ filed FY revenue</small></div>
+<div class="market-stat"><span>Approximate price / book</span><strong id="valPB">—</strong><small>Equity = assets minus liabilities</small></div>
+<div class="market-stat"><span>Last reported net margin</span><strong id="valMargin">—</strong><small>Only when SEC annual periods match</small></div>
+<div class="market-stat"><span>Last reported annual free cash flow</span><strong id="valFCF">—</strong><small>Cash flow minus capex; same period only</small></div>
+</div><p id="valuationStatus" class="status-line" role="status" aria-live="polite">Waiting for filed data…</p>
+<div class="table-scroll"><table class="data-table"><thead><tr><th>Source input</th><th>Reported value</th><th>Fiscal / as-of date</th><th>SEC filing</th></tr></thead><tbody id="valuationInputs"><tr><td colspan="4">Select a stock.</td></tr></tbody></table></div>
+<p class="sourced-note">Historical shares and prices can refer to different dates, and stock splits can invalidate simple market-cap comparisons. Companies with zero/negative EPS or equity are not assigned a P/E or P/B. Financial institutions and funds require specialized valuation methods. An unavailable item is shown as —, never filled with a fabricated value.</p>
+</section>
+<footer class="footer">ShareWatch Market Data Lab is educational research, not personalized investment advice or investment recommendations. All charts and ratios are historical or derived. Insider records are conditional on SEC parsing, short interest depends on manually supplied official reported numbers, and source availability may vary. No trade orders are executed. <a href="./help.html">Help Guide ↗</a></footer>
+</main></body></html>
