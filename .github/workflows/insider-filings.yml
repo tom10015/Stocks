@@ -1,0 +1,40 @@
+name: Collect SEC insider Form 4 filings
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - insider_update.py
+      - .github/workflows/insider-filings.yml
+  schedule:
+    - cron: "29 4,10,16,22 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: sharewatch-insider_update
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify Python importer
+        run: python -m py_compile insider_update.py
+      - name: Collect next bounded active-symbol batch
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'ShareWatch tom10015@users.noreply.github.com' }}
+        run: python -u insider_update.py --max-tickers 12
+      - name: Commit source-attributed dataset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/insiders.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh data/insiders.json"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
