@@ -219,7 +219,7 @@ function valCenter(){
    ['Annual capex','capex']].map(([label,key])=>[label,v(key),m[key]?.period_end,m[key]?.source_url])];
  $('valuationInputs').innerHTML=rows.map(([label,n,date,url])=>'<tr><td>'+safe(label)+'</td><td>'+compact(n)+'</td><td>'+
   safe(date||'Unavailable')+'</td><td>'+ (sourceURL(url)?'<a href="'+safe(url)+'" target="_blank" rel="noopener noreferrer">Source ↗</a>':'—')+'</td></tr>').join('');
- const recordCik=String(state.shares?.companies?.[ticker]?.cik||rec?.cik||'').replace(/\\D/g,'');
+ const recordCik=String(state.shares?.companies?.[ticker]?.cik||rec?.cik||'').replace(/[^0-9]/g,'');
  $('valuationSource').href=recordCik?'https://www.sec.gov/edgar/browse/?CIK='+encodeURIComponent(recordCik):'https://www.sec.gov/search-filings';
  const coverageCount=Object.keys(state.fund?.companies||{}).length;
  const hasMetrics=Object.keys(m).length>0;
