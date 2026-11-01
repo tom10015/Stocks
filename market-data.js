@@ -194,42 +194,119 @@ function signalCards(){
  write('signalStatus','Rules applied to '+selected+' using source-dated inputs; '+items.filter(x=>x.status.startsWith('Watch')).length+' watch flags. Never a guaranteed trade signal.');
 }
 function valCenter(){
- const ticker=selected,rec=state.fund?.companies?.[ticker],m=rec?.metrics||{},share=(state.shares?.companies?.[ticker]?.history||[])
-  .filter(x=>valid(x.shares)&&x.shares>0&&dateOK(x.date)).sort((a,b)=>a.date.localeCompare(b.date)).at(-1);
- const hist=(state.prices?.prices?.[ticker]?.history||[]).filter(x=>Array.isArray(x)&&dateOK(x[0])&&valid(x[1])&&x[1]>0)
+ const ticker=selected,rec=state.fund?.companies?.[ticker],m=rec?.metrics||{};
+ const issuer=state.shares?.companies?.[ticker]||{};
+ const reported=(issuer.history||[]).filter(x=>valid(x.shares)&&x.shares>0&&dateOK(x.date))
+  .sort((a,b)=>a.date.localeCompare(b.date));
+ const latestReported=reported.at(-1);
+ const hist=(state.prices?.prices?.[ticker]?.history||[])
+  .filter(x=>Array.isArray(x)&&dateOK(x[0])&&valid(x[1])&&x[1]>0)
   .sort((a,b)=>a[0].localeCompare(b[0]));
  const price=hist.at(-1),close=price?.[1]||null;
- const withinMonths=(d,asof,months)=>dateOK(d)&&dateOK(asof)&&Date.parse(d+'T00:00:00Z')>=Date.parse(asof+'T00:00:00Z')-months*31*86400000;
- const mc=close&&share?.shares&&withinMonths(share.date,price?.[0],18)?close*share.shares:null;
- const v=k=>valid(m[k]?.value)?m[k].value:null;
- const eps=v('diluted_eps'),revenue=v('revenue'),income=v('net_income'),assets=m.assets,liab=m.liabilities;
- const equity=assets&&liab&&assets.period_end===liab.period_end&&valid(assets.value)&&valid(liab.value)?assets.value-liab.value:null;
- const pe=close&&eps>0&&withinMonths(m.diluted_eps?.period_end,price?.[0],18)?close/eps:null;
- const ps=mc&&revenue>0&&withinMonths(m.revenue?.period_end,price?.[0],18)?mc/revenue:null;
- const pb=mc&&equity>0&&withinMonths(assets?.period_end,price?.[0],18)?mc/equity:null;
- const margin=income!==null&&revenue>0&&m.net_income.period_start===m.revenue.period_start&&
-  m.net_income.period_end===m.revenue.period_end&&withinMonths(m.revenue?.period_end,price?.[0],18)?income/revenue*100:null;
- const ocf=m.operating_cash_flow,capex=m.capex,fcf=ocf&&capex&&ocf.period_end===capex.period_end&&
-  ocf.period_start===capex.period_start&&withinMonths(ocf.period_end,price?.[0],18)?ocf.value-capex.value:null;
- for(const [id,x] of Object.entries({valMarketCap:compact(mc),valPE:ratio(pe),valPS:ratio(ps),valPB:ratio(pb),valMargin:pct(margin),valFCF:compact(fcf)}))write(id,x);
- const rows=[['Saved stock close',close,price?.[0],state.prices?.prices?.[ticker]?.source?.url],
-  ['Shares outstanding',share?.shares,share?.date,share?.url],
-  ...[['Annual diluted EPS','diluted_eps'],['Annual revenue','revenue'],['Annual net income','net_income'],
-   ['Total assets','assets'],['Total liabilities','liabilities'],['Annual operating cash flow','operating_cash_flow'],
-   ['Annual capex','capex']].map(([label,key])=>[label,v(key),m[key]?.period_end,m[key]?.source_url])];
- $('valuationInputs').innerHTML=rows.map(([label,n,date,url])=>'<tr><td>'+safe(label)+'</td><td>'+compact(n)+'</td><td>'+
-  safe(date||'Unavailable')+'</td><td>'+ (sourceURL(url)?'<a href="'+safe(url)+'" target="_blank" rel="noopener noreferrer">Source ↗</a>':'—')+'</td></tr>').join('');
- const recordCik=String(state.shares?.companies?.[ticker]?.cik||rec?.cik||'').replace(/[^0-9]/g,'');
- $('valuationSource').href=recordCik?'https://www.sec.gov/edgar/browse/?CIK='+encodeURIComponent(recordCik):'https://www.sec.gov/search-filings';
+ const refDate=price?.[0];
+ const isRecent=d=>dateOK(d)&&dateOK(refDate)&&
+  Date.parse(d+'T12:00:00Z')<=Date.parse(refDate+'T12:00:00Z')+31*86400000&&
+  Date.parse(d+'T12:00:00Z')>=Date.parse(refDate+'T12:00:00Z')-18*31*86400000;
+ const fact=(k)=>m[k]&&valid(m[k].value)?m[k]:null;
+ const value=k=>fact(k)?.value??null;
+ const amountUnit=k=>m[k]?.unit||'USD';
+ const sharesFromFacts=fact('shares_outstanding');
+ const possibleShares=[latestReported&&{shares:latestReported.shares,date:latestReported.date,
+     url:latestReported.url||null,desc:(latestReported.form||'Issuer shares')+' share count'},
+   sharesFromFacts&&{shares:sharesFromFacts.value,date:sharesFromFacts.period_end,
+     url:sharesFromFacts.source_url,desc:'SEC '+(sharesFromFacts.taxonomy||'')+':'+sharesFromFacts.concept}].filter(Boolean);
+ const eligibleShares=possibleShares.filter(x=>isRecent(x.date));
+ // Prefer the freshest independently reported issuer shares, not a years-old stock count.
+ eligibleShares.sort((a,b)=>b.date.localeCompare(a.date));
+ const shares=eligibleShares[0]||null;
+ const security=state.watch.find(x=>x.ticker===ticker)?.security_type||issuer.type||'';
+ const fund=security==='fund'||issuer.type==='fund';
+ const marketCap=!fund&&close&&shares?close*shares.shares:null;
+ const annualRecent=k=>fact(k)&&isRecent(fact(k).period_end)?fact(k):null;
+ const eps=(annualRecent('diluted_eps')?.value>0?annualRecent('diluted_eps'):
+   annualRecent('basic_eps')?.value>0?annualRecent('basic_eps'):null);
+ const epsType=eps?.concept?.toLowerCase().includes('basic')?'basic':'diluted';
+ const revenue=annualRecent('revenue'),income=annualRecent('net_income');
+ const assets=fact('assets'),liabilities=fact('liabilities'),directEquity=fact('equity');
+ const equity=directEquity&&isRecent(directEquity.period_end)?directEquity.value:
+   assets&&liabilities&&assets.period_end===liabilities.period_end&&isRecent(assets.period_end)?
+   assets.value-liabilities.value:null;
+ const equitySource=directEquity&&isRecent(directEquity.period_end)?'SEC reported stockholders equity':
+  equity!==null?'Calculated assets minus liabilities, matching SEC period':null;
+ const pe=close&&eps?.value>0&&!fund?close/eps.value:null;
+ const ps=marketCap&&revenue?.value>0?marketCap/revenue.value:null;
+ const pb=marketCap&&equity>0?marketCap/equity:null;
+ const margin=revenue?.value>0&&income&&revenue.period_start===income.period_start&&
+  revenue.period_end===income.period_end?income.value/revenue.value*100:null;
+ const ocf=annualRecent('operating_cash_flow'),capex=annualRecent('capex');
+ const canFcf=!!(ocf&&capex&&ocf.period_end===capex.period_end&&
+  ocf.period_start===capex.period_start);
+ const fcf=canFcf?ocf.value-capex.value:null;
+ const cashFlowValue=canFcf?fcf:ocf?.value??null;
+ const reasons={
+  valMarketCap:marketCap!==null?'Saved close × '+shares.desc+' ('+shares.date+')':
+   fund?'Fund/ETF market cap is not the same as issuer equity valuation.':
+   !close?'No saved closing price.':'No SEC/issuer shares outstanding from the last 18 months.',
+  valPE:pe!==null?'Based on '+epsType+' FY EPS, not trailing 12 months':
+   fund?'Stock P/E is not comparable for this fund/ETF.':
+   !close?'No saved closing price.':'No positive annual SEC EPS disclosed in the last 18 months.',
+  valPS:ps!==null?'Historical fiscal-year sales; market cap and revenue dates differ':
+   fund?'Not comparable for this fund/ETF.':
+   marketCap===null?'Recent share count required to compute market capitalization.':
+   !revenue?'Annual USD revenue was not found in the last 18 months.':'Annual revenue must be positive.',
+  valPB:pb!==null?(equitySource||'Filed equity')+' ('+(directEquity?.period_end||assets?.period_end)+')':
+   fund?'Not comparable for this fund/ETF.':
+   marketCap===null?'Recent shares outstanding required for market capitalization.':
+   equity===null?'No current SEC shareholders equity or matched assets and liabilities.':
+   'Book equity is zero or negative; price/book is not meaningful.',
+  valMargin:margin!==null?'SEC annual revenue and income, fiscal year '+revenue.period_end:
+   fund?'Not comparable for this fund/ETF.':
+   !revenue?'No annual revenue with a recent SEC reporting date.':
+   !income?'No annual net income with a recent SEC reporting date.':
+   'Annual revenue and net income have different fiscal-period dates.',
+  valFCF:canFcf?'Annual operating cash flow − capex, fiscal year '+ocf.period_end:
+   cashFlowValue!==null?'Annual SEC operating cash flow; no same-period capex for an FCF calculation.':
+   'No recent annual SEC operating cash flow in a standard USD concept.'
+ };
+ write('valFCFLabel',canFcf?'Last reported annual free cash flow':'Last reported annual operating cash flow');
+ for(const [id,v] of Object.entries({
+  valMarketCap:compact(marketCap),valPE:ratio(pe),valPS:ratio(ps),valPB:ratio(pb),
+  valMargin:pct(margin),valFCF:compact(cashFlowValue)}))write(id,v);
+ for(const [id,reason] of Object.entries(reasons))write(id+'Why',reason);
+ const rows=[
+  ['Saved stock close',close,refDate,state.prices?.prices?.[ticker]?.source?.url,'USD/share'],
+  ['Shares outstanding',shares?.shares||latestReported?.shares,shares?.date||latestReported?.date,
+   shares?.url||latestReported?.url,'shares'],
+  ...[['Annual diluted EPS','diluted_eps'],['Annual basic EPS','basic_eps'],
+   ['Annual revenue','revenue'],['Annual net income','net_income'],
+   ['Stockholders equity','equity'],['Total assets','assets'],
+   ['Total liabilities','liabilities'],['Annual operating cash flow','operating_cash_flow'],
+   ['Annual capital expenditures','capex']].map(([label,k])=>
+    [label,value(k),m[k]?.period_end,m[k]?.source_url,amountUnit(k)])
+ ];
+ $('valuationInputs').innerHTML=rows.map(([label,value,date,url,unit])=>'<tr><td>'+safe(label)+'</td><td>'+
+  (valid(value)?(unit==='USD/shares'?cash(value):compact(value)):'—')+
+  '</td><td>'+safe(date||'Unavailable')+'</td><td>'+
+  (sourceURL(url)?'<a href="'+safe(url)+'" target="_blank" rel="noopener noreferrer">SEC/source ↗</a>':'—')+
+  '</td></tr>').join('');
+ const recordCik=String(issuer.cik||rec?.cik||'').replace(/[^0-9]/g,'');
+ $('valuationSource').href=recordCik?'https://www.sec.gov/edgar/browse/?CIK='+encodeURIComponent(recordCik):
+  'https://www.sec.gov/search-filings';
  const coverageCount=Object.keys(state.fund?.companies||{}).length;
  const hasMetrics=Object.keys(m).length>0;
- write('valuationCoverage','Automatic SEC fundamentals: '+coverageCount+' issuers in saved dataset · source file updated '+
-   (state.fund?.updated_at||'not yet')+'. '+(hasMetrics?'These are dated annual/quarterly filing values.':'This stock has no supported filed metrics collected yet.'));
- const count=[mc,pe,ps,pb,margin,fcf].filter(valid).length;
- write('valuationStatus',count+' of 6 derived measures available for '+ticker+'. '+
-  (rec?.checked_at?'SEC companyfacts checked '+rec.checked_at+'. ':recordCik?'Automatic SEC collection is pending for this stock. ':'No mapped issuer CIK or supported SEC XBRL data for this security. ')+
-  'Saved price '+(price?.[0]||'unavailable')+'; reported shares '+(share?.date||'unavailable')+
-  '. Report periods can differ; inputs older than roughly 18 months are excluded from computed ratios.');
+ write('valuationCoverage','SEC fundamentals: '+coverageCount+' issuers saved · collector last updated '+
+  (state.fund?.updated_at||'not yet')+'. '+(hasMetrics?
+   'Each metric uses its own SEC reporting date; ratios are calculated, not directly reported.':
+   fund?'Fund valuation needs fund-specific NAV and portfolio data; issuer P/E, P/S, and P/B are usually not applicable.':
+   'Issuer data is not yet collected or compatible with these SEC filing concepts.'));
+ const count=[marketCap,pe,ps,pb,margin,cashFlowValue].filter(valid).length;
+ write('valuationStatus',count+' of 6 research figures available for '+ticker+'. '+
+  (rec?.checked_at?'SEC companyfacts checked '+rec.checked_at+'. ':
+    recordCik?'SEC fundamentals collection is pending for this ticker. ':
+    'A supported mapped SEC issuer CIK is unavailable. ')+
+  'Saved close '+(refDate||'unavailable')+
+  '; share count '+(shares?.date||latestReported?.date||'unavailable')+'. '+
+  'Read each card for the reason an unavailable ratio is omitted.');
 }
 function update(){
  if(!selected)return;
