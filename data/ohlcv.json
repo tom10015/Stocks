@@ -1,0 +1,6 @@
+{
+  "updated_at": null,
+  "source": "Yahoo Finance public daily chart (historical, unadjusted OHLCV); Stooq fallback where available",
+  "note": "Awaiting collector. No bars or technical signals are invented. Volume is vendor reported, not live.",
+  "tickers": {}
+}
