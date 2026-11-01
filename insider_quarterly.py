@@ -43,61 +43,69 @@ def download(year,quarter):
    return zipfile.ZipFile(io.BytesIO(raw)),url
   except Exception as e:errors.append(str(e)[:90])
  raise RuntimeError("SEC quarterly dataset unavailable: "+"; ".join(errors))
+def date_value(s):
+ s=str(s or "").strip()
+ for fmt in ("%Y-%m-%d","%d-%b-%Y","%d-%B-%Y","%m/%d/%Y","%Y%m%d"):
+  try:return dt.datetime.strptime(s,fmt).date().isoformat()
+  except ValueError:pass
+ return None
 def parse(z,watch_by_cik):
- issuers=find_table(z,"ISSUER")
- if not issuers:raise ValueError("No ISSUER table in SEC dataset")
- acc_to_ticker={}
- for row in issuers:
-  cik=fld(row,"ISSUERCIK","CIK")
-  cik=str(cik).lstrip("0")
-  if cik not in watch_by_cik:continue
-  acc=fld(row,"ACCESSIONNUMBER","ACCESSIONNO")
-  if not acc:continue
-  acc_to_ticker[acc]=watch_by_cik[cik]
- print("SEC dataset issuer accession matches:",len(acc_to_ticker),flush=True)
- if not acc_to_ticker:return {}
+ # SEC's published eight-table schema has NO ISSUER table.
+ # ISSUERCIK, DOCUMENT_TYPE and FILING_DATE all reside in SUBMISSION.
+ submission=find_table(z,"SUBMISSION")
+ if not submission:raise ValueError("SEC dataset missing SUBMISSION table")
+ byacc={}
+ filings={}
+ for row in submission:
+  cik=fld(row,"ISSUERCIK").lstrip("0")
+  ticker=watch_by_cik.get(cik)
+  if not ticker:continue
+  acc=fld(row,"ACCESSION_NUMBER","ACCESSIONNUMBER")
+  form=fld(row,"DOCUMENT_TYPE","DOCUMENTTYPE")
+  date=date_value(fld(row,"FILING_DATE","FILINGDATE"))
+  if not acc or form not in ("4","4/A") or not date:continue
+  accession=re.sub("[^0-9]","",acc)
+  if len(accession)!=18:continue
+  filing={"ticker":ticker,"form":form,"filed":date,"accession":acc,
+   "source_url":"https://www.sec.gov/Archives/edgar/data/"+str(int(cik))+"/"+accession+"/",
+   "classification":"SEC Form 4: no verified P/S transaction",
+   "verified_transactions":[]}
+  byacc[acc]=ticker
+  filings[acc]=filing
+ print("SEC quarterly submission matches",len(filings),flush=True)
+ if not filings:return {}
  owners={}
  for row in find_table(z,"REPORTINGOWNER"):
-  acc=fld(row,"ACCESSIONNUMBER","ACCESSIONNO")
-  if acc not in acc_to_ticker:continue
-  name=fld(row,"RPTOWNERNAME","REPORTINGOWNERNAME","OWNERNAME")
-  if name:owners.setdefault(acc,name[:150])
- filings={}
- for row in find_table(z,"SUBMISSION"):
-  acc=fld(row,"ACCESSIONNUMBER","ACCESSIONNO")
-  if acc not in acc_to_ticker:continue
-  form=fld(row,"SUBMISSIONTYPE","FORMTYPE","FORM")
-  if form not in ("4","4/A"):continue
-  date=fld(row,"FILINGDATE","FILEDATE")
-  if len(date)==8 and date.isdigit():date=date[:4]+"-"+date[4:6]+"-"+date[6:]
-  if not re.fullmatch(r"\d{4}-\d{2}-\d{2}",date):continue
-  accession=re.sub(r"[^0-9]","",acc)
-  if len(accession)!=18:continue
-  link="https://www.sec.gov/Archives/edgar/data/"+str(int(accession[:10]))+"/"+accession+"/"
-  filings[acc]={"ticker":acc_to_ticker[acc],"form":form,"filed":date,"accession":acc,
-       "source_url":link,"classification":"Official SEC dataset / non-derivative P/S verified","verified_transactions":[]}
+  acc=fld(row,"ACCESSION_NUMBER")
+  if acc not in filings:continue
+  name=fld(row,"RPTOWNERNAME")
+  if name:owners.setdefault(acc,[]).append(name[:150])
  results={}
  for row in find_table(z,"NONDERIV_TRANS"):
-  acc=fld(row,"ACCESSIONNUMBER","ACCESSIONNO")
+  acc=fld(row,"ACCESSION_NUMBER")
   if acc not in filings:continue
-  code=fld(row,"TRANSACTIONCODE","TRANS_CODE","TRANSCODE").upper()
+  code=fld(row,"TRANS_CODE")
   if code not in ("P","S"):continue
-  try:shares=float(fld(row,"TRANSACTIONSHARES","TRANS_SHARES","SHARES"))
-  except (TypeError,ValueError):continue
+  qty=fld(row,"TRANS_SHARES")
+  try:shares=float(qty.replace(",",""))
+  except (ValueError,TypeError):continue
   if not 0<shares<1e12:continue
-  raw_price=fld(row,"TRANSACTIONPRICEPERSHARE","PRICEPERSHARE","TRANSACTIONPRICE")
-  try:price=float(raw_price)
-  except (TypeError,ValueError):price=None
-  date=fld(row,"TRANSACTIONDATE","TRANSDATE")
-  if len(date)==8 and date.isdigit():date=date[:4]+"-"+date[4:6]+"-"+date[6:]
-  if not re.fullmatch(r"\d{4}-\d{2}-\d{2}",date):continue
+  date=date_value(fld(row,"TRANS_DATE"))
+  if not date:continue
+  rawprice=fld(row,"TRANS_PRICEPERSHARE")
+  try:price=float(rawprice.replace(",",""))
+  except (ValueError,TypeError):price=None
+  sec=fld(row,"SECURITY_TITLE")
   f=filings[acc]
-  f["verified_transactions"].append({"code":code,"classification":"Reported purchase (P)" if code=="P" else "Reported sale (S)",
-     "date":date,"shares":shares,"price":price if price is not None and price>=0 else None,
-     "owner":owners.get(acc,"SEC reporting owner"),"security":fld(row,"SECURITYTITLE")[:90],
-     "note":"Verified as filed from SEC quarterly structured dataset, not necessarily an open-market execution."})
- for acc,f in filings.items():
+  f["verified_transactions"].append({
+   "code":code,"classification":"Reported purchase (P)" if code=="P" else "Reported sale (S)",
+   "date":date,"shares":shares,"price":price if price is not None and price>=0 else None,
+   "owner":", ".join(dict.fromkeys(owners.get(acc,[])))[:180] or "SEC reporting owner",
+   "security":sec[:90],
+   "note":"SEC reported non-derivative Form 4 P/S; execution venue/motivation not independently verified."})
+ for f in filings.values():
   if not f["verified_transactions"]:continue
+  f["classification"]="Verified SEC non-derivative P/S"
   results.setdefault(f["ticker"],[]).append(f)
  return results
 def main():
@@ -113,7 +121,7 @@ def main():
  # Use current quarter only when it has been officially published; always include two prior quarters.
  thisyear=TODAY.year;thisq=(TODAY.month-1)//3+1
  periods=[]
- for offset in range(1,max(2,min(5,args.quarters))+1):
+ for offset in range(0,max(2,min(5,args.quarters))):
   q=thisq-offset;year=thisyear
   while q<1:q+=4;year-=1
   periods.append((year,q))
