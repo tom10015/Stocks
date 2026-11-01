@@ -19,7 +19,7 @@ TAGS={
  'assets':('Assets',),
  'liabilities':('Liabilities',),
  'long_term_debt':('LongTermDebtNoncurrent','LongTermDebt'),
- 'dividends_paid':('PaymentsOfDividendsCommonStock','PaymentsOfDividends','PaymentsForRepurchaseOfCommonStock'), # last excluded in selection below
+ 'dividends_paid':('PaymentsOfDividendsCommonStock','PaymentsOfDividends'), # last excluded in selection below
 }
 ANNUAL={'revenue','net_income','operating_cash_flow','capex','dividend_per_share','diluted_eps','dividends_paid'}
 def is_annual(x):
@@ -49,7 +49,7 @@ def choose(facts,names,metric):
  end,filed,tag,x=records[0]
  return {'value':x['val'],'period_end':end,'filed':filed,'form':x['form'],'concept':tag,
          'period_start':x.get('start'),
-         'source_url':'https://data.sec.gov/api/xbrl/companyfacts/CIK'+str(facts.get('cik','')).zfill(10)+'.json'}
+        }
 def main():
  parser=argparse.ArgumentParser()
  parser.add_argument('--max-tickers',type=int,default=12)
@@ -82,7 +82,7 @@ def main():
    response=fetch('https://data.sec.gov/api/xbrl/companyfacts/CIK'+cik+'.json')
    if not isinstance(response,dict) or not response.get('facts'):raise ValueError('No SEC companyfacts data')
    metrics={name:choose(response['facts'],tags,name) for name,tags in TAGS.items()}
-   metrics={k:v for k,v in metrics.items() if v is not None}
+   metrics={k:{**v,'source_url':'https://data.sec.gov/api/xbrl/companyfacts/CIK'+cik+'.json'} for k,v in metrics.items() if v is not None}
    rows[ticker]={'ticker':ticker,'cik':cik,'name':str(response.get('entityName') or shares[ticker].get('name') or ticker),
        'metrics':metrics,'status':'ok' if metrics else 'no_supported_facts','checked_at':now.isoformat()}
    print(ticker,'SEC metrics:',','.join(metrics) or 'none',flush=True)
