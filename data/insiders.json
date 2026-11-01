@@ -1,0 +1,6 @@
+{
+  "updated_at": null,
+  "source": "SEC EDGAR issuer submissions and verified Form 4 ownership XML",
+  "note": "Form 4 filings may contain purchases, sales, grants and exercises. Only explicitly decoded non-derivative transaction codes P and S are classified.",
+  "tickers": {}
+}
