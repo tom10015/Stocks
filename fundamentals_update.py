@@ -9,10 +9,10 @@ ROOT=Path(__file__).resolve().parent
 OUT=ROOT/'data'/'fundamentals.json'
 SHARES=ROOT/'data'/'shares.json'
 TAGS={
- 'revenue':('RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','SalesRevenueNet'),
+ 'revenue':('RevenueFromContractWithCustomerExcludingAssessedTax','RevenueFromContractWithCustomerIncludingAssessedTax','Revenues','SalesRevenueNet','SalesRevenueGoodsNet'),
  'net_income':('NetIncomeLoss',),
  'operating_cash_flow':('NetCashProvidedByUsedInOperatingActivities',),
- 'capex':('PaymentsToAcquirePropertyPlantAndEquipment',),
+ 'capex':('PaymentsToAcquirePropertyPlantAndEquipment','PaymentsToAcquireProductiveAssets'),
  'dividend_per_share':('CommonStockDividendsPerShareDeclared','CommonStockDividendsPerShareCashPaid'),
  'diluted_eps':('EarningsPerShareDiluted',),
  'cash':('CashAndCashEquivalentsAtCarryingValue',),
@@ -52,7 +52,7 @@ def choose(facts,names,metric):
         }
 def main():
  parser=argparse.ArgumentParser()
- parser.add_argument('--max-tickers',type=int,default=12)
+ parser.add_argument('--max-tickers',type=int,default=80)
  parser.add_argument('--force',action='store_true')
  args=parser.parse_args()
  watch=load_watchlist()
@@ -66,11 +66,11 @@ def main():
   try:age=(now-dt.datetime.fromisoformat(checked.replace('Z','+00:00'))).total_seconds()/3600
   except (ValueError,TypeError,AttributeError):age=1e9
   return (0 if ticker not in rows else 1,age*-1)
- eligible=[t for t in watch if shares.get(t,{}).get('cik') and watch[t].get('security_type')!='fund']
+ eligible=[t for t in watch if shares.get(t,{}).get('cik') and watch[t].get('security_type')!='fund' and shares[t].get('type')!='fund']
  eligible.sort(key=staleness)
  count=0
  for ticker in eligible:
-  if count>=max(1,min(50,args.max_tickers)):break
+  if count>=max(1,min(100,args.max_tickers)):break
   old=rows.get(ticker,{})
   if not args.force and old.get('checked_at'):
    try:
