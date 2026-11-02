@@ -315,6 +315,18 @@ function valCenter(){
   ocf.period_start===capex.period_start);
  const fcf=canFcf?ocf.value-capex.value:null;
  const cashFlowValue=canFcf?fcf:ocf?.value??null;
+ // Simple earnings-multiple sensitivity, not an intrinsic-value or analyst price target.
+ const targetPE=Number($('valTargetPE').value);
+ const estimate=!fund&&eps?.value>0&&['10','15','20'].includes($('valTargetPE').value)
+  ?eps.value*targetPE:null;
+ write('valEstimatedPrice',estimate!==null?cash(estimate):'Not available');
+ write('valEstimateDetails',estimate!==null?
+  'SEC '+epsType+' annual EPS '+cash(eps.value)+' (fiscal year ending '+eps.period_end+') × assumed '+targetPE+'× P/E.':
+  fund?'Not applicable to funds/ETFs; a NAV-based approach is needed.':
+  'A recent positive annual SEC EPS is required. Missing or negative earnings are not assigned a price.');
+ write('valEstimateComparison',estimate!==null&&close>0?
+  'Saved close '+cash(close)+' ('+refDate+'); scenario '+(estimate>=close?'+':'')+((estimate/close-1)*100).toFixed(1)+'% versus that close. This is not an expected return.':
+  'No price comparison available without both a positive estimate and saved closing price.');
  const reasons={
   valMarketCap:marketCap!==null?'Saved close × '+shares.desc+' ('+shares.date+')':
    fund?'Fund/ETF market cap is not the same as issuer equity valuation.':
@@ -387,6 +399,7 @@ function valCenter(){
   '; share count '+(shares?.date||latestReported?.date||'unavailable')+'. '+
   'Read each card for the reason an unavailable ratio is omitted.');
 }
+$('valTargetPE').addEventListener('change',()=>{if(selected)valCenter();});
 function update(){
  if(!selected)return;
  drawChart();filingRows();renderShortInterest();signalCards();valCenter();
