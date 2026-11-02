@@ -65,3 +65,9 @@ nav.tool-grid[aria-label="Market data tools"] .tile{min-width:0;overflow-wrap:br
 @media (min-width:391px) and (max-width:720px){
  nav.tool-grid[aria-label="Market data tools"]{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+/* Wider Market Data canvas: reclaim unused desktop side gutters. */
+@media (min-width:1000px){
+ body:has(nav.tool-grid[aria-label="Market data tools"]) main{max-width: none;width:100%;padding-left:clamp(20px,2.2vw,42px);padding-right:clamp(20px,2.2vw,42px)}
+ body:has(nav.tool-grid[aria-label="Market data tools"]) .nav{max-width:none;width:100%;padding-left:clamp(20px,2.2vw,42px);padding-right:clamp(20px,2.2vw,42px)}
+}
