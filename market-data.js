@@ -165,6 +165,11 @@ function filingRows(){
   ...notVerified.map(f=>({filed:f.filed,owner:'Reporting owner in SEC filing',type:f.classification||'Form 4 — details unavailable',
    shares:null,price:null,url:f.source_url,verified:false}))
  ].sort((a,b)=>b.filed.localeCompare(a.filed)).slice(0,65);
+ $('insiders').classList.remove('insiders-expanded');
+ const insiderToggle=$('insiderToggle');
+ insiderToggle.hidden=rows.length<=3;
+ insiderToggle.textContent='Show More ('+(rows.length-3)+' more)';
+ insiderToggle.setAttribute('aria-expanded','false');
  $('insiderRows').innerHTML=rows.length?rows.map(v=>'<tr><td>'+safe(v.filed)+'</td><td>'+safe(v.owner)+'</td><td>'+
   (v.verified?'<strong>'+safe(v.type)+'</strong>':safe(v.type))+'</td><td>'+num(v.shares)+'</td><td>'+cash(v.price)+'</td><td>'+
   (sourceURL(v.url)?'<a href="'+safe(v.url)+'" rel="noopener noreferrer" target="_blank">SEC Form 4 ↗</a>':'—')+'</td></tr>').join(''):
@@ -174,6 +179,13 @@ function filingRows(){
   ' · issuer-index collected '+(rec?.checked_at||'not yet')+(rec?.status==='unavailable'?' · SEC source unavailable':'')+
   '. No classification is inferred from a filing alone.');
 }
+$('insiderToggle').addEventListener('click',()=>{
+ const panel=$('insiders');
+ const expanded=panel.classList.toggle('insiders-expanded');
+ const button=$('insiderToggle');
+ button.textContent=expanded?'Show Less':'Show More ('+(Math.max(0,$('insiderRows').rows.length-3))+' more)';
+ button.setAttribute('aria-expanded',String(expanded));
+});
 function renderShortInterest(){
  $('shortNasdaq').href='https://www.nasdaq.com/market-activity/stocks/'+encodeURIComponent(selected.toLowerCase())+'/short-interest';
  for(const id of ['shortReported','shortChange','shortPct','shortDtc'])write(id,'—');
