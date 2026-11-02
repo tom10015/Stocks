@@ -139,10 +139,19 @@ function alpacaRender(){
   if(!grouped.has(c.strike)||(!Number.isFinite(grouped.get(c.strike).ask)&&Number.isFinite(c.ask)))grouped.set(c.strike,c);
  }
  const allContracts=[...grouped.values()].sort(alpacaChainSort);
- const list=alpacaExpanded?allContracts:allContracts.slice(0,5);
+ // Preview the two strikes nearest the stock price on each side of the market.
+ // Puts and calls have opposite ITM directions; use the existing classifier.
+ const near=(kind)=>allContracts
+  .filter(c=>alpacaMoneyness(c.strike,spot,c.type).kind===kind)
+  .sort((a,b)=>Math.abs(a.strike-spot)-Math.abs(b.strike-spot))
+  .slice(0,2);
+ const preview=spot===null?allContracts.slice(0,4):[...near('otm'),...near('itm')];
+ const previewSymbols=new Set(preview.map(c=>c.symbol));
+ // Keep market-price order if Strike is selected, otherwise retain selected sort.
+ const list=alpacaExpanded?allContracts:allContracts.filter(c=>previewSymbols.has(c.symbol));
  const showMore=$('alpacaShowMore');
- showMore.hidden=allContracts.length<=5;
- showMore.textContent=alpacaExpanded?'Show Less':'Show More ('+(allContracts.length-5)+' more)';
+ showMore.hidden=allContracts.length<=preview.length;
+ showMore.textContent=alpacaExpanded?'Show Less':'Show More ('+(allContracts.length-preview.length)+' more)';
  showMore.setAttribute('aria-expanded',String(alpacaExpanded));
  let rows='',lineDrawn=false;
  for(let i=0;i<list.length;i++){
