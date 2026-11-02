@@ -1,100 +1,17 @@
-/* ShareWatch research tools: indicative screener, authenticated journal, and source-verified calendar.
-   No broker execution or live NBBO data. */
+/* ShareWatch authenticated options journal. No brokerage execution. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
 const safe=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[ch]));
 const money=n=>Number.isFinite(Number(n))?'$'+Number(n).toFixed(2):'—';
-const pct=n=>Number.isFinite(n)?(n*100).toFixed(2)+'%':'—';
 const dateValid=s=>/^\d{4}-\d{2}-\d{2}$/.test(String(s||''))&&!Number.isNaN(Date.parse(s+'T12:00:00Z'));
 const today=()=>{
  const parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
  const m=Object.fromEntries(parts.map(p=>[p.type,p.value]));
  return [m.year,m.month,m.day].join('-');
 };
-function dte(s){return Math.ceil((Date.parse(s+'T12:00:00Z')-Date.now())/86400000);}
 const account=()=>window.ShareWatchUser;
-let scanResults=[],scanPage=0,running=false,journalRows=[],lastJournalUser=null;
-const scanMessage=(m,warning=false)=>{$('screenStatus').textContent=m;$('screenStatus').className='small '+(warning?'sw-warning':'muted');};
+let journalRows=[],lastJournalUser=null;
 const journalMessage=(m,warning=false)=>{$('journalMessage').textContent=m;$('journalMessage').className='small '+(warning?'sw-warning':'muted');};
-function ranked(result,sort){const score=r=>sort==='premium'?r.premium:sort==='roi'?r.roi:sort==='delta'?-r.delta:sort==='spread'?-r.spread:r.annual;return [...result].sort((a,b)=>score(b)-score(a)||a.ticker.localeCompare(b.ticker));}
-function showScan(){
- const sort=$('screenSort').value;
- $('screenRows').innerHTML=ranked(scanResults,sort).slice(0,120).map((r,i)=>
- '<tr><td><strong>'+safe(r.ticker)+'</strong></td><td>'+safe(r.expiration)+'</td><td>'+money(r.strike)+'</td><td>'+money(r.bid)+'</td><td>'+money(r.premium)+'</td><td>'+pct(r.roi)+'</td><td>'+pct(r.annual)+'</td><td>'+(r.delta==null?'—':r.delta.toFixed(3))+'</td><td>'+(Number.isFinite(r.spread)?r.spread.toFixed(1)+'%':'—')+'</td><td>'+(Number.isFinite(r.bid_size)?r.bid_size:'—')+' / '+(Number.isFinite(r.ask_size)?r.ask_size:'—')+'</td><td><button type="button" data-screen-index="'+scanResults.indexOf(r)+'">Analyze</button></td></tr>').join('')||'<tr><td colspan="11">No contracts match these filters. Try a higher delta limit, lower minimum premium, or other tickers.</td></tr>';
-}
-function scanUniverse(){
- const raw=$('screenTickers').value.toUpperCase().trim();
- if(raw){
-  const symbols=[...new Set(raw.split(/[\s,;]+/).filter(Boolean))];
-  if(symbols.length>6)throw Error('Scan a maximum of six tickers per request.');
-  const missing=symbols.filter(t=>!activeStocks.some(x=>x.ticker===t));
-  if(missing.length)throw Error('Ticker not active in ShareWatch: '+missing.join(', '));
-  return symbols;
- }
- const fav=account()?.favorites||new Set();
- return [...activeStocks].sort((a,b)=>Number(fav.has(b.ticker))-Number(fav.has(a.ticker))||a.ticker.localeCompare(b.ticker))
-  .map(x=>x.ticker).slice(scanPage*6,scanPage*6+6);
-}
-async function runScan(){
- if(running)return;running=true;$('screenRun').disabled=true;$('screenNext').disabled=true;scanResults=[];
- try{
-  const symbols=scanUniverse();
-  if(!symbols.length)throw Error('No active stocks in this scan group. Choose other tickers.');
-  const side=$('screenSide').value,maxDays=Math.max(1,Number($('screenDte').value)||45);
-  const maxDelta=Math.min(1,Math.max(0,Number($('screenDelta').value)||0.3));
-  const minPremium=Math.max(0,Number($('screenPremium').value)||0);
-  const maxSpread=Math.max(0,Number($('screenSpread').value)||0);
-  let retrieved=0,problems=[];
-  for(let n=0;n<symbols.length;n++){
-   const ticker=symbols[n],stock=activeStocks.find(x=>x.ticker===ticker);
-   if(!stock?.price||stock.price<=0){problems.push(ticker+': no saved share price');continue;}
-   scanMessage('Scanning '+ticker+' ('+(n+1)+'/'+symbols.length+'), indicative Alpaca data…');
-   try{
-    const calendar=await alpacaFetch({mode:'calendar',ticker,side,spot:String(stock.price)});
-    const expiration=(calendar.expirations||[]).filter(date=>dateValid(date)&&dte(date)>=1&&dte(date)<=maxDays).sort()[0];
-    if(!expiration){problems.push(ticker+': no expiration in selected window');continue;}
-    const chain=await alpacaFetch({mode:'chain',ticker,side,spot:String(stock.price),expiration});
-    retrieved++;
-    for(const c of chain.contracts||[]){
-     if(!(c?.strike>0&&c.bid>0&&c.type===side&&c.expiration===expiration&&c.strike>0))continue;
-     const delta=Number.isFinite(c.delta)?Math.abs(c.delta):null;
-     if(delta===null||delta>maxDelta)continue;
-     const outMoney=side==='put'?c.strike<stock.price:c.strike>stock.price;
-     if(!outMoney)continue;
-     const premium=c.bid*100;
-     if(premium<minPremium)continue;
-     const liq=swLiquidity(c);
-     if(liq.pct===null||liq.pct>maxSpread)continue;
-     const capital=(side==='put'?c.strike:stock.price)*100;
-     const roi=capital>0?premium/capital:0;
-     scanResults.push({ticker,side,expiration,strike:c.strike,bid:c.bid,premium,roi,annual:roi*365/Math.max(1,dte(expiration)),
-      delta,spread:liq.pct,bid_size:c.bid_size,ask_size:c.ask_size,symbol:c.symbol,quote_time:c.quote_time});
-    }
-   }catch(e){problems.push(ticker+': '+e.message);}
-  }
-  showScan();scanMessage('Scanned '+retrieved+'/'+symbols.length+' available chains; '+scanResults.length+' matching OTM contracts. '+(problems.length?'Unavailable: '+problems.join('; '):'')+(scanPage?' · Batch '+(scanPage+1):''));
- }catch(e){showScan();scanMessage(e.message,true)}
- finally{running=false;$('screenRun').disabled=false;$('screenNext').disabled=false;}
-}
-$('screenRun').addEventListener('click',runScan);
-$('screenNext').addEventListener('click',()=>{if($('screenTickers').value.trim()){$('screenTickers').value='';}scanPage++;if(scanPage*6>=activeStocks.length)scanPage=0;runScan();});
-$('screenSort').addEventListener('change',showScan);
-$('screenRows').addEventListener('click',e=>{
- const button=e.target.closest('[data-screen-index]');if(!button)return;
- const r=scanResults[Number(button.dataset.screenIndex)];if(!r)return;
- $('strategy').value=r.side;
- $('strategy').dispatchEvent(new Event('change',{bubbles:true}));
- selectStock(r.ticker);$('strike').value=r.strike;$('premium').value=r.bid;
- $('delta').value=r.delta;$('dte').value=Math.max(1,dte(r.expiration));
- $('journalExpiration').value=r.expiration;
- selectedOptionQuote={ticker:r.ticker,symbol:r.symbol,provider:'Alpaca indicative modified quotes',
-  quote_kind:'indicative_modified',bid:r.bid,ask:null,quote_as_of:r.quote_time,
-  delta:r.delta,contract_expiration:r.expiration};
- $('selectedContract').textContent='Indicative modified bid from screener; verify actual fill price with broker.';
- $('alpacaSelection').textContent='Screener candidate '+r.symbol+' · '+r.ticker+' '+r.expiration+' · indicative modified bid '+money(r.bid)+'. Verify with your broker.';
- $('calcStatus').textContent='Selected screener quote; press Calculate trade to update the payoff.';
- $('builderHeading').scrollIntoView({behavior:'smooth',block:'start'});
-});
 async function loadJournal(){
  const a=account();if(!a?.user){journalRows=[];paintJournal();return;}
  try{
