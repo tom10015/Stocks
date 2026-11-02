@@ -315,45 +315,44 @@ function valCenter(){
   ocf.period_start===capex.period_start);
  const fcf=canFcf?ocf.value-capex.value:null;
  const cashFlowValue=canFcf?fcf:ocf?.value??null;
- // Transparent multi-method scenario, based only on dated available SEC inputs.
- // No missing company metrics are replaced with assumed company figures.
- const assumptions={
-  conservative:{pe:10,ps:0.8,pb:1,fcf:10},
-  base:{pe:15,ps:1.5,pb:1.5,fcf:15},
-  optimistic:{pe:20,ps:2.5,pb:2.5,fcf:20}
- };
- const scenario=assumptions[$('valScenario').value]||assumptions.base;
+ // Market-relative multiple scenarios, NOT an independent estimate of intrinsic value.
+ // The old model averaged arbitrary fixed earnings/sales/book/FCF multiples,
+ // which can badly understate prices for asset-light and high-growth firms.
+ const scenarioFactors={conservative:0.8,base:1,optimistic:1.2};
+ const factor=scenarioFactors[$('valScenario').value]??1;
  const methods=[];
- const addMethod=(name,perShare,multiple,date)=>{
-  if(valid(perShare)&&perShare>0&&valid(multiple)&&multiple>0)
-   methods.push({name,price:perShare*multiple,multiple,date});
+ const add=(name,perShare,period)=>{
+  if(valid(perShare)&&perShare>0&&close>0){
+   const implied=close/perShare;
+   if(valid(implied)&&implied>0)
+    methods.push({name,perShare,implied,period,scenarioPrice:perShare*implied*factor});
+  }
  };
- if(!fund&&shares?.shares>0){
-  if(eps?.value>0)addMethod('Annual earnings / share',eps.value,scenario.pe,eps.period_end);
-  if(revenue?.value>0)addMethod('Annual sales / share',revenue.value/shares.shares,scenario.ps,revenue.period_end);
-  if(equity>0)addMethod('Book equity / share',equity/shares.shares,scenario.pb,
-   directEquity?.period_end||assets?.period_end);
-  if(canFcf&&fcf>0)addMethod('Annual FCF / share',fcf/shares.shares,scenario.fcf,ocf.period_end);
+ if(!fund&&shares?.shares>0&&close>0){
+  if(eps?.value>0)add('Annual earnings',eps.value,eps.period_end);
+  if(revenue?.value>0)add('Annual sales',revenue.value/shares.shares,revenue.period_end);
+  if(canFcf&&fcf>0)add('Annual free cash flow',fcf/shares.shares,ocf.period_end);
  }
- const combined=methods.length>=2;
- const estimate=methods.length?methods.reduce((sum,x)=>sum+x.price,0)/methods.length:null;
+ const estimate=methods.length?methods.reduce((sum,x)=>sum+x.scenarioPrice,0)/methods.length:null;
  write('valEstimatedPrice',estimate!==null?cash(estimate):'Not available');
- write('valEstimateDetails',fund?'Not applicable to funds/ETFs; use fund NAV data.':
-  !shares?'Recent SEC/issuer shares outstanding are required to calculate per-share values.':
-  combined?'Illustrative equal-weight average of '+methods.length+' independent valuation scenarios.':
-  methods.length===1?'Single-method scenario only — not a blended valuation; interpret with caution.':
-  'No valid positive metrics were available for a valuation estimate.');
+ write('valEstimateDetails',fund?'Not applicable to funds/ETFs; fund NAV and holdings are needed.':
+  !close?'Missing a saved closing share price; market-relative scenarios cannot be calculated.':
+  !shares?'Missing a recent share count; the per-share ratios cannot be verified.':
+  !methods.length?'No positive eligible SEC earnings, sales or matching-period FCF available.':
+  'Scenario based on '+methods.length+' market-implied ratio'+(methods.length===1?'':'s')+
+  ' and the saved close dated '+refDate+'. Base equals the market price by definition.');
  $('valEstimateMethods').innerHTML=methods.length?
-  '<strong>Model components ('+safe($('valScenario').selectedOptions[0].textContent)+'):</strong><ul>'+
-  methods.map(x=>'<li>'+safe(x.name)+' × '+x.multiple+' = <strong>'+cash(x.price)+
-  '</strong> per share · SEC period '+safe(x.date||'unknown')+'</li>').join('')+'</ul>'+
-  (combined?'':'Only one method is available. This is a limited, low-confidence scenario, not a consensus of methods.'):
-  'No qualifying positive SEC metrics for this model. For example, missing share counts, negative equity, or negative earnings may prevent calculation. Values are not invented.';
- write('valEstimateComparison',estimate!==null&&close>0?
-  'Saved close '+cash(close)+' ('+refDate+'); '+(combined?'blended':'single-method')+' scenario '+
-  (estimate>=close?'+':'')+((estimate/close-1)*100).toFixed(1)+
-  '% versus saved close (not an expected return).':
-  'A comparison requires both an eligible estimate and a saved closing price.');
+  '<strong>Ratios implied by saved close '+cash(close)+' ('+safe(refDate||'unknown')+'):</strong><ul>'+
+  methods.map(x=>'<li>'+safe(x.name)+' / share '+cash(x.perShare)+
+   ' · market-implied <strong>'+x.implied.toFixed(1)+'×</strong>'+
+   ' · scenario price <strong>'+cash(x.scenarioPrice)+'</strong>'+
+   ' · SEC period '+safe(x.period||'unknown')+'</li>').join('')+'</ul>':
+  'No market-implied ratios can be calculated from the saved source data; no estimate is invented.';
+ write('valEstimateComparison',estimate!==null?
+  'Scenario '+(factor===1?'matches the saved close by construction':
+  (factor<1?'20% below':'20% above')+' the saved close')+
+  '. It is not an independently calculated fair price, expected return, or buy/sell signal.':
+  'An estimate requires a saved close plus at least one eligible positive SEC financial metric.');
  const reasons={
   valMarketCap:marketCap!==null?'Saved close × '+shares.desc+' ('+shares.date+')':
    fund?'Fund/ETF market cap is not the same as issuer equity valuation.':
