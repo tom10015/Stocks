@@ -147,13 +147,7 @@
 <div id="journalSummary" class="small muted"></div>
 <div class="table-scroll"><table><thead><tr><th>Ticker</th><th>Strategy</th><th>Expiry</th><th>Strike</th><th>Open credit / debit</th><th>Status</th><th>Realized option P/L</th><th>Action</th></tr></thead><tbody id="journalRows"><tr><td colspan="8">Sign in to load your trades.</td></tr></tbody></table></div>
 </section>
-<section class="panel sw-tools" id="eventsCalendar" aria-labelledby="swEventsTitle">
-<div class="panel-head"><div><div class="eyebrow">Event risk</div><h2 id="swEventsTitle">Earnings and dividend calendar</h2></div><span class="badge">Source-reported dates</span></div>
-<p class="small muted">Upcoming reported earnings and ex-dividend dates for tracked stocks, if the market-calendar feed is available. Dates can change; no events shown does not mean there are none. Verify with issuers before trading options.</p>
-<div class="sw-tool-grid"><label>Event type<select id="eventsKind"><option value="all">Earnings + dividends</option><option value="earnings">Earnings only</option><option value="dividend">Ex-dividend only</option></select></label><label>Ticker / search<input id="eventsSearch" placeholder="Filter stocks"></label><label>Period<select id="eventsWindow"><option value="30">Next 30 days</option><option value="60">Next 60 days</option><option value="90">Next 90 days</option></select></label></div>
-<p id="eventsStatus" class="small muted" role="status" aria-live="polite">Loading verified calendar events…</p>
-<div class="table-scroll"><table><thead><tr><th>Date</th><th>Stock</th><th>Event</th><th>Details</th><th>Source</th></tr></thead><tbody id="eventsRows"><tr><td colspan="5">Calendar data has not loaded.</td></tr></tbody></table></div>
-</section>
+
 <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  
 <style>
