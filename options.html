@@ -111,24 +111,7 @@
    </div>
   </section>
  </div>
- <section class="panel sw-tools" id="optionsScreener" aria-labelledby="swScreenHeading">
-<div class="panel-head"><div><div class="eyebrow">Find contracts</div><h2 id="swScreenHeading">Advanced options screener</h2></div><span class="badge">Indicative quotes</span></div>
-<p class="small muted">Scan up to six selected tickers per request (favorites first). Rank <strong>cash-secured puts or covered calls</strong> by premium return on required collateral, delta and bid-ask spread. Not a guarantee of profit or tradable quotes.</p>
-<div class="sw-tool-grid">
-<label>Tickers (comma-separated, max 6)<input id="screenTickers" placeholder="Blank = favorites, then other tracked tickers"></label>
-<label>Strategy<select id="screenSide"><option value="put">Cash-secured puts</option><option value="call">Covered calls</option></select></label>
-<label>Max DTE<input type="number" id="screenDte" min="1" max="365" value="45"></label>
-<label>Max absolute delta<input type="number" id="screenDelta" min="0" max="1" step="0.01" value="0.30"></label>
-<label>Min premium / contract ($)<input type="number" id="screenPremium" min="0" step="1" value="10"></label>
-<label>Max bid-ask spread (%)<input type="number" id="screenSpread" min="0" max="1000" value="30"></label>
-<label>Sort results<select id="screenSort"><option value="annual">Annualized yield</option><option value="roi">Return on collateral</option><option value="premium">Premium per contract</option><option value="delta">Lowest |delta|</option><option value="spread">Narrowest spread</option></select></label>
-</div>
-<div class="actions"><button id="screenRun" type="button" class="primary">Scan option chains</button><button id="screenNext" type="button" class="ghost">Next 6 tickers</button></div>
-<div id="screenStatus" class="small muted" role="status" aria-live="polite">Choose a scan to find matching contracts.</div>
-<div class="table-scroll"><table><thead><tr><th>Ticker</th><th>Expiration</th><th>Strike</th><th>Bid</th><th>Premium / contract</th><th>ROI</th><th>Annualized</th><th>|Delta|</th><th>Spread</th><th>Quote sizes</th><th>Select</th></tr></thead><tbody id="screenRows"><tr><td colspan="11">No scan performed yet.</td></tr></tbody></table></div>
-<p class="small muted">ROI: premium divided by strike collateral for puts or reference share value for calls. Annualized yield scales ROI linearly; it is not a predicted return. Volume and open interest are unavailable from this feed.</p>
-</section>
-<section class="panel sw-tools" id="tradeJournal" aria-labelledby="swJournalTitle">
+ <section class="panel sw-tools" id="tradeJournal" aria-labelledby="swJournalTitle">
 <div class="panel-head"><div><div class="eyebrow">Private trading journal</div><h2 id="swJournalTitle">Options portfolio tracker</h2></div><span class="badge">Account only</span></div>
 <p class="small muted">Record trades manually; these are not broker-connected positions. Only your signed-in account can access your entries. Closed P/L includes entered open and closing premiums and fees, not stock assignment effects.</p>
 <div id="journalAccess" class="small muted">Sign in to save trades.</div>
@@ -162,6 +145,6 @@
 <section class="sw-quick-links" id="quick-links" aria-label="Quick Links"><span class="sw-quick-label">Quick Links:</span><nav class="sw-quick-nav" aria-label="Footer navigation"><a href="./index.html">Share Counter</a><a href="./options.html" aria-current="page">Options Analyzer</a><a href="./research.html">Market Research</a><a href="./market-data.html">Market Data</a><a href="./tools.html">Trading Tools</a><a href="./help.html">Help Guide</a><a href="./admin.html">Admin Portal</a></nav></section>
 <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability nor premium yield guarantees profitability.</footer>
 </main>
-<script src="./user-favorites.js?v=20261031-research-journal1" defer></script><script src="./inline-account.js?v=20261031-inline-user1" defer></script><script src="./options.js?v=20261101-income-deeplink1" defer></script><script src="./alpaca-options.js?v=20261101-itm-otm-two-each1" defer></script><script src="./research-tools.js?v=20261031-research4" defer></script>
+<script src="./user-favorites.js?v=20261031-research-journal1" defer></script><script src="./inline-account.js?v=20261031-inline-user1" defer></script><script src="./options.js?v=20261101-income-deeplink1" defer></script><script src="./alpaca-options.js?v=20261101-itm-otm-two-each1" defer></script><script src="./research-tools.js?v=20261101-journal-only1" defer></script>
 </body>
 </html>
