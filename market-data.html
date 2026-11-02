@@ -65,7 +65,7 @@
 <p id="signalStatus" class="status-line">Select a stock above.</p>
 <p class="sourced-note">Signals are based on a completed reported trading session, not an intraday stream. A signal can be wrong or misleading after stock splits or data-provider corrections. Share increases alone are not proof of an issuance or dilution.</p>
 </section>
-<section class="panel" id="valuation"><div class="panel-head"><div><h2>Stock Valuation Center</h2><p>Historical screening multiples calculated from the latest saved closing share price, shares outstanding and dated SEC XBRL filing values.</p></div><span class="pill">Derived metrics · not a fair-value estimate</span></div>
+<section class="panel" id="valuation"><div class="panel-head"><div><h2>Stock Valuation Center</h2><p>Historical screening multiples calculated from the latest saved closing share price, shares outstanding and dated SEC XBRL filing values.</p></div><span class="pill">Historical data · illustrative valuation</span></div>
 <div class="market-grid">
 <div class="market-stat"><span>Approximate market capitalization</span><strong id="valMarketCap">—</strong><small id="valMarketCapWhy">Saved closing price × last reported shares</small></div>
 <div class="market-stat"><span>Price / last annual diluted EPS</span><strong id="valPE">—</strong><small id="valPEWhy">Historical annual EPS; not necessarily trailing 12 months</small></div>
@@ -73,6 +73,15 @@
 <div class="market-stat"><span>Approximate price / book</span><strong id="valPB">—</strong><small id="valPBWhy">Filed shareholder equity where available</small></div>
 <div class="market-stat"><span>Last reported net margin</span><strong id="valMargin">—</strong><small id="valMarginWhy">Requires matching annual net income and revenue</small></div>
 <div class="market-stat"><span id="valFCFLabel">Last reported annual free cash flow</span><strong id="valFCF">—</strong><small id="valFCFWhy">Operating cash flow − capital expenditures, same period</small></div>
+</div>
+<div class="market-stat" style="margin:16px 0">
+ <span>Illustrative earnings-based price per share</span>
+ <strong id="valEstimatedPrice">—</strong>
+ <small id="valEstimateDetails">Uses recent positive annual SEC EPS. This is a model scenario, not a prediction or investment recommendation.</small>
+ <div class="picker-row" style="margin:12px 0 0"><label for="valTargetPE">Assumed P/E multiple
+ <select id="valTargetPE"><option value="10">10× · Conservative</option><option value="15" selected>15× · Base assumption</option><option value="20">20× · Higher valuation</option></select></label></div>
+ <div class="sourced-note" id="valEstimateComparison" aria-live="polite">Comparison to saved close will appear when sufficient data is available.</div>
+ <div class="sourced-note">Method: latest eligible positive annual diluted (or basic) EPS × your assumed P/E. The multiple is a user-selectable assumption, not a peer comparison or analyst target. This model omits growth, debt, cash, industry differences, and forecasts; it is unsuitable for many financial firms and cyclical businesses.</div>
 </div><p id="valuationStatus" class="status-line" role="status" aria-live="polite">Waiting for filed data…</p><div class="flex-actions"><a id="valuationSource" href="https://www.sec.gov/search-filings" target="_blank" rel="noopener noreferrer">View official SEC filings for this stock ↗</a><span id="valuationCoverage" class="sourced-note">Automatic SEC source collection; missing metrics will not be guessed.</span></div>
 <div class="table-scroll"><table class="data-table"><thead><tr><th>Source input</th><th>Reported value</th><th>Fiscal / as-of date</th><th>SEC filing</th></tr></thead><tbody id="valuationInputs"><tr><td colspan="4">Select a stock.</td></tr></tbody></table></div>
 <p class="sourced-note">Historical shares and prices can refer to different dates, and stock splits can invalidate simple market-cap comparisons. Companies with zero/negative EPS or equity are not assigned a P/E or P/B. Financial institutions and funds require specialized valuation methods. An unavailable item is shown as —, never filled with a fabricated value.</p>
