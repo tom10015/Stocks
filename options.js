@@ -8,6 +8,7 @@ const API_KEY='sb_publishable__pT9Xdhi40Fu4XLd7YVuAw_bkdpHpUD';
 const CONTRACT_SIZE=100;
 const $=id=>document.getElementById(id);
 let activeStocks=[],selected=null,latestCalc=null,pricesChecked=null;
+let stockListExpanded=false;
 let selectedOptionQuote=null;
 function resetSelectedQuote(){selectedOptionQuote=null;const info=$('selectedContract');if(info)info.textContent='Choose an Alpaca indicative contract or enter a manual quote.';}
 
@@ -61,15 +62,19 @@ function renderList(){
  const q=$('stockSearch').value.trim().toLowerCase(),filter=$('stockFilter').value;
  const account=window.ShareWatchUser;
  const favorites=account?.favorites||new Set();
- const display=activeStocks.filter(x=>(x.ticker.toLowerCase().includes(q)||x.name.toLowerCase().includes(q))&&
-  (filter==='all'||filter==='company'&&!isFund(x)||filter==='fund'&&isFund(x)||filter==='unpriced'&&!valid(x.price)||filter==='favorites'&&Boolean(account?.user)&&favorites.has(x.ticker)));
- $('stockList').innerHTML=display.map(x=>{
+ const display=activeStocks.filter(x=>!isFund(x)&&(x.ticker.toLowerCase().includes(q)||x.name.toLowerCase().includes(q))&&
+  (filter!=='favorites'||Boolean(account?.user)&&favorites.has(x.ticker)));
+ const toggle=$('stockListToggle');
+ toggle.hidden=display.length<=6;
+ toggle.textContent=stockListExpanded?'Show Less':'Show More ('+(display.length-6)+' more)';
+ toggle.setAttribute('aria-expanded',String(stockListExpanded));
+ $('stockList').innerHTML=(stockListExpanded?display:display.slice(0,6)).map(x=>{
   const active=selected?.ticker===x.ticker;
   const saved=Boolean(window.ShareWatchUser?.favorites.has(x.ticker));
   return '<div style="display:flex;align-items:stretch;gap:5px;margin-bottom:5px"><button style="flex:1;min-width:0" class="stock-item'+(active?' selected':'')+'" role="option" aria-selected="'+active+'" data-ticker="'+esc(x.ticker)+'"><span style="min-width:0"><span class="ticker">'+esc(x.ticker)+'</span> <span class="ticker-type">'+(isFund(x)?'Fund':'Stock')+'</span><div class="company-name" title="'+esc(x.name)+'">'+esc(x.name)+'</div></span><span style="text-align:right"><span class="price">'+(valid(x.price)?dollars(x.price):'Awaiting price')+'</span><div class="age">'+(x.priceDate?'Close '+esc(x.priceDate):'No saved quote')+'</div></span></button><button type="button" data-favorite="'+esc(x.ticker)+'" aria-label="'+(saved?'Remove ':'Add ')+esc(x.ticker)+(saved?' from':' to')+' favorites" aria-pressed="'+saved+'" title="'+(saved?'Remove favorite':'Save favorite')+'" style="flex:0 0 42px;min-width:42px;padding:6px;color:'+(saved?'#f6c86d':'#a9b7c9')+';background:#172538;border:1px solid #344862;border-radius:9px;font-size:22px;cursor:pointer">'+(saved?'★':'☆')+'</button></div>';
  }).join('')||(filter==='favorites'
   ? account?.user
-   ? '<p class="muted small">No favorite stocks match. Select All active to star your stocks here.</p>'
+   ? '<p class="muted small">No favorite stocks match. Select Stocks to star your stocks here.</p>'
    : '<p class="muted small">Sign in using the Account button above to view favorites.</p>'
   : '<p class="muted small">No active stocks match this filter. You can manage the watchlist in the admin portal.</p>');
 }
@@ -314,8 +319,9 @@ document.addEventListener('sharewatch:account',()=>{
  const user=window.ShareWatchUser?.user;
  const link=$('favoritesAccountLink');
  if(link){link.textContent=user?'Account / Sign out':'Sign in / Create account';}
- renderList();
+ stockListExpanded=false;renderList();
 });
+$('stockListToggle').addEventListener('click',()=>{stockListExpanded=!stockListExpanded;renderList();});
 $('stockList').addEventListener('click',async event=>{
  const star=event.target.closest('button[data-favorite]');
  if(star){
