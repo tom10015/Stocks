@@ -319,7 +319,7 @@ function valCenter(){
  // The old model averaged arbitrary fixed earnings/sales/book/FCF multiples,
  // which can badly understate prices for asset-light and high-growth firms.
  const scenarioFactors={conservative:0.8,base:1,optimistic:1.2};
- const factor=scenarioFactors[$('valScenario').value]??1;
+ const factor=scenarioFactors[$('valScenario').value]??scenarioFactors.conservative;
  const methods=[];
  const add=(name,perShare,period)=>{
   if(valid(perShare)&&perShare>0&&close>0){
