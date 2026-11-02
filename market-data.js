@@ -335,22 +335,25 @@ function valCenter(){
    directEquity?.period_end||assets?.period_end);
   if(canFcf&&fcf>0)addMethod('Annual FCF / share',fcf/shares.shares,scenario.fcf,ocf.period_end);
  }
- const estimate=methods.length>=2?methods.reduce((sum,x)=>sum+x.price,0)/methods.length:null;
+ const combined=methods.length>=2;
+ const estimate=methods.length?methods.reduce((sum,x)=>sum+x.price,0)/methods.length:null;
  write('valEstimatedPrice',estimate!==null?cash(estimate):'Not available');
  write('valEstimateDetails',fund?'Not applicable to funds/ETFs; use fund NAV data.':
   !shares?'Recent SEC/issuer shares outstanding are required to calculate per-share values.':
-  methods.length<2?'Only '+methods.length+' valid valuation method(s); at least two are required.':
-  'Equal-weight average of '+methods.length+' independently calculated valuation scenarios.');
+  combined?'Illustrative equal-weight average of '+methods.length+' independent valuation scenarios.':
+  methods.length===1?'Single-method scenario only — not a blended valuation; interpret with caution.':
+  'No valid positive metrics were available for a valuation estimate.');
  $('valEstimateMethods').innerHTML=methods.length?
   '<strong>Model components ('+safe($('valScenario').selectedOptions[0].textContent)+'):</strong><ul>'+
   methods.map(x=>'<li>'+safe(x.name)+' × '+x.multiple+' = <strong>'+cash(x.price)+
   '</strong> per share · SEC period '+safe(x.date||'unknown')+'</li>').join('')+'</ul>'+
-  (methods.length<2?'Not enough usable methods to calculate a combined estimate.':''):
-  'No qualifying positive SEC metrics for the selected model. Negative figures are not silently valued as zero.';
+  (combined?'':'Only one method is available. This is a limited, low-confidence scenario, not a consensus of methods.'):
+  'No qualifying positive SEC metrics for this model. For example, missing share counts, negative equity, or negative earnings may prevent calculation. Values are not invented.';
  write('valEstimateComparison',estimate!==null&&close>0?
-  'Saved close '+cash(close)+' ('+refDate+'); scenario '+(estimate>=close?'+':'')+
-  ((estimate/close-1)*100).toFixed(1)+'% versus saved close (not an expected return).':
-  'A comparison requires both an eligible combined estimate and a saved closing price.');
+  'Saved close '+cash(close)+' ('+refDate+'); '+(combined?'blended':'single-method')+' scenario '+
+  (estimate>=close?'+':'')+((estimate/close-1)*100).toFixed(1)+
+  '% versus saved close (not an expected return).':
+  'A comparison requires both an eligible estimate and a saved closing price.');
  const reasons={
   valMarketCap:marketCap!==null?'Saved close × '+shares.desc+' ('+shares.date+')':
    fund?'Fund/ETF market cap is not the same as issuer equity valuation.':
