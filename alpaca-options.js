@@ -5,6 +5,7 @@
 'use strict';
 const ALPACA_ENDPOINT=SUPABASE+'/functions/v1/sharewatch-alpaca';
 let alpacaCurrent=null,alpacaRequestId=0,alpacaCurrentTicker=null;
+let alpacaExpanded=false;
 function daysRemaining(iso){const target=Date.parse(iso+'T00:00:00Z');const today=new Date().toISOString().slice(0,10);return Number.isFinite(target)?Math.round((target-Date.parse(today+'T00:00:00Z'))/86400000):-1;}
 const alpacaCache=new Map();
 function alpacaStatus(message,connected=false){
@@ -14,6 +15,9 @@ function alpacaStatus(message,connected=false){
  $('alpacaBadge').className='badge '+(connected?'feed-ok':'feed-old');
 }
 function alpacaEmpty(message){
+ alpacaExpanded=false;
+ $('alpacaShowMore').hidden=true;
+ $('alpacaShowMore').setAttribute('aria-expanded','false');
  $('alpacaRows').innerHTML='<tr><td colspan="6" class="muted">'+esc(message)+'</td></tr>';
 }
 async function alpacaFetch(params){
@@ -134,7 +138,12 @@ function alpacaRender(){
  for(const c of sorted){
   if(!grouped.has(c.strike)||(!Number.isFinite(grouped.get(c.strike).ask)&&Number.isFinite(c.ask)))grouped.set(c.strike,c);
  }
- const list=[...grouped.values()].sort(alpacaChainSort);
+ const allContracts=[...grouped.values()].sort(alpacaChainSort);
+ const list=alpacaExpanded?allContracts:allContracts.slice(0,5);
+ const showMore=$('alpacaShowMore');
+ showMore.hidden=allContracts.length<=5;
+ showMore.textContent=alpacaExpanded?'Show Less':'Show More ('+(allContracts.length-5)+' more)';
+ showMore.setAttribute('aria-expanded',String(alpacaExpanded));
  let rows='',lineDrawn=false;
  for(let i=0;i<list.length;i++){
   const c=list[i];
@@ -181,6 +190,7 @@ function alpacaRender(){
  $('alpacaRows').innerHTML=rows||'<tr><td colspan="6" class="muted">No strikes returned for this expiration. Choose another listed date.</td></tr>';
 }
 async function alpacaLoad(force=false){
+ alpacaExpanded=false;
  if(!selected)return;
  const ticker=selected.ticker,side=alpacaSide(),spot=selected.price;
  const reqId=++alpacaRequestId;
@@ -286,9 +296,10 @@ selectStock=function(ticker){
  if(selected?.ticker===ticker)alpacaLoad();
 };
 $('alpacaRefresh').addEventListener('click',()=>alpacaLoad(true));
-$('chainSort')?.addEventListener('change',()=>alpacaRender());
-$('alpacaExpiration').addEventListener('change',()=>alpacaLoadExpiration());
-$('strategy').addEventListener('change',()=>alpacaLoad());
+$('chainSort')?.addEventListener('change',()=>{alpacaExpanded=false;alpacaRender();});
+$('alpacaShowMore').addEventListener('click',()=>{alpacaExpanded=!alpacaExpanded;alpacaRender();});
+$('alpacaExpiration').addEventListener('change',()=>{alpacaExpanded=false;alpacaLoadExpiration();});
+$('strategy').addEventListener('change',()=>{alpacaExpanded=false;alpacaLoad();});
 $('alpacaRows').addEventListener('click',e=>{
  const toggle=e.target.closest('button[data-chain-expand]');
  if(toggle){
