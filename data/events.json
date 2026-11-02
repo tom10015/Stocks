@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-01T16:54:36.850602+00:00",
+  "updated_at": "2026-11-02T20:28:49.658744+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2026-12-16",
-  "source_requests_successful": 66,
+  "coverage_end": "2026-12-17",
+  "source_requests_successful": 68,
   "source_requests_failed": 0,
-  "note": "66 source queries successful; 0 unavailable. Dates are source-reported and may change.",
+  "note": "68 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
     {
       "ticker": "AAPL",
@@ -12,6 +12,13 @@
       "type": "earnings",
       "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $1.98",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
+    },
+    {
+      "ticker": "BND",
+      "date": "2026-11-02",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.256802 \u00b7 pay 11/04/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/bnd/dividend-history"
     },
     {
       "ticker": "O",
@@ -66,7 +73,7 @@
       "ticker": "IREN",
       "date": "2026-11-05",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($0.46)",
+      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($0.49)",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
@@ -152,6 +159,13 @@
       "type": "dividend",
       "details": "Reported ex-dividend date \u00b7 0.04 \u00b7 pay 11/13/2026",
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "ECC",
+      "date": "2026-11-13",
+      "type": "earnings",
+      "details": "Reported earnings date \u00b7 time-pre-market \u00b7 EPS estimate $0.18",
+      "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "SBUX",
@@ -284,6 +298,13 @@
       "date": "2026-12-09",
       "type": "earnings",
       "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $1.57",
+      "source_url": "https://www.nasdaq.com/market-activity/earnings"
+    },
+    {
+      "ticker": "NKE",
+      "date": "2026-12-17",
+      "type": "earnings",
+      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $0.34",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     }
   ]
