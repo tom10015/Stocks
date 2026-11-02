@@ -8,12 +8,13 @@ let events=[];
 let expanded=false;
 const panel=$('eventsCalendar');
 function draw(){
- const kind=$('eventsKind').value,search=$('eventsSearch').value.toUpperCase().trim(),days=Number($('eventsWindow').value);
+ const kind=$('eventsKind').value,selectedTicker=$('stockTicker').value.toUpperCase().trim(),days=Number($('eventsWindow').value);
+ $('eventsSelectedTicker').value=selectedTicker||'No stock selected';
  const start=today(),end=new Date(Date.parse(start+'T12:00:00Z')+days*86400000).toISOString().slice(0,10);
- const rows=events.filter(x=>x.date>=start&&x.date<=end&&(kind==='all'||x.type===kind)&&(!search||x.ticker.includes(search)));
+ const rows=events.filter(x=>x.date>=start&&x.date<=end&&(kind==='all'||x.type===kind)&&x.ticker===selectedTicker);
  panel.classList.toggle('calendar-expanded',expanded);
  const shown=rows.slice(0,expanded?300:5);
- $('eventsRows').innerHTML=shown.map(x=>'<tr><td>'+safe(x.date)+'</td><td><strong>'+safe(x.ticker)+'</strong></td><td>'+safe(x.type==='dividend'?'Ex-dividend':'Earnings')+'</td><td>'+safe(x.details||'Scheduled / reported event')+'</td><td>'+(x.source_url?.startsWith('https://')?'<a target="_blank" rel="noopener noreferrer" href="'+safe(x.source_url)+'">Source ↗</a>':'—')+'</td></tr>').join('')||'<tr><td colspan="5">No source-reported events available for the selected stocks and period. This does not mean none are scheduled.</td></tr>';
+ $('eventsRows').innerHTML=shown.map(x=>'<tr><td>'+safe(x.date)+'</td><td><strong>'+safe(x.ticker)+'</strong></td><td>'+safe(x.type==='dividend'?'Ex-dividend':'Earnings')+'</td><td>'+safe(x.details||'Scheduled / reported event')+'</td><td>'+(x.source_url?.startsWith('https://')?'<a target="_blank" rel="noopener noreferrer" href="'+safe(x.source_url)+'">Source ↗</a>':'—')+'</td></tr>').join('')||'<tr><td colspan="5">No source-reported events available for this stock and period. This does not mean none are scheduled.</td></tr>';
  const toggle=$('eventsToggle');
  toggle.hidden=rows.length<=5;
  toggle.textContent=expanded?'Show Less':'Show More ('+Math.min(rows.length-5,295)+' more)';
@@ -29,7 +30,7 @@ async function load(){
  }catch(e){$('eventsStatus').textContent='Calendar unavailable: '+e.message+'. Event dates are not estimated or fabricated.';}
  draw();
 }
-for(const id of ['eventsKind','eventsWindow','eventsSearch'])$(id).addEventListener(id==='eventsSearch'?'input':'change',()=>{expanded=false;draw();});
+for(const id of ['eventsKind','eventsWindow','stockTicker'])$(id).addEventListener('change',()=>{expanded=false;draw();});
 $('eventsToggle').addEventListener('click',()=>{expanded=!expanded;draw();});
 load();
 })();
