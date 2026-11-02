@@ -315,18 +315,42 @@ function valCenter(){
   ocf.period_start===capex.period_start);
  const fcf=canFcf?ocf.value-capex.value:null;
  const cashFlowValue=canFcf?fcf:ocf?.value??null;
- // Simple earnings-multiple sensitivity, not an intrinsic-value or analyst price target.
- const targetPE=Number($('valTargetPE').value);
- const estimate=!fund&&eps?.value>0&&['10','15','20'].includes($('valTargetPE').value)
-  ?eps.value*targetPE:null;
+ // Transparent multi-method scenario, based only on dated available SEC inputs.
+ // No missing company metrics are replaced with assumed company figures.
+ const assumptions={
+  conservative:{pe:10,ps:0.8,pb:1,fcf:10},
+  base:{pe:15,ps:1.5,pb:1.5,fcf:15},
+  optimistic:{pe:20,ps:2.5,pb:2.5,fcf:20}
+ };
+ const scenario=assumptions[$('valScenario').value]||assumptions.base;
+ const methods=[];
+ const addMethod=(name,perShare,multiple,date)=>{
+  if(valid(perShare)&&perShare>0&&valid(multiple)&&multiple>0)
+   methods.push({name,price:perShare*multiple,multiple,date});
+ };
+ if(!fund&&shares?.shares>0){
+  if(eps?.value>0)addMethod('Annual earnings / share',eps.value,scenario.pe,eps.period_end);
+  if(revenue?.value>0)addMethod('Annual sales / share',revenue.value/shares.shares,scenario.ps,revenue.period_end);
+  if(equity>0)addMethod('Book equity / share',equity/shares.shares,scenario.pb,
+   directEquity?.period_end||assets?.period_end);
+  if(canFcf&&fcf>0)addMethod('Annual FCF / share',fcf/shares.shares,scenario.fcf,ocf.period_end);
+ }
+ const estimate=methods.length>=2?methods.reduce((sum,x)=>sum+x.price,0)/methods.length:null;
  write('valEstimatedPrice',estimate!==null?cash(estimate):'Not available');
- write('valEstimateDetails',estimate!==null?
-  'SEC '+epsType+' annual EPS '+cash(eps.value)+' (fiscal year ending '+eps.period_end+') × assumed '+targetPE+'× P/E.':
-  fund?'Not applicable to funds/ETFs; a NAV-based approach is needed.':
-  'A recent positive annual SEC EPS is required. Missing or negative earnings are not assigned a price.');
+ write('valEstimateDetails',fund?'Not applicable to funds/ETFs; use fund NAV data.':
+  !shares?'Recent SEC/issuer shares outstanding are required to calculate per-share values.':
+  methods.length<2?'Only '+methods.length+' valid valuation method(s); at least two are required.':
+  'Equal-weight average of '+methods.length+' independently calculated valuation scenarios.');
+ $('valEstimateMethods').innerHTML=methods.length?
+  '<strong>Model components ('+safe($('valScenario').selectedOptions[0].textContent)+'):</strong><ul>'+
+  methods.map(x=>'<li>'+safe(x.name)+' × '+x.multiple+' = <strong>'+cash(x.price)+
+  '</strong> per share · SEC period '+safe(x.date||'unknown')+'</li>').join('')+'</ul>'+
+  (methods.length<2?'Not enough usable methods to calculate a combined estimate.':''):
+  'No qualifying positive SEC metrics for the selected model. Negative figures are not silently valued as zero.';
  write('valEstimateComparison',estimate!==null&&close>0?
-  'Saved close '+cash(close)+' ('+refDate+'); scenario '+(estimate>=close?'+':'')+((estimate/close-1)*100).toFixed(1)+'% versus that close. This is not an expected return.':
-  'No price comparison available without both a positive estimate and saved closing price.');
+  'Saved close '+cash(close)+' ('+refDate+'); scenario '+(estimate>=close?'+':'')+
+  ((estimate/close-1)*100).toFixed(1)+'% versus saved close (not an expected return).':
+  'A comparison requires both an eligible combined estimate and a saved closing price.');
  const reasons={
   valMarketCap:marketCap!==null?'Saved close × '+shares.desc+' ('+shares.date+')':
    fund?'Fund/ETF market cap is not the same as issuer equity valuation.':
@@ -399,7 +423,7 @@ function valCenter(){
   '; share count '+(shares?.date||latestReported?.date||'unavailable')+'. '+
   'Read each card for the reason an unavailable ratio is omitted.');
 }
-$('valTargetPE').addEventListener('change',()=>{if(selected)valCenter();});
+$('valScenario').addEventListener('change',()=>{if(selected)valCenter();});
 function update(){
  if(!selected)return;
  drawChart();filingRows();renderShortInterest();signalCards();valCenter();
