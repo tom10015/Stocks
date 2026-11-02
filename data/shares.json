@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T09:54:35.473547+00:00",
+  "updated_at": "2026-11-02T15:48:55.722927+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1936,7 +1936,7 @@
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 307902500,
@@ -1982,9 +1982,9 @@
           "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
+      "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-01"
+      "source_updated_at": "2026-11-02"
     },
     "CRWV": {
       "ticker": "CRWV",
