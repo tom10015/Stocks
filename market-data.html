@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Market Data Lab · ShareWatch</title><meta name="description" content="Advanced stock charts, SEC Form 4 insider filings, short interest research, price-volume signals and financial valuation metrics.">
 <link rel="stylesheet" href="./resources.css?v=20261101-market1"><link rel="stylesheet" href="./market-data.css?v=20261101-market1">
-<script defer src="./market-data.js?v=20261101-all-stocks1"></script></head><body>
+<script defer src="./market-data.js?v=20261101-all-stocks1"></script><script defer src="./market-calendar.js?v=20261101-move1"></script></head><body>
 <header class="site-header"><nav class="nav" aria-label="ShareWatch navigation"><a class="brand" href="./index.html">◈ Share<span>Watch</span></a><div class="nav-links">
 <a href="./index.html">Share Counter</a><a href="./options.html">Options</a><a href="./research.html">Research & Income</a><a href="./market-data.html" class="active" aria-current="page">Market Data</a><a href="./tools.html">Tools</a><a href="./help.html">Help</a><a href="./admin.html">Admin</a></div></nav></header>
 <main>
@@ -16,6 +16,7 @@
 <a class="tile" href="#short-interest"><span class="tile-mark">◷</span><strong>Short Interest</strong><span class="muted">Official data research and manual comparison</span></a>
 <a class="tile" href="#signals"><span class="tile-mark">⚑</span><strong>Stock Signals</strong><span class="muted">Volume spikes and price trends</span></a>
 <a class="tile" href="#valuation"><span class="tile-mark">▤</span><strong>Valuation Center</strong><span class="muted">P/E, P/S, P/B, market cap</span></a>
+<a class="tile" href="#eventsCalendar"><span class="tile-mark">▦</span><strong>Earnings &amp; Dividends</strong><span class="muted">Upcoming source-reported calendar dates</span></a>
 </nav>
 <section class="panel" id="advanced-charts">
 <div class="panel-head"><div><h2>Advanced Stock Charts</h2><p>Choose any tracked ticker. Where verified OHLCV is saved, see daily candlesticks, volume, 20/50-session moving averages, and 14-session RSI. Other tickers automatically show their saved closing-price history until daily candles are collected.</p></div><span class="pill">Historical data · not live</span></div>
@@ -75,6 +76,19 @@
 <p class="sourced-note">Historical shares and prices can refer to different dates, and stock splits can invalidate simple market-cap comparisons. Companies with zero/negative EPS or equity are not assigned a P/E or P/B. Financial institutions and funds require specialized valuation methods. An unavailable item is shown as —, never filled with a fabricated value.</p>
 </section>
 
+<section class="panel sw-tools market-calendar" id="eventsCalendar" aria-labelledby="swEventsTitle">
+<div class="panel-head"><div><div class="eyebrow">Event risk</div><h2 id="swEventsTitle">Earnings and dividend calendar</h2></div><span class="badge">Source-reported dates</span></div>
+<p class="small muted">Upcoming reported earnings and ex-dividend dates for tracked stocks, if the market-calendar feed is available. Dates can change; no events shown does not mean there are none. Verify with issuers before trading options.</p>
+<div class="sw-tool-grid"><label>Event type<select id="eventsKind"><option value="all">Earnings + dividends</option><option value="earnings">Earnings only</option><option value="dividend">Ex-dividend only</option></select></label><label>Ticker / search<input id="eventsSearch" placeholder="Filter stocks"></label><label>Period<select id="eventsWindow"><option value="30">Next 30 days</option><option value="60">Next 60 days</option><option value="90">Next 90 days</option></select></label></div>
+<p id="eventsStatus" class="small muted" role="status" aria-live="polite">Loading verified calendar events…</p>
+<div class="table-scroll"><table class="data-table"><thead><tr><th>Date</th><th>Stock</th><th>Event</th><th>Details</th><th>Source</th></tr></thead><tbody id="eventsRows"><tr><td colspan="5">Calendar data has not loaded.</td></tr></tbody></table></div>
+</section>
+<style>
+.market-calendar{margin-top:20px}.market-calendar .sw-tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin:16px 0}
+.market-calendar .sw-tool-grid label{display:block;font-size:12px;color:#afbed3}
+.market-calendar .sw-tool-grid input,.market-calendar .sw-tool-grid select{display:block;width:100%;margin-top:5px;min-width:0;padding:9px;border-radius:7px;background:#162536;color:#edf3fc;border:1px solid #42536c}
+.market-calendar .data-table th,.market-calendar .data-table td{padding:10px;white-space:nowrap}
+</style>
 <style>
 .sw-quick-links{margin:24px 0 14px;padding:12px 0;border-top:1px solid #2c3c52;color:#a9bad1;font-family:inherit}
 .sw-quick-links .sw-quick-label{display:inline-block;margin:0 12px 8px 0;font-size:13px;font-weight:700;color:#d6e3f3}
