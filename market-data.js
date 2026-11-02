@@ -343,7 +343,7 @@ function valCenter(){
   ' and the saved close dated '+refDate+'. Base equals the market price by definition.');
  write('valEstimateComparison',estimate!==null?
   'Scenario '+(factor===1?'matches the saved close by construction':
-  (factor<1?'20% below':'20% above')+' the saved close')+
+  (factor<1?'is below':'is above')+' the saved close')+
   '. It is not an independently calculated fair price, expected return, or buy/sell signal.':
   'An estimate requires a saved close plus at least one eligible positive SEC financial metric.');
  const reasons={
