@@ -13,7 +13,7 @@ const today=()=>{
 };
 function dte(s){return Math.ceil((Date.parse(s+'T12:00:00Z')-Date.now())/86400000);}
 const account=()=>window.ShareWatchUser;
-let scanResults=[],scanPage=0,running=false,journalRows=[],lastJournalUser=null,calendarEvents=[];
+let scanResults=[],scanPage=0,running=false,journalRows=[],lastJournalUser=null;
 const scanMessage=(m,warning=false)=>{$('screenStatus').textContent=m;$('screenStatus').className='small '+(warning?'sw-warning':'muted');};
 const journalMessage=(m,warning=false)=>{$('journalMessage').textContent=m;$('journalMessage').className='small '+(warning?'sw-warning':'muted');};
 function ranked(result,sort){const score=r=>sort==='premium'?r.premium:sort==='roi'?r.roi:sort==='delta'?-r.delta:sort==='spread'?-r.spread:r.annual;return [...result].sort((a,b)=>score(b)-score(a)||a.ticker.localeCompare(b.ticker));}
@@ -174,24 +174,4 @@ document.addEventListener('sharewatch:account',()=>{
 });
 $('journalOpened').value=today();paintJournal();
 if(account()?.user){lastJournalUser=account().user.id;loadJournal();}
-function drawEvents(){
- const kind=$('eventsKind').value,search=$('eventsSearch').value.toUpperCase().trim(),days=Number($('eventsWindow').value);
- const start=today();const end=new Date(Date.parse(start+'T12:00:00Z')+days*86400000).toISOString().slice(0,10);
- const symbols=new Set(activeStocks.map(x=>x.ticker));
- const filtered=calendarEvents.filter(x=>x.date>=start&&x.date<=end&&symbols.has(x.ticker)&&(kind==='all'||x.type===kind)&&(!search||x.ticker.includes(search)));
- $('eventsRows').innerHTML=filtered.slice(0,300).map(x=>'<tr><td>'+safe(x.date)+'</td><td><strong>'+safe(x.ticker)+'</strong></td><td>'+safe(x.type==='dividend'?'Ex-dividend':'Earnings')+'</td><td>'+safe(x.details||'Scheduled / reported event')+'</td><td>'+(x.source_url?.startsWith('https://')?'<a target="_blank" rel="noopener noreferrer" href="'+safe(x.source_url)+'">Source ↗</a>':'—')+'</td></tr>').join('')||'<tr><td colspan="5">No source-reported events available for the selected watchlist and period. This does not mean none are scheduled.</td></tr>';
-}
-async function fetchCalendar(){
- try{
-  const response=await fetch('./data/events.json?t='+Date.now(),{cache:'no-store'});
-  if(!response.ok)throw Error('Feed not yet generated (HTTP '+response.status+')');
-  const data=await response.json();
-  calendarEvents=(Array.isArray(data.events)?data.events:[]).filter(x=>dateValid(x.date)&&/^[A-Z0-9][A-Z0-9.^-]{0,15}$/.test(x.ticker)&&['earnings','dividend'].includes(x.type));
-  $('eventsStatus').textContent='Calendar source: '+(data.provider||'Unavailable')+' · checked '+(data.updated_at||'not yet')+' · '+calendarEvents.length+' source-reported events. Coverage through '+(data.coverage_end||'unknown')+'. '+(data.note||'');
-  drawEvents();
- }catch(e){$('eventsStatus').textContent='Calendar unavailable: '+e.message+'. Event dates are not estimated or fabricated.';drawEvents();}
-}
-document.addEventListener('sharewatch:watchlist-loaded',drawEvents);
-for(const id of ['eventsKind','eventsWindow','eventsSearch'])$(id).addEventListener(id==='eventsSearch'?'input':'change',drawEvents);
-fetchCalendar();
 })();
