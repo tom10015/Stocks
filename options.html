@@ -111,28 +111,7 @@
    </div>
   </section>
  </div>
- <section class="panel sw-tools" id="tradeJournal" aria-labelledby="swJournalTitle">
-<div class="panel-head"><div><div class="eyebrow">Private trading journal</div><h2 id="swJournalTitle">Options portfolio tracker</h2></div><span class="badge">Account only</span></div>
-<p class="small muted">Record trades manually; these are not broker-connected positions. Only your signed-in account can access your entries. Closed P/L includes entered open and closing premiums and fees, not stock assignment effects.</p>
-<div id="journalAccess" class="small muted">Sign in to save trades.</div>
-<form id="journalForm" class="sw-tool-grid">
-<label>Ticker<input id="journalTicker" required maxlength="16" placeholder="AAPL"></label>
-<label>Strategy<select id="journalStrategy"><option value="put">Sold cash-secured put</option><option value="call">Sold covered call</option><option value="long_call">Bought call</option><option value="long_put">Bought put</option></select></label>
-<label>Expiration<input type="date" id="journalExpiration" required></label>
-<label>Strike ($)<input type="number" id="journalStrike" min="0.01" step="0.01" required></label>
-<label>Open premium / share ($)<input type="number" id="journalPremium" min="0.01" step="0.01" required></label>
-<label>Contracts<input type="number" id="journalContracts" min="1" max="10000" step="1" value="1" required></label>
-<label>Fees ($)<input type="number" id="journalFees" min="0" step="0.01" value="0"></label>
-<label>Opened on<input type="date" id="journalOpened" required></label>
-<label>Notes (optional)<input id="journalNotes" maxlength="500" placeholder="Trade thesis / order details"></label>
-<div class="actions"><button type="submit" id="journalSave" class="primary">Save trade</button><button type="button" id="journalUseCurrent" class="ghost">Use selected trade</button></div>
-</form>
-<p id="journalMessage" class="small muted" role="status" aria-live="polite"></p>
-<div id="journalSummary" class="small muted"></div>
-<div class="table-scroll"><table><thead><tr><th>Ticker</th><th>Strategy</th><th>Expiry</th><th>Strike</th><th>Open credit / debit</th><th>Status</th><th>Realized option P/L</th><th>Action</th></tr></thead><tbody id="journalRows"><tr><td colspan="8">Sign in to load your trades.</td></tr></tbody></table></div>
-</section>
-
-<div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
+ <div class="below"><details><summary>How to interpret the results</summary><p>Cash-secured puts: the maximum gain is the net option credit, while downside can be substantial if the shares collapse. Covered calls: you must own 100 deliverable shares per contract; upside is capped at the strike and stock downside remains. Long calls: the maximum loss is the premium plus fees, with potentially unlimited upside at expiration. Long puts: maximum loss is the premium plus fees, while upside is capped because the stock price cannot drop below zero. Early assignment, taxes, interest, slippage, bid-ask spreads, corporate actions, and changing implied volatility can affect real results. Fees are deducted, but the charts describe <strong>expiration</strong> P/L, not mark-to-market option prices. Underlying stock closes are historical. Alpaca indicative option prices are modified, not actual exchange bid/ask. Use a broker to verify actual market pricing, liquidity and expiration terms. Confirm contract size, liquidity, dividend timing, and current pricing with a broker.</p></details></div>
  
 <style>
 .sw-quick-links{margin:24px 0 14px;padding:12px 0;border-top:1px solid #2c3c52;color:#a9bad1;font-family:inherit}
@@ -145,6 +124,6 @@
 <section class="sw-quick-links" id="quick-links" aria-label="Quick Links"><span class="sw-quick-label">Quick Links:</span><nav class="sw-quick-nav" aria-label="Footer navigation"><a href="./index.html">Share Counter</a><a href="./options.html" aria-current="page">Options Analyzer</a><a href="./research.html">Market Research</a><a href="./market-data.html">Market Data</a><a href="./tools.html">Trading Tools</a><a href="./help.html">Help Guide</a><a href="./admin.html">Admin Portal</a></nav></section>
 <footer>ShareWatch Options Analyzer is an addition to the existing share-count and EPS tracking website. Calculations are illustrative, use standard 100-share non-adjusted U.S. equity option contracts, and do not constitute a trade recommendation. Neither high probability nor premium yield guarantees profitability.</footer>
 </main>
-<script src="./user-favorites.js?v=20261031-research-journal1" defer></script><script src="./inline-account.js?v=20261031-inline-user1" defer></script><script src="./options.js?v=20261101-income-deeplink1" defer></script><script src="./alpaca-options.js?v=20261101-itm-otm-two-each1" defer></script><script src="./research-tools.js?v=20261101-journal-only1" defer></script>
+<script src="./user-favorites.js?v=20261031-research-journal1" defer></script><script src="./inline-account.js?v=20261031-inline-user1" defer></script><script src="./options.js?v=20261101-income-deeplink1" defer></script><script src="./alpaca-options.js?v=20261101-itm-otm-two-each1" defer></script>
 </body>
 </html>
