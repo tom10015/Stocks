@@ -187,6 +187,10 @@ $('insiderToggle').addEventListener('click',()=>{
  button.setAttribute('aria-expanded',String(expanded));
 });
 function renderShortInterest(){
+ const panel=$('short-interest'),toggle=$('shortToggle');
+ panel.classList.remove('short-expanded');
+ toggle.hidden=true;
+ toggle.setAttribute('aria-expanded','false');
  $('shortNasdaq').href='https://www.nasdaq.com/market-activity/stocks/'+encodeURIComponent(selected.toLowerCase())+'/short-interest';
  for(const id of ['shortReported','shortChange','shortPct','shortDtc'])write(id,'—');
  write('shortDateLabel','No verified settlement date');
@@ -209,7 +213,10 @@ function renderShortInterest(){
  write('shortPct',pct(dpc));
  write('shortDateLabel','FINRA settlement '+current.settlement_date);
  write('shortDtc',valid(current.days_to_cover_reported)?current.days_to_cover_reported.toFixed(2)+' days':'—');
- $('shortHistory').innerHTML=reports.slice(0,12).map(x=>{
+ const visibleReports=reports.slice(0,12);
+ toggle.hidden=visibleReports.length<=3;
+ toggle.textContent='Show More ('+(visibleReports.length-3)+' more)';
+ $('shortHistory').innerHTML=visibleReports.map(x=>{
   const prior=Number.isSafeInteger(x.previous_shares_short)?x.previous_shares_short:null;
   return '<tr><td>'+safe(x.settlement_date)+'</td><td>'+num(x.shares_short)+'</td><td>'+num(prior)+'</td><td>'+
    (prior===null?'—':(x.shares_short>=prior?'+':'')+num(x.shares_short-prior))+'</td><td>'+
@@ -218,6 +225,11 @@ function renderShortInterest(){
  write('shortStatus',reports.length+' settlement-dated FINRA observations saved for '+selected+'. Last settlement '+current.settlement_date+
   ' · dataset checked '+(record?.checked_at||'unknown')+'. These are periodic positions, not live shorts or daily short-sale volume.');
 }
+$('shortToggle').addEventListener('click',()=>{
+ const panel=$('short-interest'),expanded=panel.classList.toggle('short-expanded'),btn=$('shortToggle');
+ btn.textContent=expanded?'Show Less':'Show More ('+Math.max(0,$('shortHistory').rows.length-3)+' more)';
+ btn.setAttribute('aria-expanded',String(expanded));
+});
 function shareIncrease(){
  const h=(state.shares?.companies?.[selected]?.history||[]).filter(x=>dateOK(x.date)&&valid(x.shares)&&x.shares>0&&x.form!=='Snapshot')
   .sort((a,b)=>a.date.localeCompare(b.date));
