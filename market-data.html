@@ -82,9 +82,10 @@
 <div class="sw-tool-grid"><label>Event type<select id="eventsKind"><option value="all">Earnings + dividends</option><option value="earnings">Earnings only</option><option value="dividend">Ex-dividend only</option></select></label><label>Ticker / search<input id="eventsSearch" placeholder="Filter stocks"></label><label>Period<select id="eventsWindow"><option value="30">Next 30 days</option><option value="60">Next 60 days</option><option value="90">Next 90 days</option></select></label></div>
 <p id="eventsStatus" class="small muted" role="status" aria-live="polite">Loading verified calendar events…</p>
 <div class="table-scroll"><table class="data-table"><thead><tr><th>Date</th><th>Stock</th><th>Event</th><th>Details</th><th>Source</th></tr></thead><tbody id="eventsRows"><tr><td colspan="5">Calendar data has not loaded.</td></tr></tbody></table></div>
+<div class="calendar-actions"><button type="button" id="eventsToggle" aria-expanded="false" aria-controls="eventsRows" hidden>Show More</button></div>
 </section>
 <style>
-.market-calendar{margin-top:20px}.market-calendar .sw-tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin:16px 0}
+.market-calendar{margin-top:20px}.market-calendar .calendar-actions{display:flex;justify-content:center;margin-top:15px}.market-calendar #eventsToggle{padding:9px 20px;border:1px solid #42536c;border-radius:8px;background:#192c3f;color:#edf3fc;cursor:pointer;font:inherit;font-size:13px}.market-calendar #eventsToggle[hidden]{display:none}.market-calendar #eventsToggle:hover{border-color:#75edc1}.market-calendar .sw-tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin:16px 0}
 .market-calendar .sw-tool-grid label{display:block;font-size:12px;color:#afbed3}
 .market-calendar .sw-tool-grid input,.market-calendar .sw-tool-grid select{display:block;width:100%;margin-top:5px;min-width:0;padding:9px;border-radius:7px;background:#162536;color:#edf3fc;border:1px solid #42536c}
 .market-calendar .data-table th,.market-calendar .data-table td{padding:10px;white-space:nowrap}
