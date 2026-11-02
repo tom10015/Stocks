@@ -44,3 +44,12 @@
 [data-empty="true"]{display:none}
 @media(max-width:900px){.market-cols{grid-template-columns:1fr}.market-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.signal-grid,.fact-list{grid-template-columns:1fr}.market-grid{grid-template-columns:1fr 1fr}.chart-box{padding:6px}.chart-box svg{min-height:170px}}
+
+/* Market Data only: six compact section links in a single desktop row. */
+@media (min-width:1100px){
+ nav.tool-grid[aria-label="Market data tools"]{grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}
+ nav.tool-grid[aria-label="Market data tools"] .tile{padding:11px 10px;gap:5px;border-radius:11px}
+ nav.tool-grid[aria-label="Market data tools"] .tile strong{font-size:12px;line-height:1.3}
+ nav.tool-grid[aria-label="Market data tools"] .tile .muted{font-size:10px;line-height:1.35}
+ nav.tool-grid[aria-label="Market data tools"] .tile-mark{font-size:17px}
+}
