@@ -341,13 +341,6 @@ function valCenter(){
   !methods.length?'No positive eligible SEC earnings, sales or matching-period FCF available.':
   'Scenario based on '+methods.length+' market-implied ratio'+(methods.length===1?'':'s')+
   ' and the saved close dated '+refDate+'. Base equals the market price by definition.');
- $('valEstimateMethods').innerHTML=methods.length?
-  '<strong>Ratios implied by saved close '+cash(close)+' ('+safe(refDate||'unknown')+'):</strong><ul>'+
-  methods.map(x=>'<li>'+safe(x.name)+' / share '+cash(x.perShare)+
-   ' · market-implied <strong>'+x.implied.toFixed(1)+'×</strong>'+
-   ' · scenario price <strong>'+cash(x.scenarioPrice)+'</strong>'+
-   ' · SEC period '+safe(x.period||'unknown')+'</li>').join('')+'</ul>':
-  'No market-implied ratios can be calculated from the saved source data; no estimate is invented.';
  write('valEstimateComparison',estimate!==null?
   'Scenario '+(factor===1?'matches the saved close by construction':
   (factor<1?'20% below':'20% above')+' the saved close')+
