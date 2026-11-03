@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03T23:14:27.193721+00:00",
+  "updated_at": "2026-11-03T23:23:44.472886+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1760,6 +1760,15 @@
           "source": "Official fund issuer",
           "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-03",
+          "checked_at": "2026-11-03",
+          "shares": 789100000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
+          "date_is_check_only": true
         }
       ],
       "yoy_pct": null,
@@ -1954,7 +1963,7 @@
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 307902500,
@@ -2000,7 +2009,7 @@
           "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
+      "reason": "",
       "type": "fund",
       "source_updated_at": "2026-11-03"
     },
@@ -3179,6 +3188,14 @@
           "form": "10-Q",
           "accession": "0001104659-26-091183",
           "url": "https://www.sec.gov/Archives/edgar/data/887905/000110465926091183/"
+        },
+        {
+          "date": "2026-10-28",
+          "filed": "2026-11-03",
+          "shares": 56191669,
+          "form": "10-Q",
+          "accession": "0001104659-26-122146",
+          "url": "https://www.sec.gov/Archives/edgar/data/887905/000110465926122146/"
         }
       ],
       "yoy_pct": null
