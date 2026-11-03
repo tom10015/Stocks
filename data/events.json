@@ -1,39 +1,11 @@
 {
-  "updated_at": "2026-11-02T20:28:49.658744+00:00",
+  "updated_at": "2026-11-03T17:59:32.674243+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2026-12-17",
+  "coverage_end": "2026-12-18",
   "source_requests_successful": 68,
   "source_requests_failed": 0,
   "note": "68 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
-    {
-      "ticker": "AAPL",
-      "date": "2026-11-02",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $1.98",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "BND",
-      "date": "2026-11-02",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.256802 \u00b7 pay 11/04/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/bnd/dividend-history"
-    },
-    {
-      "ticker": "O",
-      "date": "2026-11-02",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $1.11",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-02",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 11/03/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
     {
       "ticker": "LTC",
       "date": "2026-11-03",
@@ -297,7 +269,7 @@
       "ticker": "ORCL",
       "date": "2026-12-09",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $1.57",
+      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $1.56",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
