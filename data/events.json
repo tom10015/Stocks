@@ -1,32 +1,11 @@
 {
-  "updated_at": "2026-11-03T17:59:32.674243+00:00",
+  "updated_at": "2026-11-04T18:12:11.790418+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2026-12-18",
-  "source_requests_successful": 68,
+  "coverage_end": "2026-12-19",
+  "source_requests_successful": 66,
   "source_requests_failed": 0,
-  "note": "68 source queries successful; 0 unavailable. Dates are source-reported and may change.",
+  "note": "66 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
-    {
-      "ticker": "LTC",
-      "date": "2026-11-03",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $0.70",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-03",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.04 \u00b7 pay 11/04/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "TSLX",
-      "date": "2026-11-03",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $0.43",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
     {
       "ticker": "OBDC",
       "date": "2026-11-04",
@@ -105,6 +84,13 @@
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
+      "ticker": "CAN",
+      "date": "2026-11-10",
+      "type": "earnings",
+      "details": "Reported earnings date \u00b7 time-pre-market \u00b7 EPS estimate ($0.06)",
+      "source_url": "https://www.nasdaq.com/market-activity/earnings"
+    },
+    {
       "ticker": "CRWV",
       "date": "2026-11-10",
       "type": "earnings",
@@ -124,6 +110,13 @@
       "type": "earnings",
       "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $1.15",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
+    },
+    {
+      "ticker": "AAPL",
+      "date": "2026-11-12",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.27 \u00b7 pay 11/16/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/aapl/dividend-history"
     },
     {
       "ticker": "STRC",
