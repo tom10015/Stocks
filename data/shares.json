@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-04T11:29:48.989954+00:00",
+  "updated_at": "2026-11-04T14:39:46.347211+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1950,6 +1950,15 @@
           "date": "2026-11-03",
           "checked_at": "2026-11-03",
           "shares": 364900000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
+          "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-04",
+          "checked_at": "2026-11-04",
+          "shares": 363900000,
           "form": "Fund snapshot",
           "source": "Official fund issuer",
           "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
@@ -6079,6 +6088,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/nvdy/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-02",
+          "checked_at": "2026-11-04",
+          "shares": 112375000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/nvdy/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -6104,6 +6122,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ymax/",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-02",
+          "checked_at": "2026-11-04",
+          "shares": 48475000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ymax/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -6152,6 +6179,15 @@
           "date": "2026-10-30",
           "checked_at": "2026-11-03",
           "shares": 27102464,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-02",
+          "checked_at": "2026-11-04",
+          "shares": 26952464,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
@@ -7458,6 +7494,15 @@
           "date": "2026-11-02",
           "checked_at": "2026-11-03",
           "shares": 287330000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://neosfunds.com/qqqi/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-03",
+          "checked_at": "2026-11-04",
+          "shares": 287600000,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://neosfunds.com/qqqi/",
@@ -10233,6 +10278,15 @@
           "date": "2026-10-30",
           "checked_at": "2026-11-03",
           "shares": 29604965,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/tsly/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-02",
+          "checked_at": "2026-11-04",
+          "shares": 29304965,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/tsly/",
