@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-04T18:50:01.417981+00:00",
+  "checked_at": "2026-11-05T00:18:18.351873+00:00",
   "results": {
     "ASST": {
       "checked_at": "2026-10-28T16:44:24.494715+00:00",
@@ -74,31 +74,31 @@
       "note": "No verified historical fund share series is available from configured providers."
     },
     "ORCU": {
-      "checked_at": "2026-11-03T23:14:13.153698+00:00",
+      "checked_at": "2026-11-05T00:18:18.351873+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "QQQA": {
-      "checked_at": "2026-11-03T23:14:13.153698+00:00",
+      "checked_at": "2026-11-05T00:18:18.351873+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "SCHD": {
-      "checked_at": "2026-11-03T23:14:13.153698+00:00",
+      "checked_at": "2026-11-05T00:18:18.351873+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "STRC": {
-      "checked_at": "2026-11-03T23:14:13.153698+00:00",
+      "checked_at": "2026-11-05T00:18:18.351873+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "No SEC company CIK mapping; a fund or preferred-share source may be required."
     },
     "TSLW": {
-      "checked_at": "2026-11-03T23:14:13.153698+00:00",
+      "checked_at": "2026-11-05T00:18:18.351873+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
