@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-05T15:46:03.351561+00:00",
+  "updated_at": "2026-11-05T19:58:05.915824+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1959,6 +1959,15 @@
           "date": "2026-11-04",
           "checked_at": "2026-11-04",
           "shares": 363900000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
+          "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-05",
+          "checked_at": "2026-11-05",
+          "shares": 364900000,
           "form": "Fund snapshot",
           "source": "Official fund issuer",
           "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
@@ -4537,6 +4546,15 @@
           "source": "Official fund issuer",
           "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-05",
+          "checked_at": "2026-11-05",
+          "shares": 2585000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -6148,6 +6166,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ymax/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-04",
+          "checked_at": "2026-11-05",
+          "shares": 48325000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ymax/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -6881,6 +6908,14 @@
           "form": "10-Q",
           "accession": "0001276187-26-000038",
           "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618726000038/"
+        },
+        {
+          "date": "2026-10-30",
+          "filed": "2026-11-05",
+          "shares": 3444252188,
+          "form": "10-Q",
+          "accession": "0001276187-26-000070",
+          "url": "https://www.sec.gov/Archives/edgar/data/1276187/000127618726000070/"
         }
       ],
       "yoy_pct": null
@@ -10256,6 +10291,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/msty/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-04",
+          "checked_at": "2026-11-05",
+          "shares": 74544959,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/msty/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -10304,6 +10348,15 @@
           "date": "2026-11-02",
           "checked_at": "2026-11-04",
           "shares": 29304965,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/tsly/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-04",
+          "checked_at": "2026-11-05",
+          "shares": 28979965,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/tsly/",
