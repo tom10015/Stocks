@@ -1,25 +1,11 @@
 {
-  "updated_at": "2026-11-04T18:12:11.790418+00:00",
+  "updated_at": "2026-11-05T18:13:27.434402+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2026-12-19",
-  "source_requests_successful": 66,
+  "coverage_end": "2026-12-20",
+  "source_requests_successful": 64,
   "source_requests_failed": 0,
-  "note": "66 source queries successful; 0 unavailable. Dates are source-reported and may change.",
+  "note": "64 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
-    {
-      "ticker": "OBDC",
-      "date": "2026-11-04",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $0.32",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-04",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 11/05/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
     {
       "ticker": "IREN",
       "date": "2026-11-05",
@@ -105,18 +91,18 @@
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
-      "ticker": "CSCO",
-      "date": "2026-11-11",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $1.15",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
       "ticker": "AAPL",
       "date": "2026-11-12",
       "type": "dividend",
       "details": "Reported ex-dividend date \u00b7 0.27 \u00b7 pay 11/16/2026",
       "source_url": "https://www.nasdaq.com/market-activity/stocks/aapl/dividend-history"
+    },
+    {
+      "ticker": "CSCO",
+      "date": "2026-11-12",
+      "type": "earnings",
+      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $1.15",
+      "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "STRC",
@@ -152,13 +138,6 @@
       "type": "dividend",
       "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 11/17/2026",
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "CAN",
-      "date": "2026-11-17",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate ($0.06)",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "DIS",
