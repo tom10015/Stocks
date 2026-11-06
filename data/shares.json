@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-06T17:26:03.559578+00:00",
+  "updated_at": "2026-11-06T19:25:38.106236+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -5075,6 +5075,14 @@
           "form": "10-Q",
           "accession": "0001193125-26-326752",
           "url": "https://www.sec.gov/Archives/edgar/data/895728/000119312526326752/"
+        },
+        {
+          "date": "2026-10-30",
+          "filed": "2026-11-06",
+          "shares": 2228888088,
+          "form": "10-Q",
+          "accession": "0001193125-26-450714",
+          "url": "https://www.sec.gov/Archives/edgar/data/895728/000119312526450714/"
         }
       ],
       "yoy_pct": null
@@ -6192,6 +6200,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ymax/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-05",
+          "checked_at": "2026-11-06",
+          "shares": 47675000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ymax/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -6249,6 +6266,15 @@
           "date": "2026-11-02",
           "checked_at": "2026-11-04",
           "shares": 26952464,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-05",
+          "checked_at": "2026-11-06",
+          "shares": 26552464,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
@@ -7572,6 +7598,15 @@
           "date": "2026-11-03",
           "checked_at": "2026-11-04",
           "shares": 287600000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://neosfunds.com/qqqi/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-05",
+          "checked_at": "2026-11-06",
+          "shares": 288700000,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://neosfunds.com/qqqi/",
@@ -11062,6 +11097,14 @@
           "form": "10-Q",
           "accession": "0001396440-26-000094",
           "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644026000094/"
+        },
+        {
+          "date": "2026-11-05",
+          "filed": "2026-11-06",
+          "shares": 93846603,
+          "form": "10-Q",
+          "accession": "0001396440-26-000159",
+          "url": "https://www.sec.gov/Archives/edgar/data/1396440/000139644026000159/"
         }
       ],
       "yoy_pct": 2.7
