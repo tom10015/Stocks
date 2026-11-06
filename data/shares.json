@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-06T02:15:33.803983+00:00",
+  "updated_at": "2026-11-06T06:41:42.615577+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1769,12 +1769,21 @@
           "source": "Official fund issuer",
           "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-06",
+          "checked_at": "2026-11-06",
+          "shares": 788800000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
+          "date_is_check_only": true
         }
       ],
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "GLD": {
       "ticker": "GLD",
@@ -1977,7 +1986,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "GDX": {
       "ticker": "GDX",
@@ -2038,7 +2047,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "CRWV": {
       "ticker": "CRWV",
@@ -2151,7 +2160,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "T": {
       "ticker": "T",
@@ -3408,6 +3417,14 @@
           "form": "10-Q",
           "accession": "0001818874-26-000054",
           "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887426000054/"
+        },
+        {
+          "date": "2026-10-30",
+          "filed": "2026-11-05",
+          "shares": 1297840447,
+          "form": "10-Q",
+          "accession": "0001818874-26-000070",
+          "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887426000070/"
         }
       ],
       "yoy_pct": null
@@ -4559,7 +4576,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "FINV": {
       "ticker": "FINV",
@@ -6136,7 +6153,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "YMAX": {
       "ticker": "YMAX",
@@ -6179,7 +6196,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "ULTY": {
       "ticker": "ULTY",
@@ -6240,7 +6257,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "CONY": {
       "ticker": "CONY",
@@ -6283,7 +6300,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "AIYY": {
       "ticker": "AIYY",
@@ -6308,7 +6325,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "F": {
       "ticker": "F",
@@ -7563,7 +7580,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "BRK-B": {
       "ticker": "BRK-B",
@@ -10304,7 +10321,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "TSLY": {
       "ticker": "TSLY",
@@ -10365,7 +10382,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-05"
+      "source_updated_at": "2026-11-06"
     },
     "O": {
       "ticker": "O",
