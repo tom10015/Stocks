@@ -1,39 +1,11 @@
 {
-  "updated_at": "2026-11-05T18:13:27.434402+00:00",
+  "updated_at": "2026-11-06T17:39:22.603830+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2026-12-20",
+  "coverage_end": "2026-12-21",
   "source_requests_successful": 64,
   "source_requests_failed": 0,
   "note": "64 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
-    {
-      "ticker": "IREN",
-      "date": "2026-11-05",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($0.49)",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "MAIN",
-      "date": "2026-11-05",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $0.91",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "SOUN",
-      "date": "2026-11-05",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($0.12)",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-05",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 11/06/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
     {
       "ticker": "ENB",
       "date": "2026-11-06",
@@ -59,7 +31,7 @@
       "ticker": "QUBT",
       "date": "2026-11-09",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($0.07)",
+      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($0.08)",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
