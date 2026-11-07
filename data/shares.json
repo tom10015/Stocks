@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-07T09:11:27.257684+00:00",
+  "updated_at": "2026-11-07T12:59:26.597278+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1986,6 +1986,15 @@
           "date": "2026-11-05",
           "checked_at": "2026-11-05",
           "shares": 364900000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
+          "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-07",
+          "checked_at": "2026-11-07",
+          "shares": 365200000,
           "form": "Fund snapshot",
           "source": "Official fund issuer",
           "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
@@ -4577,6 +4586,15 @@
           "date": "2026-11-05",
           "checked_at": "2026-11-05",
           "shares": 2585000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-07",
+          "checked_at": "2026-11-07",
+          "shares": 2510000,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
@@ -7616,6 +7634,15 @@
           "date": "2026-11-05",
           "checked_at": "2026-11-06",
           "shares": 288700000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://neosfunds.com/qqqi/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-06",
+          "checked_at": "2026-11-07",
+          "shares": 289740000,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://neosfunds.com/qqqi/",
