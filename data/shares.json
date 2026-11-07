@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-07T20:10:07.121374+00:00",
+  "updated_at": "2026-11-07T21:50:22.017147+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -2063,7 +2063,7 @@
           "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
+      "reason": "The read operation timed out",
       "type": "fund",
       "source_updated_at": "2026-11-06"
     },
