@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-09T20:04:56.104643+00:00",
+  "updated_at": "2026-11-09T22:21:26.984977+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -944,6 +944,14 @@
           "form": "10-Q",
           "accession": "0001628280-26-055218",
           "url": "https://www.sec.gov/Archives/edgar/data/1758009/000162828026055218/"
+        },
+        {
+          "date": "2026-11-06",
+          "filed": "2026-11-09",
+          "shares": 226931758,
+          "form": "10-Q",
+          "accession": "0001628280-26-072119",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758009/000162828026072119/"
         }
       ],
       "yoy_pct": null
