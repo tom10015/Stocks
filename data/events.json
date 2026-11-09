@@ -1,18 +1,11 @@
 {
-  "updated_at": "2026-11-08T16:46:11.123223+00:00",
+  "updated_at": "2026-11-09T21:00:04.971318+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2026-12-23",
-  "source_requests_successful": 66,
+  "coverage_end": "2026-12-24",
+  "source_requests_successful": 68,
   "source_requests_failed": 0,
-  "note": "66 source queries successful; 0 unavailable. Dates are source-reported and may change.",
+  "note": "68 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
-    {
-      "ticker": "ASST",
-      "date": "2026-11-09",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $3.44",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
     {
       "ticker": "QUBT",
       "date": "2026-11-09",
