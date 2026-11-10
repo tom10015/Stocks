@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T18:37:40.641076+00:00",
+  "updated_at": "2026-11-10T19:44:31.544960+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -2003,6 +2003,15 @@
           "date": "2026-11-07",
           "checked_at": "2026-11-07",
           "shares": 365200000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
+          "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-10",
+          "checked_at": "2026-11-10",
+          "shares": 365600000,
           "form": "Fund snapshot",
           "source": "Official fund issuer",
           "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
@@ -6228,6 +6237,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/nvdy/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-09",
+          "checked_at": "2026-11-10",
+          "shares": 111475000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/nvdy/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -6364,6 +6382,15 @@
           "date": "2026-11-06",
           "checked_at": "2026-11-08",
           "shares": 26227464,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-09",
+          "checked_at": "2026-11-10",
+          "shares": 25827464,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
@@ -7705,6 +7732,15 @@
           "date": "2026-11-06",
           "checked_at": "2026-11-07",
           "shares": 289740000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://neosfunds.com/qqqi/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-09",
+          "checked_at": "2026-11-10",
+          "shares": 290700000,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://neosfunds.com/qqqi/",
