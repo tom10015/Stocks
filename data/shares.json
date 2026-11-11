@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-11T14:04:20.660086+00:00",
+  "updated_at": "2026-11-11T14:21:08.503763+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -2016,6 +2016,15 @@
           "source": "Official fund issuer",
           "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-11",
+          "checked_at": "2026-11-11",
+          "shares": 365500000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
+          "date_is_check_only": true
         }
       ],
       "yoy_pct": null,
@@ -2025,7 +2034,7 @@
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 307902500,
@@ -2096,11 +2105,20 @@
           "source": "Official fund issuer",
           "url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-11",
+          "checked_at": "2026-11-11",
+          "shares": 309552500,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/",
+          "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
+      "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-10"
+      "source_updated_at": "2026-11-11"
     },
     "CRWV": {
       "ticker": "CRWV",
@@ -6246,6 +6264,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/nvdy/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-09",
+          "checked_at": "2026-11-11",
+          "shares": 110475000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/nvdy/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -7741,6 +7768,15 @@
           "date": "2026-11-09",
           "checked_at": "2026-11-10",
           "shares": 290700000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://neosfunds.com/qqqi/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-10",
+          "checked_at": "2026-11-11",
+          "shares": 291120000,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://neosfunds.com/qqqi/",
