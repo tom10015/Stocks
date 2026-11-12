@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-11T18:00:44.971748+00:00",
+  "updated_at": "2026-11-12T18:33:01.249295+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2026-12-26",
+  "coverage_end": "2026-12-27",
   "source_requests_successful": 0,
-  "source_requests_failed": 66,
-  "note": "0 source queries successful; 66 unavailable. Last known events retained; verify dates with issuers.",
+  "source_requests_failed": 64,
+  "note": "0 source queries successful; 64 unavailable. Last known events retained; verify dates with issuers.",
   "events": [
     {
       "ticker": "AAPL",
