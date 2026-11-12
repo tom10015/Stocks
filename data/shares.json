@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-12T10:13:11.614838+00:00",
+  "updated_at": "2026-11-12T15:12:45.647935+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -2021,6 +2021,15 @@
           "date": "2026-11-11",
           "checked_at": "2026-11-11",
           "shares": 365500000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
+          "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-12",
+          "checked_at": "2026-11-12",
+          "shares": 365100000,
           "form": "Fund snapshot",
           "source": "Official fund issuer",
           "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
@@ -6422,6 +6431,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-10",
+          "checked_at": "2026-11-12",
+          "shares": 25577464,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -6461,6 +6479,15 @@
           "date": "2026-10-29",
           "checked_at": "2026-11-01",
           "shares": 19882457,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/cony/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-10",
+          "checked_at": "2026-11-12",
+          "shares": 19607457,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/cony/",
