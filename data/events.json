@@ -1,32 +1,11 @@
 {
-  "updated_at": "2026-11-12T18:33:01.249295+00:00",
+  "updated_at": "2026-11-13T17:59:28.268238+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2026-12-27",
+  "coverage_end": "2026-12-28",
   "source_requests_successful": 0,
   "source_requests_failed": 64,
   "note": "0 source queries successful; 64 unavailable. Last known events retained; verify dates with issuers.",
   "events": [
-    {
-      "ticker": "AAPL",
-      "date": "2026-11-12",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.27 \u00b7 pay 11/16/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/aapl/dividend-history"
-    },
-    {
-      "ticker": "CSCO",
-      "date": "2026-11-12",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $1.15",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-12",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.04 \u00b7 pay 11/13/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
     {
       "ticker": "ECC",
       "date": "2026-11-13",
