@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-14T20:38:05.660495+00:00",
+  "updated_at": "2026-11-14T22:24:18.867722+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -2246,7 +2246,7 @@
     },
     "CRSH": {
       "ticker": "CRSH",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2026-09-04",
@@ -2274,7 +2274,7 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-14"
     },
@@ -6265,7 +6265,7 @@
     },
     "NVDY": {
       "ticker": "NVDY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-21",
@@ -6338,13 +6338,13 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-14"
     },
     "YMAX": {
       "ticker": "YMAX",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "shares": 48225000,
@@ -6408,13 +6408,13 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-14"
     },
     "ULTY": {
       "ticker": "ULTY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-20",
@@ -6514,13 +6514,13 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-14"
     },
     "CONY": {
       "ticker": "CONY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "shares": 19857457,
@@ -6575,13 +6575,13 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-14"
     },
     "AIYY": {
       "ticker": "AIYY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "shares": 6212473,
@@ -6600,7 +6600,7 @@
           "date_is_check_only": true
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-14"
     },
@@ -10603,7 +10603,7 @@
     },
     "MSTY": {
       "ticker": "MSTY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-22",
@@ -10649,13 +10649,13 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-14"
     },
     "TSLY": {
       "ticker": "TSLY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-20",
@@ -10710,7 +10710,7 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-14"
     },
