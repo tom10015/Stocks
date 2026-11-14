@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-14T01:42:39.556018+00:00",
+  "updated_at": "2026-11-14T06:20:42.470904+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1800,7 +1800,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "GLD": {
       "ticker": "GLD",
@@ -2039,7 +2039,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "GDX": {
       "ticker": "GDX",
@@ -2132,11 +2132,20 @@
           "source": "Official fund issuer",
           "url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-14",
+          "checked_at": "2026-11-14",
+          "shares": 306552500,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/",
+          "date_is_check_only": true
         }
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "CRWV": {
       "ticker": "CRWV",
@@ -2258,7 +2267,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "T": {
       "ticker": "T",
@@ -4692,7 +4701,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "FINV": {
       "ticker": "FINV",
@@ -6313,7 +6322,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "YMAX": {
       "ticker": "YMAX",
@@ -6383,7 +6392,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "ULTY": {
       "ticker": "ULTY",
@@ -6489,7 +6498,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "CONY": {
       "ticker": "CONY",
@@ -6550,7 +6559,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "AIYY": {
       "ticker": "AIYY",
@@ -6575,7 +6584,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "F": {
       "ticker": "F",
@@ -7866,7 +7875,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "BRK-B": {
       "ticker": "BRK-B",
@@ -10615,7 +10624,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "TSLY": {
       "ticker": "TSLY",
@@ -10676,7 +10685,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-13"
+      "source_updated_at": "2026-11-14"
     },
     "O": {
       "ticker": "O",
