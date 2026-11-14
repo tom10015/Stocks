@@ -1,32 +1,11 @@
 {
-  "updated_at": "2026-11-13T17:59:28.268238+00:00",
+  "updated_at": "2026-11-14T16:41:42.282882+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2026-12-28",
+  "coverage_end": "2026-12-29",
   "source_requests_successful": 0,
   "source_requests_failed": 64,
   "note": "0 source queries successful; 64 unavailable. Last known events retained; verify dates with issuers.",
   "events": [
-    {
-      "ticker": "ECC",
-      "date": "2026-11-13",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-pre-market \u00b7 EPS estimate $0.18",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "SBUX",
-      "date": "2026-11-13",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.63 \u00b7 pay 11/27/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/sbux/dividend-history"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-13",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.1 \u00b7 pay 11/16/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
     {
       "ticker": "STRC",
       "date": "2026-11-16",
