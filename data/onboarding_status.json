@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-14T01:42:38.625844+00:00",
+  "checked_at": "2026-11-14T08:53:53.905239+00:00",
   "results": {
     "ASST": {
       "checked_at": "2026-10-28T16:44:24.494715+00:00",
@@ -14,7 +14,7 @@
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "BND": {
-      "checked_at": "2026-11-13T06:26:44.588064+00:00",
+      "checked_at": "2026-11-14T08:53:53.905239+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
@@ -26,10 +26,10 @@
       "note": "SEC concept unavailable: SEC reader returned an error page; trying companyfacts. "
     },
     "CLM": {
-      "checked_at": "2026-11-13T06:26:44.588064+00:00",
+      "checked_at": "2026-11-14T08:53:53.905239+00:00",
       "points_added": 0,
       "history_points": 1,
-      "note": "Fund snapshot: Website returned a bot challenge; "
+      "note": "HTTPError: HTTP Error 401: Unauthorized"
     },
     "COIW": {
       "checked_at": "2026-11-13T14:51:59.948574+00:00",
@@ -104,13 +104,13 @@
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "UTF": {
-      "checked_at": "2026-11-13T06:26:44.588064+00:00",
+      "checked_at": "2026-11-14T08:53:53.905239+00:00",
       "points_added": 0,
       "history_points": 1,
-      "note": "Fund snapshot: Website returned a bot challenge; "
+      "note": "HTTPError: HTTP Error 401: Unauthorized"
     },
     "XOVR": {
-      "checked_at": "2026-11-13T06:26:44.588064+00:00",
+      "checked_at": "2026-11-14T08:53:53.905239+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
