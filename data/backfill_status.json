@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-08T11:29:18.231990+00:00",
+  "checked_at": "2026-11-15T12:13:46.314709+00:00",
   "results": {
     "BND": {
       "status": "no supported historical provider; retain actual future observations",
@@ -8,7 +8,7 @@
     "CLM": {
       "status": "no matching, explicitly dated disclosure found",
       "history_points": 1,
-      "next_offset": 7
+      "next_offset": 14
     },
     "COIW": {
       "status": "no supported historical provider; retain actual future observations",
@@ -21,7 +21,7 @@
     "ECC": {
       "status": "no matching, explicitly dated disclosure found",
       "history_points": 1,
-      "next_offset": 7
+      "next_offset": 14
     },
     "FINV": {
       "status": "no new XBRL observations",
@@ -54,7 +54,7 @@
     "UTF": {
       "status": "no matching, explicitly dated disclosure found",
       "history_points": 1,
-      "next_offset": 7
+      "next_offset": 14
     },
     "XOVR": {
       "status": "no supported historical provider; retain actual future observations",
