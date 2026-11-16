@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-15T17:21:46.199169+00:00",
+  "updated_at": "2026-11-16T20:39:04.072915+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2026-12-30",
+  "coverage_end": "2026-12-31",
   "source_requests_successful": 0,
-  "source_requests_failed": 66,
-  "note": "0 source queries successful; 66 unavailable. Last known events retained; verify dates with issuers.",
+  "source_requests_failed": 68,
+  "note": "0 source queries successful; 68 unavailable. Last known events retained; verify dates with issuers.",
   "events": [
     {
       "ticker": "STRC",
