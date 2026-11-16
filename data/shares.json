@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-16T00:19:33.013241+00:00",
+  "updated_at": "2026-11-16T06:26:50.693916+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1805,7 +1805,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "GLD": {
       "ticker": "GLD",
@@ -2053,7 +2053,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "GDX": {
       "ticker": "GDX",
@@ -2159,7 +2159,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "CRWV": {
       "ticker": "CRWV",
@@ -2281,7 +2281,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "T": {
       "ticker": "T",
@@ -4729,7 +4729,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "FINV": {
       "ticker": "FINV",
@@ -6364,7 +6364,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "YMAX": {
       "ticker": "YMAX",
@@ -6443,7 +6443,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "ULTY": {
       "ticker": "ULTY",
@@ -6558,7 +6558,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "CONY": {
       "ticker": "CONY",
@@ -6619,7 +6619,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "AIYY": {
       "ticker": "AIYY",
@@ -6644,7 +6644,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "F": {
       "ticker": "F",
@@ -7947,7 +7947,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "BRK-B": {
       "ticker": "BRK-B",
@@ -10703,7 +10703,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "TSLY": {
       "ticker": "TSLY",
@@ -10773,7 +10773,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-15"
+      "source_updated_at": "2026-11-16"
     },
     "O": {
       "ticker": "O",
