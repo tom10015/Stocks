@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-11-17T18:30:28.733313+00:00",
+  "updated_at": "2026-11-17T20:55:09.862601+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
       "name": "Iren Ltd",
       "cik": "0001878848",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2025-10-31",
@@ -39,7 +39,7 @@
       "ticker": "KGC",
       "name": "Kinross Gold Corp",
       "cik": "0000701818",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2017-12-31",
@@ -121,7 +121,7 @@
       "ticker": "NVDA",
       "name": "Nvidia Corp",
       "cik": "0001045810",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-08-17",
@@ -698,7 +698,7 @@
       "ticker": "QUBT",
       "name": "Quantum Computing Inc.",
       "cik": "0001758009",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2019-03-20",
@@ -1041,13 +1041,13 @@
       ],
       "yoy_pct": null,
       "type": "fund",
-      "reason": "HTTP Error 401: Unauthorized"
+      "reason": "No explicitly published shares outstanding found"
     },
     "INTC": {
       "ticker": "INTC",
       "name": "Intel Corp",
       "cik": "0000050863",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-07-24",
@@ -2066,7 +2066,7 @@
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 307902500,
@@ -2164,11 +2164,20 @@
           "source": "Official fund issuer",
           "url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-17",
+          "checked_at": "2026-11-17",
+          "shares": 306352500,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/",
+          "date_is_check_only": true
         }
       ],
-      "reason": "HTTP Error 401: Unauthorized",
+      "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-16"
+      "source_updated_at": "2026-11-17"
     },
     "CRWV": {
       "ticker": "CRWV",
@@ -2253,7 +2262,7 @@
           "url": "https://stockanalysis.com/stocks/asst/statistics/"
         }
       ],
-      "reason": "HTTP Error 401: Unauthorized; backup: External source has no readable shares outstanding",
+      "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Asset Entities Inc.",
       "yoy_pct": 3905.98,
       "cik": "0001920406"
@@ -2296,7 +2305,7 @@
       "ticker": "T",
       "name": "At&T Inc.",
       "cik": "0000732717",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-06-30",
@@ -2866,7 +2875,7 @@
       "ticker": "LTC",
       "name": "Ltc Properties Inc",
       "cik": "0000887905",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2011-08-01",
@@ -3372,7 +3381,7 @@
       "ticker": "SOFI",
       "name": "Sofi Technologies, Inc.",
       "cik": "0001818874",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2021-07-27",
@@ -3581,7 +3590,7 @@
       "ticker": "ORCL",
       "name": "Oracle Corp",
       "cik": "0001341439",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-09-16",
@@ -4143,7 +4152,7 @@
       "ticker": "ADC",
       "name": "Agree Realty Corp",
       "cik": "0000917251",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2011-08-05",
@@ -4734,6 +4743,15 @@
           "source": "Official fund issuer",
           "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-17",
+          "checked_at": "2026-11-17",
+          "shares": 2395000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://leverageshares.com/us/etfs/leverage-shares-2x-long-avgo-daily-etf",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -4753,7 +4771,7 @@
           "url": "https://stockanalysis.com/stocks/finv/statistics/"
         }
       ],
-      "reason": "HTTP Error 401: Unauthorized; backup: External source has no readable shares outstanding",
+      "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Finvolution Group",
       "yoy_pct": -0.19,
       "cik": "0001691445"
@@ -4762,7 +4780,7 @@
       "ticker": "SOUN",
       "name": "Soundhound Ai, Inc.",
       "cik": "0001840856",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2021-07-20",
@@ -4892,7 +4910,7 @@
           "url": "https://www.cefconnect.com/fund/CRF"
         }
       ],
-      "reason": "HTTP Error 401: Unauthorized",
+      "reason": "Website returned a bot challenge",
       "name": "Cornerstone Total Return Fund Inc",
       "type": "fund",
       "source_updated_at": "2026-10-28"
@@ -4909,7 +4927,7 @@
           "url": "https://www.cefconnect.com/fund/CLM"
         }
       ],
-      "reason": "HTTP Error 401: Unauthorized",
+      "reason": "Website returned a bot challenge",
       "name": "Cornerstone Strategic Investment Fund, Inc.",
       "type": "fund"
     },
@@ -4917,7 +4935,7 @@
       "ticker": "ENB",
       "name": "Enbridge Inc",
       "cik": "0000895728",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2012-12-31",
@@ -5263,7 +5281,7 @@
           "url": "https://stockanalysis.com/etf/hydb/"
         }
       ],
-      "reason": "HTTP Error 401: Unauthorized",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund"
     },
     "UTF": {
@@ -5278,7 +5296,7 @@
           "url": "https://www.cefconnect.com/fund/UTF"
         }
       ],
-      "reason": "HTTP Error 401: Unauthorized",
+      "reason": "Website returned a bot challenge",
       "name": "Cohen & Steers Infrastructure Fund Inc",
       "type": "fund"
     },
@@ -5375,7 +5393,7 @@
           "url": "https://stockanalysis.com/stocks/can/statistics/"
         }
       ],
-      "reason": "HTTP Error 401: Unauthorized; backup: External source has no readable shares outstanding",
+      "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Canaan Inc.",
       "yoy_pct": 96.61,
       "cik": "0001780652"
@@ -5399,7 +5417,7 @@
       "ticker": "PEP",
       "name": "Pepsico Inc",
       "cik": "0000077476",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-10-02",
@@ -5961,7 +5979,7 @@
       "ticker": "TSLX",
       "name": "Sixth Street Specialty Lending, Inc.",
       "cik": "0001508655",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2022-11-01",
@@ -6107,7 +6125,7 @@
       "ticker": "OBDC",
       "name": "Blue Owl Capital Corp",
       "cik": "0001655888",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2022-08-03",
@@ -6269,7 +6287,7 @@
           "url": "https://www.schwabassetmanagement.com/products/schd"
         }
       ],
-      "reason": "HTTP Error 401: Unauthorized",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund"
     },
     "COIW": {
@@ -6369,6 +6387,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/nvdy/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-13",
+          "checked_at": "2026-11-17",
+          "shares": 109900000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/nvdy/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -6444,6 +6471,15 @@
           "date": "2026-11-13",
           "checked_at": "2026-11-15",
           "shares": 47200000,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ymax/",
+          "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-13",
+          "checked_at": "2026-11-17",
+          "shares": 46475000,
           "form": "Fund report",
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ymax/",
@@ -6563,6 +6599,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-13",
+          "checked_at": "2026-11-17",
+          "shares": 25377464,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/ulty/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -6659,7 +6704,7 @@
       "ticker": "F",
       "name": "Ford Motor Co",
       "cik": "0000037996",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-07-28",
@@ -6733,7 +6778,7 @@
       "ticker": "ET",
       "name": "Energy Transfer Lp",
       "cik": "0001276187",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2010-08-03",
@@ -7271,7 +7316,7 @@
       "ticker": "MO",
       "name": "Altria Group, Inc.",
       "cik": "0000764180",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-07-20",
@@ -7962,7 +8007,7 @@
       "ticker": "BRK-B",
       "name": "Berkshire Hathaway Inc",
       "cik": "0001067983",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-10-29",
@@ -8028,7 +8073,7 @@
       "ticker": "DIS",
       "name": "Walt Disney Co",
       "cik": "0001744489",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2019-05-01",
@@ -8285,6 +8330,14 @@
           "form": "10-Q",
           "accession": "0001744489-26-000057",
           "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448926000057/"
+        },
+        {
+          "date": "2026-11-11",
+          "filed": "2026-11-17",
+          "shares": 1708029668,
+          "form": "10-K",
+          "accession": "0001744489-26-000066",
+          "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448926000066/"
         }
       ],
       "yoy_pct": null,
@@ -8294,7 +8347,7 @@
       "ticker": "GE",
       "name": "General Electric Co",
       "cik": "0000040545",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-06-30",
@@ -8864,7 +8917,7 @@
       "ticker": "HD",
       "name": "Home Depot, Inc.",
       "cik": "0000354950",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-08-28",
@@ -9426,7 +9479,7 @@
       "ticker": "NKE",
       "name": "Nike, Inc.",
       "cik": "0000320187",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-08-31",
@@ -9580,7 +9633,7 @@
       "ticker": "SBUX",
       "name": "Starbucks Corp",
       "cik": "0000829224",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-06-28",
@@ -10150,7 +10203,7 @@
       "ticker": "CLSK",
       "name": "Cleanspark, Inc.",
       "cik": "0000827876",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2011-06-29",
@@ -10657,7 +10710,7 @@
           "url": "https://stockanalysis.com/stocks/ecc/statistics/"
         }
       ],
-      "reason": "HTTP Error 401: Unauthorized; backup: External source has no readable shares outstanding",
+      "reason": "SEC reader returned an error page; backup: External source has no readable shares outstanding",
       "name": "Eagle Point Credit Co Inc.",
       "yoy_pct": 8.97,
       "cik": "0001604174"
@@ -10778,6 +10831,15 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/tsly/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-13",
+          "checked_at": "2026-11-17",
+          "shares": 28329965,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/tsly/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
@@ -10788,7 +10850,7 @@
       "ticker": "O",
       "name": "Realty Income Corp",
       "cik": "0000726728",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2010-06-30",
@@ -11326,7 +11388,7 @@
       "ticker": "MAIN",
       "name": "Main Street Capital Corp",
       "cik": "0001396440",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2022-08-04",
@@ -11480,7 +11542,7 @@
       "ticker": "AAPL",
       "name": "Apple Inc.",
       "cik": "0000320193",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-06-27",
@@ -12050,7 +12112,7 @@
       "ticker": "BA",
       "name": "Boeing Co",
       "cik": "0000012927",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-06-30",
@@ -12620,7 +12682,7 @@
       "ticker": "AMZN",
       "name": "Amazon Com Inc",
       "cik": "0001018724",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-07-17",
@@ -13190,7 +13252,7 @@
       "ticker": "CSCO",
       "name": "Cisco Systems, Inc.",
       "cik": "0000858877",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2009-11-12",
@@ -13744,7 +13806,7 @@
       "ticker": "NOK",
       "name": "Nokia Corp",
       "cik": "0000924613",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2017-12-31",
@@ -13826,7 +13888,7 @@
       "ticker": "AA",
       "name": "Alcoa Corp",
       "cik": "0001675149",
-      "status": "stale",
+      "status": "ok",
       "history": [
         {
           "date": "2016-11-25",
