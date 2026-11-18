@@ -1,45 +1,17 @@
 {
-  "updated_at": "2026-11-17T19:18:34.107852+00:00",
+  "updated_at": "2026-11-18T18:59:41.311281+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2027-01-01",
-  "source_requests_successful": 0,
-  "source_requests_failed": 68,
-  "note": "0 source queries successful; 68 unavailable. Last known events retained; verify dates with issuers.",
+  "coverage_end": "2027-01-02",
+  "source_requests_successful": 66,
+  "source_requests_failed": 0,
+  "note": "66 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
     {
-      "ticker": "DIS",
-      "date": "2026-11-17",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-pre-market \u00b7 EPS estimate $1.67",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "HD",
-      "date": "2026-11-17",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-pre-market \u00b7 EPS estimate $3.86",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "NVDA",
-      "date": "2026-11-17",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $2.49",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-17",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 11/18/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
-    {
-      "ticker": "FINV",
+      "ticker": "QQQI",
       "date": "2026-11-18",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.5838 \u00b7 pay 11/20/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/qqqi/dividend-history"
     },
     {
       "ticker": "STRC",
@@ -84,6 +56,13 @@
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
+      "ticker": "FINV",
+      "date": "2026-11-25",
+      "type": "earnings",
+      "details": "Reported earnings date \u00b7 time-after-hours",
+      "source_url": "https://www.nasdaq.com/market-activity/earnings"
+    },
+    {
       "ticker": "STRC",
       "date": "2026-11-25",
       "type": "dividend",
@@ -105,6 +84,48 @@
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
+      "ticker": "STRC",
+      "date": "2026-12-01",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/02/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-02",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/03/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-03",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.04 \u00b7 pay 12/04/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-04",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.1 \u00b7 pay 12/07/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-07",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/08/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-08",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/09/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
       "ticker": "ORCL",
       "date": "2026-12-09",
       "type": "earnings",
@@ -112,11 +133,116 @@
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
+      "ticker": "STRC",
+      "date": "2026-12-09",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.04 \u00b7 pay 12/10/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-10",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/11/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-11",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.1 \u00b7 pay 12/14/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-14",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/15/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-15",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.04 \u00b7 pay 12/16/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-16",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/17/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
       "ticker": "NKE",
       "date": "2026-12-17",
       "type": "earnings",
       "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $0.34",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-17",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/18/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-18",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.09 \u00b7 pay 12/21/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-21",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/22/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-22",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/23/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-23",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.04 \u00b7 pay 12/24/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-24",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.12 \u00b7 pay 12/28/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-28",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/29/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-29",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/30/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "STRC",
+      "date": "2026-12-30",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/31/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     }
   ]
 }
