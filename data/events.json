@@ -1,25 +1,11 @@
 {
-  "updated_at": "2026-11-18T18:59:41.311281+00:00",
+  "updated_at": "2026-11-19T19:07:41.263225+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2027-01-02",
-  "source_requests_successful": 66,
+  "coverage_end": "2027-01-03",
+  "source_requests_successful": 64,
   "source_requests_failed": 0,
-  "note": "66 source queries successful; 0 unavailable. Dates are source-reported and may change.",
+  "note": "64 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
-    {
-      "ticker": "QQQI",
-      "date": "2026-11-18",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.5838 \u00b7 pay 11/20/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/qqqi/dividend-history"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-18",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.04 \u00b7 pay 11/19/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
     {
       "ticker": "STRC",
       "date": "2026-11-19",
@@ -89,6 +75,13 @@
       "type": "dividend",
       "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/02/2026",
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "NVDA",
+      "date": "2026-12-02",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.25 \u00b7 pay 12/23/2026",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/nvda/dividend-history"
     },
     {
       "ticker": "STRC",
