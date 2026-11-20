@@ -1,18 +1,11 @@
 {
-  "updated_at": "2026-11-19T19:07:41.263225+00:00",
+  "updated_at": "2026-11-20T18:45:08.780298+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2027-01-03",
+  "coverage_end": "2027-01-04",
   "source_requests_successful": 64,
   "source_requests_failed": 0,
   "note": "64 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
-    {
-      "ticker": "STRC",
-      "date": "2026-11-19",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 11/20/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
     {
       "ticker": "STRC",
       "date": "2026-11-20",
@@ -98,6 +91,13 @@
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
+      "ticker": "PEP",
+      "date": "2026-12-04",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 1.48 \u00b7 pay 1/06/2027",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/pep/dividend-history"
+    },
+    {
       "ticker": "STRC",
       "date": "2026-12-04",
       "type": "dividend",
@@ -119,13 +119,6 @@
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
     },
     {
-      "ticker": "ORCL",
-      "date": "2026-12-09",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $1.56",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
       "ticker": "STRC",
       "date": "2026-12-09",
       "type": "dividend",
@@ -145,6 +138,13 @@
       "type": "dividend",
       "details": "Reported ex-dividend date \u00b7 0.1 \u00b7 pay 12/14/2026",
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "ORCL",
+      "date": "2026-12-14",
+      "type": "earnings",
+      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $1.56",
+      "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
       "ticker": "STRC",
@@ -236,6 +236,13 @@
       "type": "dividend",
       "details": "Reported ex-dividend date \u00b7 0.03 \u00b7 pay 12/31/2026",
       "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
+    },
+    {
+      "ticker": "CSCO",
+      "date": "2027-01-04",
+      "type": "dividend",
+      "details": "Reported ex-dividend date \u00b7 0.42 \u00b7 pay 1/20/2027",
+      "source_url": "https://www.nasdaq.com/market-activity/stocks/csco/dividend-history"
     }
   ]
 }
