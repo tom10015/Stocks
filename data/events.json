@@ -1,18 +1,11 @@
 {
-  "updated_at": "2026-11-20T18:45:08.780298+00:00",
+  "updated_at": "2026-11-21T17:44:35.308467+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2027-01-04",
+  "coverage_end": "2027-01-05",
   "source_requests_successful": 64,
   "source_requests_failed": 0,
   "note": "64 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
-    {
-      "ticker": "STRC",
-      "date": "2026-11-20",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.1 \u00b7 pay 11/23/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
     {
       "ticker": "STRC",
       "date": "2026-11-23",
