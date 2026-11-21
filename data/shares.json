@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21T03:27:00.023709+00:00",
+  "updated_at": "2026-11-21T07:04:42.622693+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1823,7 +1823,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "GLD": {
       "ticker": "GLD",
@@ -2107,7 +2107,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "GDX": {
       "ticker": "GDX",
@@ -2245,11 +2245,20 @@
           "source": "Official fund issuer",
           "url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-21",
+          "checked_at": "2026-11-21",
+          "shares": 309452500,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/",
+          "date_is_check_only": true
         }
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "CRWV": {
       "ticker": "CRWV",
@@ -2371,7 +2380,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "T": {
       "ticker": "T",
@@ -4828,7 +4837,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "FINV": {
       "ticker": "FINV",
@@ -6499,7 +6508,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "YMAX": {
       "ticker": "YMAX",
@@ -6596,7 +6605,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "ULTY": {
       "ticker": "ULTY",
@@ -6738,7 +6747,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "CONY": {
       "ticker": "CONY",
@@ -6817,11 +6826,11 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "AIYY": {
       "ticker": "AIYY",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 6212473,
@@ -6849,9 +6858,9 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "IncompleteRead(573440 bytes read)",
+      "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "F": {
       "ticker": "F",
@@ -8181,7 +8190,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "BRK-B": {
       "ticker": "BRK-B",
@@ -9650,6 +9659,14 @@
           "form": "10-Q",
           "accession": "0001628280-26-058715",
           "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026058715/"
+        },
+        {
+          "date": "2026-11-17",
+          "filed": "2026-11-20",
+          "shares": 997852247,
+          "form": "10-Q",
+          "accession": "0001628280-26-075287",
+          "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026075287/"
         }
       ],
       "yoy_pct": null,
@@ -10954,7 +10971,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "TSLY": {
       "ticker": "TSLY",
@@ -11060,7 +11077,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-20"
+      "source_updated_at": "2026-11-21"
     },
     "O": {
       "ticker": "O",
