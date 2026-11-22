@@ -1,14 +1,13 @@
 {
-  "checked_at": "2026-11-15T12:13:46.314709+00:00",
+  "checked_at": "2026-11-22T12:49:51.792096+00:00",
   "results": {
     "BND": {
       "status": "no supported historical provider; retain actual future observations",
       "history_points": 1
     },
     "CLM": {
-      "status": "no matching, explicitly dated disclosure found",
-      "history_points": 1,
-      "next_offset": 14
+      "status": "source unavailable",
+      "reason": "HTTP Error 401: Unauthorized"
     },
     "COIW": {
       "status": "no supported historical provider; retain actual future observations",
@@ -19,13 +18,12 @@
       "history_points": 1
     },
     "ECC": {
-      "status": "no matching, explicitly dated disclosure found",
-      "history_points": 1,
-      "next_offset": 14
+      "status": "source unavailable",
+      "reason": "HTTP Error 401: Unauthorized"
     },
     "FINV": {
-      "status": "no new XBRL observations",
-      "history_points": 1
+      "status": "source unavailable",
+      "reason": "HTTP Error 401: Unauthorized"
     },
     "HYDB": {
       "status": "no supported historical provider; retain actual future observations",
@@ -52,17 +50,12 @@
       "history_points": 1
     },
     "UTF": {
-      "status": "no matching, explicitly dated disclosure found",
-      "history_points": 1,
-      "next_offset": 14
+      "status": "source unavailable",
+      "reason": "HTTP Error 401: Unauthorized"
     },
     "XOVR": {
       "status": "no supported historical provider; retain actual future observations",
       "history_points": 1
-    },
-    "AIYY": {
-      "status": "no supported historical provider; retain actual future observations",
-      "history_points": 2
     }
   }
 }
