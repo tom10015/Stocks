@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-22T06:32:27.238498+00:00",
+  "updated_at": "2026-11-22T06:45:35.865380+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1823,7 +1823,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "GLD": {
       "ticker": "GLD",
@@ -2107,7 +2107,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "GDX": {
       "ticker": "GDX",
@@ -2258,7 +2258,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "CRWV": {
       "ticker": "CRWV",
@@ -2380,7 +2380,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "T": {
       "ticker": "T",
@@ -4846,7 +4846,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "FINV": {
       "ticker": "FINV",
@@ -6517,7 +6517,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "YMAX": {
       "ticker": "YMAX",
@@ -6614,7 +6614,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "ULTY": {
       "ticker": "ULTY",
@@ -6756,7 +6756,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "CONY": {
       "ticker": "CONY",
@@ -6831,11 +6831,20 @@
           "source": "Official fund issuer",
           "url": "https://yieldmaxetfs.com/our-etfs/cony/",
           "date_is_check_only": false
+        },
+        {
+          "date": "2026-11-20",
+          "checked_at": "2026-11-22",
+          "shares": 19082457,
+          "form": "Fund report",
+          "source": "Official fund issuer",
+          "url": "https://yieldmaxetfs.com/our-etfs/cony/",
+          "date_is_check_only": false
         }
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "AIYY": {
       "ticker": "AIYY",
@@ -6869,7 +6878,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "F": {
       "ticker": "F",
@@ -8208,7 +8217,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "BRK-B": {
       "ticker": "BRK-B",
@@ -10989,7 +10998,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "TSLY": {
       "ticker": "TSLY",
@@ -11095,7 +11104,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-21"
+      "source_updated_at": "2026-11-22"
     },
     "O": {
       "ticker": "O",
