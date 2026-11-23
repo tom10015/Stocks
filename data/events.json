@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-22T17:59:40.126904+00:00",
+  "updated_at": "2026-11-23T22:11:28.074488+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2027-01-06",
-  "source_requests_successful": 66,
+  "coverage_end": "2027-01-07",
+  "source_requests_successful": 68,
   "source_requests_failed": 0,
-  "note": "66 source queries successful; 0 unavailable. Dates are source-reported and may change.",
+  "note": "68 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
     {
       "ticker": "STRC",
@@ -17,7 +17,7 @@
       "ticker": "CLSK",
       "date": "2026-11-24",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate ($0.36)",
+      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate ($0.36)",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
@@ -164,7 +164,7 @@
       "ticker": "NKE",
       "date": "2026-12-17",
       "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-not-supplied \u00b7 EPS estimate $0.34",
+      "details": "Reported earnings date \u00b7 time-after-hours \u00b7 EPS estimate $0.34",
       "source_url": "https://www.nasdaq.com/market-activity/earnings"
     },
     {
