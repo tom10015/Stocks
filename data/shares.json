@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-23T21:59:49.723906+00:00",
+  "updated_at": "2026-11-23T23:54:12.781408+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1818,6 +1818,15 @@
           "source": "Official fund issuer",
           "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-23",
+          "checked_at": "2026-11-23",
+          "shares": 786600000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
+          "date_is_check_only": true
         }
       ],
       "yoy_pct": null,
@@ -2102,6 +2111,15 @@
           "source": "Official fund issuer",
           "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-23",
+          "checked_at": "2026-11-23",
+          "shares": 362900000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ssga.com/us/en/individual/etfs/spdr-gold-shares-gld",
+          "date_is_check_only": true
         }
       ],
       "yoy_pct": null,
@@ -2111,7 +2129,7 @@
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "stale",
+      "status": "fund",
       "history": [
         {
           "shares": 307902500,
@@ -2256,9 +2274,9 @@
           "date_is_check_only": true
         }
       ],
-      "reason": "No explicitly published shares outstanding found",
+      "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-22"
+      "source_updated_at": "2026-11-23"
     },
     "CRWV": {
       "ticker": "CRWV",
