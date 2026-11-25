@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-25T01:33:57.736093+00:00",
+  "checked_at": "2026-11-25T10:24:03.245032+00:00",
   "results": {
     "ASST": {
       "checked_at": "2026-10-28T16:44:24.494715+00:00",
@@ -50,16 +50,16 @@
       "note": "HTTPError: HTTP Error 401: Unauthorized"
     },
     "FINV": {
-      "checked_at": "2026-11-24T05:55:14.859228+00:00",
+      "checked_at": "2026-11-25T10:24:03.245032+00:00",
       "points_added": 0,
       "history_points": 1,
-      "note": "HTTPError: HTTP Error 401: Unauthorized"
+      "note": "SEC concept unavailable: SEC reader returned an error page; trying companyfacts. "
     },
     "HYDB": {
-      "checked_at": "2026-11-24T05:55:14.859228+00:00",
+      "checked_at": "2026-11-25T10:24:03.245032+00:00",
       "points_added": 0,
       "history_points": 1,
-      "note": "Fund snapshot: HTTP Error 401: Unauthorized; No verified historical fund share series is available from configured providers."
+      "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "MSTY": {
       "checked_at": "2026-10-30T05:35:04.073338+00:00",
@@ -104,16 +104,16 @@
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "UTF": {
-      "checked_at": "2026-11-24T05:55:14.859228+00:00",
+      "checked_at": "2026-11-25T10:24:03.245032+00:00",
       "points_added": 0,
       "history_points": 1,
-      "note": "HTTPError: HTTP Error 401: Unauthorized"
+      "note": "Fund snapshot: Website returned a bot challenge; "
     },
     "XOVR": {
-      "checked_at": "2026-11-24T05:55:14.859228+00:00",
+      "checked_at": "2026-11-25T10:24:03.245032+00:00",
       "points_added": 0,
       "history_points": 1,
-      "note": "Fund snapshot: HTTP Error 401: Unauthorized; No verified historical fund share series is available from configured providers."
+      "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     }
   }
 }
