@@ -1,25 +1,11 @@
 {
-  "updated_at": "2026-11-25T20:05:51.837709+00:00",
+  "updated_at": "2026-11-26T19:46:24.923834+00:00",
   "provider": "Nasdaq public calendar (unofficial)",
-  "coverage_end": "2027-01-09",
-  "source_requests_successful": 66,
+  "coverage_end": "2027-01-10",
+  "source_requests_successful": 64,
   "source_requests_failed": 0,
-  "note": "66 source queries successful; 0 unavailable. Dates are source-reported and may change.",
+  "note": "64 source queries successful; 0 unavailable. Dates are source-reported and may change.",
   "events": [
-    {
-      "ticker": "FINV",
-      "date": "2026-11-25",
-      "type": "earnings",
-      "details": "Reported earnings date \u00b7 time-after-hours",
-      "source_url": "https://www.nasdaq.com/market-activity/earnings"
-    },
-    {
-      "ticker": "STRC",
-      "date": "2026-11-25",
-      "type": "dividend",
-      "details": "Reported ex-dividend date \u00b7 0.06 \u00b7 pay 11/27/2026",
-      "source_url": "https://www.nasdaq.com/market-activity/stocks/strc/dividend-history"
-    },
     {
       "ticker": "STRC",
       "date": "2026-11-27",
