@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-27T04:07:44.416896+00:00",
+  "checked_at": "2026-11-27T13:46:41.294297+00:00",
   "results": {
     "ASST": {
       "checked_at": "2026-10-28T16:44:24.494715+00:00",
@@ -50,16 +50,16 @@
       "note": "SEC concept unavailable: SEC reader returned an error page; trying companyfacts. "
     },
     "FINV": {
-      "checked_at": "2026-11-26T12:14:31.560100+00:00",
+      "checked_at": "2026-11-27T13:46:41.294297+00:00",
       "points_added": 0,
       "history_points": 1,
-      "note": "SEC concept unavailable: SEC reader returned an error page; trying companyfacts. "
+      "note": "HTTPError: HTTP Error 401: Unauthorized"
     },
     "HYDB": {
-      "checked_at": "2026-11-26T12:14:31.560100+00:00",
+      "checked_at": "2026-11-27T13:46:41.294297+00:00",
       "points_added": 0,
       "history_points": 1,
-      "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
+      "note": "Fund snapshot: HTTP Error 401: Unauthorized; No verified historical fund share series is available from configured providers."
     },
     "MSTY": {
       "checked_at": "2026-10-30T05:35:04.073338+00:00",
@@ -104,13 +104,13 @@
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
     },
     "UTF": {
-      "checked_at": "2026-11-26T12:14:31.560100+00:00",
+      "checked_at": "2026-11-27T13:46:41.294297+00:00",
       "points_added": 0,
       "history_points": 1,
-      "note": "Fund snapshot: Website returned a bot challenge; "
+      "note": "HTTPError: HTTP Error 401: Unauthorized"
     },
     "XOVR": {
-      "checked_at": "2026-11-26T12:14:31.560100+00:00",
+      "checked_at": "2026-11-27T13:46:41.294297+00:00",
       "points_added": 0,
       "history_points": 1,
       "note": "Fund snapshot: No explicitly published shares outstanding found; No verified historical fund share series is available from configured providers."
