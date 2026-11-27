@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T13:46:50.474948+00:00",
+  "updated_at": "2026-11-27T21:17:02.199417+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -2165,7 +2165,7 @@
     },
     "GDX": {
       "ticker": "GDX",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "shares": 307902500,
@@ -2337,7 +2337,7 @@
           "date_is_check_only": true
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-27"
     },
