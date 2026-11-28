@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-28T04:13:59.794226+00:00",
+  "updated_at": "2026-11-28T07:46:05.820406+00:00",
   "companies": {
     "IREN": {
       "ticker": "IREN",
@@ -1836,12 +1836,21 @@
           "source": "Official fund issuer",
           "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
           "date_is_check_only": true
+        },
+        {
+          "date": "2026-11-28",
+          "checked_at": "2026-11-28",
+          "shares": 785600000,
+          "form": "Fund snapshot",
+          "source": "Official fund issuer",
+          "url": "https://www.ishares.com/us/products/239561/ishares-gold-trust-fund",
+          "date_is_check_only": true
         }
       ],
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-27"
+      "source_updated_at": "2026-11-28"
     },
     "GLD": {
       "ticker": "GLD",
@@ -2161,7 +2170,7 @@
       "yoy_pct": null,
       "type": "fund",
       "reason": "",
-      "source_updated_at": "2026-11-27"
+      "source_updated_at": "2026-11-28"
     },
     "GDX": {
       "ticker": "GDX",
@@ -2431,7 +2440,7 @@
     },
     "CRSH": {
       "ticker": "CRSH",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2026-09-04",
@@ -2459,7 +2468,7 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-27"
     },
@@ -4954,7 +4963,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-27"
+      "source_updated_at": "2026-11-28"
     },
     "FINV": {
       "ticker": "FINV",
@@ -6505,7 +6514,7 @@
     },
     "NVDY": {
       "ticker": "NVDY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-21",
@@ -6641,13 +6650,13 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-27"
     },
     "YMAX": {
       "ticker": "YMAX",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "shares": 48225000,
@@ -6756,13 +6765,13 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-27"
     },
     "ULTY": {
       "ticker": "ULTY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-20",
@@ -6916,13 +6925,13 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-27"
     },
     "CONY": {
       "ticker": "CONY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "shares": 19857457,
@@ -7013,13 +7022,13 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-27"
     },
     "AIYY": {
       "ticker": "AIYY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "shares": 6212473,
@@ -7047,7 +7056,7 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-27"
     },
@@ -8406,7 +8415,7 @@
       ],
       "reason": "",
       "type": "fund",
-      "source_updated_at": "2026-11-27"
+      "source_updated_at": "2026-11-28"
     },
     "BRK-B": {
       "ticker": "BRK-B",
@@ -11138,7 +11147,7 @@
     },
     "MSTY": {
       "ticker": "MSTY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-22",
@@ -11211,13 +11220,13 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-27"
     },
     "TSLY": {
       "ticker": "TSLY",
-      "status": "fund",
+      "status": "stale",
       "history": [
         {
           "date": "2026-10-20",
@@ -11335,7 +11344,7 @@
           "date_is_check_only": false
         }
       ],
-      "reason": "",
+      "reason": "No explicitly published shares outstanding found",
       "type": "fund",
       "source_updated_at": "2026-11-27"
     },
